@@ -1,0 +1,33 @@
+package com.tpu.thetower.fragments
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentElevatorBinding
+import com.tpu.thetower.databinding.FragmentLvl0Binding
+
+class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        val binding = FragmentElevatorBinding.bind(view)
+        val btnToLvl0 : Button = binding.btnElevatorToLvl0
+        val btnToLvl1 : Button = binding.btnElevatorToLvl1
+
+        btnToLvl0.setOnClickListener {
+            FragmentManager.changeBG(this,R.id.action_elevatorFragment_to_lvl0Fragment)
+        }
+
+        btnToLvl1.setOnClickListener {
+            FragmentManager.changeBG(this,R.id.action_elevatorFragment_to_lvl1Fragment)
+        }
+
+
+    }
+}

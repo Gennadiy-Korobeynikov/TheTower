@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_bg"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_hud"
+        android:layout_width="600dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:name="com.tpu.thetower.fragments.HUDFragment"
+        android:visibility="gone"/>
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_go_back_arrow"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:name="com.tpu.thetower.fragments.GoBackArrowFragment"
+        android:visibility="gone"
+        android:layout_gravity="bottom" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.tpu.thetower.fragments.DialogFragment"
+        android:layout_gravity="bottom"
+        android:visibility="gone"/>
+
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_permission_request"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.tpu.thetower.fragments.PermissionRequestFragment"
+        android:visibility="gone" />
+
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_permission_denied"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.tpu.thetower.fragments.PermissionDeniedFragment"
+        android:visibility="gone"/>
+
+
+
+
+
+
+</FrameLayout>

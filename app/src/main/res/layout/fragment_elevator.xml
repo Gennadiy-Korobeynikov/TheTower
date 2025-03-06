@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ElevatorFragment">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/elevator_test"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_elevator_to_lvl0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToLVL 0"
+        android:layout_gravity="center"
+        android:layout_marginStart="210dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_elevator_to_lvl1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToLVL 1"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="210dp"/>
+
+</FrameLayout>
