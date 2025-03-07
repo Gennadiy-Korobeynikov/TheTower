@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings for settings menu -->
+    <string name="settings_title">Settings</string>
+    <string name="music_volume">Music Volume</string>
+    <string name="sound_volume">Sound Effects Volume</string>
+    <string name="game_language">Game Language</string>
+    <string name="back_button">Back</string>
+
+    <!-- Language array -->
+    <string-array name="language_options">
+        <item>Russian</item>
+        <item>English</item>
+        <item>German</item>
+    </string-array>
+
+
+</resources>

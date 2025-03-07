@@ -18,6 +18,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
         val binding = FragmentTitleScreenBinding.bind(view)
         val btn_test : Button = binding.btnToLvl0
+        val btn_settings : Button = binding.btnToSettings
 
         FragmentManager.hideHUD(requireActivity())
         FragmentManager.hideGoBackArrow(requireActivity())
@@ -29,5 +30,10 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
         }
 
+        btn_settings.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_settingsFragment)
+        }
     }
+
+
 }

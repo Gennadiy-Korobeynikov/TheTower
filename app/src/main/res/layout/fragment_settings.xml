@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".fragments.SettingsFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_blured" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/title_screen_test_blured" />
+
+    <!-- Меню настроек -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Заголовок -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_title"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Разделитель -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Громкость музыки -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/music_volume"
+                    android:textSize="16sp"/>
+
+                <SeekBar
+                    android:id="@+id/music_volume_seek_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:max="100"
+                    android:progress="70"/>
+            </LinearLayout>
+
+            <!-- Разделитель -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Громкость звуков -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/sound_volume"
+                    android:textSize="16sp"/>
+
+                <SeekBar
+                    android:id="@+id/sound_volume_seek_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:max="100"
+                    android:progress="80"/>
+            </LinearLayout>
+
+            <!-- Разделитель -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Выбор языка -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/game_language"
+                    android:textSize="16sp"/>
+
+                <Spinner
+                    android:id="@+id/language_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:background="@android:drawable/btn_dropdown"/>
+            </LinearLayout>
+
+            <!-- Разделитель -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Кнопка назад -->
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/back_button"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

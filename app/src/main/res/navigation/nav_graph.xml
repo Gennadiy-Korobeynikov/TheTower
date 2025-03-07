@@ -17,6 +17,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_titleScreenFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl0Fragment"
@@ -70,5 +73,10 @@
         android:name="com.tpu.thetower.fragments.Lvl0Puzzle1Fragment"
         android:label="fragment_lvl0_puzzle1"
         tools:layout="@layout/fragment_lvl0_puzzle1" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tpu.thetower.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>
