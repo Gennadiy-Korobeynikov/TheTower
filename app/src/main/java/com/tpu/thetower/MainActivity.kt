@@ -8,10 +8,23 @@ import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var musicManager: MusicManager
+    lateinit var saveManager: SaveManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        musicManager = MusicManager.getInstance()
+        saveManager = SaveManager.getInstance()
+
+        val gameData = saveManager.readData(this)
+        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
+        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
+
+        musicManager.setVolume(savedMusicVolume)
 
 //        deleteJsonFile(this, "save_file.json")
 //
@@ -32,21 +45,21 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun copyJsonFromAssets(context: Context, fileName: String) {
-        val file = File(context.filesDir, fileName)
-
-        if (!file.exists()) { // Копируем, только если файла нет
-            context.assets.open(fileName).use { inputStream ->
-                file.outputStream().use { outputStream ->
-                    inputStream.copyTo(outputStream)
-                }
-            }
-        }
-    }
-
-    fun deleteJsonFile(context: Context, fileName: String) {
-        val file = File(context.filesDir, fileName)
-            file.delete()
-    }
+//    fun copyJsonFromAssets(context: Context, fileName: String) {
+//        val file = File(context.filesDir, fileName)
+//
+//        if (!file.exists()) { // Копируем, только если файла нет
+//            context.assets.open(fileName).use { inputStream ->
+//                file.outputStream().use { outputStream ->
+//                    inputStream.copyTo(outputStream)
+//                }
+//            }
+//        }
+//    }
+//
+//    fun deleteJsonFile(context: Context, fileName: String) {
+//        val file = File(context.filesDir, fileName)
+//            file.delete()
+//    }
 
 }

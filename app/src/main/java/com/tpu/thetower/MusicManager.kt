@@ -7,7 +7,7 @@ class MusicManager private constructor()  {
 
     private var mediaPlayer: MediaPlayer? = null
     private var currentMusic: Int = -1
-    private var volume: Float = 1.0f
+    private var volume: Float = 0.5f
 
     companion object {
         private var instance: MusicManager? = null
