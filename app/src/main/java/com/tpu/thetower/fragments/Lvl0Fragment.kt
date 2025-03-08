@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -19,7 +21,7 @@ import com.tpu.thetower.databinding.FragmentLvl0Binding
 import com.tpu.thetower.devicemanagers.FlashlightManager
 
 
-class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
+class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
 
     private lateinit var binding : FragmentLvl0Binding
 
@@ -27,6 +29,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
+    private lateinit var hintManager: HintManager
 
     private lateinit var btnToElevator : Button
     private lateinit var btnToPuzzle1 : Button
@@ -46,6 +49,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         setListeners()
         handleSounds()
         FragmentManager.hideGoBackArrow(requireActivity())
+        hintManager = HintManager(listOf("lvl0_puzzle0_hint1" , "lvl0_puzzle0_hint2"))
 
         if (FragmentManager.light) {
             ivDarkness.visibility = View.GONE
@@ -112,14 +116,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         }
     }
 
-    private fun getPermissions() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) //Временная заглушка для демо
-            FragmentManager.showPermissionRequestFragment(requireActivity())
-    }
 
     private fun startAwakeningAnim() {
         ivBlack.animate()
@@ -159,6 +155,13 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         super.onPause()
 
         musicManager.pauseMusic()
+    }
+
+    override fun useHint() {
+        if (!FragmentManager.light)
+            hintManager.useHint(this)
+        else
+            DialogManager.startDialog(requireActivity(), "lvl0_to_puzzle1_hint")
     }
 }
 

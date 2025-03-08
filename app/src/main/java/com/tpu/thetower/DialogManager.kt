@@ -32,26 +32,6 @@ class DialogManager {
 
         fun loadDialogs(activity: Activity) {
             dialogs = mapOf(
-                "test" to
-                        Dialog(
-                            listOf(
-                                "Помогите!",
-                                "Сам думай, шизанутый долбаёб",
-                                "Шла нахуй отседова, лампа ебаная!",
-                                "Сосал?",
-                                "[Съебалась в ужасе*]"
-                            ),
-                            listOfNotNull(
-                                characters["John"],
-                                characters["Bulb"],
-                                characters["John"],
-                                characters["Bulb"],
-                                characters["Bulb"]
-                            )
-                        )
-                        { Log.d("test", "test") },
-
-
                 "lvl0_start" to
                         Dialog(
                             listOf(
@@ -94,6 +74,80 @@ class DialogManager {
                         Dialog(
                             listOf(
                                 getString(activity , R.string.lvl0_light_on),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                "no_hints" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.no_hints),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl0_puzzle0_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl0_puzzle0_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                "lvl0_puzzle0_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl0_puzzle0_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                "lvl0_to_puzzle1_hint" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl0_to_puzzle1_hint),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                "lvl0_puzzle1_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl0_puzzle1_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl0_puzzle1_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl0_puzzle1_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl0_puzzle1_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl0_puzzle1_hint3),
                             ),
                             listOfNotNull(
                                 characters["John"],

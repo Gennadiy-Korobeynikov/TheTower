@@ -1,6 +1,7 @@
 package com.tpu.thetower.fragments
 
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.tpu.thetower.DialogManager
@@ -30,12 +31,6 @@ class DialogFragment(
 
         FragmentManager.showDialog(requireActivity())
 
-//        requireActivity().supportFragmentManager
-//            .setFragmentResultListener("dialog", viewLifecycleOwner) { _, bundle ->
-//            val text = bundle.getString("test")
-//            tvName.text = "Джон"
-//            tvDialogText.text = text
-//        }
 
         fun updateDialog() {
             // Ещё есть реплики
@@ -53,7 +48,6 @@ class DialogFragment(
 
 
         layoutDialog.setOnClickListener {
-            //FragmentManager.showDialog(requireActivity())
             updateDialog()
         }
 

@@ -3,6 +3,7 @@ package com.tpu.thetower
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.findNavController
@@ -59,6 +60,12 @@ class FragmentManager {
 
         fun hidePermissionRequestFragment(activity : Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_permission_request).visibility = View.GONE
+        }
+
+        fun updateHintStateImg(fragment: Fragment, step : String ) { // Временно передаём строку, потом - Int
+
+            fragment.requireActivity().supportFragmentManager
+                .setFragmentResult("hintImgUpdating", bundleOf("step" to step))
         }
     }
 }
