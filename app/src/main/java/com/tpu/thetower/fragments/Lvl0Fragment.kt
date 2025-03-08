@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.transition.Visibility
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.PermissionManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0Binding
@@ -28,12 +29,12 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentLvl0Binding.bind(view)
-        val btnToElevator : Button = binding.btnToElevator
-        val btnToPuzzle1 : Button = binding.btnToPuzzle1
+        val btnToElevator: Button = binding.btnToElevator
+        val btnToPuzzle1: Button = binding.btnToPuzzle1
         //val btnTestDialog : Button = binding.btnTestDialog
-        val ivDarkness : ImageView = binding.ivDarkness
+        val ivDarkness: ImageView = binding.ivDarkness
         val ivDarknessFlashlight = binding.ivDarknessFlashlight
-        val btnLightOn : ImageButton = binding.btnLightOn
+        val btnLightOn: ImageButton = binding.btnLightOn
 
 
         if (FragmentManager.light) {
@@ -44,11 +45,11 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
 
         btnToElevator.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_global_elevatorFragment)
+            FragmentManager.changeBG(this, R.id.action_global_elevatorFragment)
         }
 
         btnToPuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
             //getPermissions()
         }
 
@@ -60,8 +61,15 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
         ivDarkness.setOnClickListener {
             FragmentManager.showDialog(requireActivity())
-            requireActivity().supportFragmentManager.setFragmentResult("testt", bundleOf("test" to "Да тут же кромешная тьма!\nНужен свет, иначе я себе точно что-то сломаю"))
-            if (ContextCompat.checkSelfPermission( requireContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) //Временная заглушка для демо
+            requireActivity().supportFragmentManager.setFragmentResult(
+                "testt",
+                bundleOf("test" to "Да тут же кромешная тьма!\nНужен свет, иначе я себе точно что-то сломаю")
+            )
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) //Временная заглушка для демо
                 getPermissions()
         }
 
@@ -70,7 +78,10 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
             FragmentManager.showDialog(requireActivity())
-            requireActivity().supportFragmentManager.setFragmentResult("testt", bundleOf("test" to "Ааргх. Как ярко!\n Стоп, я, что, в подвале?.." ))
+            requireActivity().supportFragmentManager.setFragmentResult(
+                "testt",
+                bundleOf("test" to "Ааргх. Как ярко!\n Стоп, я, что, в подвале?..")
+            )
 
         }
 
@@ -79,7 +90,10 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             requireActivity().runOnUiThread {
                 if (isFlashlightOn && !FragmentManager.light) {
                     FragmentManager.showDialog(requireActivity())
-                    requireActivity().supportFragmentManager.setFragmentResult("testt", bundleOf("test" to "Откуда идёт этот свет?\n Хотя неважно, теперь я вижу выключатель" ))
+                    requireActivity().supportFragmentManager.setFragmentResult(
+                        "testt",
+                        bundleOf("test" to "Откуда идёт этот свет?\n Хотя неважно, теперь я вижу выключатель")
+                    )
                     ivDarkness.visibility = View.GONE
                 } else {
                     if (!FragmentManager.light)
@@ -100,7 +114,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         super.onDestroy()
         flashlightManager.unregister()
     }
-
 
 
 }

@@ -13,6 +13,7 @@ navigationFragmentKtx = "2.8.8"
 navigationUiKtx = "2.8.8"
 
 [libraries]
+gson = "com.google.code.gson:gson:2.12.1"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
