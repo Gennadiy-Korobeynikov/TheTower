@@ -20,6 +20,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         val btnToLvl0 : Button = binding.btnElevatorToLvl0
         val btnToLvl1 : Button = binding.btnElevatorToLvl1
 
+
         btnToLvl0.setOnClickListener {
             FragmentManager.changeBG(this,R.id.action_elevatorFragment_to_lvl0Fragment)
         }
@@ -27,6 +28,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         btnToLvl1.setOnClickListener {
             FragmentManager.changeBG(this,R.id.action_elevatorFragment_to_lvl1Fragment)
         }
+
 
 
     }

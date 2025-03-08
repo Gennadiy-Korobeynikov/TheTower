@@ -9,7 +9,7 @@
 
     <ImageButton
         android:id="@+id/btn_go_back"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="#00FFFFFF"

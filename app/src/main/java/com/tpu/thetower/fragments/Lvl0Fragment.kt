@@ -42,13 +42,17 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             btnLightOn.visibility = View.GONE
         }
 
+        FragmentManager.hideGoBackArrow(requireActivity())
+
 
         btnToElevator.setOnClickListener {
             FragmentManager.changeBG(this,R.id.action_global_elevatorFragment)
+            FragmentManager.showGoBackArrow(requireActivity())
         }
 
         btnToPuzzle1.setOnClickListener {
             FragmentManager.changeBG(this,R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
+            FragmentManager.showGoBackArrow(requireActivity())
             //getPermissions()
         }
 

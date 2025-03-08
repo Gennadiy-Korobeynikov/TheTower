@@ -27,11 +27,11 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_go_back_arrow"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:name="com.tpu.thetower.fragments.GoBackArrowFragment"
         android:visibility="gone"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom|center_horizontal" />
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -40,7 +40,9 @@
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.DialogFragment"
         android:layout_gravity="bottom"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"/>
 
 
 
@@ -49,7 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.PermissionRequestFragment"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:elevation="3dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
 
 
@@ -58,7 +63,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.PermissionDeniedFragment"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:elevation="3dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
 
 

@@ -20,7 +20,6 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1) {
 
         val binding = FragmentLvl0Puzzle1Binding.bind(view)
 
-
     }
 
 }
