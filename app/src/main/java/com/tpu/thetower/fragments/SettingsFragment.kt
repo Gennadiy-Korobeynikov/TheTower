@@ -11,18 +11,21 @@ import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentSettingsBinding
 
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private lateinit var musicManager: MusicManager
+    private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
 
         val binding = FragmentSettingsBinding.bind(view)
@@ -50,6 +53,28 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 }
 
                 musicManager.setVolume(volume)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+
+        sb_sound.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                val volume = progress / 100f
+
+                val updatedGameData = gameData?.copy(
+                    gameSettings = gameData.gameSettings.copy(soundVolume = volume)
+                )
+
+                if (updatedGameData != null) {
+                    saveManager.saveData(requireContext(), updatedGameData)
+                }
+
+                soundManager.setVolume(volume)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

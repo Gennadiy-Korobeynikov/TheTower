@@ -16,6 +16,7 @@ import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.PermissionManager
 import com.tpu.thetower.R
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl0Binding
 import com.tpu.thetower.devicemanagers.FlashlightManager
 
@@ -23,6 +24,8 @@ import com.tpu.thetower.devicemanagers.FlashlightManager
 class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
     private lateinit var flashlightManager: FlashlightManager
+    private lateinit var musicManager: MusicManager
+    private lateinit var soundManager: SoundManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +39,12 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         val ivDarknessFlashlight = binding.ivDarknessFlashlight
         val btnLightOn: ImageButton = binding.btnLightOn
 
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init()
+        soundManager.loadSound(requireContext(), R.raw.sound_of_a_flashlight)
+        soundManager.loadSound(requireContext(), R.raw.sound_of_an_elevator_door_opening)
+
 
         if (FragmentManager.light) {
             ivDarkness.visibility = View.GONE
@@ -45,6 +54,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
 
         btnToElevator.setOnClickListener {
+            soundManager.playSound(R.raw.sound_of_an_elevator_door_opening)
             FragmentManager.changeBG(this, R.id.action_global_elevatorFragment)
         }
 
@@ -89,6 +99,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
             requireActivity().runOnUiThread {
                 if (isFlashlightOn && !FragmentManager.light) {
+                    soundManager.playSound(R.raw.sound_of_a_flashlight)
                     FragmentManager.showDialog(requireActivity())
                     requireActivity().supportFragmentManager.setFragmentResult(
                         "testt",
@@ -112,7 +123,15 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
     override fun onDestroy() {
         super.onDestroy()
+
         flashlightManager.unregister()
+        soundManager.release()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        musicManager.playMusic(requireContext(), R.raw.soundtrack_2)
     }
 
 

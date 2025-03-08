@@ -9,8 +9,9 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var musicManager: MusicManager
-    lateinit var saveManager: SaveManager
+    private lateinit var musicManager: MusicManager
+    private lateinit var soundManager: SoundManager
+    private lateinit var saveManager: SaveManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,13 +19,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
+
 
         val gameData = saveManager.readData(this)
         val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
         val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
 
         musicManager.setVolume(savedMusicVolume)
+        soundManager.setVolume(savedSoundVolume)
 
 //        deleteJsonFile(this, "save_file.json")
 //

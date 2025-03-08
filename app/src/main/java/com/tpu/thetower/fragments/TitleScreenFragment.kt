@@ -1,6 +1,5 @@
 package com.tpu.thetower.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,7 +8,6 @@ import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentTitleScreenBinding
-import java.io.File
 
 
 class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
@@ -42,7 +40,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     }
 
 
-
     override fun onResume() {
         super.onResume()
 
@@ -51,8 +48,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
         if (currentMusic != music) {
             musicManager.playMusic(requireContext(), music)
-        }
-        else {
+        } else {
             musicManager.resumeMusic()
         }
     }

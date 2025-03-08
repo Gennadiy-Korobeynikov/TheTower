@@ -8,26 +8,31 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.R
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
 import com.tpu.thetower.databinding.FragmentLvl0Binding
 
 class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
+
+    private lateinit var soundManager: SoundManager
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        soundManager = SoundManager.getInstance()
 
         val binding = FragmentElevatorBinding.bind(view)
-        val btnToLvl0 : Button = binding.btnElevatorToLvl0
-        val btnToLvl1 : Button = binding.btnElevatorToLvl1
+        val btnToLvl0: Button = binding.btnElevatorToLvl0
+        val btnToLvl1: Button = binding.btnElevatorToLvl1
 
         btnToLvl0.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_elevatorFragment_to_lvl0Fragment)
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl0Fragment)
         }
 
         btnToLvl1.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_elevatorFragment_to_lvl1Fragment)
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
         }
-
-
     }
 }
