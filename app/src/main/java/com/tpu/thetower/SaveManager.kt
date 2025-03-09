@@ -3,7 +3,7 @@ package com.tpu.thetower
 import android.content.Context
 import com.google.gson.Gson
 import com.tpu.thetower.models.GameSettings
-import com.tpu.thetower.models.Level
+import com.tpu.thetower.models.LevelData
 import com.tpu.thetower.models.PlayerInfo
 import java.io.File
 import java.io.FileReader
@@ -47,7 +47,7 @@ class SaveManager private constructor() {
     // Модели данных
     data class SaveData(
         val playerInfo: PlayerInfo,
-        val levels: List<Level>,
+        val levels: List<LevelData>,
         val gameSettings: GameSettings
     )
 
