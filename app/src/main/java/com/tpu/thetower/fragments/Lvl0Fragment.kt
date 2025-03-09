@@ -13,8 +13,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.transition.Visibility
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.PermissionManager
 import com.tpu.thetower.R
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl0Binding
 import com.tpu.thetower.devicemanagers.FlashlightManager
 
@@ -22,18 +24,26 @@ import com.tpu.thetower.devicemanagers.FlashlightManager
 class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
     private lateinit var flashlightManager: FlashlightManager
+    private lateinit var musicManager: MusicManager
+    private lateinit var soundManager: SoundManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentLvl0Binding.bind(view)
-        val btnToElevator : Button = binding.btnToElevator
-        val btnToPuzzle1 : Button = binding.btnToPuzzle1
+        val btnToElevator: Button = binding.btnToElevator
+        val btnToPuzzle1: Button = binding.btnToPuzzle1
         //val btnTestDialog : Button = binding.btnTestDialog
-        val ivDarkness : ImageView = binding.ivDarkness
+        val ivDarkness: ImageView = binding.ivDarkness
         val ivDarknessFlashlight = binding.ivDarknessFlashlight
-        val btnLightOn : ImageButton = binding.btnLightOn
+        val btnLightOn: ImageButton = binding.btnLightOn
+
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init()
+        soundManager.loadSound(requireContext(), R.raw.sound_of_a_flashlight)
+        soundManager.loadSound(requireContext(), R.raw.sound_of_an_elevator_door_opening)
 
 
         if (FragmentManager.light) {
@@ -46,12 +56,13 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
 
         btnToElevator.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_global_elevatorFragment)
+            FragmentManager.changeBG(this, R.id.action_global_elevatorFragment)
             FragmentManager.showGoBackArrow(requireActivity())
+            soundManager.playSound(R.raw.sound_of_an_elevator_door_opening)
         }
 
         btnToPuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
             FragmentManager.showGoBackArrow(requireActivity())
             //getPermissions()
         }
@@ -64,8 +75,15 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
 
         ivDarkness.setOnClickListener {
             FragmentManager.showDialog(requireActivity())
-            requireActivity().supportFragmentManager.setFragmentResult("testt", bundleOf("test" to "Да тут же кромешная тьма!\nНужен свет, иначе я себе точно что-то сломаю"))
-            if (ContextCompat.checkSelfPermission( requireContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) //Временная заглушка для демо
+            requireActivity().supportFragmentManager.setFragmentResult(
+                "testt",
+                bundleOf("test" to "Да тут же кромешная тьма!\nНужен свет, иначе я себе точно что-то сломаю")
+            )
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) //Временная заглушка для демо
                 getPermissions()
         }
 
@@ -74,7 +92,10 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
             FragmentManager.showDialog(requireActivity())
-            requireActivity().supportFragmentManager.setFragmentResult("testt", bundleOf("test" to "Ааргх. Как ярко!\n Стоп, я, что, в подвале?.." ))
+            requireActivity().supportFragmentManager.setFragmentResult(
+                "testt",
+                bundleOf("test" to "Ааргх. Как ярко!\n Стоп, я, что, в подвале?..")
+            )
 
         }
 
@@ -82,8 +103,12 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
             requireActivity().runOnUiThread {
                 if (isFlashlightOn && !FragmentManager.light) {
+                    soundManager.playSound(R.raw.sound_of_a_flashlight)
                     FragmentManager.showDialog(requireActivity())
-                    requireActivity().supportFragmentManager.setFragmentResult("testt", bundleOf("test" to "Откуда идёт этот свет?\n Хотя неважно, теперь я вижу выключатель" ))
+                    requireActivity().supportFragmentManager.setFragmentResult(
+                        "testt",
+                        bundleOf("test" to "Откуда идёт этот свет?\n Хотя неважно, теперь я вижу выключатель")
+                    )
                     ivDarkness.visibility = View.GONE
                 } else {
                     if (!FragmentManager.light)
@@ -103,8 +128,14 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
     override fun onDestroy() {
         super.onDestroy()
         flashlightManager.unregister()
+        soundManager.release()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        musicManager.playMusic(requireContext(), R.raw.soundtrack_2)
+    }
 
 
 }

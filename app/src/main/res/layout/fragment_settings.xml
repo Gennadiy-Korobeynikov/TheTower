@@ -147,7 +147,7 @@
 
             <!-- Кнопка назад -->
             <Button
-                android:id="@+id/back_button"
+                android:id="@+id/btn_back"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="@string/back_button"
