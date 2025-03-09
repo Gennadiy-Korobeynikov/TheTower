@@ -41,8 +41,7 @@
         android:name="com.tpu.thetower.fragments.DialogFragment"
         android:layout_gravity="bottom"
         android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:clickable="true" />
 
 
 
@@ -53,8 +52,7 @@
         android:name="com.tpu.thetower.fragments.PermissionRequestFragment"
         android:visibility="gone"
         android:elevation="3dp"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:clickable="true" />
 
 
 
@@ -65,8 +63,7 @@
         android:name="com.tpu.thetower.fragments.PermissionDeniedFragment"
         android:visibility="gone"
         android:elevation="3dp"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:clickable="true" />
 
 
 

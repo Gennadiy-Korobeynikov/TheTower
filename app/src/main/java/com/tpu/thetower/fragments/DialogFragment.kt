@@ -2,7 +2,6 @@ package com.tpu.thetower.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import com.tpu.thetower.FragmentManager
 
@@ -23,7 +22,7 @@ class DialogFragment : Fragment(R.layout.fragment_dialog) {
 
         val tvName = binding.tvName
         val tvDialogText = binding.tvDialogText
-        val imgv_avatar = binding.imgvAvatar
+        val imgvAvatar = binding.imgvAvatar
         val layoutDialog = binding.layoutDialog
 
 

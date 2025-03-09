@@ -34,12 +34,14 @@
         android:background="@drawable/button_outline" />
 
 
+
     <ImageView
         android:id="@+id/iv_darkness_flashlight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/lvl0_bg_flashlight"
-        android:elevation="3dp" />
+        android:elevation="3dp"
+        android:clickable="true" />
 
     <ImageButton
         android:id="@+id/btn_light_on"
@@ -58,6 +60,22 @@
         android:src="@drawable/lvl0_bg_dark"
         android:clickable="true"
         android:elevation="3dp" />
+
+<!--    Ограничивает нажатие при вызове статус-бара-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="top"
+        android:clickable="true"
+        android:elevation="3dp"/>
+
+    <ImageView
+        android:id="@+id/iv_black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lvl0_black"
+        android:elevation="3dp"
+        android:clickable="true"/>
 
 
 </FrameLayout>
