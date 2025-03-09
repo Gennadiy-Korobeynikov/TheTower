@@ -9,24 +9,34 @@ import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentTitleScreenBinding
 
-
 class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
-    protected lateinit var musicManager: MusicManager
+    private lateinit var binding: FragmentTitleScreenBinding
 
+    private lateinit var musicManager: MusicManager
+
+    private lateinit var btnStart: Button
+    private lateinit var btnSettings: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        musicManager = MusicManager.getInstance()
+        binding = FragmentTitleScreenBinding.bind(view)
 
-        val binding = FragmentTitleScreenBinding.bind(view)
-        val btnStart: Button = binding.btnToLvl0
-        val btnSettings: Button = binding.btnToSettings
+        bindView()
+        setListeners()
+        handleSounds()
 
         FragmentManager.hideHUD(requireActivity())
         FragmentManager.hideGoBackArrow(requireActivity())
+    }
 
+    private fun bindView() {
+        btnStart = binding.btnToLvl0
+        btnSettings = binding.btnToSettings
+    }
+
+    private fun setListeners() {
         btnStart.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
             FragmentManager.showHUD(requireActivity())
@@ -38,6 +48,9 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         }
     }
 
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -54,7 +67,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     override fun onPause() {
         super.onPause()
+
         musicManager.pauseMusic()
     }
-
 }

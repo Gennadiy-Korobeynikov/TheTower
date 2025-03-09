@@ -44,43 +44,10 @@ class SaveManager private constructor() {
         fileWriter.close()
     }
 
-    // Модели данных
     data class SaveData(
         val playerInfo: PlayerInfo,
         val levels: List<LevelData>,
         val gameSettings: GameSettings
     )
 
-
-//    companion object {
-//        private var instance: SaveManager? = null
-//
-//        @Synchronized
-//        fun getInstance(): SaveManager {
-//            if (instance == null) {
-//                instance = SaveManager()
-//            }
-//            return instance!!
-//        }
-//    }
-//
-//    fun readJsonFromFile(context: Context, fileName: String): String? {
-//        file = File(context.filesDir, fileName)
-//        return if (file!!.exists()) file!!.readText(Charsets.UTF_8) else null
-//    }
-//
-//
-//    fun copyJsonFromAssets(context: Context, fileName: String) {
-//        file = File(context.filesDir, fileName)
-//
-//        if (!file.exists()) { // Копируем, только если файла нет
-//            context.assets.open(fileName).use { inputStream ->
-//                file.outputStream().use { outputStream ->
-//                    inputStream.copyTo(outputStream)
-//
-//
-//                }
-//            }
-//        }
-//    }
 }

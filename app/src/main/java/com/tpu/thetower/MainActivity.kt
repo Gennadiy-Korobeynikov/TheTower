@@ -1,11 +1,9 @@
 package com.tpu.thetower
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,22 +16,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
-        saveManager = SaveManager.getInstance()
-
-
-        val gameData = saveManager.readData(this)
-        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
-        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
-
-        musicManager.setVolume(savedMusicVolume)
-        soundManager.setVolume(savedSoundVolume)
+        loadSettings()
 
 //        deleteJsonFile(this, "save_file.json")
-//
 //        copyJsonFromAssets(this, "save_file.json")
-
 
 
         window.decorView.apply {
@@ -46,6 +32,21 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    fun loadSettings() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        saveManager = SaveManager.getInstance()
+
+
+        val gameData = saveManager.readData(this)
+        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
+        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
+
+        musicManager.setVolume(savedMusicVolume)
+        soundManager.setVolume(savedSoundVolume)
+    }
+
 
 
 
