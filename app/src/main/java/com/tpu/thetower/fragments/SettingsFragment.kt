@@ -29,18 +29,18 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         saveManager = SaveManager.getInstance()
 
         val binding = FragmentSettingsBinding.bind(view)
-        val btn_back: Button = binding.btnBack
-        val sb_music: SeekBar = binding.musicVolumeSeekBar
-        val sb_sound: SeekBar = binding.soundVolumeSeekBar
+        val btnBack: Button = binding.btnBack
+        val sbMusic: SeekBar = binding.musicVolumeSeekBar
+        val sbSound: SeekBar = binding.soundVolumeSeekBar
 
         val gameData = saveManager.readData(requireContext())
         val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
         val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
 
-        sb_music.progress = (savedMusicVolume * 100).toInt()
-        sb_sound.progress = (savedSoundVolume * 100).toInt()
+        sbMusic.progress = (savedMusicVolume * 100).toInt()
+        sbSound.progress = (savedSoundVolume * 100).toInt()
 
-        sb_music.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        sbMusic.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
 
@@ -62,7 +62,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
         })
 
-        sb_sound.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        sbSound.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
 
@@ -94,7 +94,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             languageSpinner.adapter = adapter
         }
 
-        btn_back.setOnClickListener {
+        btnBack.setOnClickListener {
             FragmentManager.goBack(this)
         }
     }

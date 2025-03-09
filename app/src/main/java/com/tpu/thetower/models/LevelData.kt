@@ -1,14 +1,14 @@
 package com.tpu.thetower.models
 
-data class Level(
+data class LevelData(
     val id: Int,
     val name: String,
     val isUnlocked: Boolean,
     val isCompleted: Boolean,
-    val puzzles: List<Puzzle>
+    val puzzles: List<PuzzleData>
 )
 
-data class Puzzle(
+data class PuzzleData(
     val id: String,
     val name: String,
     val status: String,

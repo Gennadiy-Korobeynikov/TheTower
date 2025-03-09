@@ -11,15 +11,15 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/lvl0_test" />
+        android:src="@drawable/lvl0_bd_light" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_to_elevator"
-        android:layout_width="wrap_content"
-        android:layout_height="230dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="40dp"
+        android:layout_width="150dp"
+        android:layout_height="270dp"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_outline" />
 
@@ -28,34 +28,26 @@
         android:id="@+id/btn_to_puzzle1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="-25dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="39dp"
         android:background="@drawable/button_outline" />
 
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/btn_test_dialog"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_gravity="end"-->
-<!--        android:layout_marginTop="250dp"-->
-<!--        android:layout_marginEnd="150dp"-->
-<!--        android:background="@drawable/button_outline" />-->
 
     <ImageView
         android:id="@+id/iv_darkness_flashlight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg_flashlight"
-        android:elevation="3dp"/>
+        android:src="@drawable/lvl0_bg_flashlight"
+        android:elevation="3dp" />
 
     <ImageButton
         android:id="@+id/btn_light_on"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-10dp"
-        android:layout_marginEnd="40dp"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="200dp"
         android:background="@drawable/button_outline"
         android:elevation="3dp"/>
 
@@ -63,9 +55,9 @@
         android:id="@+id/iv_darkness"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg_dark"
+        android:src="@drawable/lvl0_bg_dark"
         android:clickable="true"
-        android:elevation="3dp"/>
+        android:elevation="3dp" />
 
 
 </FrameLayout>

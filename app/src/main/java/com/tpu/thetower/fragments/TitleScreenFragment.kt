@@ -21,14 +21,14 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         musicManager = MusicManager.getInstance()
 
         val binding = FragmentTitleScreenBinding.bind(view)
-        val btnStart : Button = binding.btnToLvl0
-        val btnSettings : Button = binding.btnToSettings
+        val btnStart: Button = binding.btnToLvl0
+        val btnSettings: Button = binding.btnToSettings
 
         FragmentManager.hideHUD(requireActivity())
         FragmentManager.hideGoBackArrow(requireActivity())
 
         btnStart.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_titleScreenFragment_to_lvl0Fragment)
+            FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
             FragmentManager.showHUD(requireActivity())
             FragmentManager.showGoBackArrow(requireActivity())
         }

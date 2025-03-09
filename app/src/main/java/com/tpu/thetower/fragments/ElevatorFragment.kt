@@ -34,7 +34,5 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             soundManager.release()
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
         }
-
-
     }
 }
