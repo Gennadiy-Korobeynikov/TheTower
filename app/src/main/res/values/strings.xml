@@ -1,4 +1,35 @@
 <resources>
+    <string name="app_name">TheTower</string>
+
+    <!--################################# Окно запроса разрешений (+ туториал)  #######################################-->
+    <string name="permission_request">
+    This game has special mechanics: as you pass you will encounter puzzles that require you to use your creativity to solve them.
+    that will require the use of your creativity... and your device.\n
+    The former is completely at your disposal, but the latter requires permissions.\n\n
+    (Don\'t be alarmed if some of the permissions seem strange to you. I, the dialog box, personally guarantee that all data will be used only for the advancement of the game world)\n\n\n
+
+    For example, right now, think about how you can use your smartphone to temporarily turn on the lights in a room.
+    </string>
+
+    <string name="ok">ОК</string>
+
+    <!--##############################################################################################################-->
+
+
+    <!--################################# Окно при отказе предоставить разрешения  ####################################-->
+
+    <string name="permission_denied_msg">
+        Wait! You are losing a significant amount of this game\'s unique gameplay!
+    All permissions are only necessary to keep track of the fact that you managed to go outside the box,
+    went beyond the usual games of this genre and utilized the features of your device.
+    of your device ( turning on the flashlight, the camera, adding a new contact and more! )\n\n
+        I, dialog box, I really hope that I managed to change your mind, because the developers tried very hard to make the game unusual :)
+    </string>
+
+    <string name="open_sys"> Go to the application settings</string>
+    <string name="no_thanks"> No, thanks, I can enjoy what I\'ve got.</string>
+
+
     <!-- Strings for settings menu -->
     <string name="settings_title">Settings</string>
     <string name="music_volume">Music Volume</string>
