@@ -2,19 +2,15 @@ package com.tpu.thetower.fragments
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import androidx.transition.Visibility
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
-import com.tpu.thetower.PermissionManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl0Binding
@@ -56,12 +52,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         }
         else
             startAwakeningAnim()
-
-
     }
 
     private fun bindView() {
-
         btnToElevator= binding.btnToElevator
         btnToPuzzle1 = binding.btnToPuzzle1
         ivDarkness  = binding.ivDarkness
@@ -71,8 +64,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
     }
 
     private fun setListeners() {
-
-
         btnToElevator.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_global_elevatorFragment)
             FragmentManager.showGoBackArrow(requireActivity())
@@ -84,8 +75,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             FragmentManager.showGoBackArrow(requireActivity())
             //getPermissions()
         }
-
-
 
         ivDarkness.setOnClickListener {
             FragmentManager.showDialog(requireActivity())
@@ -122,7 +111,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
                         soundManager.playSound(R.raw.sound_of_a_flashlight)
                         ivDarkness.visibility = View.VISIBLE
                     }
-
                 }
             }
         }
@@ -148,7 +136,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
                     "testt",
                     bundleOf("test" to "Ах, голова раскалывается. Где я?")
                 )
-
                 getPermissions() // Временно просим разрешения здесь
             }
             .start()
@@ -163,11 +150,10 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         soundManager.loadSound(requireContext(), R.raw.sound_of_an_elevator_door_opening)
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
+
         flashlightManager.unregister()
-        soundManager.release()
     }
 
     override fun onResume() {
@@ -176,6 +162,11 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         musicManager.playMusic(requireContext(), R.raw.soundtrack_2)
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        musicManager.pauseMusic()
+    }
 }
 
 
