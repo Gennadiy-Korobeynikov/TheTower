@@ -27,10 +27,10 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1) {
 
     private var solution = charArrayOf('0','0','0','0')
 
-    private val images = arrayOf(arrayOf(R.drawable.num_0, R.drawable.num_1, R.drawable.num_2, R.drawable.num_3, R.drawable.num_4_2, R.drawable.num_5, R.drawable.num_6, R.drawable.num_7, R.drawable.num_8, R.drawable.num_9),
-        arrayOf(R.drawable.num_0, R.drawable.num_1, R.drawable.num_2, R.drawable.num_3, R.drawable.num_4, R.drawable.num_5, R.drawable.num_6_1, R.drawable.num_7, R.drawable.num_8, R.drawable.num_9),
-        arrayOf(R.drawable.num_0, R.drawable.num_1_1, R.drawable.num_2, R.drawable.num_3, R.drawable.num_4_1, R.drawable.num_5, R.drawable.num_6, R.drawable.num_7, R.drawable.num_8, R.drawable.num_9),
-        arrayOf(R.drawable.num_0, R.drawable.num_1, R.drawable.num_2, R.drawable.num_3, R.drawable.num_4, R.drawable.num_5, R.drawable.num_6, R.drawable.num_7_1, R.drawable.num_8, R.drawable.num_9))
+    private val images = arrayOf(arrayOf(R.drawable.lvl0_puzzle1_num_0, R.drawable.lvl0_puzzle1_num_1, R.drawable.lvl0_puzzle1_num_2, R.drawable.lvl0_puzzle1_num_3, R.drawable.lvl0_puzzle1_num_4_2, R.drawable.lvl0_puzzle1_num_5, R.drawable.lvl0_puzzle1_num_6, R.drawable.lvl0_puzzle1_num_7, R.drawable.lvl0_puzzle1_num_8, R.drawable.lvl0_puzzle1_num_9),
+        arrayOf(R.drawable.lvl0_puzzle1_num_0, R.drawable.lvl0_puzzle1_num_1, R.drawable.lvl0_puzzle1_num_2, R.drawable.lvl0_puzzle1_num_3, R.drawable.lvl0_puzzle1_num_4, R.drawable.lvl0_puzzle1_num_5, R.drawable.lvl0_puzzle1_num_6_1, R.drawable.lvl0_puzzle1_num_7, R.drawable.lvl0_puzzle1_num_8, R.drawable.lvl0_puzzle1_num_9),
+        arrayOf(R.drawable.lvl0_puzzle1_num_0, R.drawable.lvl0_puzzle1_num_1_1, R.drawable.lvl0_puzzle1_num_2, R.drawable.lvl0_puzzle1_num_3, R.drawable.lvl0_puzzle1_num_4_1, R.drawable.lvl0_puzzle1_num_5, R.drawable.lvl0_puzzle1_num_6, R.drawable.lvl0_puzzle1_num_7, R.drawable.lvl0_puzzle1_num_8, R.drawable.lvl0_puzzle1_num_9),
+        arrayOf(R.drawable.lvl0_puzzle1_num_0, R.drawable.lvl0_puzzle1_num_1, R.drawable.lvl0_puzzle1_num_2, R.drawable.lvl0_puzzle1_num_3, R.drawable.lvl0_puzzle1_num_4, R.drawable.lvl0_puzzle1_num_5, R.drawable.lvl0_puzzle1_num_6, R.drawable.lvl0_puzzle1_num_7_1, R.drawable.lvl0_puzzle1_num_8, R.drawable.lvl0_puzzle1_num_9))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
