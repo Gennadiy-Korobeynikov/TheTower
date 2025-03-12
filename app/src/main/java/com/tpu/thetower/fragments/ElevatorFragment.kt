@@ -24,6 +24,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         val binding = FragmentElevatorBinding.bind(view)
         val btnToLvl0: Button = binding.btnElevatorToLvl0
         val btnToLvl1: Button = binding.btnElevatorToLvl1
+        val btnToLvlTest: Button = binding.btnElevatorToLvlTest
 
         btnToLvl0.setOnClickListener {
             soundManager.release()
@@ -33,6 +34,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         btnToLvl1.setOnClickListener {
             soundManager.release()
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
+        }
+
+        btnToLvlTest.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
         }
     }
 }
