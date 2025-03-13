@@ -1,6 +1,7 @@
 package com.tpu.thetower
 
 import android.app.Activity
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -12,8 +13,8 @@ class FragmentManager {
 
         var light : Boolean = false  // Временный костыль для демо
 
-        fun changeBG(from : Fragment, to : Int) {
-            from.findNavController().navigate(to)
+        fun changeBG(from : Fragment, to : Int, bundle: Bundle = Bundle()) {
+            from.findNavController().navigate(to, bundle)
         }
 
         fun goBack(from : Fragment) {

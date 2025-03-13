@@ -10,12 +10,15 @@ import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentLvlTestBinding
 import com.tpu.thetower.puzzles.Lvl0Puzzle1
 
 class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     View.OnTouchListener,
     View.OnDragListener {
+
+    private lateinit var saveManager: SaveManager
 
     private lateinit var binding: FragmentLvlTestBinding
     private val originalPositions = mutableMapOf<View, Pair<Float, Float>>()
@@ -73,7 +76,8 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
             DragEvent.ACTION_DRAG_EXITED -> return true
 
             DragEvent.ACTION_DROP -> {
-                val previousZone = zoneOccupants.entries.firstOrNull { it.value == draggedView }?.key
+                val previousZone =
+                    zoneOccupants.entries.firstOrNull { it.value == draggedView }?.key
 
                 if (targetView != null && targetView in zoneOccupants.keys) {
                     val currentOccupant = zoneOccupants[targetView]
@@ -140,7 +144,8 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     }
 
     private fun updateSolution() {
-        val targets = listOf(binding.ivTarget1, binding.ivTarget2, binding.ivTarget3, binding.ivTarget4)
+        val targets =
+            listOf(binding.ivTarget1, binding.ivTarget2, binding.ivTarget3, binding.ivTarget4)
         targets.forEachIndexed { index, target ->
             val draggable = zoneOccupants[target]
             solution[index] = when (draggable?.id) {
@@ -151,6 +156,13 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
                 else -> '0'
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        saveManager = SaveManager.getInstance()
+        saveManager.saveCurrentLevel(requireContext(), -1)
     }
 
 }

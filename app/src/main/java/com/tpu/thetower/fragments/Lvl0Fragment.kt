@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
+import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl0Binding
 import com.tpu.thetower.devicemanagers.FlashlightManager
@@ -24,6 +25,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
     private lateinit var flashlightManager: FlashlightManager
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
+    private lateinit var saveManager: SaveManager
 
     private lateinit var btnToElevator : Button
     private lateinit var btnToPuzzle1 : Button
@@ -160,6 +162,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         super.onResume()
 
         musicManager.playMusic(requireContext(), R.raw.soundtrack_2)
+        saveManager = SaveManager.getInstance()
+        saveManager.saveCurrentLevel(requireContext(), 0)
     }
 
     override fun onPause() {

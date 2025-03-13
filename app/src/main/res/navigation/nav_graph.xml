@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_titleScreenFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_titleScreenFragment_to_elevatorFragment"
+            app:destination="@id/elevatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl0Fragment"

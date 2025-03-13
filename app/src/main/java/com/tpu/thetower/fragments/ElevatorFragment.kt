@@ -19,6 +19,12 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val receivedData = arguments?.getString("saved_level")
+        if (receivedData != null) {
+            FragmentManager.changeBG(this, receivedData.toInt())
+            arguments = Bundle()
+        }
+
         soundManager = SoundManager.getInstance()
 
         val binding = FragmentElevatorBinding.bind(view)

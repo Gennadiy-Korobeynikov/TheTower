@@ -36,6 +36,14 @@
         android:layout_marginEnd="162dp"
         android:background="@drawable/button_outline" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button_outline"
+        android:text="Кликай сюда"/>
 
 
 </FrameLayout>

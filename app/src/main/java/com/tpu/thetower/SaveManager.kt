@@ -44,6 +44,39 @@ class SaveManager private constructor() {
         fileWriter.close()
     }
 
+    fun saveMusicVolume(context: Context, volume: Float) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy(
+            gameSettings = gameData.gameSettings.copy(musicVolume = volume)
+        )
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
+    fun saveSoundVolume(context: Context, volume: Float) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy(
+            gameSettings = gameData.gameSettings.copy(soundVolume = volume)
+        )
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
+    fun saveCurrentLevel(context: Context, level: Int) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy(
+            playerInfo = gameData.playerInfo.copy(currentLevel = level)
+        )
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
     data class SaveData(
         val playerInfo: PlayerInfo,
         val levels: List<LevelData>,
