@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_titleScreenFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_titleScreenFragment_to_elevatorFragment"
+            app:destination="@id/elevatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl0Fragment"
@@ -49,6 +52,9 @@
             app:enterAnim="@android:anim/fade_in"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvlTestFragment"
+            app:destination="@id/lvlTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -78,5 +84,10 @@
         android:name="com.tpu.thetower.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/lvlTestFragment"
+        android:name="com.tpu.thetower.fragments.LvlTestFragment"
+        android:label="fragment_lvl_test"
+        tools:layout="@layout/fragment_lvl_test" />
 
 </navigation>

@@ -12,6 +12,15 @@
         android:src="@drawable/elevator_test"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_elevator_to_lvl_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToLVL TEST"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="210dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_elevator_to_lvl0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.LvlTestFragment">
+
+    <!-- Target Zones -->
+    <ImageView
+        android:id="@+id/ivTarget1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:id="@+id/ivTarget2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle"
+        app:layout_constraintStart_toEndOf="@id/ivTarget1"
+        app:layout_constraintTop_toTopOf="@id/ivTarget1"
+        android:layout_marginStart="32dp"/>
+
+    <ImageView
+        android:id="@+id/ivTarget3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle"
+        app:layout_constraintStart_toEndOf="@id/ivTarget2"
+        app:layout_constraintTop_toTopOf="@id/ivTarget1"
+        android:layout_marginStart="32dp"/>
+
+    <ImageView
+        android:id="@+id/ivTarget4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle"
+        app:layout_constraintStart_toEndOf="@id/ivTarget3"
+        app:layout_constraintTop_toTopOf="@id/ivTarget1"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Draggable Items -->
+    <ImageView
+        android:id="@+id/ivDraggable1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle_drag1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="16dp"/>
+
+    <ImageView
+        android:id="@+id/ivDraggable2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle_drag2"
+        app:layout_constraintStart_toEndOf="@id/ivDraggable1"
+        app:layout_constraintBottom_toBottomOf="@id/ivDraggable1"
+        android:layout_marginStart="32dp"/>
+
+    <ImageView
+        android:id="@+id/ivDraggable3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle_drag3"
+        app:layout_constraintStart_toEndOf="@id/ivDraggable2"
+        app:layout_constraintBottom_toBottomOf="@id/ivDraggable1"
+        android:layout_marginStart="32dp"/>
+
+    <ImageView
+        android:id="@+id/ivDraggable4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_triangle_drag4"
+        app:layout_constraintStart_toEndOf="@id/ivDraggable3"
+        app:layout_constraintBottom_toBottomOf="@id/ivDraggable1"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

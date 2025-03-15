@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
+import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentTitleScreenBinding
 
 class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
@@ -14,9 +15,11 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     private lateinit var binding: FragmentTitleScreenBinding
 
     private lateinit var musicManager: MusicManager
+    private lateinit var saveManager: SaveManager
 
     private lateinit var btnStart: Button
     private lateinit var btnSettings: Button
+    private lateinit var btnResume: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +37,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     private fun bindView() {
         btnStart = binding.btnToLvl0
         btnSettings = binding.btnToSettings
+        btnResume = binding.btnResume
     }
 
     private fun setListeners() {
@@ -46,10 +50,29 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         btnSettings.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_settingsFragment)
         }
+
+        btnResume.setOnClickListener {
+            val gameData = saveManager.readData(requireContext())
+            val savedLevel = gameData?.playerInfo?.currentLevel ?: 0
+
+
+            val levels = listOf(
+                R.id.action_elevatorFragment_to_lvlTestFragment,
+                R.id.action_elevatorFragment_to_lvl0Fragment,
+                R.id.action_elevatorFragment_to_lvl1Fragment
+            )
+
+            val bundle = Bundle().apply {
+                putString("saved_level", levels[savedLevel + 1].toString())
+            }
+            FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_elevatorFragment, bundle)
+
+        }
     }
 
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
+        saveManager = SaveManager.getInstance()
     }
 
     override fun onResume() {

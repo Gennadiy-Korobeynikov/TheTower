@@ -55,14 +55,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
 
-                val updatedGameData = gameData?.copy(
-                    gameSettings = gameData.gameSettings.copy(musicVolume = volume)
-                )
-
-                if (updatedGameData != null) {
-                    saveManager.saveData(requireContext(), updatedGameData)
-                }
-
+                saveManager.saveMusicVolume(requireContext(), volume)
                 musicManager.setVolume(volume)
             }
 
@@ -77,14 +70,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
 
-                val updatedGameData = gameData?.copy(
-                    gameSettings = gameData.gameSettings.copy(soundVolume = volume)
-                )
-
-                if (updatedGameData != null) {
-                    saveManager.saveData(requireContext(), updatedGameData)
-                }
-
+                saveManager.saveSoundVolume(requireContext(), volume)
                 soundManager.setVolume(volume)
             }
 
