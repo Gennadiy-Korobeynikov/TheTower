@@ -10,6 +10,64 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/puzzle_test" />
+        android:src="@drawable/lvl0_bd_light" />
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:listitem="@layout/item_image"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:listitem="@layout/item_image"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:listitem="@layout/item_image"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:listitem="@layout/item_image"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lvl0_puzzle1_shadow"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="17dp"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lvl0_puzzle1_lock" />
+
+
 
 </FrameLayout>

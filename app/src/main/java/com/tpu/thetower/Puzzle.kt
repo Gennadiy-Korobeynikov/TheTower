@@ -3,11 +3,11 @@ package com.tpu.thetower
 // Заготовка под класс головоломок
 abstract class Puzzle(val name : String) {
 
-    abstract  var isSolved : Boolean
-    abstract var usedHintsCount : Int
+    var isSolved : Boolean = false
+    var usedHintsCount : Int = 0
 //    abstract var hints : Array<Dialog>
 
-    abstract fun checkSolution(solution : String)
+    abstract fun checkSolution(solution : String) : Boolean
     fun complete() {
         isSolved = true
     }

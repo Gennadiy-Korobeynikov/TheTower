@@ -64,7 +64,6 @@ class MusicManager private constructor()  {
         mediaPlayer?.setVolume(this.volume, this.volume)
     }
 
-
     fun getCurrentMusic(): Int {
         return currentMusic
     }

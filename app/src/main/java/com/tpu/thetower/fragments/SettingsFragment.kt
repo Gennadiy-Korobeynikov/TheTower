@@ -2,10 +2,8 @@ package com.tpu.thetower.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.SeekBar
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
@@ -17,22 +15,35 @@ import com.tpu.thetower.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
+    private lateinit var binding: FragmentSettingsBinding
+
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
 
+    private lateinit var btnBack: Button
+    private lateinit var sbMusic: SeekBar
+    private lateinit var sbSound: SeekBar
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
+        binding = FragmentSettingsBinding.bind(view)
+
+        bindView()
+        setListeners()
+        handleSounds()
+    }
+
+    private fun bindView() {
+
+        btnBack = binding.btnBack
+        sbMusic = binding.musicVolumeSeekBar
+        sbSound = binding.soundVolumeSeekBar
+    }
+
+    private fun setListeners() {
         saveManager = SaveManager.getInstance()
-
-        val binding = FragmentSettingsBinding.bind(view)
-        val btnBack: Button = binding.btnBack
-        val sbMusic: SeekBar = binding.musicVolumeSeekBar
-        val sbSound: SeekBar = binding.soundVolumeSeekBar
-
         val gameData = saveManager.readData(requireContext())
         val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
         val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
@@ -84,24 +95,26 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
         })
 
-        val languageSpinner = view.findViewById<Spinner>(R.id.language_spinner)
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.language_options,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            languageSpinner.adapter = adapter
-        }
-
         btnBack.setOnClickListener {
             FragmentManager.goBack(this)
         }
+    }
+
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        saveManager = SaveManager.getInstance()
     }
 
     override fun onResume() {
         super.onResume()
 
         musicManager.resumeMusic()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        musicManager.pauseMusic()
     }
 }
