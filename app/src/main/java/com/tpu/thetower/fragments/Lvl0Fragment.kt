@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.transition.Visibility
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.PermissionManager
@@ -82,28 +83,19 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
         btnToPuzzle1.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
             FragmentManager.showGoBackArrow(requireActivity())
-            //getPermissions()
         }
 
 
 
         ivDarkness.setOnClickListener {
-            FragmentManager.showDialog(requireActivity())
-            requireActivity().supportFragmentManager.setFragmentResult(
-                "testt",
-                bundleOf("test" to "Да тут же кромешная тьма!\nНужен свет, иначе я себе точно что-то сломаю")
-            )
+            DialogManager.startDialog(requireActivity(),"lvl0_dark")
         }
 
         btnLightOn.setOnClickListener {
             FragmentManager.light = true
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
-            FragmentManager.showDialog(requireActivity())
-            requireActivity().supportFragmentManager.setFragmentResult(
-                "testt",
-                bundleOf("test" to "Ааргх. Как ярко!\n Стоп, я, что, в подвале?..")
-            )
+            DialogManager.startDialog(requireActivity(),"lvl0_light_on")
             flashlightManager.unregister()
         }
 
@@ -111,11 +103,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             requireActivity().runOnUiThread {
                 if (isFlashlightOn && !FragmentManager.light) {
                     soundManager.playSound(R.raw.sound_of_a_flashlight)
-                    FragmentManager.showDialog(requireActivity())
-                    requireActivity().supportFragmentManager.setFragmentResult(
-                        "testt",
-                        bundleOf("test" to "Что это за свет?\n Хотя неважно, теперь я вижу выключатель")
-                    )
+                    DialogManager.startDialog(requireActivity(),"lvl0_flashlight_on")
                     ivDarkness.visibility = View.GONE
                 } else {
                     if (!FragmentManager.light) {
@@ -143,13 +131,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) {
             .setDuration(3000)
             .withEndAction {
                 ivBlack.visibility = View.GONE
-                FragmentManager.showDialog(requireActivity())
-                requireActivity().supportFragmentManager.setFragmentResult(
-                    "testt",
-                    bundleOf("test" to "Ах, голова раскалывается. Где я?")
-                )
-
-                getPermissions() // Временно просим разрешения здесь
+                DialogManager.startDialog(requireActivity(),"lvl0_start")
             }
             .start()
         }

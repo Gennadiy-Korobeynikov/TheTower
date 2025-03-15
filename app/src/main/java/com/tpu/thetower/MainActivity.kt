@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.tpu.thetower.models.Dialog
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+
+        DialogManager.loadCharacters()
+        DialogManager.loadDialogs(this)
+
 
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
@@ -33,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 //        deleteJsonFile(this, "save_file.json")
 //
 //        copyJsonFromAssets(this, "save_file.json")
+
 
 
 
