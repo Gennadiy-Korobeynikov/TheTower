@@ -30,12 +30,6 @@ class DialogFragment(
 
         FragmentManager.showDialog(requireActivity())
 
-//        requireActivity().supportFragmentManager
-//            .setFragmentResultListener("dialog", viewLifecycleOwner) { _, bundle ->
-//            val text = bundle.getString("test")
-//            tvName.text = "Джон"
-//            tvDialogText.text = text
-//        }
 
         fun updateDialog() {
             // Ещё есть реплики
@@ -53,7 +47,6 @@ class DialogFragment(
 
 
         layoutDialog.setOnClickListener {
-            //FragmentManager.showDialog(requireActivity())
             updateDialog()
         }
 
