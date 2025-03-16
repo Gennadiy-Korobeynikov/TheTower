@@ -77,6 +77,17 @@ class SaveManager private constructor() {
         }
     }
 
+    fun saveUnlockedModule(context: Context, unlockedModule: Int) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy(
+            playerInfo = gameData.playerInfo.copy(lastUnlockedModule = unlockedModule)
+        )
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
     data class SaveData(
         val playerInfo: PlayerInfo,
         val levels: List<LevelData>,

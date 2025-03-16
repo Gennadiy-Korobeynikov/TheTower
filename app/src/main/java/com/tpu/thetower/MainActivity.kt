@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         musicManager.setVolume(savedMusicVolume)
         soundManager.setVolume(savedSoundVolume)
         loadSettings()
+        loadProgress()
 
 //        deleteJsonFile(this, "save_file.json")
 //        copyJsonFromAssets(this, "save_file.json")
@@ -51,7 +52,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun loadSettings() {
+
+    private fun loadProgress() {
+        LevelAccessManager.lastUnlockedModule = 0 // Пока открыт только модуль 0 (подвал - нет карты)
+                                                // Позже - в зависимости от сохранения
+    }
+
+    private fun loadSettings() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
