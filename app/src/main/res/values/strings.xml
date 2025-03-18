@@ -3,15 +3,15 @@
 
     <!--################################# Окно запроса разрешений (+ туториал)  #######################################-->
     <string name="permission_request">
-    У этой игры есть особенные механики: по мере прохождения вам будут встречаться головоломки, для решения
-    которых нужно будет использовать Вашу креативность... и ваше устройство.\n
-    Первое полностью в вашем распоряжении, а вот на второе игре необходимы разрешения.\n\n
-    (Не пугайтесь, если некоторые разрешения покажутся вам странными. Я, диалоговое окошко, лично гарантирую, что все данные будут использованы только для продвижения по игрвому миру)\n\n
+        This game has special mechanics: as you pass you will encounter puzzles that require you to use your creativity to solve them.
+    that will require the use of your creativity... and your device.\n
+    The former is completely at your disposal, but the latter requires permissions.\n\n
+    (Don\'t be alarmed if some of the permissions seem strange to you. I, the dialog box, personally guarantee that all data will be used only for the advancement of the game world)\n\n\n
 
-    Например, сейчас, подумайте, каким образом можно использовать ваш смарфтон, чтобы временно включить свет в комнате.
+    For example, right now, think about how you can use your smartphone to temporarily turn on the lights in a room.
 </string>
 
-    <string name="ok">ОК</string>
+    <string name="ok">OK</string>
 
     <!--##############################################################################################################-->
 
@@ -19,47 +19,44 @@
     <!--################################# Окно при отказе предоставить разрешения  ####################################-->
 
     <string name="permission_denied_msg">
-        Подождите! Вы теряете значительный объём уникального геймплея этой игры!
-    Все разрешения необходимы только для того, чтобы отслеживать, что Вы сумели подойти нестандартно к решению,
-    вышли за рамки привычных игр этого жанра и использовали функции вашего
-    устройства ( включение фонарика, камеры, добавление нового контакта и многое другое! )\n\n
-        Я, диалоговое окно, очень надеюсь, что мне удалось переубедить Вас, ведь разработчики очень старались сделать игру необычной :)
+       Wait! You are losing a significant amount of this game\'s unique gameplay!
+    All permissions are only necessary to keep track of the fact that you managed to go outside the box,
+    went beyond the usual games of this genre and utilized the features of your device.
+    of your device ( turning on the flashlight, the camera, adding a new contact and more! )\n\n
+        I, dialog box, I really hope that I managed to change your mind, because the developers tried very hard to make the game unusual :)
     </string>
 
-    <string name="open_sys"> Перейти в настройки приложения</string>
-    <string name="no_thanks"> Нет, спасибо, я смогу насладиться и тем, что есть</string>
+    <string name="open_sys">Go to the application settings</string>
+    <string name="no_thanks">No, thanks, I can enjoy what I\'ve got</string>
 
     <!--##############################################################################################################-->
-    <string name="settings_title">Настройки</string>
-    <string name="music_volume">Громкость музыки</string>
-    <string name="sound_volume">Громкость звуков</string>
-    <string name="game_language">Язык игры</string>
-    <string name="back_button">Назад</string>
+    <string name="settings_title">Settings</string>
+    <string name="music_volume">Music Volume</string>
+    <string name="sound_volume">Sound Effects Volume</string>
+    <string name="game_language">Game Language</string>
+    <string name="back_button">Back</string>
 
     <!-- Массив для языков -->
     <string-array name="language_options">
-        <item>Русский</item>
-        <item>Английский</item>
-        <item>Немецкий</item>
+        <item>Russian</item>
+        <item>English</item>
+        <item>German</item>
     </string-array>
-
-
 
 
     <!--############################################# Реплики диалогов ################################################-->
 
     <!--#################### Lvl0 #################-->
-    <string name="lvl0_start">Ах, голова раскалывается. Где я?</string>
-    <string name="lvl0_dark">Да тут же кромешная тьма!\nНужен свет, иначе я себе точно что-то сломаю</string>
-    <string name="lvl0_flashlight_on">Что это за свет?\nХотя неважно, теперь я вижу выключатель</string>
-    <string name="lvl0_light_on">Ааргх. Как ярко! \nСтоп, я, что, в подвале?..</string>
+    <string name="lvl0_start">TODO</string>
+    <string name="lvl0_dark">TODO</string>
+    <string name="lvl0_flashlight_on">TODO</string>
+    <string name="lvl0_light_on">TODO</string>
     <!--###########################################-->
 
 
     <!--#################### Lvl1 #################-->
 
     <!--###########################################-->
-
 
 
     <!--##############################################################################################################-->
