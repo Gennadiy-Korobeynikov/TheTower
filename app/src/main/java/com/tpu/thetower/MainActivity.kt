@@ -20,11 +20,12 @@ class MainActivity : AppCompatActivity() {
 
         copyJsonFromAssets(this, "save_file.json")
 
+        DialogManager.loadCharacters()
+        DialogManager.loadDialogs(this)
+
         loadSettings()
 
 //        deleteJsonFile(this, "save_file.json")
-
-
 
         window.decorView.apply {
             systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY

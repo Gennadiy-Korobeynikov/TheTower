@@ -52,4 +52,12 @@
         android:layout_marginStart="65dp"
         android:background="@drawable/button_outline"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_hint"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_outline"/>
+
 </FrameLayout>

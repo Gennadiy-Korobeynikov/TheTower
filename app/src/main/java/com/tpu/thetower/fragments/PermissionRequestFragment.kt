@@ -29,6 +29,7 @@ class PermissionRequestFragment : Fragment(R.layout.fragment_permission_request)
 
         permissionManager = PermissionManager(requireActivity(),requireActivity())
 
+
         val btnOk = binding.btnOk
 
         btnOk.setOnClickListener {
