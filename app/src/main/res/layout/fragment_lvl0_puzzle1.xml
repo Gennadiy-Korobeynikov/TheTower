@@ -9,65 +9,93 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/lvl0_bd_light" />
 
     <LinearLayout
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.085" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            tools:listitem="@layout/item_image"
+            android:layout_weight="0.16"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_image" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.055" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            tools:listitem="@layout/item_image"
+            android:layout_weight="0.16"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_image" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.055" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            tools:listitem="@layout/item_image"
+            android:layout_weight="0.16"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_image" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.055" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            tools:listitem="@layout/item_image"
+            android:layout_weight="0.16"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_image" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
     </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/lvl0_puzzle1_shadow"
+        android:layout_gravity="center"
         android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
-        android:layout_gravity="center"/>
+        android:src="@drawable/lvl0_puzzle1_shadow" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/lvl0_puzzle1_lock" />
-
 
 
 </FrameLayout>
