@@ -1,9 +1,11 @@
 package com.tpu.thetower
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,10 +18,12 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        copyJsonFromAssets(this, "save_file.json")
+
         loadSettings()
 
 //        deleteJsonFile(this, "save_file.json")
-//        copyJsonFromAssets(this, "save_file.json")
+
 
 
         window.decorView.apply {
@@ -47,22 +51,17 @@ class MainActivity : AppCompatActivity() {
         soundManager.setVolume(savedSoundVolume)
     }
 
+    fun copyJsonFromAssets(context: Context, fileName: String) {
+        val file = File(context.filesDir, fileName)
 
-
-
-
-
-//    fun copyJsonFromAssets(context: Context, fileName: String) {
-//        val file = File(context.filesDir, fileName)
-//
-//        if (!file.exists()) { // Копируем, только если файла нет
-//            context.assets.open(fileName).use { inputStream ->
-//                file.outputStream().use { outputStream ->
-//                    inputStream.copyTo(outputStream)
-//                }
-//            }
-//        }
-//    }
+        if (!file.exists()) { // Копируем, только если файла нет
+            context.assets.open(fileName).use { inputStream ->
+                file.outputStream().use { outputStream ->
+                    inputStream.copyTo(outputStream)
+                }
+            }
+        }
+    }
 //
 //    fun deleteJsonFile(context: Context, fileName: String) {
 //        val file = File(context.filesDir, fileName)
