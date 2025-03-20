@@ -13,12 +13,15 @@ import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
+import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl0Binding
 import com.tpu.thetower.devicemanagers.FlashlightManager
+import kotlin.concurrent.thread
+import kotlin.reflect.KProperty
 
 
 class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
@@ -83,6 +86,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
         btnToPuzzle1.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
             FragmentManager.showGoBackArrow(requireActivity())
+            // Временно для теста
+            LevelAccessManager.upgradeAccessLvl(this)
         }
 
 
