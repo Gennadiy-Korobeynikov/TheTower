@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.Hintable
+import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentHudBinding
 
@@ -24,6 +25,11 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
         val btnHint : Button = binding.btnHint
         val ivAccessCard : ImageView = binding.ivAccessCard
         val tvTestHint : TextView  = binding.tvTestHintRecovery
+
+        val btnTestUpgrAccessLvl = binding.btnTestUpgrAccessLvl
+        btnTestUpgrAccessLvl.setOnClickListener {
+            LevelAccessManager.upgradeAccessLvl(this)
+        }
 
         btnToTitle.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)

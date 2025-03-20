@@ -23,14 +23,15 @@ class LevelAccessManager {
 //            3 to listOf(8,9,10)
             // Примерный вид в будущем
 
-            // Пока для тестирования (каждый уровень доступа открывает один этаж)
-            1 to listOf(0),
-            2 to listOf(1),
-            3 to listOf(2),
+            // Пока для тестирования
+            0 to listOf(0),
+            1 to listOf(0,1),
+            2 to listOf(0,1,2),
+            3 to listOf(0,1,2),
         )
 
 
-        var lastUnlockedModule = 0
+        var lastUnlockedModule = -1
 
 
         fun unlockModule( fragment: Fragment , moduleNum : Int) {
@@ -41,6 +42,10 @@ class LevelAccessManager {
 
 
         fun upgradeAccessLvl(fragment: Fragment) {
+
+            if (currentAccessLvl == modules.count())
+                currentAccessLvl = -1
+
             currentAccessLvl++
             FragmentManager.changeAccessCardImg( fragment, cardImageIds[currentAccessLvl])
             unlockModule( fragment, currentAccessLvl)

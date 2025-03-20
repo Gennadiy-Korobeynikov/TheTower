@@ -87,7 +87,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
             FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
             FragmentManager.showGoBackArrow(requireActivity())
             // Временно для теста
-            LevelAccessManager.upgradeAccessLvl(this)
+            //LevelAccessManager.upgradeAccessLvl(this)
         }
 
 
