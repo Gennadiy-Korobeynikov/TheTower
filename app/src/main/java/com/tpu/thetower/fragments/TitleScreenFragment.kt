@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MainActivity
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -52,21 +54,11 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         }
 
         btnResume.setOnClickListener {
-            val gameData = saveManager.readData(requireContext())
-            val savedLevel = gameData?.playerInfo?.currentLevel ?: 0
-
-
-            val levels = listOf(
-                R.id.action_elevatorFragment_to_lvlTestFragment,
-                R.id.action_elevatorFragment_to_lvl0Fragment,
-                R.id.action_elevatorFragment_to_lvl1Fragment
-            )
-
-            val bundle = Bundle().apply {
-                putString("saved_level", levels[savedLevel + 1].toString())
-            }
-            FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_elevatorFragment, bundle)
-
+            val loadManager = LoadManager.getInstance(requireContext() as MainActivity)
+            loadManager.loadProgress()
+            FragmentManager.showHUD(requireActivity())
+            FragmentManager.showGoBackArrow(requireActivity())
+            loadManager.startSavedLevel()
         }
     }
 

@@ -70,9 +70,9 @@ class FragmentManager {
                 .setFragmentResult("accessCardUpgrading", bundleOf("accessCardImgId" to accessCardImgId))
         }
 
-        fun changeUnlockedModules(fragment: Fragment, lastUnlockedModule : Int) {
+        fun changeUnlockedModules(fragment: Fragment, currAccessLevel : Int) {
             fragment.requireActivity().supportFragmentManager
-                .setFragmentResult("moduleUnlocking", bundleOf("lastUnlockedModule" to lastUnlockedModule))
+                .setFragmentResult("moduleUnlocking", bundleOf("currAccessLevel" to currAccessLevel))
         }
 
         fun updateHintStateImg(fragment: Fragment, step : String ) { // Временно передаём строку, потом - Int

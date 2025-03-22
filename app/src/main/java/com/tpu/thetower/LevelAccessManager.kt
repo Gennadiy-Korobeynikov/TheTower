@@ -7,7 +7,6 @@ class LevelAccessManager {
 
     companion object {
         private val saveManager = SaveManager.getInstance()
-        private var currentAccessLvl = 0
         private val cardImageIds : List<Int> = listOf(
             R.drawable.card,
             R.drawable.test_card1,
@@ -16,40 +15,26 @@ class LevelAccessManager {
             R.drawable.test_card4,
         )
 
-        val modules : Map<Int, List<Int>> = mapOf(
-            // module num to levels
-//            1 to listOf(0,1,2),
-//            2 to listOf(3,4,5,6,7),
-//            3 to listOf(8,9,10)
-            // Примерный вид в будущем
+        var currentAccessLvl = 0
 
-            // Пока для тестирования
-            0 to listOf(0),
-            1 to listOf(0,1),
-            2 to listOf(0,1,2),
-            3 to listOf(0,1,2),
-        )
+        val topUnlockedLvlsForModules : List<Int> = listOf(0,2,4)
 
 
-        var lastUnlockedModule = -1
-
-
-        fun unlockModule( fragment: Fragment , moduleNum : Int) {
-            lastUnlockedModule = moduleNum
-            FragmentManager.changeUnlockedModules(fragment,moduleNum)
+        fun unlockModules( fragment: Fragment) {
+            FragmentManager.changeAccessCardImg( fragment, cardImageIds[currentAccessLvl])
+            FragmentManager.changeUnlockedModules(fragment, currentAccessLvl)
         }
 
 
 
         fun upgradeAccessLvl(fragment: Fragment) {
 
-            if (currentAccessLvl == modules.count())
-                currentAccessLvl = -1
+            if (currentAccessLvl == 2) //Для теста
+                currentAccessLvl = 0
 
             currentAccessLvl++
-            FragmentManager.changeAccessCardImg( fragment, cardImageIds[currentAccessLvl])
-            unlockModule( fragment, currentAccessLvl)
-            saveManager.saveUnlockedModule(fragment.requireContext() ,lastUnlockedModule)
+            unlockModules(fragment)
+            saveManager.saveAccessLevel(fragment.requireContext() , currentAccessLvl)
         }
 
 

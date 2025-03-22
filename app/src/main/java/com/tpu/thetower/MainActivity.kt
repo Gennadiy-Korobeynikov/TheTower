@@ -12,19 +12,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
+    private lateinit var loadManager: LoadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        //oadManager.activity = this
         setContentView(R.layout.activity_main)
 
         copyJsonFromAssets(this, "save_file.json")
+        setManagers()
 
-        DialogManager.loadCharacters()
-        DialogManager.loadDialogs(this)
+        // Когда появится кнопка сброса прогресса
+        //LoadManager.loadProgress()
 
-        loadSettings()
-        loadProgress()
+        loadManager.loadSettings()
+
+
 
 //        deleteJsonFile(this, "save_file.json")
 
@@ -40,24 +44,26 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun loadProgress() {
-        LevelAccessManager.lastUnlockedModule = 0 // Пока открыт только модуль 0 (подвал - нет карты)
-                                                // Позже - в зависимости от сохранения
-    }
-
-    private fun loadSettings() {
+    private fun setManagers() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
-
-
-        val gameData = saveManager.readData(this)
-        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
-        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
-
-        musicManager.setVolume(savedMusicVolume)
-        soundManager.setVolume(savedSoundVolume)
+        loadManager = LoadManager.getInstance(this)
     }
+
+//    private fun loadSettings() {
+//
+//
+//        saveManager.saveAccessLevel(this , 0) // Fot TEst
+//
+//
+//        val gameData = saveManager.readData(this)
+//        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
+//        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
+//
+//        musicManager.setVolume(savedMusicVolume)
+//        soundManager.setVolume(savedSoundVolume)
+//    }
 
     fun copyJsonFromAssets(context: Context, fileName: String) {
         val file = File(context.filesDir, fileName)

@@ -22,6 +22,8 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
 
     private lateinit var btnToLvl0: Button
     private lateinit var btnToLvl1: Button
+    private lateinit var btnToLvl2: Button
+    private lateinit var btnToLvl3: Button
     private lateinit var btnToLvlTest: Button
 
     private lateinit var lvlButtons : List<Button>
@@ -45,21 +47,22 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         saveManager = SaveManager.getInstance()
 
 
-        val gameData = saveManager.readData(requireContext()) //СМОТРИ СЮДА
-        val loadedLastUnlockedModule = gameData?.playerInfo?.lastUnlockedModule ?: 0
-        unlockLvls(loadedLastUnlockedModule)
-
-
+        val currAccessLevel = LevelAccessManager.currentAccessLvl
+        unlockLvls(currAccessLevel)
     }
 
     private fun bindView() {
         btnToLvl0 = binding.btnElevatorToLvl0
         btnToLvl1 = binding.btnElevatorToLvl1
+        btnToLvl2 = binding.btnElevatorToLvl2
+        btnToLvl3 = binding.btnElevatorToLvl3
         btnToLvlTest = binding.btnElevatorToLvlTest
 
         lvlButtons = listOf(
             btnToLvl0,
             btnToLvl1,
+            btnToLvl2,
+            btnToLvl3,
             btnToLvlTest
         )
     }
@@ -84,14 +87,15 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
 
         requireActivity().supportFragmentManager
             .setFragmentResultListener("moduleUnlocking", viewLifecycleOwner) { _, bundle ->
-                val lastUnlockedModule = bundle.getInt("lastUnlockedModule")
-                unlockLvls(lastUnlockedModule)
+                val currAccessLevel = bundle.getInt("currAccessLevel")
+                unlockLvls(currAccessLevel)
             }
     }
 
-    private fun unlockLvls(lastUnlockedModule : Int) {
-        val unlockingLvls = LevelAccessManager.modules[lastUnlockedModule]
-        unlockingLvls?.forEach { lvlButtons[it].visibility = View.VISIBLE }
+    private fun unlockLvls(currAccessLevel : Int) {
+        val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
+        val unlockingLvls = (0..topUnlockingLvl)
+        unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }
         //TODO Обновить дизайн панели уроавления
     }
 }
