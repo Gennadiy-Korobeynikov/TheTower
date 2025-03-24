@@ -88,6 +88,16 @@ class SaveManager private constructor() {
         }
     }
 
+    fun savePuzzleUsedHintsCount(context: Context, level : Int, puzzle : Int, hintUsed : Int) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy()
+        updatedGameData?.levels?.get(level)?.puzzles?.get(puzzle)?.hintsUsed = hintUsed
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
     data class SaveData(
         val playerInfo: PlayerInfo,
         val levels: List<LevelData>,

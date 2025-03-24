@@ -14,6 +14,7 @@ import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LevelAccessManager
+import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -52,7 +53,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
         setListeners()
         handleSounds()
         FragmentManager.hideGoBackArrow(requireActivity())
-        hintManager = HintManager(listOf("lvl0_puzzle0_hint1" , "lvl0_puzzle0_hint2"))
+        hintManager = HintManager(listOf("lvl0_puzzle0_hint1" , "lvl0_puzzle0_hint2"),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),0,0),
+            0,0)
 
         if (FragmentManager.light) {
             ivDarkness.visibility = View.GONE
@@ -162,7 +165,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
 
     override fun useHint() {
         if (!FragmentManager.light)
-            hintManager.useHint(this)
+            hintManager.useHint(requireActivity())
         else
             DialogManager.startDialog(requireActivity(), "lvl0_to_puzzle1_hint")
     }

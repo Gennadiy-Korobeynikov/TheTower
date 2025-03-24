@@ -12,21 +12,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
-    private lateinit var loadManager: LoadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        //oadManager.activity = this
+        LoadManager.setGameData(this)
         setContentView(R.layout.activity_main)
 
         copyJsonFromAssets(this, "save_file.json")
         setManagers()
+        saveManager.savePuzzleUsedHintsCount(this,0, 0,0)// TEST
+        saveManager.savePuzzleUsedHintsCount(this,0, 1,0)// TEST
 
         // Когда появится кнопка сброса прогресса
         //LoadManager.loadProgress()
 
-        loadManager.loadSettings()
+        LoadManager.loadSettings(this)
 
 
 
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
-        loadManager = LoadManager.getInstance(this)
     }
 
 //    private fun loadSettings() {

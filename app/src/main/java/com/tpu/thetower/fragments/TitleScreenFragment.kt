@@ -54,11 +54,10 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         }
 
         btnResume.setOnClickListener {
-            val loadManager = LoadManager.getInstance(requireContext() as MainActivity)
-            loadManager.loadProgress()
+            LoadManager.loadProgress(requireActivity())
             FragmentManager.showHUD(requireActivity())
             FragmentManager.showGoBackArrow(requireActivity())
-            loadManager.startSavedLevel()
+            LoadManager.startSavedLevel(requireActivity())
         }
     }
 

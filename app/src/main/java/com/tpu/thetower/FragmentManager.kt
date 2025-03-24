@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -75,10 +76,10 @@ class FragmentManager {
                 .setFragmentResult("moduleUnlocking", bundleOf("currAccessLevel" to currAccessLevel))
         }
 
-        fun updateHintStateImg(fragment: Fragment, step : String ) { // Временно передаём строку, потом - Int
+        fun updateHintStateImg(activity: Activity, step : String ) { // Временно передаём строку, потом - Int
 
-            fragment.requireActivity().supportFragmentManager
-                .setFragmentResult("hintImgUpdating", bundleOf("step" to step))
+            (activity as? AppCompatActivity)?.supportFragmentManager
+                ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))
         }
     }
 }

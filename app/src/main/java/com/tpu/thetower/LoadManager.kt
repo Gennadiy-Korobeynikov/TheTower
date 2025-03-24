@@ -1,75 +1,84 @@
 package com.tpu.thetower
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import java.lang.ref.WeakReference
 
-class LoadManager private constructor(activity: MainActivity) {
-
-    private var activityRef: WeakReference<MainActivity> = WeakReference(activity)
-
+class LoadManager() {
     companion object {
-        private var instance: LoadManager? = null
-
-        @Synchronized
-        fun getInstance(activity: MainActivity): LoadManager {
-            return instance?.apply { activityRef = WeakReference(activity) }
-                ?: synchronized(this) {
-                    instance ?: LoadManager(activity).also { instance = it }
-                }
-        }
-    }
-
-    private var activity: MainActivity = activityRef.get()!!
-    private val saveManager = SaveManager.getInstance()
-    private val gameData = saveManager.readData(activity)
-    private val musicManager = MusicManager.getInstance()
-    private val soundManager = SoundManager.getInstance()
-    private val currFragment = activity.supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
 
 
-    private val levels = listOf(
-        R.id.action_elevatorFragment_to_lvlTestFragment,
-        R.id.action_elevatorFragment_to_lvl0Fragment,
-        R.id.action_elevatorFragment_to_lvl1Fragment
-    )
+
+        private val saveManager = SaveManager.getInstance()
+        private lateinit var gameData : SaveManager.SaveData
+        private val musicManager = MusicManager.getInstance()
+        private val soundManager = SoundManager.getInstance()
 
 
-    fun loadProgress() {
-        DialogManager.loadCharacters()
-        DialogManager.loadDialogs(activity)
 
-        LevelAccessManager.currentAccessLvl = gameData?.playerInfo?.accessLevel ?: 0
-        LevelAccessManager.unlockModules(currFragment)
-
-    }
-
-
-    fun startSavedLevel() {
-        val savedLevel = gameData?.playerInfo?.currentLevel ?: 0
-        val bundle = Bundle().apply {
-            putString("saved_level", levels[savedLevel + 1].toString())
-        }
-        FragmentManager.changeBG(
-            currFragment,
-            R.id.action_titleScreenFragment_to_elevatorFragment,
-            bundle
+        private val levels = listOf(
+            R.id.action_elevatorFragment_to_lvlTestFragment,
+            R.id.action_elevatorFragment_to_lvl0Fragment,
+            R.id.action_elevatorFragment_to_lvl1Fragment
         )
-    }
+
+        fun setGameData(activity: Activity) {
+            gameData = saveManager.readData(activity)!!
+        }
+
+        fun loadProgress(activity: Activity) {
+            setGameData(activity)
+            DialogManager.loadCharacters()
+            DialogManager.loadDialogs(activity)
+
+            LevelAccessManager.currentAccessLvl = gameData.playerInfo?.accessLevel ?: 0
+            LevelAccessManager.unlockModules(getCurrFragment(activity))
 
 
-    fun loadSettings() {
-        // Временно здесь
-        DialogManager.loadCharacters()
-        DialogManager.loadDialogs(activity)
+        }
 
-        saveManager.saveAccessLevel(activity, 0) // Fot TEst
+        private fun getCurrFragment(activity: Activity) : Fragment {
+            return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
+        }
 
-        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
-        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
+        fun startSavedLevel(activity: Activity) {
+            setGameData(activity)
+            val savedLevel = gameData?.playerInfo?.currentLevel ?: 0
+            val bundle = Bundle().apply {
+                putString("saved_level", levels[savedLevel + 1].toString())
+            }
+            FragmentManager.changeBG(
+                getCurrFragment(activity),
+                R.id.action_titleScreenFragment_to_elevatorFragment,
+                bundle
+            )
+        }
 
-        musicManager.setVolume(savedMusicVolume)
-        soundManager.setVolume(savedSoundVolume)
+
+        fun loadSettings(activity: Activity) {
+            setGameData(activity)
+            // Временно здесь
+            DialogManager.loadCharacters()
+            DialogManager.loadDialogs(activity)
+
+            saveManager.saveAccessLevel(activity, 0) // Fot TEst
+
+            val savedMusicVolume = gameData.gameSettings.musicVolume ?: 0.5f
+            val savedSoundVolume = gameData.gameSettings.soundVolume ?: 0.5f
+
+            musicManager.setVolume(savedMusicVolume)
+            soundManager.setVolume(savedSoundVolume)
+        }
+
+//        fun getPuzzleStatus(level: Int, puzzle: Int): String {
+//            return gameData.levels[level].puzzles[puzzle].status
+//        }
+
+        fun getPuzzleUsedHintsCount(activity: Activity ,level: Int, puzzle: Int): Int {
+            setGameData(activity)
+            return gameData.levels[level].puzzles[puzzle].hintsUsed //Пока так
+        }
     }
 }

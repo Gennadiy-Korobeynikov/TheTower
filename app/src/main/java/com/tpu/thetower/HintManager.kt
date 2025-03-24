@@ -1,46 +1,64 @@
 package com.tpu.thetower
 
 import android.app.Activity
+import android.content.Context
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 
 class HintManager(
     private val hints: List<String>,
+    private var usedHintsCount : Int,
+    private var level : Int,
+    private var puzzle : Int,
 ) {
+    private val saveManager = SaveManager.getInstance()
+    companion object {
+        private var isNewHintAvaliable = true
+        private var timer: CountDownTimer? = null
+        private val totalTimeToRecover = 10_000L  // Пока 10 сек для теста
+        private val updateInterval = 2_000L  // Пока 2 сек
 
-    private var usedHintCount = 0
-    private var timer: CountDownTimer? = null
-    private val totalTimeToRecover = 10_000L  // Пока 10 сек для теста
-    private val updateInterval = 2_000L  // Пока 2 сек
-    private var isNewHintAvaliable = true
+        private fun startHintRecovery(activity: Activity, hintManager: HintManager) {
+            timer?.cancel()
+            isNewHintAvaliable = false
 
-    fun useHint(fragment: Fragment) {
-        DialogManager.startDialog(fragment.requireActivity(),hints[usedHintCount])
-        if (isNewHintAvaliable && usedHintCount < hints.count() - 1)
-            startHintRecovery(fragment)
+            timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
+                override fun onTick(millisUntilFinished: Long) {
+                    FragmentManager.updateHintStateImg(
+                        activity,
+                        ((totalTimeToRecover - millisUntilFinished) / updateInterval).toString()
+                    )
+                }
+
+                override fun onFinish() {
+                    FragmentManager.updateHintStateImg(activity, "Подсказка готова")
+                    isNewHintAvaliable = true
+                    hintManager.usedHintsCountIncrease(activity)
+
+                }
+            }.start()
+        }
+
+
+        // Для пропуска ожидания с помощью потенциальной рекламы
+        fun cancelRecovery() {
+            timer?.cancel()
+            isNewHintAvaliable = true
+        }
     }
 
-    private fun startHintRecovery(fragment: Fragment) {
-        timer?.cancel()
-        isNewHintAvaliable = false
 
-        timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
-            override fun onTick(millisUntilFinished: Long) {
-                FragmentManager.updateHintStateImg( fragment,((totalTimeToRecover - millisUntilFinished) / updateInterval).toString() ) // 1..6
-            }
+    fun useHint(activity: Activity) {
 
-            override fun onFinish() {
-                FragmentManager.updateHintStateImg( fragment,"Подсказка готова" )
-                isNewHintAvaliable = true
-                usedHintCount++
-            }
-        }.start()
+        DialogManager.startDialog(activity,hints[usedHintsCount])
+        if (isNewHintAvaliable && usedHintsCount < hints.count() - 1) {
+            startHintRecovery(activity, this)
+        }
     }
 
-
-    // Для пропуска ожидания с помощью потенциальной рекламы
-    fun cancelRecovery() {
-        timer?.cancel()
-        isNewHintAvaliable = true
+    fun usedHintsCountIncrease(activity: Activity) {
+        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity,level,puzzle) + 1
+        saveManager.savePuzzleUsedHintsCount(activity,level, puzzle,usedHintsCount)
     }
+
 }
