@@ -16,10 +16,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+//        deleteJsonFile(this, "save_file.json")
+//        copyJsonFromAssets(this, "save_file.json")
+
         LoadManager.setGameData(this)
         setContentView(R.layout.activity_main)
 
-        copyJsonFromAssets(this, "save_file.json")
+
         setManagers()
         saveManager.savePuzzleUsedHintsCount(this,0, 0,0)// TEST
         saveManager.savePuzzleUsedHintsCount(this,0, 1,0)// TEST
@@ -30,8 +34,7 @@ class MainActivity : AppCompatActivity() {
         LoadManager.loadSettings(this)
 
 
-
-//        deleteJsonFile(this, "save_file.json")
+//
 
         window.decorView.apply {
             systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -76,10 +79,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-//
-//    fun deleteJsonFile(context: Context, fileName: String) {
-//        val file = File(context.filesDir, fileName)
-//            file.delete()
-//    }
+
+    fun deleteJsonFile(context: Context, fileName: String) {
+        val file = File(context.filesDir, fileName)
+            file.delete()
+    }
 
 }

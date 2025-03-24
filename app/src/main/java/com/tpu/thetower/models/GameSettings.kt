@@ -1,7 +1,7 @@
 package com.tpu.thetower.models
 
 data class GameSettings(
-    val soundVolume: Float,
-    val musicVolume: Float,
-    val language: String
+    var soundVolume: Float,
+    var musicVolume: Float,
+    var language: String
 )

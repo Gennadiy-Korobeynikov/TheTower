@@ -1,5 +1,6 @@
 package com.tpu.thetower.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,6 +12,7 @@ import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentTitleScreenBinding
+import java.io.File
 
 class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
@@ -44,9 +46,13 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private fun setListeners() {
         btnStart.setOnClickListener {
+            FragmentManager.light = false
+            deleteJsonFile(requireContext(), "save_file.json")
+            copyJsonFromAssets(requireContext(), "save_file.json")
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
             FragmentManager.showHUD(requireActivity())
             FragmentManager.showGoBackArrow(requireActivity())
+
         }
 
         btnSettings.setOnClickListener {
@@ -69,19 +75,25 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     override fun onResume() {
         super.onResume()
 
-        val music = R.raw.soundtrack_1
-        val currentMusic = musicManager.getCurrentMusic()
+        musicManager.playMusic(requireContext(), R.raw.soundtrack_1)
+    }
 
-        if (currentMusic != music) {
-            musicManager.playMusic(requireContext(), music)
-        } else {
-            musicManager.resumeMusic()
+
+    private fun copyJsonFromAssets(context: Context, fileName: String) {
+        val file = File(context.filesDir, fileName)
+
+        if (!file.exists()) { // Копируем, только если файла нет
+            context.assets.open(fileName).use { inputStream ->
+                file.outputStream().use { outputStream ->
+                    inputStream.copyTo(outputStream)
+                }
+            }
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-
-        musicManager.pauseMusic()
+    private fun deleteJsonFile(context: Context, fileName: String) {
+        val file = File(context.filesDir, fileName)
+        file.delete()
     }
+
 }
