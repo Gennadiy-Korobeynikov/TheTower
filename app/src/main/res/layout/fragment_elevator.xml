@@ -18,8 +18,7 @@
         android:text="ToLVL TEST"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="210dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_elevator_to_lvl0"
@@ -27,8 +26,7 @@
         android:layout_height="wrap_content"
         android:text="ToLVL 0"
         android:layout_gravity="center"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="210dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_elevator_to_lvl1"
@@ -37,7 +35,6 @@
         android:text="ToLVL 1"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="210dp"/>
 
 </FrameLayout>

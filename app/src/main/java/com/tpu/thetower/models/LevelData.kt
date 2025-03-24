@@ -14,5 +14,5 @@ data class PuzzleData(
     val status: String,
     val attempts: Int,
     val timeSpent: Int,
-    val hintsUsed: Int
+    var hintsUsed: Int
 )

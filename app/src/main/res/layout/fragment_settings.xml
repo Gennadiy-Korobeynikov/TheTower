@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_blured" />
+        android:src="@drawable/bg" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/title_screen_test_blured" />
+        android:src="@drawable/title_screen_blurred" />
 
     <!-- Меню настроек -->
     <androidx.cardview.widget.CardView

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -70,9 +71,15 @@ class FragmentManager {
                 .setFragmentResult("accessCardUpgrading", bundleOf("accessCardImgId" to accessCardImgId))
         }
 
-        fun changeUnlockedModules(fragment: Fragment, lastUnlockedModule : Int) {
+        fun changeUnlockedModules(fragment: Fragment, currAccessLevel : Int) {
             fragment.requireActivity().supportFragmentManager
-                .setFragmentResult("moduleUnlocking", bundleOf("lastUnlockedModule" to lastUnlockedModule))
+                .setFragmentResult("moduleUnlocking", bundleOf("currAccessLevel" to currAccessLevel))
+        }
+
+        fun updateHintStateImg(activity: Activity, step : String ) { // Временно передаём строку, потом - Int
+
+            (activity as? AppCompatActivity)?.supportFragmentManager
+                ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))
         }
     }
 }

@@ -17,23 +17,22 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/titel_screen_test" />
+        android:src="@drawable/title_screen" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_to_lvl0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
         android:background="@drawable/button_outline" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_to_settings"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="162dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="100dp"
         android:background="@drawable/button_outline" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="150dp"
         android:background="@drawable/button_outline"
         android:text="Кликай сюда"/>
 

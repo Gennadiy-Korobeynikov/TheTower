@@ -7,6 +7,10 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
+import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MainActivity
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.adapters.ImageCodeAdapter
@@ -14,7 +18,7 @@ import com.tpu.thetower.databinding.FragmentLvl0Puzzle1Binding
 import com.tpu.thetower.puzzles.Lvl0Puzzle1
 
 
-class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1) {
+class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
 
     private lateinit var binding : FragmentLvl0Puzzle1Binding
 
@@ -24,6 +28,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1) {
     private lateinit var rv4 : RecyclerView
 
     private val puzzle: Puzzle = Lvl0Puzzle1("Lvl0Puzzle1")
+    private lateinit var hintManager : HintManager
 
     private var solution = charArrayOf('0','0','0','0')
 
@@ -37,9 +42,23 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1) {
 
         binding = FragmentLvl0Puzzle1Binding.bind(view)
         bindView()
+
+        hintManager = HintManager(
+                listOf(
+                    "lvl0_puzzle1_hint1",
+                    "lvl0_puzzle1_hint2",
+                    "lvl0_puzzle1_hint3"
+                ),
+        LoadManager.getPuzzleUsedHintsCount(requireActivity(),0,1),
+        0,1
+        )
+
+
         setupWheels(images)
 
     }
+
+
 
     private fun bindView(){
         rv1 = binding.rvImage1
@@ -93,6 +112,10 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1) {
 
     private fun solved(){
         TODO("Not implemented")
+    }
+
+    override fun useHint() {
+        hintManager.useHint(this.requireActivity())
     }
 
 }

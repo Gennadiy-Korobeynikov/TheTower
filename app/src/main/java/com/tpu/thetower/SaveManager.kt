@@ -77,11 +77,21 @@ class SaveManager private constructor() {
         }
     }
 
-    fun saveUnlockedModule(context: Context, unlockedModule: Int) {
+    fun saveAccessLevel(context: Context, currAccessLevel: Int) {
         val gameData = readData(context)
         val updatedGameData = gameData?.copy(
-            playerInfo = gameData.playerInfo.copy(lastUnlockedModule = unlockedModule)
+            playerInfo = gameData.playerInfo.copy(accessLevel = currAccessLevel)
         )
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
+    fun savePuzzleUsedHintsCount(context: Context, level : Int, puzzle : Int, hintUsed : Int) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy()
+        updatedGameData?.levels?.get(level)?.puzzles?.get(puzzle)?.hintsUsed = hintUsed
 
         if (updatedGameData != null) {
             saveData(context, updatedGameData)

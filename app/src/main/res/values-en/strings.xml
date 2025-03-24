@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings for settings menu -->
+    <string name="app_name">TODO</string>
+    <string name="permission_request">TODO</string>
+    <string name="ok">TODO</string>
+    <string name="permission_denied_msg">TODO</string>
+    <string name="open_sys">TODO</string>
+    <string name="no_thanks">TODO</string>
+    <string name="settings_title">Settings</string>
+    <string name="music_volume">Music Volume</string>
+    <string name="sound_volume">Sound Effects Volume</string>
+    <string name="game_language">Game Language</string>
+    <string name="back_button">Back</string>
+</resources>
