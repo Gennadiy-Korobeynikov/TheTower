@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_screen"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -85,6 +86,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/iv_lock_shadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -93,6 +95,7 @@
         android:src="@drawable/lvl0_puzzle1_shadow" />
 
     <ImageView
+        android:id="@+id/iv_lock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/lvl0_puzzle1_lock" />

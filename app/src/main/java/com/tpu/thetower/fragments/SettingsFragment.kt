@@ -91,16 +91,4 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
     }
-
-    override fun onResume() {
-        super.onResume()
-
-        musicManager.resumeMusic()
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        musicManager.pauseMusic()
-    }
 }

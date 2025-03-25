@@ -8,11 +8,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentLvlTestBinding
-import com.tpu.thetower.puzzles.Lvl0Puzzle1
 
 class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     View.OnTouchListener,
@@ -24,7 +22,7 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     private val originalPositions = mutableMapOf<View, Pair<Float, Float>>()
     private val zoneOccupants = mutableMapOf<View, View?>()
 
-    private val puzzle: Puzzle = Lvl0Puzzle1("Lvl0Puzzle1")
+//    private val puzzle: Puzzle = Lvl0Puzzle1("Lvl0Puzzle1")
 
     private var solution = charArrayOf('0', '0', '0', '0')
 
@@ -128,7 +126,7 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
                     }
                 }
                 updateSolution()
-                puzzle.checkSolution(String(solution))
+//                puzzle.checkSolution(requireContext(), String(solution))
                 return true
             }
         }
