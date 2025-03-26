@@ -102,7 +102,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
             DialogManager.startDialog(requireActivity(),"lvl0_light_on")
-            flashlightManager.unregister()
+            flashlightManager.toggleFlashlight(false) // Выкл фонарик
+            flashlightManager.stopMonitoring()
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
@@ -129,6 +130,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
             .setDuration(3000)
             .withEndAction {
                 ivBlack.visibility = View.GONE
+                flashlightManager.startMonitoring()
                 DialogManager.startDialog(requireActivity(),"lvl0_start")
             }
             .start()
@@ -146,7 +148,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
 
     override fun onDestroy() {
         super.onDestroy()
-        flashlightManager.unregister()
+        flashlightManager.stopMonitoring()
     }
 
     override fun onResume() {

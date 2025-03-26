@@ -9,7 +9,7 @@ import android.util.Log
 class FlashlightManager (context: Context, private val onTorchStateChanged: (Boolean) -> Unit) {
     private val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as? CameraManager
     private var cameraId: String? = null
-
+    private var isRegistered = false
 
     private val torchCallback = object : CameraManager.TorchCallback() {
         // Фонарик включился / выключился
@@ -25,13 +25,15 @@ class FlashlightManager (context: Context, private val onTorchStateChanged: (Boo
         }
     }
 
-    init {
+    fun startMonitoring() {
+        if (isRegistered) return  // Не даём зарегистрироваться повторно
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && cameraManager != null) {
             try {
-                val cameraList = cameraManager.cameraIdList // Камер-то мб и несколько у богачей
+                val cameraList = cameraManager.cameraIdList
                 if (cameraList.isNotEmpty()) {
-                    cameraId = cameraList.first() // Выбираем первую (основную)
+                    cameraId = cameraList.first()
                     cameraManager.registerTorchCallback(torchCallback, null)
+                    isRegistered = true  // Устанавливаем флаг, что регистрация выполнена
                 } else {
                     Log.e("FlashlightMonitor", "Нет доступных камер")
                 }
@@ -43,11 +45,23 @@ class FlashlightManager (context: Context, private val onTorchStateChanged: (Boo
         }
     }
 
-    // Перестаём отслеживать фонарик
-    fun unregister() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && cameraManager != null) {
+    fun stopMonitoring() {
+        if (isRegistered && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && cameraManager != null) {
             cameraManager.unregisterTorchCallback(torchCallback)
+            isRegistered = false  // Сбрасываем флаг регистрации
+        }
+    }
+
+
+    fun toggleFlashlight(isOn: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && cameraManager != null && cameraId != null) {
+            try {
+                cameraManager.setTorchMode(cameraId!!, isOn)
+            } catch (e: CameraAccessException) {
+                e.printStackTrace()
+            }
+        } else {
+            Log.e("FlashlightMonitor", "Невозможно переключить фонарик")
         }
     }
 }
-
