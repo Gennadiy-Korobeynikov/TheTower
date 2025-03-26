@@ -25,7 +25,7 @@ class DialogManager {
             val dialogFragment = DialogFragment(dialog)
             (activity as? AppCompatActivity)?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fcv_dialog, dialogFragment, "DialogFragment")
-                ?.commit()
+                ?.commitNow()
             FragmentManager.showDialog(activity)
         }
 
