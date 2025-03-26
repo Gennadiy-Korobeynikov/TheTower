@@ -33,7 +33,8 @@ class HintManager(
                 override fun onFinish() {
                     FragmentManager.updateHintStateImg(activity, "Подсказка готова")
                     isNewHintAvaliable = true
-                    hintManager.usedHintsCountIncrease(activity)
+                    if (hintManager.usedHintsCount < hintManager.hints.count())
+                        hintManager.usedHintsCountIncrease(activity)
 
                 }
             }.start()
@@ -50,8 +51,14 @@ class HintManager(
 
     fun useHint(activity: Activity) {
 
+        // Последняя подсказка - только показываем
+        if (usedHintsCount == hints.count()) {
+            DialogManager.startDialog(activity, hints[usedHintsCount - 1])
+            return
+        }
+
         DialogManager.startDialog(activity,hints[usedHintsCount])
-        if (isNewHintAvaliable && usedHintsCount < hints.count() - 1) {
+        if (isNewHintAvaliable) {
             startHintRecovery(activity, this)
         }
     }
