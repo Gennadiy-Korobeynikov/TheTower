@@ -37,6 +37,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_dialog"
+        android:name="com.tpu.thetower.fragments.GoBackArrowFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
@@ -64,6 +65,13 @@
         android:visibility="gone"
         android:elevation="3dp"
         android:clickable="true" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_title_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.tpu.thetower.fragments.TitleScreenFragment" />
 
 
 

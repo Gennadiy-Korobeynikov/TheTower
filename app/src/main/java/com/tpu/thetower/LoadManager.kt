@@ -33,7 +33,7 @@ class LoadManager() {
             DialogManager.loadCharacters()
             DialogManager.loadDialogs(activity)
 
-            LevelAccessManager.currentAccessLvl = gameData.playerInfo?.accessLevel ?: 0
+            LevelAccessManager.currentAccessLvl = gameData.playerInfo.accessLevel ?: 0
             LevelAccessManager.unlockModules(getCurrFragment(activity))
 
 
@@ -45,13 +45,13 @@ class LoadManager() {
 
         fun startSavedLevel(activity: Activity) {
             setGameData(activity)
-            val savedLevel = gameData?.playerInfo?.currentLevel ?: 0
+            val savedLevel = gameData.playerInfo.currentLevel
             val bundle = Bundle().apply {
                 putString("saved_level", levels[savedLevel + 1].toString())
             }
             FragmentManager.changeBG(
                 getCurrFragment(activity),
-                R.id.action_titleScreenFragment_to_elevatorFragment,
+                R.id.action_global_elevatorFragment,
                 bundle
             )
         }

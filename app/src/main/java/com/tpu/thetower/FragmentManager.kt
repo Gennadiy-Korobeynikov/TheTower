@@ -26,6 +26,18 @@ class FragmentManager {
             from.findNavController().popBackStack()
         }
 
+        fun showTitleScreen(activity: Activity) {
+            activity.findViewById<FragmentContainerView>(R.id.fcv_title_screen).visibility = View.VISIBLE
+            hideHUD(activity)
+            hideGoBackArrow(activity)
+        }
+
+        fun hideTitleScreen(activity: Activity) {
+            activity.findViewById<FragmentContainerView>(R.id.fcv_title_screen).visibility = View.GONE
+            showHUD(activity)
+            showGoBackArrow(activity)
+        }
+
         fun hideHUD(activity : Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_hud).visibility = View.GONE
         }

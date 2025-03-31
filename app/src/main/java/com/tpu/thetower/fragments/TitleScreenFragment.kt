@@ -44,9 +44,9 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private fun setListeners() {
         btnStart.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
+            FragmentManager.hideTitleScreen(requireActivity())
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
-            FragmentManager.showHUD(requireActivity())
-            FragmentManager.showGoBackArrow(requireActivity())
         }
 
         btnSettings.setOnClickListener {
@@ -55,8 +55,8 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
         btnResume.setOnClickListener {
             LoadManager.loadProgress(requireActivity())
-            FragmentManager.showHUD(requireActivity())
-            FragmentManager.showGoBackArrow(requireActivity())
+            FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
+            FragmentManager.hideTitleScreen(requireActivity())
             LoadManager.startSavedLevel(requireActivity())
         }
     }

@@ -3,8 +3,11 @@ package com.tpu.thetower
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -16,10 +19,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        LoadManager.setGameData(this)
+
+
         setContentView(R.layout.activity_main)
 
+
         copyJsonFromAssets(this, "save_file.json")
+        LoadManager.setGameData(this)
         setManagers()
         saveManager.savePuzzleUsedHintsCount(this,0, 0,0)// TEST
         saveManager.savePuzzleUsedHintsCount(this,0, 1,0)// TEST
@@ -42,7 +48,20 @@ class MainActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         }
 
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_bg) as? NavHostFragment
+                val currentFragment = navHostFragment?.childFragmentManager?.fragments?.lastOrNull()
+                if (currentFragment is Fragment) {
+                    FragmentManager.showTitleScreen(this@MainActivity)
+                }
+            }
+        })
+
     }
+
+
 
 
     private fun setManagers() {

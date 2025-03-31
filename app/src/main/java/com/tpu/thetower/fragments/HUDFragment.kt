@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.FragmentManager.Companion.changeBG
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.R
@@ -32,9 +33,8 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
         }
 
         btnToTitle.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
-            FragmentManager.hideHUD(requireActivity())
-            FragmentManager.hideGoBackArrow(requireActivity())
+            FragmentManager.changeBG(this,R.id.action_global_titleScreenFragment)
+            FragmentManager.showTitleScreen(requireActivity())
         }
 
         requireActivity().supportFragmentManager
