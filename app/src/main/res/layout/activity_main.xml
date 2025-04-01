@@ -67,6 +67,17 @@
         android:clickable="true" />
 
 
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.tpu.thetower.fragments.MenuFragment"
+        android:visibility="gone"
+        android:elevation="3dp"
+        android:clickable="true" />
+
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_title_screen"
         android:layout_width="match_parent"

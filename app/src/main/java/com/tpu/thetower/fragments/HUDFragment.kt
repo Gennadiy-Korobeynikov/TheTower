@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
-import com.tpu.thetower.FragmentManager.Companion.changeBG
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.R
@@ -22,7 +21,7 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
 
         val binding = FragmentHudBinding.bind(view)
-        val btnToTitle: Button = binding.btnToTitlescreen
+        val btnMenu: Button = binding.btnMenu
         val btnHint : Button = binding.btnHint
         val ivAccessCard : ImageView = binding.ivAccessCard
         val tvTestHint : TextView  = binding.tvTestHintRecovery
@@ -32,9 +31,8 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
             LevelAccessManager.upgradeAccessLvl(this)
         }
 
-        btnToTitle.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_global_titleScreenFragment)
-            FragmentManager.showTitleScreen(requireActivity())
+        btnMenu.setOnClickListener {
+            FragmentManager.showMenu(requireActivity())
         }
 
         requireActivity().supportFragmentManager

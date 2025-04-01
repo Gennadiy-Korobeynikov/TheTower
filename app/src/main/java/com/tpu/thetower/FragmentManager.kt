@@ -38,11 +38,20 @@ class FragmentManager {
             showGoBackArrow(activity)
         }
 
+        fun showMenu(activity: Activity) {
+            activity.findViewById<FragmentContainerView>(R.id.fcv_menu).visibility = View.VISIBLE
+        }
+
+        fun hideMenu(activity: Activity) {
+            activity.findViewById<FragmentContainerView>(R.id.fcv_menu).visibility = View.GONE
+        }
+
+
         fun hideHUD(activity : Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_hud).visibility = View.GONE
         }
 
-        fun showHUD(activity : Activity) {
+        private fun showHUD(activity : Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_hud).visibility = View.VISIBLE
         }
 
