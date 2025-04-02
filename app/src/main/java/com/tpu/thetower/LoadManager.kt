@@ -78,6 +78,24 @@ class LoadManager {
             return gameData.levels[level].puzzles.count {it.status == "completed"}
         }
 
+        fun isLevelCompleted(activity: Activity, level: Int): Boolean {
+            setGameData(activity)
+
+            return getLevelProgress(activity, level) == gameData.levels[level].puzzles.size
+        }
+
+        fun getBlockProgress(activity: Activity, borders: Pair<Int, Int>): Int {
+            var progressStatus = 0
+
+            for (level: Int in borders.first..borders.second) {
+                if (isLevelCompleted(activity, level)) {
+                    progressStatus += 20
+                }
+            }
+
+            return progressStatus
+        }
+
         fun getAccessLevel(activity: Activity) : Int {
             setGameData(activity)
 

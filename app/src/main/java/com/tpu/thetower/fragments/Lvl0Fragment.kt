@@ -137,20 +137,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             flashlightManager.unregister()
             saveManager.savePuzzleData(requireContext(), 0, 0)
         }
-
-        flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
-            requireActivity().runOnUiThread {
-                if (isFlashlightOn && !FragmentManager.light) {
-                    soundManager.playSound(R.raw.sound_of_a_flashlight)
-                    DialogManager.startDialog(requireActivity(), "lvl0_flashlight_on")
-                    ivDarkness.visibility = View.GONE
-                } else {
-                    if (!FragmentManager.light) {
-                        ivDarkness.visibility = View.VISIBLE
-                    }
-                }
-            }
-        }
     }
 
 
@@ -170,6 +156,21 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             .withEndAction {
                 ivBlack.visibility = View.GONE
                 DialogManager.startDialog(requireActivity(), "lvl0_start")
+
+                flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
+                    requireActivity().runOnUiThread {
+                        if (isFlashlightOn && !FragmentManager.light) {
+                            soundManager.playSound(R.raw.sound_of_a_flashlight)
+                            DialogManager.startDialog(requireActivity(), "lvl0_flashlight_on")
+                            ivDarkness.visibility = View.GONE
+                        } else {
+                            if (!FragmentManager.light) {
+                                ivDarkness.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+
             }
             .start()
     }

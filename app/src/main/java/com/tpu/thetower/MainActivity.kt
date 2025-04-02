@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
 //        deleteJsonFile(this, "save_file.json")
-//        copyJsonFromAssets(this, "save_file.json")
+        copyJsonFromAssets(this, "save_file.json")
 
         LoadManager.setGameData(this)
         setContentView(R.layout.activity_main)

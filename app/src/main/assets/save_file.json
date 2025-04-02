@@ -8,7 +8,7 @@
   "levels": [
     {
       "id": 0,
-      "name": "",
+      "name": "Basement",
       "isCompleted": false,
       "puzzles": [
         {

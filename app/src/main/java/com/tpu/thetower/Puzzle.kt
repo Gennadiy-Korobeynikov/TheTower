@@ -7,7 +7,6 @@ abstract class Puzzle(val name: String) {
 
     var isSolved: Boolean = false
     var usedHintsCount: Int = 0
-    var lastSolution : String = "1111"
 
     private lateinit var saveManager: SaveManager
 

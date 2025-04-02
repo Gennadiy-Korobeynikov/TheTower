@@ -4,7 +4,7 @@ data class LevelData(
     val id: Int,
     val name: String,
     var isCompleted: Boolean,
-    var puzzles: List<PuzzleData>
+    val puzzles: List<PuzzleData>
 )
 
 data class PuzzleData(

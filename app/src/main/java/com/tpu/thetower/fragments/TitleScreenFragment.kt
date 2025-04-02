@@ -47,12 +47,10 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     private fun setListeners() {
         btnStart.setOnClickListener {
             FragmentManager.light = false
-            deleteJsonFile(requireContext(), "save_file.json")
-            copyJsonFromAssets(requireContext(), "save_file.json")
+            saveManager.resetData(requireContext())
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
             FragmentManager.showHUD(requireActivity())
             FragmentManager.showGoBackArrow(requireActivity())
-
         }
 
         btnSettings.setOnClickListener {

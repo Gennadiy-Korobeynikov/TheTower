@@ -38,7 +38,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
-    private var solution = puzzle.lastSolution.toCharArray()
+    private var solution = "1111".toCharArray()
 
     private val images = arrayOf(
         arrayOf(
@@ -162,14 +162,18 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
             }
         })
         rv.post {
-            val midPosition = -2 + adapter.itemCount / 2
-            layoutManager.scrollToPositionWithOffset(midPosition, 0)
+            val targetDigit = Character.getNumericValue(solution[rvIndex])
+            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % 10
+            layoutManager.scrollToPosition(startPosition)
+//            val midPosition = -2 + adapter.itemCount / 2
+//            layoutManager.scrollToPositionWithOffset(midPosition, 0)
         }
 
     }
 
     private fun passed() {
         LevelAccessManager.upgradeAccessLvl(this)
+        FragmentManager.hideGoBackArrow(requireActivity())
         mainScreen.animate()
             .alpha(0.2f)
             .setDuration(2500)

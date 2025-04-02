@@ -45,6 +45,27 @@ class SaveManager private constructor() {
         fileWriter.close()
     }
 
+    fun resetData(context: Context) {
+        val saveData = readData(context) ?: return
+
+        val file = File(context.filesDir, "save_file.json")
+        file.delete()
+        context.assets.open("save_file.json").use { inputStream ->
+            file.outputStream().use { outputStream ->
+                inputStream.copyTo(outputStream)
+            }
+        }
+
+        val currentData = readData(context)
+        val updatedData = currentData?.copy(
+            gameSettings = saveData.gameSettings
+        )
+
+        if (updatedData != null){
+            saveData(context, updatedData)
+        }
+    }
+
     fun saveMusicVolume(context: Context, volume: Float) {
         val gameData = readData(context)
         val updatedGameData = gameData?.copy(
