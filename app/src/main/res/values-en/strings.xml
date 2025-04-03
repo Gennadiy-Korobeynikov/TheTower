@@ -12,4 +12,38 @@
     <string name="sound_volume">Sound Effects Volume</string>
     <string name="game_language">Game Language</string>
     <string name="back_button">Back</string>
+
+
+
+    <!--############################################# Реплики диалогов ################################################-->
+
+    <!--#################### Lvl0 #################-->
+    <string name="lvl0_start">TODO</string>
+    <string name="lvl0_dark">TODO</string>
+    <string name="lvl0_flashlight_on">TODO</string>
+    <string name="lvl0_light_on">TODO</string>
+    <!--###########################################-->
+
+
+    <!--#################### Lvl1 #################-->
+    <string name="lvl1_npc_receptionist1"> Добрый день! Чем могу Вам помочь? </string>
+    <string name="lvl1_npc_receptionist2"> Что со мной произошло? Как я здесь оказался? </string>
+    <string name="lvl1_npc_receptionist3"> Вчера вы к нам пришли с очень сильной эмоциональной нагрузкой,\n вы кричали и были в бешенстве. \n Видимо вы сильно переволновались, поэтому сейчас не помните, что произошло. </string>
+    <string name="lvl1_npc_receptionist4"> Почему я оказался в подвале??? </string>
+    <string name="lvl1_npc_receptionist5"> Мы понимаем ваше беспокойство, но Вы были очень агрессивны, \nпростите за предоставленные неудобства, \nно это было сделано в целях Вашей же безопасности. </string>
+    <string name="lvl1_npc_receptionist6"> Я всё равно ничего не понимаю. Что я здесь делаю? </string>
+    <string name="lvl1_npc_receptionist7"> К сожалению, Вы нам не сказали цели вашего визита. \nНо, Вы вчера о чем-то кричали, просили нас, даже требовали. </string>
+    <string name="lvl1_npc_receptionist8"> Мне жаль, но из вашей бессвязной речи мы поняли только то, \nчто Вы говорили о дочери.</string>
+    <string name="lvl1_npc_receptionist9"> Зачем мне вам говорить о моей доч…</string>
+    <string name="lvl1_npc_receptionist10">Господи! Моя дочка! [Имя]! Где она?! </string>
+    <string name="lvl1_npc_receptionist11"> [Успакаивает гг, боясь, что у того снова припадок]</string>
+    <string name="lvl1_npc_receptionist12"> [Здесь нужно дописать диалог]… \n Я найду её! С вашей помощью или без, я найду [Имя]! </string>
+
+    <string name="lvl1_npc_receptionist_2_1"> О, это снова Вы. Вам уже полегчало? Разузнали что-то про Вашу дочь? </string>
+    <string name="lvl1_npc_receptionist_2_2"> Я знаю, что она где-то здесь. </string>
+
+    <!--###########################################-->
+
+
+    <!--##############################################################################################################-->
 </resources>

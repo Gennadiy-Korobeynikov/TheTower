@@ -34,12 +34,8 @@ class DialogManager {
             dialogs = mapOf(
                 "lvl0_start" to
                         Dialog(
-                            listOf(
-                                getString(activity , R.string.lvl0_start),
-                            ),
-                            listOfNotNull(
-                                characters["John"],
-                            )
+                            listOf( getString(activity , R.string.lvl0_start),),
+                            listOfNotNull( characters["John"],)
                         )
                         // Запрос разрешений после окончания диалога
                         { FragmentManager.showPermissionRequestFragment(activity) },
@@ -48,13 +44,8 @@ class DialogManager {
 
                 "lvl0_dark" to
                         Dialog(
-                            listOf(
-                                getString(activity , R.string.lvl0_dark),
-                            ),
-                            listOfNotNull(
-                                characters["John"],
-                            )
-                        )
+                            listOf(getString(activity , R.string.lvl0_dark),),
+                            listOfNotNull(characters["John"],))
                         {} ,
 
 
@@ -154,6 +145,57 @@ class DialogManager {
                             )
                         )
                         {} ,
+
+
+                "lvl1_npc_receptionist" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl1_npc_receptionist1),
+                                getString(activity , R.string.lvl1_npc_receptionist2),
+                                getString(activity , R.string.lvl1_npc_receptionist3),
+                                getString(activity , R.string.lvl1_npc_receptionist4),
+                                getString(activity , R.string.lvl1_npc_receptionist5),
+                                getString(activity , R.string.lvl1_npc_receptionist6),
+                                getString(activity , R.string.lvl1_npc_receptionist7),
+                                getString(activity , R.string.lvl1_npc_receptionist8),
+                                getString(activity , R.string.lvl1_npc_receptionist9),
+                                getString(activity , R.string.lvl1_npc_receptionist10),
+                                getString(activity , R.string.lvl1_npc_receptionist11),
+                                getString(activity , R.string.lvl1_npc_receptionist12),
+
+                            ),
+                            listOfNotNull(
+                                characters["receptionist"],
+                                characters["John"],
+                                characters["receptionist"],
+                                characters["John"],
+                                characters["receptionist"],
+                                characters["John"],
+                                characters["receptionist"],
+                                characters["receptionist"],
+                                characters["John"],
+                                characters["John"],
+                                characters["receptionist"],
+                                characters["John"],
+                            )
+                        )
+                        {/*Тут надо вызвать сохранение заврешения диалога*/}  ,
+
+
+                "lvl1_npc_receptionist_2" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl1_npc_receptionist_2_1),
+                                getString(activity , R.string.lvl1_npc_receptionist_2_2),
+
+                                ),
+                            listOfNotNull(
+                                characters["receptionist"],
+                                characters["John"],
+                            )
+                        )
+                        {}  ,
+
             )
 
         }
@@ -162,7 +204,7 @@ class DialogManager {
         fun loadCharacters() {
             characters = mapOf(
                 "John" to Character("Джон", R.drawable.character_avatar_test),
-                "Bulb" to Character("Лампочка", R.drawable.hint)
+                "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist)
             )
         }
 

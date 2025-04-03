@@ -9,16 +9,16 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/elevator_test"/>
+        android:src="@drawable/elevator_bg"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_elevator_to_lvl0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToLVL 0"
+        android:text="Подвал"
         android:layout_gravity="center"
-        android:layout_marginStart="210dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="150dp"
         android:visibility="visible"/>
 
@@ -26,11 +26,11 @@
         android:id="@+id/btn_elevator_to_lvl1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToLVL 1"
+        android:text="Ресепшен"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="250dp"
+        android:visibility="visible"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -40,8 +40,8 @@
         android:text="ToLVL 2"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="250dp"
+        android:visibility="visible"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -50,8 +50,8 @@
         android:layout_height="wrap_content"
         android:text="ToLVL 3"
         android:layout_gravity="center"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="250dp"
+        android:visibility="visible"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -61,7 +61,7 @@
         android:text="ToLVL TEST"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
-        android:layout_marginStart="210dp"
-        android:visibility="gone"/>
+        android:layout_marginStart="250dp"
+        android:visibility="visible"/>
 
 </FrameLayout>
