@@ -3,9 +3,11 @@ package com.tpu.thetower.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -24,6 +26,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private lateinit var btnBack: Button
     private lateinit var sbMusic: SeekBar
     private lateinit var sbSound: SeekBar
+    private lateinit var progressBar: ProgressBar
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +36,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         bindView()
         setListeners()
         handleSounds()
+
+        progressBar.progress = LoadManager.getBlockProgress(requireActivity(), Pair(0, 0))
     }
 
     private fun bindView() {
@@ -40,6 +45,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         btnBack = binding.btnBack
         sbMusic = binding.musicVolumeSeekBar
         sbSound = binding.soundVolumeSeekBar
+        progressBar = binding.progressBar
     }
 
     private fun setListeners() {
@@ -90,17 +96,5 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        musicManager.resumeMusic()
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        musicManager.pauseMusic()
     }
 }

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.LevelAccessManager
+import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
@@ -19,6 +21,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
     private lateinit var binding : FragmentElevatorBinding
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
+    private lateinit var musicManager: MusicManager
 
     private lateinit var btnToLvl0: Button
     private lateinit var btnToLvl1: Button
@@ -45,9 +48,12 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         }
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
+        musicManager = MusicManager.getInstance()
+
+        musicManager.stopMusic()
 
 
-        val currAccessLevel = LevelAccessManager.currentAccessLvl
+        val currAccessLevel = LoadManager.getAccessLevel(requireActivity())
         unlockLvls(currAccessLevel)
     }
 

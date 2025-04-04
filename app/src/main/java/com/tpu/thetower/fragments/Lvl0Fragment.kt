@@ -25,9 +25,9 @@ import kotlin.concurrent.thread
 import kotlin.reflect.KProperty
 
 
-class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
+class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
-    private lateinit var binding : FragmentLvl0Binding
+    private lateinit var binding: FragmentLvl0Binding
 
     private lateinit var flashlightManager: FlashlightManager
     private lateinit var musicManager: MusicManager
@@ -35,14 +35,17 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
     private lateinit var saveManager: SaveManager
     private lateinit var hintManager: HintManager
 
-    private lateinit var btnToElevator : Button
-    private lateinit var btnToPuzzle1 : Button
-    private lateinit var btnLightOn : ImageButton
+    private lateinit var btnToElevator: Button
+    private lateinit var btnToPuzzle1: Button
+    private lateinit var btnToPuzzle1Lock: Button
+    private lateinit var btnLightOn: ImageButton
 
-    private lateinit var ivDarkness : ImageView
-    private lateinit var ivDarknessFlashlight : ImageView
-    private lateinit var ivBlack : ImageView
-
+    private lateinit var ivDarkness: ImageView
+    private lateinit var ivDarknessFlashlight: ImageView
+    private lateinit var ivBlack: ImageView
+    private lateinit var ivPuzzle1: ImageView
+    private lateinit var ivClick: ImageView
+    private lateinit var ivMain: ImageView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,28 +60,49 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
             LoadManager.getPuzzleUsedHintsCount(requireActivity(),0,0),
             0,0)
 
-        if (FragmentManager.light) {
-            ivDarkness.visibility = View.GONE
-            ivDarknessFlashlight.visibility = View.GONE
-            btnLightOn.visibility = View.GONE
-            ivBlack.visibility = View.GONE
+        when (LoadManager.getLevelProgress(requireActivity(), 0)) {
+            0 -> {
+                startAwakeningAnim()
+            }
+            1 -> {
+                FragmentManager.light = true
+                ivDarkness.visibility = View.GONE
+                ivDarknessFlashlight.visibility = View.GONE
+                btnLightOn.visibility = View.GONE
+                ivBlack.visibility = View.GONE
+            }
+
+            2 -> {
+                ivDarkness.visibility = View.GONE
+                ivDarknessFlashlight.visibility = View.GONE
+                btnLightOn.visibility = View.GONE
+                ivBlack.visibility = View.GONE
+                FragmentManager.light = true
+
+                ivMain.setImageResource(R.drawable.lvl0_bd_solved)
+                btnToPuzzle1Lock.visibility = View.GONE
+                btnToPuzzle1Lock.visibility = View.GONE
+                btnToElevator.visibility = View.VISIBLE
+
+            }
         }
-        else
-            startAwakeningAnim()
     }
 
     private fun bindView() {
 
-        btnToElevator= binding.btnToElevator
+        btnToElevator = binding.btnToElevator
         btnToPuzzle1 = binding.btnToPuzzle1
-        ivDarkness  = binding.ivDarkness
+        btnToPuzzle1Lock = binding.btnToPuzzle1Lock
+        ivDarkness = binding.ivDarkness
         ivDarknessFlashlight = binding.ivDarknessFlashlight
         ivBlack = binding.ivBlack
+        ivPuzzle1 = binding.ivPuzzle1
         btnLightOn = binding.btnLightOn
+        ivClick = binding.ivClick
+        ivMain = binding.ivMain
     }
 
     private fun setListeners() {
-
 
         btnToElevator.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_global_elevatorFragment)
@@ -86,15 +110,24 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
             soundManager.playSound(R.raw.sound_of_an_elevator_door_opening)
         }
 
-        btnToPuzzle1.setOnClickListener {
+        btnToPuzzle1Lock.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
             FragmentManager.showGoBackArrow(requireActivity())
         }
 
+        btnToPuzzle1.setOnClickListener {
+            ivPuzzle1.visibility = View.VISIBLE
+            DialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
+            ivClick.visibility = View.VISIBLE
+        }
 
+        ivClick.setOnClickListener {
+            ivPuzzle1.visibility = View.GONE
+            ivClick.visibility = View.GONE
+        }
 
         ivDarkness.setOnClickListener {
-            DialogManager.startDialog(requireActivity(),"lvl0_dark")
+            DialogManager.startDialog(requireActivity(), "lvl0_dark")
         }
 
         btnLightOn.setOnClickListener {
@@ -141,14 +174,19 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
         soundManager.init()
-        soundManager.loadSound(requireContext(), R.raw.sound_of_a_flashlight)
-        soundManager.loadSound(requireContext(), R.raw.sound_of_an_elevator_door_opening)
+        soundManager.loadSound(
+            requireContext(), listOf(
+                R.raw.sound_of_a_flashlight,
+                R.raw.sound_of_an_elevator_door_opening
+            )
+        )
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
         flashlightManager.stopMonitoring()
+        saveManager.saveLevelProgress(requireActivity(), 0)
     }
 
     override fun onResume() {
@@ -159,11 +197,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0) , Hintable{
         saveManager.saveCurrentLevel(requireContext(), 0)
     }
 
-    override fun onPause() {
-        super.onPause()
-
-        musicManager.pauseMusic()
-    }
 
     override fun useHint() {
         if (!FragmentManager.light)

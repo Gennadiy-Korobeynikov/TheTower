@@ -44,6 +44,8 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private fun setListeners() {
         btnStart.setOnClickListener {
+            FragmentManager.light = false
+            saveManager.resetData(requireContext())
             FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
             FragmentManager.hideTitleScreen(requireActivity())
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
@@ -69,19 +71,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     override fun onResume() {
         super.onResume()
 
-        val music = R.raw.soundtrack_1
-        val currentMusic = musicManager.getCurrentMusic()
-
-        if (currentMusic != music) {
-            musicManager.playMusic(requireContext(), music)
-        } else {
-            musicManager.resumeMusic()
-        }
+        musicManager.playMusic(requireContext(), R.raw.soundtrack_1)
     }
 
-    override fun onPause() {
-        super.onPause()
-
-        musicManager.pauseMusic()
-    }
 }

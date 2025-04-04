@@ -90,7 +90,7 @@
     <!--############################## Lvl0 #################################-->
     <string name="lvl0_to_puzzle1_hint">TODO</string>
 
-    <!--################# Lvl0Puzzle0 ##############-->
+    <!--################# Lvl0Puzzle1 ##############-->
     <string name="lvl0_puzzle0_hint1">TODO </string>
     <string name="lvl0_puzzle0_hint2">TODO </string>
     <!--#############################################-->
@@ -99,6 +99,8 @@
     <string name="lvl0_puzzle1_hint1">TODO</string>
     <string name="lvl0_puzzle1_hint2">TODO</string>
     <string name="lvl0_puzzle1_hint3">TODO</string>
+    <string name="lvl0_puzzle1">TODO</string>
+    <string name="lvl0_puzzle1_solved">TODO</string>
     <!--##################################################-->
 
 
@@ -108,5 +110,6 @@
 
 
     <!--##############################################################################################################-->
+
 
 </resources>

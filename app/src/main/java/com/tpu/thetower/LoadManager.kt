@@ -6,13 +6,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import java.lang.ref.WeakReference
 
-class LoadManager() {
+class LoadManager {
     companion object {
 
 
 
         private val saveManager = SaveManager.getInstance()
-        private lateinit var gameData : SaveManager.SaveData
+        private lateinit var gameData: SaveManager.SaveData
         private val musicManager = MusicManager.getInstance()
         private val soundManager = SoundManager.getInstance()
 
@@ -39,7 +39,7 @@ class LoadManager() {
 
         }
 
-        private fun getCurrFragment(activity: Activity) : Fragment {
+        private fun getCurrFragment(activity: Activity): Fragment {
             return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
         }
 
@@ -47,6 +47,7 @@ class LoadManager() {
             setGameData(activity)
             val savedLevel = gameData.playerInfo.currentLevel
             val bundle = Bundle().apply {
+                // Потом убрать + 1, потому что пропадёт тестовый уровень
                 putString("saved_level", levels[savedLevel + 1].toString())
             }
             FragmentManager.changeBG(
@@ -76,9 +77,38 @@ class LoadManager() {
 //            return gameData.levels[level].puzzles[puzzle].status
 //        }
 
-        fun getPuzzleUsedHintsCount(activity: Activity ,level: Int, puzzle: Int): Int {
+        fun getPuzzleUsedHintsCount(activity: Activity, level: Int, puzzle: Int): Int {
             setGameData(activity)
             return gameData.levels[level].puzzles[puzzle].hintsUsed //Пока так
+        }
+
+        fun getLevelProgress(activity: Activity, level: Int): Int {
+            setGameData(activity)
+            return gameData.levels[level].puzzles.count {it.status == "completed"}
+        }
+
+        fun isLevelCompleted(activity: Activity, level: Int): Boolean {
+            setGameData(activity)
+
+            return getLevelProgress(activity, level) == gameData.levels[level].puzzles.size
+        }
+
+        fun getBlockProgress(activity: Activity, borders: Pair<Int, Int>): Int {
+            var progressStatus = 0
+
+            for (level: Int in borders.first..borders.second) {
+                if (isLevelCompleted(activity, level)) {
+                    progressStatus += 20
+                }
+            }
+
+            return progressStatus
+        }
+
+        fun getAccessLevel(activity: Activity) : Int {
+            setGameData(activity)
+
+            return gameData.playerInfo.accessLevel ?: 0
         }
     }
 }

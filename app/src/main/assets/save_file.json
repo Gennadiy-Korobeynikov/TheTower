@@ -1,54 +1,54 @@
 {
   "playerInfo": {
     "uid": "",
-    "totalPlayTime": 3600,
-    "lastUnlockedModule": 2,
-    "currentLevel": 1
+    "totalPlayTime": 0,
+    "accessLevel": 0,
+    "currentLevel": 0
   },
   "levels": [
     {
-      "id": 1,
-      "name": "",
-      "isCompleted": true,
+      "id": 0,
+      "name": "Basement",
+      "isCompleted": false,
       "puzzles": [
         {
-          "id": "",
-          "name": "",
-          "status": "completed",
-          "attempts": 2,
-          "timeSpent": 450,
-          "hints_used": 1
-        },
-        {
-          "id": "",
-          "name": "",
+          "id": 0,
+          "name": "Flashlight",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
-          "hints_used": 0
+          "hintsUsed": 0
+        },
+        {
+          "id": 1,
+          "name": "Lock",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
         }
       ]
     },
     {
-      "id": 2,
+      "id": 1,
       "name": "",
       "isCompleted": false,
       "puzzles": [
         {
-          "id": "",
+          "id": 0,
           "name": "",
           "status": "in_progress",
           "attempts": 1,
           "timeSpent": 230,
-          "hints_used": 0
+          "hintsUsed": 0
         },
         {
-          "id": "",
+          "id": 0,
           "name": "",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
-          "hints_used": 0
+          "hintsUsed": 0
         }
       ]
     }
@@ -57,28 +57,5 @@
     "soundVolume": 0.5,
     "musicVolume": 0.5,
     "language": "ru"
-  },
-  "npcDialogs": [
-    {
-      "npcId": "",
-      "dialogHistory": [
-        {
-          "dialogId": "first_meeting",
-          "status": "completed",
-          "availableNextDialog": "quest_hint"
-        },
-        {
-          "dialogId": "quest_hint",
-          "status": "available",
-          "availableNextDialog": "final_quest"
-        },
-        {
-          "dialogId": "final_quest",
-          "status": "locked",
-          "availableNextDialog": null
-        }
-      ],
-      "currentDialogIndex": 1
-    }
-  ]
+  }
 }

@@ -3,11 +3,8 @@ package com.tpu.thetower
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -19,13 +16,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-
+        copyJsonFromAssets(this, "save_file.json")
+        LoadManager.setGameData(this)
         setContentView(R.layout.activity_main)
 
 
-        copyJsonFromAssets(this, "save_file.json")
-        LoadManager.setGameData(this)
         setManagers()
         saveManager.savePuzzleUsedHintsCount(this,0, 0,0)// TEST
         saveManager.savePuzzleUsedHintsCount(this,0, 1,0)// TEST
@@ -60,8 +55,6 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-
-
 
 
     private fun setManagers() {
