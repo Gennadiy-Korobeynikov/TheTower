@@ -97,7 +97,7 @@
 
     <!--################# Lvl0Puzzle1 ##############-->
     <string name="lvl0_puzzle1_hint1">Хмм... Надо бы осмотреть команту, может найдётся что-то полезное</string>
-    <string name="lvl0_puzzle1_hint2">Наверное, те 4 фигуры на [бумажке/стене] как-то связаны с кодом для этого замка</string>
+    <string name="lvl0_puzzle1_hint2">Наверное, те 4 фигуры на бумажке как-то связаны с кодом для этого замка</string>
     <string name="lvl0_puzzle1_hint3">Интересно, что у каждой из этих фигур разное количество углов...</string>
     <string name="lvl0_puzzle1">Что бы это значило...</string>
     <string name="lvl0_puzzle1_solved">И что мне делать с этой картой?</string>

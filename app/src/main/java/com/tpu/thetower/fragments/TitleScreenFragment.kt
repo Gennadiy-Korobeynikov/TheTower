@@ -53,6 +53,8 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
         btnSettings.setOnClickListener {
             FragmentManager.hideTitleScreen(requireActivity())
+            FragmentManager.hideGoBackArrow(requireActivity())
+            FragmentManager.hideHUD(requireActivity())
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_settingsFragment)
         }
 

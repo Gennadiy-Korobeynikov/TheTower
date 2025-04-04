@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        copyJsonFromAssets(this, "save_file.json")
-        LoadManager.setGameData(this)
         setContentView(R.layout.activity_main)
 
+        copyJsonFromAssets(this, "save_file.json")
+        LoadManager.setGameData(this)
 
         setManagers()
         saveManager.savePuzzleUsedHintsCount(this,0, 0,0)// TEST
