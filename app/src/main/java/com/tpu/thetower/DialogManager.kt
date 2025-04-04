@@ -146,6 +146,16 @@ class DialogManager {
                         )
                         {} ,
 
+                "lvl0_puzzle1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl0_puzzle1),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {},
 
                 "lvl1_npc_receptionist" to
                         Dialog(

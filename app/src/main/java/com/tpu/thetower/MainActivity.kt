@@ -3,8 +3,11 @@ package com.tpu.thetower
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -88,10 +91,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-//
-//    fun deleteJsonFile(context: Context, fileName: String) {
-//        val file = File(context.filesDir, fileName)
-//            file.delete()
-//    }
+
+    fun deleteJsonFile(context: Context, fileName: String) {
+        val file = File(context.filesDir, fileName)
+            file.delete()
+    }
 
 }

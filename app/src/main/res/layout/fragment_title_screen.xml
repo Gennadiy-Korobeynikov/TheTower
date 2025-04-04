@@ -24,7 +24,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:background="@drawable/button_outline" />
+        android:background="@android:color/transparent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_to_settings"
@@ -33,7 +33,7 @@
         android:layout_gravity="start"
         android:layout_marginTop="6dp"
         android:layout_marginStart="100dp"
-        android:background="@drawable/button_outline" />
+        android:background="@android:color/transparent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_resume"

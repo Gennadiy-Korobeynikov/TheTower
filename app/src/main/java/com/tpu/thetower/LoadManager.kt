@@ -33,7 +33,6 @@ class LoadManager {
             DialogManager.loadCharacters()
             DialogManager.loadDialogs(activity)
 
-            LevelAccessManager.currentAccessLvl = gameData.playerInfo.accessLevel ?: 0
             LevelAccessManager.unlockModules(getCurrFragment(activity))
 
 

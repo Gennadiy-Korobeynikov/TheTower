@@ -137,6 +137,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             DialogManager.startDialog(requireActivity(),"lvl0_light_on")
             flashlightManager.toggleFlashlight(false) // Выкл фонарик
             flashlightManager.stopMonitoring()
+            saveManager.savePuzzleData(requireContext(), 0, 0)
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->

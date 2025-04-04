@@ -23,27 +23,27 @@
         android:layout_marginStart="200dp"
         android:layout_marginTop="10dp"
         android:visibility="gone"
-        android:background="@drawable/button_outline" />
+        android:background="@android:color/transparent" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_to_puzzle1_lock"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginStart="58dp"
         android:layout_marginTop="39dp"
-        android:background="@drawable/button_outline" />
+        android:background="@android:color/transparent" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_to_puzzle1"
-        android:layout_width="50dp"
+        android:layout_width="70dp"
         android:layout_height="140dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="58dp"
+        android:layout_marginStart="88dp"
         android:layout_marginTop="120dp"
-        android:background="@drawable/button_outline" />
+        android:background="@android:color/transparent" />
 
 
     <ImageView
@@ -55,13 +55,13 @@
 
     <ImageButton
         android:id="@+id/btn_light_on"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="end|center_vertical"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="200dp"
-        android:background="@drawable/button_outline"
-        android:elevation="3dp" />
+        android:elevation="3dp"
+        android:background="@android:color/transparent" />
 
     <ImageView
         android:id="@+id/iv_darkness"

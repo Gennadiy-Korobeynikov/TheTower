@@ -57,8 +57,10 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1){
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
         soundManager.init()
-        soundManager.loadSound(requireContext(), R.raw.sound_of_a_flashlight)
-        soundManager.loadSound(requireContext(), R.raw.sound_of_an_elevator_door_opening)
+        soundManager.loadSound(requireContext(), listOf(
+            R.raw.sound_of_a_flashlight,
+            R.raw.sound_of_an_elevator_door_opening
+        ))
     }
 
 
