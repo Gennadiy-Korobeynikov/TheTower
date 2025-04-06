@@ -4,7 +4,8 @@ data class LevelData(
     val id: Int,
     val name: String,
     var isCompleted: Boolean,
-    val puzzles: List<PuzzleData>
+    val puzzles: List<PuzzleData>,
+    val npcDialogs: List<DialogData>
 )
 
 data class PuzzleData(
@@ -15,3 +16,9 @@ data class PuzzleData(
     var timeSpent: Int,
     var hintsUsed: Int
 )
+
+data class DialogData(
+    val npcId: Int,
+    var currentDialogIndex: Int
+)
+

@@ -10,12 +10,10 @@ class LoadManager {
     companion object {
 
 
-
         private val saveManager = SaveManager.getInstance()
         private lateinit var gameData: SaveManager.SaveData
         private val musicManager = MusicManager.getInstance()
         private val soundManager = SoundManager.getInstance()
-
 
 
         private val levels = listOf(
@@ -38,6 +36,7 @@ class LoadManager {
 
 
         }
+
         private fun getCurrFragment(activity: Activity): Fragment {
             return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
         }
@@ -81,7 +80,7 @@ class LoadManager {
 
         fun getLevelProgress(activity: Activity, level: Int): Int {
             setGameData(activity)
-            return gameData.levels[level].puzzles.count {it.status == "completed"}
+            return gameData.levels[level].puzzles.count { it.status == "completed" }
         }
 
         fun isLevelCompleted(activity: Activity, level: Int): Boolean {
@@ -102,10 +101,16 @@ class LoadManager {
             return progressStatus
         }
 
-        fun getAccessLevel(activity: Activity) : Int {
+        fun getAccessLevel(activity: Activity): Int {
             setGameData(activity)
 
             return gameData.playerInfo.accessLevel ?: 0
+        }
+
+        fun getCurrentDialog(activity: Activity, level: Int, npc: Int): Int {
+            setGameData(activity)
+
+            return gameData.levels[level].npcDialogs[npc].currentDialogIndex
         }
     }
 }

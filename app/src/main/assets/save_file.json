@@ -27,6 +27,12 @@
           "timeSpent": 0,
           "hintsUsed": 0
         }
+      ],
+      "npcDialogs": [
+        {
+          "npcId": 0,
+          "currentDialogIndex": 0
+        }
       ]
     },
     {
@@ -49,6 +55,12 @@
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
+        }
+      ],
+      "npcDialogs": [
+        {
+          "npcId": 0,
+          "currentDialogIndex": 0
         }
       ]
     }

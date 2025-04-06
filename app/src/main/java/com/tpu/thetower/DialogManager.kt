@@ -189,7 +189,7 @@ class DialogManager {
                                 characters["John"],
                             )
                         )
-                        {/*Тут надо вызвать сохранение заврешения диалога*/}  ,
+                        { nextDialog(activity, 1, 0)}  ,
 
 
                 "lvl1_npc_receptionist_2" to
@@ -216,6 +216,13 @@ class DialogManager {
                 "John" to Character("Джон", R.drawable.character_avatar_test),
                 "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist)
             )
+        }
+
+        private fun nextDialog(activity: Activity, level: Int, npc: Int) {
+            var currentDialog = LoadManager.getCurrentDialog(activity, level, npc)
+            val saveManager = SaveManager.getInstance()
+            currentDialog++
+            saveManager.saveCurrentDialog(activity, level, npc, currentDialog)
         }
 
     }
