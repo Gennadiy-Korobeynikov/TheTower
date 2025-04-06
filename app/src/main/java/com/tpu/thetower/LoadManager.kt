@@ -63,8 +63,6 @@ class LoadManager {
             DialogManager.loadCharacters()
             DialogManager.loadDialogs(activity)
 
-            saveManager.saveAccessLevel(activity, 0) // Fot TEst
-
             val savedMusicVolume = gameData.gameSettings.musicVolume ?: 0.5f
             val savedSoundVolume = gameData.gameSettings.soundVolume ?: 0.5f
 
