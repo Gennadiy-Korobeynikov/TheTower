@@ -52,7 +52,6 @@
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.PermissionRequestFragment"
         android:visibility="gone"
-        android:elevation="3dp"
         android:clickable="true" />
 
 
@@ -83,6 +82,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.TitleScreenFragment" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.tpu.thetower.fragments.SettingsFragment"
+        android:visibility="gone"/>
 
 
 

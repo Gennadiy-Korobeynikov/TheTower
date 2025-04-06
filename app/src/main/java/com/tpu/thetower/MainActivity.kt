@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_bg) as? NavHostFragment
                 val currentFragment = navHostFragment?.childFragmentManager?.fragments?.lastOrNull()
                 if (currentFragment is Fragment) {
-                    FragmentManager.showTitleScreen(this@MainActivity)
+                    FragmentManager.showMenu(this@MainActivity)
                 }
             }
         })
@@ -91,10 +91,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    fun deleteJsonFile(context: Context, fileName: String) {
-        val file = File(context.filesDir, fileName)
-            file.delete()
-    }
+//
+//    fun deleteJsonFile(context: Context, fileName: String) {
+//        val file = File(context.filesDir, fileName)
+//            file.delete()
+//    }
 
 }

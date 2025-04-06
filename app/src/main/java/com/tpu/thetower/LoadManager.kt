@@ -33,11 +33,11 @@ class LoadManager {
             DialogManager.loadCharacters()
             DialogManager.loadDialogs(activity)
 
+            LevelAccessManager.currentAccessLvl = gameData.playerInfo.accessLevel
             LevelAccessManager.unlockModules(getCurrFragment(activity))
 
 
         }
-
         private fun getCurrFragment(activity: Activity): Fragment {
             return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
         }

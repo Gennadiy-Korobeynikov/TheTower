@@ -88,7 +88,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         })
 
         btnBack.setOnClickListener {
-            FragmentManager.goBack(this)
+            FragmentManager.hideSettings(requireActivity())
         }
     }
 

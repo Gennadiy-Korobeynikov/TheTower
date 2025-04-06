@@ -46,6 +46,18 @@ class FragmentManager {
             activity.findViewById<FragmentContainerView>(R.id.fcv_menu).visibility = View.GONE
         }
 
+        fun showSettings(activity: Activity) {
+            hideGoBackArrow(activity)
+            hideHUD(activity)
+            //changeBG(this, R.id.action_titleScreenFragment_to_settingsFragment)
+            activity.findViewById<FragmentContainerView>(R.id.fcv_settings).visibility = View.VISIBLE
+        }
+
+        fun hideSettings(activity: Activity) {
+            activity.findViewById<FragmentContainerView>(R.id.fcv_settings).visibility = View.GONE
+        }
+
+
 
         fun hideHUD(activity : Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_hud).visibility = View.GONE
