@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_elevatorFragment_to_lvlTestFragment"
             app:destination="@id/lvlTestFragment" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
+            app:destination="@id/lvl2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -87,5 +90,27 @@
         android:name="com.tpu.thetower.fragments.LvlTestFragment"
         android:label="fragment_lvl_test"
         tools:layout="@layout/fragment_lvl_test" />
+    <fragment
+        android:id="@+id/lvl2Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl2Fragment"
+        android:label="fragment_lvl2"
+        tools:layout="@layout/fragment_lvl2" >
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle0Fragment"
+            app:destination="@id/lvl2Puzzle0Fragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle1Fragment"
+            app:destination="@id/lvl2Puzzle1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lvl2Puzzle0Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl2Puzzle0Fragment"
+        android:label="fragment_lvl2_puzzle0"
+        tools:layout="@layout/fragment_lvl2_puzzle0" />
+    <fragment
+        android:id="@+id/lvl2Puzzle1Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl2Puzzle1Fragment"
+        android:label="fragment_lvl2_puzzle1"
+        tools:layout="@layout/fragment_lvl2_puzzle1" />
 
 </navigation>

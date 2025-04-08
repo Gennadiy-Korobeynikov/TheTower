@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".fragments.Lvl2Puzzle1Fragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lvl2_puzzle1" />
+
+    <ImageView
+        android:id="@+id/iv_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lvl2_puzzle1_dialog"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:text="@string/lvl2_puzzle1_password"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
+
+    <!-- Контейнер для ячеек -->
+    <LinearLayout
+        android:id="@+id/pinContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <!-- Ячейки для ввода символов -->
+        <TextView
+            android:id="@+id/tv_pin1"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_pin2"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_pin3"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_pin4"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_pin5"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_pin6"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/hidden_input"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:cursorVisible="false"
+        android:importantForAutofill="no"
+        android:maxLength="6" />
+
+</FrameLayout>

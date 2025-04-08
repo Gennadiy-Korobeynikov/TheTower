@@ -19,7 +19,8 @@ class LoadManager {
         private val levels = listOf(
             R.id.action_elevatorFragment_to_lvlTestFragment,
             R.id.action_elevatorFragment_to_lvl0Fragment,
-            R.id.action_elevatorFragment_to_lvl1Fragment
+            R.id.action_elevatorFragment_to_lvl1Fragment,
+            R.id.action_elevatorFragment_to_lvl2Fragment
         )
 
         fun setGameData(activity: Activity) {
