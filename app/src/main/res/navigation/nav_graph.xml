@@ -53,6 +53,13 @@
         <action
             android:id="@+id/action_elevatorFragment_to_lvlTestFragment"
             app:destination="@id/lvlTestFragment" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl2PuzzleHooverFragment"
+            app:destination="@id/lvl2PuzzleHooverFragment"
+            app:enterAnim="@android:animator/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -87,5 +94,10 @@
         android:name="com.tpu.thetower.fragments.LvlTestFragment"
         android:label="fragment_lvl_test"
         tools:layout="@layout/fragment_lvl_test" />
+    <fragment
+        android:id="@+id/lvl2PuzzleHooverFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzleHooverFragment"
+        android:label="fragment_lvl2_puzzle_hoover"
+        tools:layout="@layout/fragment_lvl2_puzzle_hoover" />
 
 </navigation>

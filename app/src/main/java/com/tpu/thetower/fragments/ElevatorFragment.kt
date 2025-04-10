@@ -85,6 +85,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
         }
 
+        btnToLvl2.setOnClickListener {
+            //soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2PuzzleHooverFragment)
+        }
+
         btnToLvlTest.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
         }
@@ -102,6 +107,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
         unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }
-        //TODO Обновить дизайн панели уроавления
+        //TODO Обновить дизайн панели управления
     }
 }
