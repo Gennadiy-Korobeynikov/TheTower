@@ -81,7 +81,8 @@
         android:id="@+id/fcv_title_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.tpu.thetower.fragments.TitleScreenFragment" />
+        android:name="com.tpu.thetower.fragments.TitleScreenFragment"
+        android:clickable="true"/>
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -89,7 +90,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.SettingsFragment"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:clickable="true"/>
 
 
 
