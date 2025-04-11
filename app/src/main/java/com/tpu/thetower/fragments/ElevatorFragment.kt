@@ -85,7 +85,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
         }
 
-        btnToLvl2.setOnClickListener {
+        btnToLvl3.setOnClickListener {
             //soundManager.release()
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2PuzzleHooverFragment)
         }

@@ -3,33 +3,21 @@ package com.tpu.thetower.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.DialogManager
-import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
-import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
-import com.tpu.thetower.adapters.ImageCodeAdapter
-import com.tpu.thetower.databinding.FragmentLvl0Puzzle1Binding
-import com.tpu.thetower.databinding.FragmentLvl2PuzzleHooverBinding
+import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
 import com.tpu.thetower.puzzles.Direction
-import com.tpu.thetower.puzzles.Lvl0Puzzle1
-import com.tpu.thetower.puzzles.Lvl2PuzzleHoover
+import com.tpu.thetower.puzzles.Lvl3PuzzleHoover
 
 
-class Lvl2PuzzleHooverFragment : Fragment(R.layout.fragment_lvl2_puzzle_hoover), Hintable {
+class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover), Hintable {
 
-    private lateinit var binding: FragmentLvl2PuzzleHooverBinding
+    private lateinit var binding: FragmentLvl3PuzzleHooverBinding
 
     private lateinit var tvCoordinates : TextView
     private lateinit var tvDirection: TextView
@@ -41,7 +29,7 @@ class Lvl2PuzzleHooverFragment : Fragment(R.layout.fragment_lvl2_puzzle_hoover),
     private lateinit var btnForward: Button
 
 
-    private val puzzleHoover = Lvl2PuzzleHoover("Lvl2PuzzleHooverPuzzle1")
+    private val puzzleHoover = Lvl3PuzzleHoover("Lvl2PuzzleHooverPuzzle1")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
@@ -54,7 +42,7 @@ class Lvl2PuzzleHooverFragment : Fragment(R.layout.fragment_lvl2_puzzle_hoover),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2PuzzleHooverBinding.bind(view)
+        binding = FragmentLvl3PuzzleHooverBinding.bind(view)
         bindView()
         setListeners()
         test()
@@ -110,7 +98,7 @@ class Lvl2PuzzleHooverFragment : Fragment(R.layout.fragment_lvl2_puzzle_hoover),
 // Временно для тестирования
     private fun test() {
         if (restart) {
-            tvRestart.text = "Въебался в стену!"
+            tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
             restart = false
         }
 

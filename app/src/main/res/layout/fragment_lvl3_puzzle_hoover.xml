@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Lvl2PuzzleHooverFragment">
+    tools:context=".fragments.Lvl3PuzzleHooverFragment">
 
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginTop="50dp"
         tools:text="Въебался в стену!"
         android:textColor="#EB0606"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_win"

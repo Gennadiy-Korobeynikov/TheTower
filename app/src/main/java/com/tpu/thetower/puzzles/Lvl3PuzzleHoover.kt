@@ -3,7 +3,7 @@ package com.tpu.thetower.puzzles
 import android.content.Context
 import com.tpu.thetower.Puzzle
 
-class Lvl2PuzzleHoover(name : String): Puzzle(name) {
+class Lvl3PuzzleHoover(name : String): Puzzle(name) {
 
     private val isCorrectCell  = arrayOf(
         arrayOf(false,false,false,false,false),
