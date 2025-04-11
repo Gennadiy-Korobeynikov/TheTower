@@ -7,15 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Lvl3PuzzleHooverFragment">
 
+  <ImageView
+      android:id="@+id/iw_monitor_image"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/hoover_map_test"/>
 
     <TextView
         android:id="@+id/tv_restart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         tools:text="Въебался в стену!"
-        android:textColor="#EB0606"
+        android:textColor="#6B0101"
         android:textSize="20sp" />
 
     <TextView
@@ -35,8 +40,9 @@
         android:text="(X,Y)"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"/>
+        android:layout_gravity="center|end"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="40dp"/>
 
     <TextView
         android:id="@+id/tv_direction"
@@ -45,8 +51,8 @@
         android:text="direction"
         android:textSize="25sp"
         android:textStyle="italic"
-        android:layout_gravity="center"
-        android:layout_marginBottom="50dp"/>
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="50dp"/>
 
     <Button
         android:id="@+id/btn_right"
@@ -54,7 +60,8 @@
         android:layout_height="wrap_content"
         android:text="Вправо"
         android:layout_gravity="center"
-        android:layout_marginLeft="100dp"/>
+        android:layout_marginLeft="-60dp"
+        android:layout_marginTop="160dp"/>
 
     <Button
         android:id="@+id/btn_left"
@@ -62,7 +69,8 @@
         android:layout_height="wrap_content"
         android:text="Влево"
         android:layout_gravity="center"
-        android:layout_marginRight="100dp"/>
+        android:layout_marginRight="270dp"
+        android:layout_marginTop="160dp"/>
 
     <Button
         android:id="@+id/btn_forward"
@@ -70,7 +78,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Вперёд"
-        android:textColor="#0C8102" />
+        android:textColor="#0C8102"
+        android:layout_marginLeft="-170dp"
+        android:layout_marginTop="160dp"/>
 
 
 </FrameLayout>

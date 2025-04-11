@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.HintManager
@@ -23,6 +24,8 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private lateinit var tvDirection: TextView
     private lateinit var tvRestart: TextView
     private lateinit var tvWin : TextView
+    private lateinit var iwTest : ImageView
+
 
     private lateinit var btnRight: Button
     private lateinit var btnLeft: Button
@@ -73,6 +76,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         btnRight = binding.btnRight
         btnLeft = binding.btnLeft
         btnForward = binding.btnForward
+        iwTest = binding.iwMonitorImage
     }
 
 
@@ -88,6 +92,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         btnForward.setOnClickListener {
             tvRestart.text = ""
             tvWin.text = ""
+            iwTest.setImageResource(R.drawable.lvl3_puzzle_hoover_noise_test)
             puzzleHoover.moveForward()
             restart = puzzleHoover.isWall()
             win = puzzleHoover.checkSolution(requireContext())
@@ -98,6 +103,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
 // Временно для тестирования
     private fun test() {
         if (restart) {
+            iwTest.setImageResource(R.drawable.hoover_map_test)
             tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
             restart = false
         }
