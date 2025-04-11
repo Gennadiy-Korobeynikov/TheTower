@@ -60,6 +60,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
+            app:destination="@id/lvl2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -99,5 +102,27 @@
         android:name="com.tpu.thetower.fragments.Lvl3PuzzleHooverFragment"
         android:label="fragment_lvl2_puzzle_hoover"
         tools:layout="@layout/fragment_lvl3_puzzle_hoover" />
+    <fragment
+        android:id="@+id/lvl2Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl2Fragment"
+        android:label="fragment_lvl2"
+        tools:layout="@layout/fragment_lvl2" >
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle0Fragment"
+            app:destination="@id/lvl2Puzzle0Fragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle1Fragment"
+            app:destination="@id/lvl2Puzzle1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lvl2Puzzle0Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl2Puzzle0Fragment"
+        android:label="fragment_lvl2_puzzle0"
+        tools:layout="@layout/fragment_lvl2_puzzle0" />
+    <fragment
+        android:id="@+id/lvl2Puzzle1Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl2Puzzle1Fragment"
+        android:label="fragment_lvl2_puzzle1"
+        tools:layout="@layout/fragment_lvl2_puzzle1" />
 
 </navigation>

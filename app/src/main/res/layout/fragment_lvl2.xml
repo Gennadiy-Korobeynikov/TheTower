@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Lvl2Fragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lvl2_bg" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle0"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_outline" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle0_lock"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="-230dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/button_outline" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle0_completed"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="-230dp"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"
+        android:background="@drawable/button_outline" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle1"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/button_outline" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle1_lock"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/button_outline" />
+
+    <ImageView
+        android:id="@+id/iv_puzzle0"
+        android:layout_width="360dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/lvl2_puzzle0"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_click"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:elevation="3dp"
+        android:visibility="gone" />
+
+
+</FrameLayout>

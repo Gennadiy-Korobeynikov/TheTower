@@ -114,5 +114,10 @@ class FragmentManager {
             (activity as? AppCompatActivity)?.supportFragmentManager
                 ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))
         }
+
+        fun choosePuzzle(fragment: Fragment, puzzleNum: Int) {
+            fragment.requireActivity().supportFragmentManager
+                .setFragmentResult("puzzleChoosing", bundleOf("puzzleNum" to puzzleNum))
+        }
     }
 }

@@ -46,10 +46,10 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1){
 
     private fun setListeners() {
         btnNpcReceptionist.setOnClickListener {
-            // if (Первый раз диалог)
-            DialogManager.startDialog(requireActivity(),"lvl1_npc_receptionist")
-            //else
-            // DialogManager.startDialog(requireActivity(),"lvl1_npc_receptionist_2)")
+            when (LoadManager.getCurrentDialog(requireActivity(), 1, 0)) {
+                0 -> DialogManager.startDialog(requireActivity(),"lvl1_npc_receptionist")
+                1 -> DialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist_2")
+            }
         }
     }
 

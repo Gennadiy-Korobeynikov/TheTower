@@ -10,18 +10,17 @@ class LoadManager {
     companion object {
 
 
-
         private val saveManager = SaveManager.getInstance()
         private lateinit var gameData: SaveManager.SaveData
         private val musicManager = MusicManager.getInstance()
         private val soundManager = SoundManager.getInstance()
 
 
-
         private val levels = listOf(
             R.id.action_elevatorFragment_to_lvlTestFragment,
             R.id.action_elevatorFragment_to_lvl0Fragment,
-            R.id.action_elevatorFragment_to_lvl1Fragment
+            R.id.action_elevatorFragment_to_lvl1Fragment,
+            R.id.action_elevatorFragment_to_lvl2Fragment
         )
 
         fun setGameData(activity: Activity) {
@@ -38,6 +37,7 @@ class LoadManager {
 
 
         }
+
         private fun getCurrFragment(activity: Activity): Fragment {
             return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
         }
@@ -63,8 +63,6 @@ class LoadManager {
             DialogManager.loadCharacters()
             DialogManager.loadDialogs(activity)
 
-            saveManager.saveAccessLevel(activity, 0) // Fot TEst
-
             val savedMusicVolume = gameData.gameSettings.musicVolume ?: 0.5f
             val savedSoundVolume = gameData.gameSettings.soundVolume ?: 0.5f
 
@@ -83,7 +81,7 @@ class LoadManager {
 
         fun getLevelProgress(activity: Activity, level: Int): Int {
             setGameData(activity)
-            return gameData.levels[level].puzzles.count {it.status == "completed"}
+            return gameData.levels[level].puzzles.count { it.status == "completed" }
         }
 
         fun isLevelCompleted(activity: Activity, level: Int): Boolean {
@@ -104,10 +102,16 @@ class LoadManager {
             return progressStatus
         }
 
-        fun getAccessLevel(activity: Activity) : Int {
+        fun getAccessLevel(activity: Activity): Int {
             setGameData(activity)
 
             return gameData.playerInfo.accessLevel ?: 0
+        }
+
+        fun getCurrentDialog(activity: Activity, level: Int, npc: Int): Int {
+            setGameData(activity)
+
+            return gameData.levels[level].npcDialogs[npc].currentDialogIndex
         }
     }
 }

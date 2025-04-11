@@ -3,107 +3,122 @@ package com.tpu.thetower.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
-import com.tpu.thetower.Hintable
-import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.adapters.ImageCodeAdapter
-import com.tpu.thetower.databinding.FragmentLvl0Puzzle1Binding
-import com.tpu.thetower.puzzles.Lvl0Puzzle1
+import com.tpu.thetower.databinding.FragmentLvl2Puzzle0Binding
+import com.tpu.thetower.puzzles.Lvl2Puzzle0
+import com.tpu.thetower.puzzles.Lvl2Puzzle2
 
 
-class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
+class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0) {
 
-    private lateinit var binding: FragmentLvl0Puzzle1Binding
+    private lateinit var binding: FragmentLvl2Puzzle0Binding
 
     private lateinit var rv1: RecyclerView
     private lateinit var rv2: RecyclerView
     private lateinit var rv3: RecyclerView
     private lateinit var rv4: RecyclerView
+    private lateinit var rv5: RecyclerView
 
     private lateinit var mainScreen: FrameLayout
 
 
-    private val puzzle: Puzzle = Lvl0Puzzle1("Lvl0Puzzle1")
+    private lateinit var puzzle: Puzzle
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
-    private var solution = "1111".toCharArray()
+    private var solution = "11111".toCharArray()
 
     private var isSolved = false
 
     private val images = arrayOf(
         arrayOf(
-            R.drawable.lvl0_puzzle1_num_0,
-            R.drawable.lvl0_puzzle1_num_1,
-            R.drawable.lvl0_puzzle1_num_2,
-            R.drawable.lvl0_puzzle1_num_3,
-            R.drawable.lvl0_puzzle1_num_4_2,
-            R.drawable.lvl0_puzzle1_num_5,
-            R.drawable.lvl0_puzzle1_num_6,
-            R.drawable.lvl0_puzzle1_num_7,
-            R.drawable.lvl0_puzzle1_num_8,
-            R.drawable.lvl0_puzzle1_num_9
+            R.drawable.lvl2_puzzle0_a,
+            R.drawable.lvl2_puzzle0_b,
+            R.drawable.lvl2_puzzle0_c,
+            R.drawable.lvl2_puzzle0_d,
+            R.drawable.lvl2_puzzle0_e,
+            R.drawable.lvl2_puzzle0_h,
+            R.drawable.lvl2_puzzle0_l,
+            R.drawable.lvl2_puzzle0_n,
+            R.drawable.lvl2_puzzle0_u
         ),
         arrayOf(
-            R.drawable.lvl0_puzzle1_num_0,
-            R.drawable.lvl0_puzzle1_num_1,
-            R.drawable.lvl0_puzzle1_num_2,
-            R.drawable.lvl0_puzzle1_num_3,
-            R.drawable.lvl0_puzzle1_num_4,
-            R.drawable.lvl0_puzzle1_num_5,
-            R.drawable.lvl0_puzzle1_num_6_1,
-            R.drawable.lvl0_puzzle1_num_7,
-            R.drawable.lvl0_puzzle1_num_8,
-            R.drawable.lvl0_puzzle1_num_9
+            R.drawable.lvl2_puzzle0_a,
+            R.drawable.lvl2_puzzle0_b,
+            R.drawable.lvl2_puzzle0_c,
+            R.drawable.lvl2_puzzle0_d,
+            R.drawable.lvl2_puzzle0_e,
+            R.drawable.lvl2_puzzle0_h,
+            R.drawable.lvl2_puzzle0_l,
+            R.drawable.lvl2_puzzle0_n,
+            R.drawable.lvl2_puzzle0_u
         ),
         arrayOf(
-            R.drawable.lvl0_puzzle1_num_0,
-            R.drawable.lvl0_puzzle1_num_1_1,
-            R.drawable.lvl0_puzzle1_num_2,
-            R.drawable.lvl0_puzzle1_num_3,
-            R.drawable.lvl0_puzzle1_num_4_1,
-            R.drawable.lvl0_puzzle1_num_5,
-            R.drawable.lvl0_puzzle1_num_6,
-            R.drawable.lvl0_puzzle1_num_7,
-            R.drawable.lvl0_puzzle1_num_8,
-            R.drawable.lvl0_puzzle1_num_9
+            R.drawable.lvl2_puzzle0_a,
+            R.drawable.lvl2_puzzle0_b,
+            R.drawable.lvl2_puzzle0_c,
+            R.drawable.lvl2_puzzle0_d,
+            R.drawable.lvl2_puzzle0_e,
+            R.drawable.lvl2_puzzle0_h,
+            R.drawable.lvl2_puzzle0_l,
+            R.drawable.lvl2_puzzle0_n,
+            R.drawable.lvl2_puzzle0_u
         ),
         arrayOf(
-            R.drawable.lvl0_puzzle1_num_0,
-            R.drawable.lvl0_puzzle1_num_1,
-            R.drawable.lvl0_puzzle1_num_2,
-            R.drawable.lvl0_puzzle1_num_3,
-            R.drawable.lvl0_puzzle1_num_4,
-            R.drawable.lvl0_puzzle1_num_5,
-            R.drawable.lvl0_puzzle1_num_6,
-            R.drawable.lvl0_puzzle1_num_7_1,
-            R.drawable.lvl0_puzzle1_num_8,
-            R.drawable.lvl0_puzzle1_num_9
+            R.drawable.lvl2_puzzle0_a,
+            R.drawable.lvl2_puzzle0_b,
+            R.drawable.lvl2_puzzle0_c,
+            R.drawable.lvl2_puzzle0_d,
+            R.drawable.lvl2_puzzle0_e,
+            R.drawable.lvl2_puzzle0_h,
+            R.drawable.lvl2_puzzle0_l,
+            R.drawable.lvl2_puzzle0_n,
+            R.drawable.lvl2_puzzle0_u
+        ),arrayOf(
+            R.drawable.lvl2_puzzle0_a,
+            R.drawable.lvl2_puzzle0_b,
+            R.drawable.lvl2_puzzle0_c,
+            R.drawable.lvl2_puzzle0_d,
+            R.drawable.lvl2_puzzle0_e,
+            R.drawable.lvl2_puzzle0_h,
+            R.drawable.lvl2_puzzle0_l,
+            R.drawable.lvl2_puzzle0_n,
+            R.drawable.lvl2_puzzle0_u
         )
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl0Puzzle1Binding.bind(view)
+        binding = FragmentLvl2Puzzle0Binding.bind(view)
         bindView()
 
+        requireActivity().supportFragmentManager
+            .setFragmentResultListener("puzzleChoosing", viewLifecycleOwner) { _, bundle ->
+                val puzzleNum = bundle.getInt("puzzleNum")
+                when (puzzleNum) {
+                    0 -> puzzle = Lvl2Puzzle0("Lvl2Puzzle0")
+                    1 -> puzzle = Lvl2Puzzle2("Lvl2Puzzle2")
+                }
+            }
+
         soundManager = SoundManager.getInstance()
-        soundManager.loadSound(requireContext(), listOf(
-            R.raw.sound_of_the_lock_opening,
-            R.raw.sound_of_segments_rotating_on_the_safe_lock
-        ))
+        soundManager.loadSound(
+            requireContext(), listOf(
+                R.raw.sound_of_the_lock_opening,
+                R.raw.sound_of_segments_rotating_on_the_safe_lock
+            )
+        )
 
         hintManager = HintManager(
             listOf(
@@ -122,7 +137,8 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
         rv2 = binding.rvImage2
         rv3 = binding.rvImage3
         rv4 = binding.rvImage4
-
+        rv5 = binding.rvImage5
+//
         mainScreen = binding.mainScreen
     }
 
@@ -131,6 +147,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
         setupWheel(rv2, data[1], 1)
         setupWheel(rv3, data[2], 2)
         setupWheel(rv4, data[3], 3)
+        setupWheel(rv5, data[4], 4)
     }
 
     private fun setupWheel(rv: RecyclerView, data: Array<Int>, rvIndex: Int) {
@@ -150,7 +167,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
                     val centerView = snapHelper.findSnapView(layoutManager) ?: return
                     val position = layoutManager.getPosition(centerView)
                     if (position != RecyclerView.NO_POSITION) {
-                        val digit = position % 10
+                        val digit = position % 9
                         solution[rvIndex] = digit.digitToChar()
 
                         val isCorrectSolution = puzzle.checkSolution(requireContext(), String(solution))
@@ -165,7 +182,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
         })
         rv.post {
             val targetDigit = Character.getNumericValue(solution[rvIndex])
-            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % 10 - 1
+            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % 10
             layoutManager.scrollToPosition(startPosition)
 //            val midPosition = -2 + adapter.itemCount / 2
 //            layoutManager.scrollToPositionWithOffset(midPosition, 0)
@@ -174,7 +191,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
     }
 
     private fun passed() {
-        LevelAccessManager.upgradeAccessLvl(this)
+//        LevelAccessManager.upgradeAccessLvl(this)
         isSolved = true
         FragmentManager.hideGoBackArrow(requireActivity())
         mainScreen.animate()
@@ -182,16 +199,11 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
             .setDuration(2500)
             .withEndAction {
                 FragmentManager.goBack(this)
-                DialogManager.startDialog(requireActivity(), "lvl0_puzzle1_solved")
             }
             .start()
         // TODO Добавить звук открывающейся двери сейфа
-        // TODO Опционально добавить фото карты при выходе из сейфа
     }
 
-    override fun useHint() {
-        hintManager.useHint(this.requireActivity())
-    }
 
 
 }

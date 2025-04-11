@@ -61,7 +61,7 @@ class SaveManager private constructor() {
             gameSettings = saveData.gameSettings
         )
 
-        if (updatedData != null){
+        if (updatedData != null) {
             saveData(context, updatedData)
         }
     }
@@ -110,7 +110,7 @@ class SaveManager private constructor() {
         }
     }
 
-    fun savePuzzleUsedHintsCount(context: Context, level : Int, puzzle : Int, hintUsed : Int) {
+    fun savePuzzleUsedHintsCount(context: Context, level: Int, puzzle: Int, hintUsed: Int) {
         val gameData = readData(context)
         val updatedGameData = gameData?.copy()
         updatedGameData?.levels?.get(level)?.puzzles?.get(puzzle)?.hintsUsed = hintUsed
@@ -166,11 +166,24 @@ class SaveManager private constructor() {
     fun saveLevelProgress(activity: Activity, level: Int) {
         val gameData = readData(activity)
         val updatedGameData = gameData?.copy()
-        if (updatedGameData?.levels?.get(level)?.puzzles?.size == LoadManager.getLevelProgress(activity, 0)) {
+        if (updatedGameData?.levels?.get(level)?.puzzles?.size == LoadManager.getLevelProgress(
+                activity,
+                0
+            )
+        ) {
             updatedGameData.levels[level].isCompleted = true
         }
 
         if (updatedGameData != null) {
+            saveData(activity, updatedGameData)
+        }
+    }
+
+    fun saveCurrentDialog(activity: Activity, level: Int, npc: Int, dialogIndex: Int) {
+        val gameData = readData(activity)
+        val updatedGameData = gameData?.copy()
+        if (updatedGameData != null) {
+            updatedGameData.levels[level].npcDialogs[npc].currentDialogIndex = dialogIndex
             saveData(activity, updatedGameData)
         }
     }

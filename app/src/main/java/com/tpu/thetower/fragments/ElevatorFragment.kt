@@ -94,6 +94,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
         }
 
+        btnToLvl2.setOnClickListener {
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2Fragment)
+        }
+
 
 
         requireActivity().supportFragmentManager
