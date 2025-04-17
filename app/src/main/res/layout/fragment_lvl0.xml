@@ -19,8 +19,8 @@
         android:id="@+id/btn_to_elevator"
         android:layout_width="150dp"
         android:layout_height="270dp"
-        android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="200dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="-170dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent" />
 
@@ -39,8 +39,8 @@
         android:id="@+id/btn_to_puzzle1"
         android:layout_width="70dp"
         android:layout_height="140dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="88dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="-300dp"
         android:layout_marginTop="120dp"
         android:background="@android:color/transparent" />
 
@@ -54,11 +54,11 @@
 
     <ImageButton
         android:id="@+id/btn_light_on"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="end|center_vertical"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="220dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="200dp"
         android:elevation="3dp"
         android:background="@android:color/transparent" />
 

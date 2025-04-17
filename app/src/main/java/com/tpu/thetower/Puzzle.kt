@@ -10,8 +10,9 @@ abstract class Puzzle(val name: String) {
 
     private lateinit var saveManager: SaveManager
 
-    abstract fun checkSolution(context: Context, solution: String): Boolean
-    fun complete(name: String, context: Context) {
+    abstract fun checkSolution(context: Context, solution : String = ""): Boolean
+
+    fun complete(context: Context) {
         isSolved = true
         saveManager = SaveManager.getInstance()
         val (level_id, puzzle_id) = name.filter { it.isDigit() }.map { it.toString().toInt() }
@@ -19,8 +20,5 @@ abstract class Puzzle(val name: String) {
 
     }
 
-//    fun getNextHint() {
-//        FragmentManager.showDialog(hints[usedHintsCount])
-//    }
 
 }

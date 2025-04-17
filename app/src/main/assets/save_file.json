@@ -27,11 +27,24 @@
           "timeSpent": 0,
           "hintsUsed": 0
         }
-      ]
+      ],
+      "npcDialogs": []
     },
     {
       "id": 1,
-      "name": "",
+      "name": "Reception",
+      "isCompleted": false,
+      "puzzles": [],
+      "npcDialogs": [
+        {
+          "npcId": 0,
+          "currentDialogIndex": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Server room",
       "isCompleted": false,
       "puzzles": [
         {
@@ -43,12 +56,26 @@
           "hintsUsed": 0
         },
         {
-          "id": 0,
+          "id": 1,
           "name": "",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
+        },
+        {
+          "id": 2,
+          "name": "",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        }
+      ],
+      "npcDialogs": [
+        {
+          "npcId": 0,
+          "currentDialogIndex": 0
         }
       ]
     }

@@ -8,7 +8,7 @@ class Lvl0Puzzle1(name: String) : Puzzle(name) {
 
     override fun checkSolution(context: Context, solution: String) : Boolean {
         if (solution == answer){
-            super.complete(name, context)
+            super.complete(context)
             return true
         }
         return false

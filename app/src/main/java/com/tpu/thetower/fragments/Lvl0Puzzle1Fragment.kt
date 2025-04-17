@@ -40,6 +40,8 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
 
     private var solution = "1111".toCharArray()
 
+    private var isSolved = false
+
     private val images = arrayOf(
         arrayOf(
             R.drawable.lvl0_puzzle1_num_0,
@@ -151,9 +153,9 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
                         val digit = position % 10
                         solution[rvIndex] = digit.digitToChar()
 
-                        val isSolved = puzzle.checkSolution(requireContext(), String(solution))
+                        val isCorrectSolution = puzzle.checkSolution(requireContext(), String(solution))
 
-                        if (isSolved){
+                        if (isCorrectSolution && !isSolved){
                             soundManager.playSound(R.raw.sound_of_the_lock_opening)
                             passed()
                         }
@@ -163,7 +165,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
         })
         rv.post {
             val targetDigit = Character.getNumericValue(solution[rvIndex])
-            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % 10
+            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % 10 - 1
             layoutManager.scrollToPosition(startPosition)
 //            val midPosition = -2 + adapter.itemCount / 2
 //            layoutManager.scrollToPositionWithOffset(midPosition, 0)
@@ -173,6 +175,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
 
     private fun passed() {
         LevelAccessManager.upgradeAccessLvl(this)
+        isSolved = true
         FragmentManager.hideGoBackArrow(requireActivity())
         mainScreen.animate()
             .alpha(0.2f)
