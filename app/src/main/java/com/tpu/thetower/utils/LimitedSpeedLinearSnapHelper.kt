@@ -9,7 +9,7 @@ class LimitedSpeedLinearSnapHelper(
 
     override fun onFling(velocityX: Int, velocityY: Int): Boolean {
         val limitedVelocityX = velocityX.coerceIn(-maxFlingVelocity, maxFlingVelocity)
-        val limitedVelocityY = velocityX.coerceIn(-maxFlingVelocity, maxFlingVelocity)
+        val limitedVelocityY = velocityY.coerceIn(-maxFlingVelocity, maxFlingVelocity)
         super.onFling(limitedVelocityX, limitedVelocityY)
         return true
     }
