@@ -94,6 +94,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2Fragment)
         }
 
+        btnToLvl3.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_keyFragment)
+        }
+
 
 
         requireActivity().supportFragmentManager

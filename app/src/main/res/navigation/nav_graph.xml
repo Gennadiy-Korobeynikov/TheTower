@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
             app:destination="@id/lvl2Fragment" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_keyFragment"
+            app:destination="@id/keyFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -112,5 +115,9 @@
         android:name="com.tpu.thetower.fragments.Lvl2Puzzle1Fragment"
         android:label="fragment_lvl2_puzzle1"
         tools:layout="@layout/fragment_lvl2_puzzle1" />
+    <fragment
+        android:id="@+id/keyFragment"
+        android:name="com.tpu.thetower.fragments.KeyFragment"
+        android:label="KeyFragment" />
 
 </navigation>
