@@ -6,8 +6,6 @@ import android.widget.Button
 import androidx.core.os.bundleOf
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainer
-import androidx.fragment.app.FragmentContainerView
 import com.tpu.thetower.FragmentManager
 
 import com.tpu.thetower.MusicManager
@@ -33,29 +31,12 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
 
 
-//    private  val pagesTest : List<Int> = listOf(
-//        R.drawable.page1_test,
-//        R.drawable.page2_test,
-//        R.drawable.page3_test,
-//    )
-
-    private lateinit var textsTest: List<String>
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl4Binding.bind(view)
         bindView()
         setListeners()
         handleSounds()
-
-//        textsTest  = listOf(
-//        getString(R.string.lvl4_book_babel_text1),
-//        getString(R.string.lvl4_book_babel_text2),
-//        getString(R.string.lvl4_book_babel_text3),
-//        )
-
-
     }
 
     private fun bindView() {
@@ -64,7 +45,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         btnToBookQr = binding.btnToBookQr
         btnToBookBlur = binding.btnToBookBlur
         btnToBookHistory = binding.btnToBookHistory
-
     }
 
     private fun setListeners() {
@@ -79,8 +59,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     }
 
     private fun openBook(book : String) {
-
-
         FragmentManager.changeBG(this,R.id.action_lvl4Fragment_to_booksFragment)
         requireActivity().supportFragmentManager
             .setFragmentResult("bookOpening", bundleOf("book" to book))
