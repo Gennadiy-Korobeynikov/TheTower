@@ -18,7 +18,7 @@ import com.tpu.thetower.databinding.FragmentLvl0Binding
 
 class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
 
-    private lateinit var binding : FragmentElevatorBinding
+    private lateinit var binding: FragmentElevatorBinding
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
     private lateinit var musicManager: MusicManager
@@ -28,8 +28,9 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
     private lateinit var btnToLvl2: Button
     private lateinit var btnToLvl3: Button
     private lateinit var btnToLvlTest: Button
+    private lateinit var btnToLvlChessboardTest: Button
 
-    private lateinit var lvlButtons : List<Button>
+    private lateinit var lvlButtons: List<Button>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,13 +64,15 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         btnToLvl2 = binding.btnElevatorToLvl2
         btnToLvl3 = binding.btnElevatorToLvl3
         btnToLvlTest = binding.btnElevatorToLvlTest
+        btnToLvlChessboardTest = binding.btnElevatorToLvlChessboardTest
 
         lvlButtons = listOf(
             btnToLvl0,
             btnToLvl1,
             btnToLvl2,
             btnToLvl3,
-            btnToLvlTest
+            btnToLvlTest,
+            btnToLvlChessboardTest
         )
     }
 
@@ -99,6 +102,12 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2Fragment)
         }
 
+        btnToLvlChessboardTest.setOnClickListener {
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_chessboardTestFragment)
+        }
+
+
 
 
         requireActivity().supportFragmentManager
@@ -108,7 +117,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             }
     }
 
-    private fun unlockLvls(currAccessLevel : Int) {
+    private fun unlockLvls(currAccessLevel: Int) {
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
         unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }
