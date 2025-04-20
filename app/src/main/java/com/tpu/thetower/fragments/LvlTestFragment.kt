@@ -133,13 +133,13 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
         return false
     }
 
-    private fun placeViewInZone(view: View, zone: View) {
-        view.apply {
-            x = zone.x + (zone.width - width) / 2f
-            y = zone.y + (zone.height - height) / 2f
-            visibility = View.VISIBLE
+        private fun placeViewInZone(view: View, zone: View) {
+            view.apply {
+                x = zone.x + (zone.width - width) / 2f
+                y = zone.y + (zone.height - height) / 2f
+                visibility = View.VISIBLE
+            }
         }
-    }
 
     private fun updateSolution() {
         val targets =

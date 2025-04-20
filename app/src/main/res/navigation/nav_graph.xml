@@ -59,6 +59,9 @@
         <action
             android:id="@+id/action_elevatorFragment_to_keyFragment"
             app:destination="@id/keyFragment" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl3Fragment"
+            app:destination="@id/lvl3Fragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -119,5 +122,25 @@
         android:id="@+id/keyFragment"
         android:name="com.tpu.thetower.fragments.KeyFragment"
         android:label="KeyFragment" />
+    <fragment
+        android:id="@+id/lvl3Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl3Fragment"
+        android:label="fragment_lvl3"
+        tools:layout="@layout/fragment_lvl3" >
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle0Fragment"
+            app:destination="@id/lvl3Puzzle0Fragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle1Fragment"
+            app:destination="@id/lvl3Puzzle1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lvl3Puzzle0Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl3Puzzle0Fragment"
+        android:label="Lvl3Puzzle0Fragment" />
+    <fragment
+        android:id="@+id/lvl3Puzzle1Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl3Puzzle1Fragment"
+        android:label="Lvl3Puzzle1Fragment" />
 
 </navigation>

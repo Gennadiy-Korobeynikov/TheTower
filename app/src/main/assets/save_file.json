@@ -78,6 +78,51 @@
           "currentDialogIndex": 0
         }
       ]
+    },
+    {
+      "id": 3,
+      "name": "Security room",
+      "isCompleted": false,
+      "puzzles": [
+        {
+          "id": 0,
+          "name": "",
+          "status": "in_progress",
+          "attempts": 1,
+          "timeSpent": 230,
+          "hintsUsed": 0
+        },
+        {
+          "id": 1,
+          "name": "",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 2,
+          "name": "",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 3,
+          "name": "",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        }
+      ],
+      "npcDialogs": [
+        {
+          "npcId": 0,
+          "currentDialogIndex": 0
+        }
+      ]
     }
   ],
   "gameSettings": {
