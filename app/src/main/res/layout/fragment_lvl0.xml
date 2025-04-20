@@ -50,7 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="3dp"
-        android:src="@drawable/lvl0_bg_flashlight" />
+        android:src="@drawable/lvl0_bg_flashlight"
+        android:clickable="true"/>
 
     <ImageButton
         android:id="@+id/btn_light_on"
