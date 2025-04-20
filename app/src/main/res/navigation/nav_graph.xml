@@ -66,6 +66,13 @@
         <action
             android:id="@+id/action_elevatorFragment_to_chessboardTestFragment"
             app:destination="@id/chessboardTestFragment" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl4Fragment"
+            app:destination="@id/lvl4Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -132,5 +139,23 @@
         android:name="com.tpu.thetower.fragments.ChessboardTestFragment"
         android:label="fragment_chessboard_test"
         tools:layout="@layout/fragment_chessboard_test" />
+    <fragment
+        android:id="@+id/lvl4Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl4Fragment"
+        android:label="fragment_lvl4"
+        tools:layout="@layout/fragment_lvl4" >
+        <action
+            android:id="@+id/action_lvl4Fragment_to_booksFragment"
+            app:destination="@id/booksFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/booksFragment"
+        android:name="com.tpu.thetower.fragments.BooksFragment"
+        android:label="fragment_books"
+        tools:layout="@layout/fragment_books" />
 
 </navigation>

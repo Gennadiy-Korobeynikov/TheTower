@@ -18,7 +18,7 @@ import com.tpu.thetower.databinding.FragmentLvl0Binding
 
 class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
 
-    private lateinit var binding: FragmentElevatorBinding
+    private lateinit var binding : FragmentElevatorBinding
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
     private lateinit var musicManager: MusicManager
@@ -27,10 +27,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
     private lateinit var btnToLvl1: Button
     private lateinit var btnToLvl2: Button
     private lateinit var btnToLvl3: Button
+    private lateinit var btnToLvl4: Button
     private lateinit var btnToLvlTest: Button
     private lateinit var btnToLvlChessboardTest: Button
 
-    private lateinit var lvlButtons: List<Button>
+    private lateinit var lvlButtons : List<Button>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,6 +64,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         btnToLvl1 = binding.btnElevatorToLvl1
         btnToLvl2 = binding.btnElevatorToLvl2
         btnToLvl3 = binding.btnElevatorToLvl3
+        btnToLvl4 = binding.btnElevatorToLvl4
         btnToLvlTest = binding.btnElevatorToLvlTest
         btnToLvlChessboardTest = binding.btnElevatorToLvlChessboardTest
 
@@ -71,12 +73,22 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             btnToLvl1,
             btnToLvl2,
             btnToLvl3,
+            btnToLvl4,
             btnToLvlTest,
             btnToLvlChessboardTest
         )
     }
 
     private fun setListeners() {
+
+        btnToLvlTest.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
+        }
+
+        btnToLvlChessboardTest.setOnClickListener {
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_chessboardTestFragment)
+        }
 
         btnToLvl0.setOnClickListener {
             soundManager.release()
@@ -88,26 +100,20 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
         }
 
-        btnToLvl3.setOnClickListener {
-            //soundManager.release()
-            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2PuzzleHooverFragment)
-        }
-
-        btnToLvlTest.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
-        }
-
         btnToLvl2.setOnClickListener {
             soundManager.release()
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2Fragment)
         }
 
-        btnToLvlChessboardTest.setOnClickListener {
-            soundManager.release()
-            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_chessboardTestFragment)
+        btnToLvl3.setOnClickListener {
+            //soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2PuzzleHooverFragment)
         }
 
-
+        btnToLvl4.setOnClickListener {
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl4Fragment)
+        }
 
 
         requireActivity().supportFragmentManager
@@ -117,7 +123,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             }
     }
 
-    private fun unlockLvls(currAccessLevel: Int) {
+    private fun unlockLvls(currAccessLevel : Int) {
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
         unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }

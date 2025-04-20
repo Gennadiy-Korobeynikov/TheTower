@@ -203,8 +203,14 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     override fun useHint() {
         if (!FragmentManager.light)
             hintManager.useHint(requireActivity())
-        else
-            DialogManager.startDialog(requireActivity(), "lvl0_to_puzzle1_hint")
+        else {
+            if (LoadManager.isLevelCompleted(requireActivity(),0)) {
+                DialogManager.startDialog(requireActivity(), "no_hints")
+            }
+            else
+                DialogManager.startDialog(requireActivity(), "lvl0_to_puzzle1_hint")
+
+        }
     }
 }
 

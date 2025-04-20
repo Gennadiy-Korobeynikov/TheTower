@@ -108,6 +108,10 @@
     <!--################# Lvl2Puzzle1 ##############-->
     <string name="lvl2_puzzle1_password">Enter the password</string>
     <!--#############################################-->
+    <string name="blank"></string>
+    <string name="lvl4_book_babel_text1">1</string>
+    <string name="lvl4_book_babel_text2">2</string>
+    <string name="lvl4_book_babel_text3">3</string>
 
 
 </resources>
