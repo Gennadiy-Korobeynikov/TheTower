@@ -64,6 +64,9 @@
             android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
             app:destination="@id/lvl2Fragment" />
         <action
+            android:id="@+id/action_elevatorFragment_to_chessboardTestFragment"
+            app:destination="@id/chessboardTestFragment" />
+        <action
             android:id="@+id/action_elevatorFragment_to_lvl4Fragment"
             app:destination="@id/lvl4Fragment"
             app:enterAnim="@android:anim/fade_in"
@@ -131,6 +134,11 @@
         android:name="com.tpu.thetower.fragments.Lvl2Puzzle1Fragment"
         android:label="fragment_lvl2_puzzle1"
         tools:layout="@layout/fragment_lvl2_puzzle1" />
+    <fragment
+        android:id="@+id/chessboardTestFragment"
+        android:name="com.tpu.thetower.fragments.ChessboardTestFragment"
+        android:label="fragment_chessboard_test"
+        tools:layout="@layout/fragment_chessboard_test" />
     <fragment
         android:id="@+id/lvl4Fragment"
         android:name="com.tpu.thetower.fragments.Lvl4Fragment"
