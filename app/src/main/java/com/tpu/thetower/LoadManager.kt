@@ -20,7 +20,8 @@ class LoadManager {
             R.id.action_elevatorFragment_to_lvlTestFragment,
             R.id.action_elevatorFragment_to_lvl0Fragment,
             R.id.action_elevatorFragment_to_lvl1Fragment,
-            R.id.action_elevatorFragment_to_lvl2Fragment
+            R.id.action_elevatorFragment_to_lvl2Fragment,
+            R.id.action_elevatorFragment_to_lvl3Fragment
         )
 
         fun setGameData(activity: Activity) {

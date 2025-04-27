@@ -1,13 +1,17 @@
 package com.tpu.thetower
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.DragEvent
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.tpu.thetower.fragments.HUDFragment
+import com.tpu.thetower.fragments.Lvl3Fragment
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         //LoadManager.loadProgress()
 
         LoadManager.loadSettings(this)
-
 
 
 //        deleteJsonFile(this, "save_file.json")

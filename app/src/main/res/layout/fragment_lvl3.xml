@@ -13,41 +13,40 @@
         android:scaleType="fitCenter"
         android:src="@drawable/lvl3_bg" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+    <ImageView
+        android:id="@+id/ivDraggable"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_triangle_drag1"
+        android:visibility="gone"/>
 
-        <ImageView
-            android:id="@+id/ivTarget"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_outline"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"/>
+    <ImageView
+        android:id="@+id/ivTarget"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_outline" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_to_puzzle_0"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="150dp"
-            android:background="@drawable/button_outline" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle_0"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/button_outline" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_to_puzzle_1"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="190dp"
-            android:layout_marginTop="-110dp"
-            android:background="@drawable/button_outline" />
-
-
-
-    </FrameLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle_1"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="-110dp"
+        android:background="@drawable/button_outline" />
 
 
 </FrameLayout>

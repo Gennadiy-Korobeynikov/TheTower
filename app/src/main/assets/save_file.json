@@ -86,7 +86,7 @@
       "puzzles": [
         {
           "id": 0,
-          "name": "",
+          "name": "donuts",
           "status": "in_progress",
           "attempts": 1,
           "timeSpent": 230,
@@ -94,7 +94,7 @@
         },
         {
           "id": 1,
-          "name": "",
+          "name": "buttons",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
@@ -102,7 +102,7 @@
         },
         {
           "id": 2,
-          "name": "",
+          "name": "sleeping pills",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
@@ -110,7 +110,15 @@
         },
         {
           "id": 3,
-          "name": "",
+          "name": "vacuum cleaner",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 4,
+          "name": "key",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
