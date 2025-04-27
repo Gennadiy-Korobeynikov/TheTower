@@ -27,7 +27,9 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
     private lateinit var btnToLvl1: Button
     private lateinit var btnToLvl2: Button
     private lateinit var btnToLvl3: Button
+    private lateinit var btnToLvl4: Button
     private lateinit var btnToLvlTest: Button
+    private lateinit var btnToLvlChessboardTest: Button
 
     private lateinit var lvlButtons : List<Button>
 
@@ -62,18 +64,31 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         btnToLvl1 = binding.btnElevatorToLvl1
         btnToLvl2 = binding.btnElevatorToLvl2
         btnToLvl3 = binding.btnElevatorToLvl3
+        btnToLvl4 = binding.btnElevatorToLvl4
         btnToLvlTest = binding.btnElevatorToLvlTest
+        btnToLvlChessboardTest = binding.btnElevatorToLvlChessboardTest
 
         lvlButtons = listOf(
             btnToLvl0,
             btnToLvl1,
             btnToLvl2,
             btnToLvl3,
-            btnToLvlTest
+            btnToLvl4,
+            btnToLvlTest,
+            btnToLvlChessboardTest
         )
     }
 
     private fun setListeners() {
+
+        btnToLvlTest.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
+        }
+
+        btnToLvlChessboardTest.setOnClickListener {
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_chessboardTestFragment)
+        }
 
         btnToLvl0.setOnClickListener {
             soundManager.release()
@@ -95,7 +110,12 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         }
 
         btnToLvl3.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl3Fragment)
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2PuzzleHooverFragment)
+        }
+
+        btnToLvl4.setOnClickListener {
+            soundManager.release()
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl4Fragment)
         }
 
 

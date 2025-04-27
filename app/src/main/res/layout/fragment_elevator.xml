@@ -16,7 +16,7 @@
         android:id="@+id/btn_elevator_to_lvl0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Подвал"
+        android:text="0) Подвал"
         android:layout_gravity="center"
         android:layout_marginStart="250dp"
         android:layout_marginTop="150dp"
@@ -26,7 +26,7 @@
         android:id="@+id/btn_elevator_to_lvl1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ресепшен"
+        android:text="1) Ресепшен"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:layout_marginStart="250dp"
@@ -37,7 +37,7 @@
         android:id="@+id/btn_elevator_to_lvl2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToLVL 2"
+        android:text="2) Комп"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:layout_marginStart="250dp"
@@ -48,8 +48,18 @@
         android:id="@+id/btn_elevator_to_lvl3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToLVL 3"
+        android:text="3) Охрана"
         android:layout_gravity="center"
+        android:layout_marginStart="250dp"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_elevator_to_lvl4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4) Библиотека"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
         android:layout_marginStart="250dp"
         android:visibility="gone"/>
 
@@ -58,10 +68,20 @@
         android:id="@+id/btn_elevator_to_lvl_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToLVL TEST"
+        android:text="TEST"
         android:layout_gravity="center"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginStart="250dp"
         android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_elevator_to_lvl_chessboard_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToLVL ChessboardTEST"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:layout_marginStart="250dp"
+        android:visibility="visible"/>
 
 </FrameLayout>

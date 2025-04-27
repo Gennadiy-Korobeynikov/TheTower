@@ -2,8 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:backgroundTint="#00000000"
     tools:context=".fragments.Lvl0Fragment">
 
@@ -12,62 +13,134 @@
         android:id="@+id/iv_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         android:src="@drawable/lvl0_bd_light" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_elevator"
-        android:layout_width="150dp"
-        android:layout_height="270dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-170dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_puzzle1_lock"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="39dp"
-        android:background="@android:color/transparent" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_puzzle1"
-        android:layout_width="70dp"
-        android:layout_height="140dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-300dp"
-        android:layout_marginTop="120dp"
-        android:background="@android:color/transparent" />
-
 
     <ImageView
         android:id="@+id/iv_darkness_flashlight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:clickable="true"
         android:elevation="3dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/lvl0_bg_flashlight" />
 
-    <ImageButton
-        android:id="@+id/btn_light_on"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="10dp"
-        android:elevation="3dp"
-        android:background="@android:color/transparent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="3dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_elevator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.19" />
+
+        <!-- горизонтальная на 10% от верха картинки -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_elevator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_elevator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintHeight_percent="0.70"
+            app:layout_constraintStart_toStartOf="@id/guideV_elevator"
+            app:layout_constraintTop_toTopOf="@id/guideH_elevator"
+            app:layout_constraintWidth_percent="0.16" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_puzzle1_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
+        <!-- горизонтальная на 10% от верха картинки -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_puzzle1_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.41" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_puzzle1_lock"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintHeight_percent="0.30"
+            app:layout_constraintStart_toStartOf="@id/guideV_puzzle1_lock"
+            app:layout_constraintTop_toTopOf="@id/guideH_puzzle1_lock"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_puzzle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0" />
+
+        <!-- горизонтальная на 10% от верха картинки -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_puzzle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_puzzle1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintHeight_percent="0.40"
+            app:layout_constraintStart_toStartOf="@id/guideV_puzzle1"
+            app:layout_constraintTop_toTopOf="@id/guideH_puzzle1"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_light_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.77" />
+
+        <!-- горизонтальная на 10% от верха картинки -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_light_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47" />
+
+        <ImageButton
+            android:id="@+id/btn_light_on"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintStart_toStartOf="@id/guideV_light_on"
+            app:layout_constraintTop_toTopOf="@id/guideH_light_on"
+            app:layout_constraintWidth_percent="0.07" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/iv_darkness"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
         android:clickable="true"
         android:elevation="3dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/lvl0_bg_dark" />
 
     <!--    Ограничивает нажатие при вызове статус-бара-->
@@ -82,8 +155,10 @@
         android:id="@+id/iv_black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
         android:clickable="true"
         android:elevation="3dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/lvl0_black" />
 
     <ImageView
@@ -99,7 +174,11 @@
         android:id="@+id/iv_click"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
         android:clickable="true"
         android:elevation="3dp"
+        android:scaleType="fitCenter"
         android:visibility="gone" />
+
+
 </FrameLayout>

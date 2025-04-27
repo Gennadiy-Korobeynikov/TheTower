@@ -17,7 +17,7 @@ class LevelAccessManager {
 
         var currentAccessLvl = 0
 
-        val topUnlockedLvlsForModules : List<Int> = listOf(0,2,4)
+        val topUnlockedLvlsForModules : List<Int> = listOf(0,2,5)
 
 
         fun unlockModules( fragment: Fragment) {

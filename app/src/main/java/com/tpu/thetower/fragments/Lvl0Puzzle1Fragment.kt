@@ -3,10 +3,7 @@ package com.tpu.thetower.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
@@ -17,9 +14,9 @@ import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
-import com.tpu.thetower.adapters.ImageCodeAdapter
 import com.tpu.thetower.databinding.FragmentLvl0Puzzle1Binding
 import com.tpu.thetower.puzzles.Lvl0Puzzle1
+import com.tpu.thetower.utils.WheelSetupHelper
 
 
 class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
@@ -100,10 +97,12 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
         bindView()
 
         soundManager = SoundManager.getInstance()
-        soundManager.loadSound(requireContext(), listOf(
-            R.raw.sound_of_the_lock_opening,
-            R.raw.sound_of_segments_rotating_on_the_safe_lock
-        ))
+        soundManager.loadSound(
+            requireContext(), listOf(
+                R.raw.sound_of_the_lock_opening,
+                R.raw.sound_of_segments_rotating_on_the_safe_lock
+            )
+        )
 
         hintManager = HintManager(
             listOf(
@@ -134,43 +133,23 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
     }
 
     private fun setupWheel(rv: RecyclerView, data: Array<Int>, rvIndex: Int) {
-        val adapter = ImageCodeAdapter(data)
-        rv.adapter = adapter
-
-        val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        rv.layoutManager = layoutManager
-
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(rv)
-        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(rv, newState)
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    soundManager.playSound(R.raw.sound_of_segments_rotating_on_the_safe_lock)
-                    val centerView = snapHelper.findSnapView(layoutManager) ?: return
-                    val position = layoutManager.getPosition(centerView)
-                    if (position != RecyclerView.NO_POSITION) {
-                        val digit = position % 10
-                        solution[rvIndex] = digit.digitToChar()
-
-                        val isCorrectSolution = puzzle.checkSolution(requireContext(), String(solution))
-
-                        if (isCorrectSolution && !isSolved){
-                            soundManager.playSound(R.raw.sound_of_the_lock_opening)
-                            passed()
-                        }
-                    }
+        WheelSetupHelper.setupWheel(
+            rv = rv,
+            data = data,
+            rvIndex = rvIndex,
+            solution = solution,
+            context = requireContext(),
+            puzzle = puzzle,
+            soundManager = soundManager,
+            rotationSoundResId = R.raw.sound_of_segments_rotating_on_the_safe_lock,
+            isSolvedRef = { isSolved },
+            onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
+                override fun onPuzzleSolved() {
+                    soundManager.playSound(R.raw.sound_of_the_lock_opening)
+                    passed()
                 }
             }
-        })
-        rv.post {
-            val targetDigit = Character.getNumericValue(solution[rvIndex])
-            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % 10 - 1
-            layoutManager.scrollToPosition(startPosition)
-//            val midPosition = -2 + adapter.itemCount / 2
-//            layoutManager.scrollToPositionWithOffset(midPosition, 0)
-        }
-
+        )
     }
 
     private fun passed() {
