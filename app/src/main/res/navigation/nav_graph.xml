@@ -54,18 +54,8 @@
             android:id="@+id/action_elevatorFragment_to_lvlTestFragment"
             app:destination="@id/lvlTestFragment" />
         <action
-            android:id="@+id/action_elevatorFragment_to_lvl2PuzzleHooverFragment"
-            app:destination="@id/lvl3PuzzleHooverFragment"
-            app:enterAnim="@android:animator/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
             app:destination="@id/lvl2Fragment" />
-        <action
-            android:id="@+id/action_elevatorFragment_to_keyFragment"
-            app:destination="@id/keyFragment" />
         <action
             android:id="@+id/action_elevatorFragment_to_lvl3Fragment"
             app:destination="@id/lvl3Fragment" />
@@ -178,6 +168,12 @@
         <action
             android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle1Fragment"
             app:destination="@id/lvl3Puzzle1Fragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleHooverFragment"
+            app:destination="@id/lvl3PuzzleHooverFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_keyFragment"
+            app:destination="@id/keyFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl3Puzzle0Fragment"
