@@ -27,6 +27,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
     private lateinit var btnToPuzzle0: Button
     private lateinit var btnToPuzzle1: Button
+    private lateinit var btnToPuzzle3: Button
+    private lateinit var btnToPuzzle4: Button
+    private lateinit var btnToPuzzle4Lock: Button
 
     private lateinit var ivTarget: ImageView
     private lateinit var ivDraggable: ImageView
@@ -59,6 +62,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     private fun bindView() {
         btnToPuzzle0 = binding.btnToPuzzle0
         btnToPuzzle1 = binding.btnToPuzzle1
+        btnToPuzzle3 = binding.btnToPuzzle3
+        btnToPuzzle4 = binding.btnToPuzzle4
+        btnToPuzzle4Lock = binding.btnToPuzzle4Lock
         ivTarget = binding.ivTarget
         ivDraggable = binding.ivDraggable
     }
@@ -72,6 +78,16 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnToPuzzle1.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3Puzzle1Fragment)
         }
+
+        btnToPuzzle3.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
+        }
+
+        btnToPuzzle4.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_keyFragment)
+        }
+
+        btnToPuzzle4
 
         ivTarget.setOnDragListener(this@Lvl3Fragment)
         ivDraggable.setOnTouchListener(this@Lvl3Fragment)

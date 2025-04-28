@@ -32,7 +32,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private lateinit var btnForward: Button
 
 
-    private val puzzleHoover = Lvl3PuzzleHoover("Lvl2PuzzleHooverPuzzle1")
+    private val puzzleHoover = Lvl3PuzzleHoover("Lvl3PuzzleHooverPuzzle3")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
