@@ -169,7 +169,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
                 DialogManager.startDialog(requireActivity(),"lvl0_start")
             }
             .start()
-        }
+    }
 
 
     private fun handleSounds() {

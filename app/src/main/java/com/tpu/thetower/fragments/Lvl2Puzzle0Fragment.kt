@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
@@ -17,7 +18,7 @@ import com.tpu.thetower.puzzles.Lvl2Puzzle2
 import com.tpu.thetower.utils.WheelSetupHelper
 
 
-class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0) {
+class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
 
     private lateinit var binding: FragmentLvl2Puzzle0Binding
 
@@ -110,12 +111,10 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0) {
 
         hintManager = HintManager(
             listOf(
-                "lvl0_puzzle1_hint1",
-                "lvl0_puzzle1_hint2",
-                "lvl0_puzzle1_hint3"
+                "lvl2_puzzle0_hint",
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 0, 0),
-            0, 0
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, 0),
+            2, 0
         )
         requireActivity().supportFragmentManager
             .setFragmentResultListener("puzzleChoosing", viewLifecycleOwner) { _, bundle ->
@@ -179,5 +178,9 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0) {
             }
             .start()
         // TODO Добавить звук открывающейся двери сейфа
+    }
+
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
     }
 }

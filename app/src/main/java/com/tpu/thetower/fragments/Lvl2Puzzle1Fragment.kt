@@ -11,13 +11,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl2Puzzle1Binding
 import com.tpu.thetower.puzzles.Lvl2Puzzle1
 
-class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
+class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
 
     private lateinit var binding: FragmentLvl2Puzzle1Binding
     private val pinCells = mutableListOf<TextView>()
@@ -36,6 +39,7 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
     private lateinit var pinContainer: LinearLayout
     private lateinit var hiddenInput: EditText
     private lateinit var ivDialog: ImageView
+    private lateinit var hintManager: HintManager
 
 
 
@@ -47,6 +51,11 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         bindView()
         setListeners()
 
+        hintManager = HintManager(listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3",),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,2),
+            2,2)
+
+        pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6))
         pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
         when (LoadManager.getLevelProgress(requireActivity(), 2)) {
@@ -126,5 +135,12 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         super.onPause()
 
         hideKeyboard()
+    }
+
+    override fun useHint() {
+        if (LoadManager.getLevelProgress(requireActivity(), 2) == 1)
+            hintManager.useHint(requireActivity())
+        else
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 }

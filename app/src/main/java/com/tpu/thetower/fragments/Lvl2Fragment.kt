@@ -5,7 +5,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
@@ -15,7 +18,7 @@ import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2Binding
 
 
-class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
+class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
 
     private lateinit var binding: FragmentLvl2Binding
 
@@ -29,6 +32,12 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
     private lateinit var btnToPuzzle1: Button
     private lateinit var btnToPuzzle2Lock: Button
     private lateinit var btnToPuzzle2Completed: Button
+    private lateinit var btnToPuzzle1Lock: Button
+    private lateinit var hintManager: HintManager
+
+    private lateinit var ivPuzzle0: ImageView
+    private lateinit var ivClick: ImageView
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -114,6 +123,14 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
 
         saveManager = SaveManager.getInstance()
         saveManager.saveCurrentLevel(requireContext(), 2)
+    }
+
+    override fun useHint() {
+        if (LoadManager.isLevelCompleted(requireActivity(),2)) {
+            DialogManager.startDialog(requireActivity(), "no_hints")
+        }
+        else
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 
 }

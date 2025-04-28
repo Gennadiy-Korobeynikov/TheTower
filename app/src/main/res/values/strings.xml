@@ -108,10 +108,19 @@
     <!--################# Lvl2Puzzle1 ##############-->
     <string name="lvl2_puzzle1_password">Enter the password</string>
     <!--#############################################-->
-    <string name="blank"></string>
     <string name="lvl4_book_babel_text1">1</string>
     <string name="lvl4_book_babel_text2">2</string>
     <string name="lvl4_book_babel_text3">3</string>
+    <string name="lvl2_computer">TODO</string>
+    <string name="hint_is_not_here">TODO</string>
+    <string name="lvl2_puzzle0_hint">TODO</string>
+    <string name="lvl2_puzzle1_hint2">TODO</string>
+    <string name="lvl2_puzzle1_hint1">TODO</string>
+    <string name="lvl2_puzzle1_hint3">TODO</string>
+    <string name="lvl2_puzzle1_hint4">TODO</string>
+    <string name="lvl2_puzzle2_hint1">TODO</string>
+    <string name="lvl2_puzzle2_hint2">TODO</string>
+    <string name="lvl2_puzzle2_hint3">TODO</string>
 
 
 </resources>

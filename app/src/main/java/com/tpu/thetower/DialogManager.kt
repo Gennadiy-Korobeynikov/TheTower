@@ -206,7 +206,99 @@ class DialogManager {
                         )
                         {}  ,
 
-            )
+                "hint_is_not_here" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.hint_is_not_here),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle0_hint" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle0_hint),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle1_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle1_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle1_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle1_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle1_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle1_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle1_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle1_hint4),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle2_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle2_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle2_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle2_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                "lvl2_puzzle2_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle2_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                )
 
         }
 
