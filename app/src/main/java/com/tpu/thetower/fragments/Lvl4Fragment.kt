@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.LoadManager
 
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
@@ -21,13 +22,16 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    //private lateinit var saveManager: SaveManager
 
     private lateinit var btnToBookBabel: Button
     private lateinit var btnToBookAskii: Button
     private lateinit var btnToBookQr: Button
     private lateinit var btnToBookBlur: Button
     private lateinit var btnToBookHistory: Button
+
+    private lateinit var btnToChessboardPuzzle: Button
+    private lateinit var btnToTimeLinePuzzle1: Button
 
 
 
@@ -37,6 +41,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         bindView()
         setListeners()
         handleSounds()
+       // saveManager = SaveManager.getInstance()
     }
 
     private fun bindView() {
@@ -45,6 +50,8 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         btnToBookQr = binding.btnToBookQr
         btnToBookBlur = binding.btnToBookBlur
         btnToBookHistory = binding.btnToBookHistory
+        btnToChessboardPuzzle = binding.btnToChessboardPuzzle
+        btnToTimeLinePuzzle1 = binding.btnToPuzzle1
     }
 
     private fun setListeners() {
@@ -53,7 +60,18 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         }
 
         btnToBookAskii.setOnClickListener {
-            openBook("askii")
+
+            //val book : String =  if (LoadManager.isPuzzleCompleted(requireActivity(),4,2)) "askii_a" else "askii_b"
+        val book : String =  if (LoadManager.isASKII) "askii_b" else "askii_a" // TODO Исправить!!!!! длолжно быть через сохранения
+            openBook(book)
+        }
+
+        btnToChessboardPuzzle.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_chessboardTestFragment)
+        }
+
+        btnToTimeLinePuzzle1.setOnClickListener {
+            FragmentManager.changeBG(this,R.id.action_lvl4Fragment_to_lvl4Puzzle1Fragment)
         }
 
     }

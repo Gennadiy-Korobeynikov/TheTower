@@ -34,6 +34,7 @@ class BookFragment(
         binding = FragmentBookBinding.bind(view)
         bindView()
         setListeners()
+        tvText.text = texts[0]
 
     }
 

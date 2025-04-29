@@ -27,7 +27,11 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
                 R.drawable.page2_test,
                 R.drawable.page3_test,
             ),
-            "askii" to  listOf(
+            "askii_a" to  listOf(
+                R.drawable.page1_test,
+                R.drawable.page2_test,
+            ),
+            "askii_b" to  listOf(
                 R.drawable.page1_test,
                 R.drawable.page2_test,
             ),
@@ -39,10 +43,14 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
                 getString(R.string.lvl4_book_babel_text2),
                 getString(R.string.lvl4_book_babel_text3),
             ),
-            "askii" to listOf(
-                getString(R.string.lvl4_book_babel_text1),
-                getString(R.string.lvl4_book_babel_text2),
-            )
+            "askii_a" to listOf(
+                getString(R.string.lvl4_book_askii_text1_a),
+                getString(R.string.lvl4_book_askii_text2_a),
+            ),
+            "askii_b" to listOf(
+                getString(R.string.lvl4_book_askii_text1_b),
+                getString(R.string.lvl4_book_askii_text2_b),
+            ),
         )
 
         requireActivity().supportFragmentManager

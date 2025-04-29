@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.GridLayout
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentChessboardTestBinding
 import com.tpu.thetower.puzzles.ChessboardPuzzle
 
@@ -17,6 +19,7 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test) {
     private val cellStates = MutableList(64) { false }
 
     private val puzzle: Puzzle = ChessboardPuzzle("Lvl2Puzzle1")
+    private lateinit var saveManager: SaveManager
 
 
     private lateinit var board: GridLayout
@@ -26,9 +29,12 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test) {
         board = binding.gridBoard
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChessboardTestBinding.bind(view)
+        saveManager = SaveManager.getInstance()
         bind()
         val screenHeight = requireContext().resources.displayMetrics.heightPixels
         val boardPx = (screenHeight * 0.7).toInt()
@@ -71,7 +77,11 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test) {
 
             board.addView(cell, params)
         }
+
     }
+
+
+
 
     private fun passed() {
         Log.i("Puzzle", "Passed")

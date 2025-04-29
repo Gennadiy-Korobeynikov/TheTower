@@ -60,9 +60,6 @@
             android:id="@+id/action_elevatorFragment_to_lvl3Fragment"
             app:destination="@id/lvl3Fragment" />
         <action
-            android:id="@+id/action_elevatorFragment_to_chessboardTestFragment"
-            app:destination="@id/chessboardTestFragment" />
-        <action
             android:id="@+id/action_elevatorFragment_to_lvl4Fragment"
             app:destination="@id/lvl4Fragment"
             app:enterAnim="@android:anim/fade_in"
@@ -153,6 +150,20 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_chessboardTestFragment"
+            app:destination="@id/chessboardTestFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4Puzzle1Fragment"
+            app:destination="@id/lvl4Puzzle1Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/booksFragment"
@@ -189,6 +200,11 @@
         android:id="@+id/lvl3Puzzle1Fragment"
         android:name="com.tpu.thetower.fragments.Lvl3Puzzle1Fragment"
         android:label="Lvl3Puzzle1Fragment" />
+    <fragment
+        android:id="@+id/lvl4Puzzle1Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl4Puzzle1Fragment"
+        android:label="fragment_lvl4_puzzle1"
+        tools:layout="@layout/fragment_lvl4_puzzle1" />
     <fragment
         android:id="@+id/lvl2CaesarFragment"
         android:name="com.tpu.thetower.fragments.Lvl2CaesarFragment"

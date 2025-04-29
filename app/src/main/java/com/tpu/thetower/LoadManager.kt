@@ -10,6 +10,8 @@ class LoadManager {
     companion object {
 
 
+        public var isASKII = false // TODO Исправить!!!!! длолжно быть через сохранения
+
         private val saveManager = SaveManager.getInstance()
         private lateinit var gameData: SaveManager.SaveData
         private val musicManager = MusicManager.getInstance()
@@ -83,6 +85,11 @@ class LoadManager {
         fun getLevelProgress(activity: Activity, level: Int): Int {
             setGameData(activity)
             return gameData.levels[level].puzzles.count { it.status == "completed" }
+        }
+
+        fun isPuzzleCompleted(activity: Activity, level: Int, puzzle: Int) : Boolean {
+            setGameData(activity)
+            return gameData.levels[level].puzzles[puzzle].status == "completed"
         }
 
         fun isLevelCompleted(activity: Activity, level: Int): Boolean {

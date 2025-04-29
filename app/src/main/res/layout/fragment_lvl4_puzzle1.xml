@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ChessboardTestFragment">
+    tools:context=".fragments.Lvl4Puzzle1Fragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -11,14 +11,14 @@
         android:src="@drawable/lvl4_test" />
 
 
-    <GridLayout
-        android:id="@+id/gridBoard"
+
+    <ToggleButton
+        android:id="@+id/toggle_btn_askii"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/black"
-        android:columnCount="8"
-        android:rowCount="8" />
+        android:textOn="ASKII"
+        android:textOff="UTF-8"
+        android:layout_gravity="center"/>
 
 
 </FrameLayout>

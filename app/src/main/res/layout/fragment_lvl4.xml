@@ -52,6 +52,24 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/button_outline" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_chessboard_puzzle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="280dp"
+        android:text="ChessBoard"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_to_puzzle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="170dp"
+        android:text="timeline + Ацкий Код"/>
+
 
 
 

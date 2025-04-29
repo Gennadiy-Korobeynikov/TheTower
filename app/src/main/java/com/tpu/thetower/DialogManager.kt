@@ -298,6 +298,28 @@ class DialogManager {
                         )
                         {} ,
 
+                "lvl4_puzzle1_askii" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl4_puzzle1_askii),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+                "lvl4_puzzle1_normal" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl4_puzzle1_normal),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
                 )
 
         }

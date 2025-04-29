@@ -121,6 +121,12 @@
     <string name="lvl2_puzzle2_hint1">TODO</string>
     <string name="lvl2_puzzle2_hint2">TODO</string>
     <string name="lvl2_puzzle2_hint3">TODO</string>
+    <string name="lvl4_book_askii_text1_a">TODO</string>
+    <string name="lvl4_book_askii_text2_a">TODO</string>
+    <string name="lvl4_book_askii_text1_b">TODO</string>
+    <string name="lvl4_book_askii_text2_b">TODO</string>
+    <string name="lvl4_puzzle1_askii">TODO</string>
+    <string name="lvl4_puzzle1_normal">TODO</string>
 
 
 </resources>
