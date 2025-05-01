@@ -34,7 +34,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     private lateinit var saveManager: SaveManager
 
     // Пороговые значения
-    private val shakeThreshold = 5000 // Чувствительность к тряске
+    private val shakeThreshold = 3500 // Чувствительность к тряске
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +47,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
         saveManager = SaveManager.getInstance()
 
         when (LoadManager.getLevelProgress(requireActivity(), 3)) {
-            1 -> {
+            1,2,3,4,5 -> {
                 iv0.visibility = View.GONE
                 iv1.visibility = View.VISIBLE
             }

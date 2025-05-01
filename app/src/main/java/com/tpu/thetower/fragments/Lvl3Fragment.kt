@@ -50,12 +50,16 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
         }
         when (LoadManager.getLevelProgress(requireActivity(), 3)) {
-            0, 1 -> true
+            0, 1 -> {
+                btnToPuzzle1.visibility = View.VISIBLE
+            }
             2 -> {
                 ivDraggable.visibility = View.VISIBLE
                 FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
             }
-            3 -> true
+            3 -> {
+                //TODO охранник спит
+            }
         }
     }
 

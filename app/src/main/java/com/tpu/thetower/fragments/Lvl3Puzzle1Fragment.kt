@@ -61,7 +61,7 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1) {
                 val clickedButton = view as Button
                 solution += clickedButton.text.toString()
                 clickedButton.isClickable = false
-                clickedButton.setTextColor(Color.GRAY)
+                clickedButton.setBackgroundResource(R.drawable.lvl3_puzzle1_button_on)
                 checkSolution()
             }
         }
@@ -78,11 +78,12 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1) {
                         FragmentManager.goBack(this)
                     }
                     .start()
-            }
-            solution = ""
-            buttons.forEach { button ->
-                button.isClickable = true
-                button.setTextColor(Color.BLACK)
+            } else {
+                solution = ""
+                buttons.forEach { button ->
+                    button.isClickable = true
+                    button.setBackgroundResource(R.drawable.lvl3_puzzle1_button_off)
+                }
             }
         }
     }

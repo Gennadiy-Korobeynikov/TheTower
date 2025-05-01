@@ -14,6 +14,14 @@
         android:scaleType="fitCenter"
         android:src="@drawable/lvl3_bg" />
 
+    <ImageView
+        android:id="@+id/ivDraggable"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_triangle_drag1"
+        android:visibility="gone" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -102,14 +110,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.76" />
 
-        <ImageView
-            android:id="@+id/ivDraggable"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_triangle_drag1"
-            android:visibility="gone"
-            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/ivTarget"
@@ -136,6 +136,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
+            android:visibility="gone"
             app:layout_constraintHeight_percent="0.15"
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle1"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle1"
