@@ -33,7 +33,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
     private lateinit var btnToPuzzle2Lock: Button
     private lateinit var btnToPuzzle2Completed: Button
     private lateinit var btnToPuzzle1Lock: Button
-    private lateinit var hintManager: HintManager
 
     private lateinit var ivPuzzle0: ImageView
     private lateinit var ivClick: ImageView

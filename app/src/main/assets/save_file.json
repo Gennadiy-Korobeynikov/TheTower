@@ -70,6 +70,14 @@
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
+        },
+        {
+          "id": 3,
+          "name": "",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
         }
       ],
       "npcDialogs": [

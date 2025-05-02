@@ -293,6 +293,64 @@ class DialogManager {
                             )
                         )
                         {} ,
+
+
+
+                "lvl2_puzzle3_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle3_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle3_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle3_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle3_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle3_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle3_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle3_hint4_1),
+                                getString(activity , R.string.lvl2_puzzle3_hint4_2),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+                "lvl2_puzzle3_hint5" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle3_hint5),
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {} ,
+
+
+
 // Lvl 3 ---------------------------------------
 
                 "lvl3_to_puzzle0_hint1" to
