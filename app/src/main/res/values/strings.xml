@@ -127,6 +127,45 @@
     <string name="lvl4_book_askii_text2_b">TODO</string>
     <string name="lvl4_puzzle1_askii">TODO</string>
     <string name="lvl4_puzzle1_normal">TODO</string>
+    <string name="lvl3_to_puzzle0_hint">TODO</string>
+    <string name="lvl3_puzzle0_hint1_1">TODO</string>
+    <string name="lvl3_puzzle0_hint1_2">TODO</string>
+    <string name="lvl3_puzzle0_hint2_1">TODO</string>
+    <string name="lvl3_puzzle0_hint2_2">TODO</string>
+    <string name="lvl3_puzzle0_hint3">TODO</string>
+    <string name="lvl3_puzzle0_hint4">TODO</string>
+    <string name="lvl3_puzzle0_hint5">TODO</string>
+    <string name="lvl3_puzzle0_hint6_1">TODO</string>
+    <string name="lvl3_puzzle0_hint6_2">TODO</string>
+    <string name="lvl3_puzzle0_hint7_1">TODO</string>
+    <string name="lvl3_puzzle1_hint1">TODO</string>
+    <string name="lvl3_puzzle1_hint2_1">TODO</string>
+    <string name="lvl3_puzzle1_hint2_2">TODO</string>
+    <string name="lvl3_to_coffee_hint1_1">TODO</string>
+    <string name="lvl3_to_coffee_hint1_2">TODO</string>
+    <string name="lvl3_to_coffee_hint1_3">TODO</string>
+    <string name="lvl3_puzzle2_hint1">TODO</string>
+    <string name="lvl3_puzzle2_hint2">TODO</string>
+    <string name="lvl3_puzzle2_hint3">TODO</string>
+    <string name="lvl3_puzzle2_hint4">TODO</string>
+    <string name="lvl3_puzzle3_hint1_1">TODO</string>
+    <string name="lvl3_puzzle3_hint2">TODO</string>
+    <string name="lvl3_puzzle3_hint3">TODO</string>
+    <string name="lvl3_puzzle3_hint4_1">TODO</string>
+    <string name="lvl3_puzzle3_hint4_2">TODO</string>
+    <string name="lvl3_puzzle3_hint5_1">TODO</string>
+    <string name="lvl3_puzzle3_hint5_2">TODO</string>
+    <string name="lvl3_puzzle3_hint6_1">TODO</string>
+    <string name="lvl3_puzzle3_hint6_2">TODO</string>
+    <string name="lvl3_puzzle4_hint1">TODO</string>
+    <string name="lvl3_puzzle4_hint2_1">TODO</string>
+    <string name="lvl3_puzzle4_hint3_1">TODO</string>
+    <string name="lvl3_puzzle4_hint3_2">TODO</string>
+    <string name="lvl3_puzzle3_hint1_2">TODO</string>
+    <string name="lvl3_puzzle4_hint2_2">TODO</string>
+    <string name="lvl3_to_puzzle0_hint1">TODO</string>
+    <string name="lvl3_puzzle0_hint7_2">TODO</string>
+    <string name="lvl3_to_puzzle0_hint2">TODO</string>
 
 
 </resources>

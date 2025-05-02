@@ -10,7 +10,9 @@ import android.view.View.DragShadowBuilder
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
@@ -19,12 +21,14 @@ import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3Binding
 
-class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, View.OnDragListener {
+class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, View.OnDragListener , Hintable{
     private lateinit var binding: FragmentLvl3Binding
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
+    private lateinit var hintManager: HintManager
+
 
     private lateinit var btnToPuzzle0: Button
     private lateinit var btnToPuzzle1: Button
@@ -45,6 +49,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         setListeners()
         handleSounds()
 
+        hintManager = HintManager(listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2", ),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,2),
+            3,2) // 11 - подсыпка снотвороного
         FragmentManager.showGoBackArrow(requireActivity())
 
         ivDraggable.post {
@@ -59,6 +66,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
                 FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
             }
             3 -> {
+                hintManager = HintManager(listOf("lvl3_to_coffee_hint1", ),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,2),
+                    2,2) // 11 - подсыпка снотворного
+                FragmentManager.showGoBackArrow(requireActivity())
+                true
                 //TODO охранник спит
             }
         }
@@ -176,6 +188,13 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         saveManager = SaveManager.getInstance()
         saveManager.saveCurrentLevel(requireContext(), 3)
+    }
+
+    override fun useHint() {
+        if (LoadManager.getLevelProgress(requireActivity(), 3) == 3) // Охранник спит
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
+        else
+            hintManager.useHint(requireActivity())
     }
 
 

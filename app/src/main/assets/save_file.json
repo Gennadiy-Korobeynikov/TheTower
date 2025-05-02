@@ -101,7 +101,7 @@
           "hintsUsed": 0
         },
         {
-          "id": 2,
+          "id": 11,
           "name": "sleeping pills",
           "status": "",
           "attempts": 0,
@@ -109,8 +109,16 @@
           "hintsUsed": 0
         },
         {
-          "id": 3,
+          "id": 2,
           "name": "vacuum cleaner",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 3,
+          "name": "lock model",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,

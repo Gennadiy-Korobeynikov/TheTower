@@ -58,12 +58,13 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
 
         hintManager = HintManager(
             listOf(
-                "lvl0_puzzle1_hint1",
-                "lvl0_puzzle1_hint2",
-                "lvl0_puzzle1_hint3"
+                "lvl3_puzzle2_hint1",
+                "lvl3_puzzle2_hint2",
+                "lvl3_puzzle2_hint3",
+                "lvl3_puzzle2_hint4"
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 0, 0),
-            0, 0
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, 3),
+            3, 3
         )
     }
 
@@ -125,7 +126,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     }
 
     override fun useHint() {
-        hintManager.useHint(this.requireActivity())
+        hintManager.useHint(requireActivity())
     }
 
 

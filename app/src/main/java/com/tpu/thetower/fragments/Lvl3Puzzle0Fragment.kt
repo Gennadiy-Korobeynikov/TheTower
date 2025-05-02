@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -18,7 +20,7 @@ import com.tpu.thetower.databinding.FragmentLvl3Puzzle0Binding
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEventListener {
+class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEventListener, Hintable {
     private lateinit var sensorManager: SensorManager
     private var lastUpdate: Long = 0
     private var lastShake: Long = 0
@@ -32,6 +34,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     private lateinit var binding: FragmentLvl3Puzzle0Binding
 
     private lateinit var saveManager: SaveManager
+    private lateinit var hintManager: HintManager
 
     // Пороговые значения
     private val shakeThreshold = 3500 // Чувствительность к тряске
@@ -46,12 +49,24 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
 
         saveManager = SaveManager.getInstance()
 
-        when (LoadManager.getLevelProgress(requireActivity(), 3)) {
-            1,2,3,4,5 -> {
-                iv0.visibility = View.GONE
-                iv1.visibility = View.VISIBLE
+        val levelProgress = LoadManager.getLevelProgress(requireActivity(), 3)
+        when (levelProgress) {
+            0 -> { // До тряски коробки
+                hintManager = HintManager(listOf("lvl3_puzzle0_hint1", "lvl3_puzzle0_hint2", "lvl3_puzzle0_hint3","lvl3_puzzle0_hint4",),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,0),
+                    3,0)
+            }
+            1 -> { // После тряски коробки
+                hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,0),
+                    3,0)
             }
         }
+        if (levelProgress > 0) {
+            iv0.visibility = View.GONE
+            iv1.visibility = View.VISIBLE
+        }
+
     }
 
 
@@ -109,5 +124,9 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // Не используется, но требуется реализовать
+    }
+
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
     }
 }

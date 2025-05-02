@@ -6,13 +6,17 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
+import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl3Puzzle1Binding
 import com.tpu.thetower.puzzles.Lvl3Puzzle1
 
-class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1) {
+class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1), Hintable {
 
     private lateinit var binding: FragmentLvl3Puzzle1Binding
 
@@ -26,6 +30,7 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1) {
     private lateinit var mainScreen: FrameLayout
 
     private lateinit var puzzle: Puzzle
+    private lateinit var hintManager: HintManager
 
     private val buttons = mutableListOf<Button>()
 
@@ -41,6 +46,9 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1) {
         bindView()
         buttons.addAll(listOf(btn1, btn2, btn3, btn4, btn5, btn6))
         setListeners()
+        hintManager = HintManager(listOf("lvl3_puzzle1_hint1", "lvl3_puzzle1_hint2",),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,1),
+            3,1)
     }
 
     private fun bindView() {
@@ -86,5 +94,12 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1) {
                 }
             }
         }
+    }
+
+    override fun useHint() {
+        if (LoadManager.getLevelProgress(requireActivity(), 3) == 1) // После тряски пончиков
+            hintManager.useHint(requireActivity())
+        else
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 }

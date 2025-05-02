@@ -14,6 +14,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
+import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import kotlin.math.roundToInt
 
@@ -24,10 +28,11 @@ data class KeyPin(
     val maxPosition: Float
 )
 
-class KeyFragment : Fragment(R.layout.fragment_key) {
+class KeyFragment : Fragment(R.layout.fragment_key),Hintable {
 
     private lateinit var keyView: KeyView
     private lateinit var tvKeyPosition: TextView
+    private lateinit var hintManager: HintManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +56,25 @@ class KeyFragment : Fragment(R.layout.fragment_key) {
         btnReset.setOnClickListener {
             keyView.resetPins()
         }
+
+        if (LoadManager.isPuzzleCompleted(requireActivity(),3, 4)) // Замок вставлен в комп
+            hintManager = HintManager(
+                listOf("lvl3_puzzle4_hint3",),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, 5),
+                3, 5
+            )
+        else
+            hintManager = HintManager(
+                listOf("lvl3_puzzle4_hint1","lvl3_puzzle4_hint2","lvl3_puzzle4_hint3"),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, 5),
+                3, 5
+            )
+
+    }
+
+    override fun useHint() {
+            hintManager.useHint(requireActivity())
+
     }
 }
 
@@ -246,6 +270,8 @@ class KeyView @JvmOverloads constructor(
         }
 
         return super.onTouchEvent(event)
+
+
     }
 
     fun resetPins() {
@@ -255,4 +281,6 @@ class KeyView @JvmOverloads constructor(
         onKeyPinsChangedListener?.invoke(pins)
         invalidate()
     }
+
+
 }
