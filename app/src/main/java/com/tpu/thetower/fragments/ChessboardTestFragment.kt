@@ -18,7 +18,7 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test) {
     private lateinit var binding: FragmentChessboardTestBinding
     private val cellStates = MutableList(64) { false }
 
-    private val puzzle: Puzzle = ChessboardPuzzle("Lvl2Puzzle1")
+    private val puzzle: Puzzle = ChessboardPuzzle(4,"chess")
     private lateinit var saveManager: SaveManager
 
 

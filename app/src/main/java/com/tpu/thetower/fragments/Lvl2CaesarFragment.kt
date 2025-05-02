@@ -18,8 +18,8 @@ class Lvl2CaesarFragment : Fragment(R.layout.fragment_lvl2_caesar), Hintable {
         super.onViewCreated(view, savedInstanceState)
 
         hintManager = HintManager(listOf("lvl2_puzzle1_hint1", "lvl2_puzzle1_hint2", "lvl2_puzzle1_hint3","lvl2_puzzle1_hint4",),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,1),
-            2,1)
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"caesar"),
+            2,"caesar")
         FragmentManager.showGoBackArrow(requireActivity())
     }
 

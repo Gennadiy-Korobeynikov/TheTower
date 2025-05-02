@@ -57,17 +57,17 @@ class KeyFragment : Fragment(R.layout.fragment_key),Hintable {
             keyView.resetPins()
         }
 
-        if (LoadManager.isPuzzleCompleted(requireActivity(),3, 4)) // Замок вставлен в комп
+        if (LoadManager.isPuzzleCompleted(requireActivity(),3, "lock model")) // Замок вставлен в комп
             hintManager = HintManager(
                 listOf("lvl3_puzzle4_hint3",),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, 5),
-                3, 5
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
+                3, "key"
             )
         else
             hintManager = HintManager(
                 listOf("lvl3_puzzle4_hint1","lvl3_puzzle4_hint2","lvl3_puzzle4_hint3"),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, 5),
-                3, 5
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
+                3, "key"
             )
 
     }

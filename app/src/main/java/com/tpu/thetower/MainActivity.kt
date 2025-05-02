@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         LoadManager.setGameData(this)
 
         setManagers()
-        saveManager.savePuzzleUsedHintsCount(this,0, 0,0)// TEST
-        saveManager.savePuzzleUsedHintsCount(this,0, 1,0)// TEST
+        saveManager.savePuzzleUsedHintsCount(this,0, "flashlight",0)// TEST
+        saveManager.savePuzzleUsedHintsCount(this,0, "lock",0)// TEST
 
         // Когда появится кнопка сброса прогресса
         //LoadManager.loadProgress()

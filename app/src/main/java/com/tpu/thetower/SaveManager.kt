@@ -110,43 +110,53 @@ class SaveManager private constructor() {
         }
     }
 
-    fun savePuzzleUsedHintsCount(context: Context, level: Int, puzzle: Int, hintUsed: Int) {
+    fun savePuzzleUsedHintsCount(context: Context, level: Int, puzzle: String, hintUsed: Int) {
         val gameData = readData(context)
         val updatedGameData = gameData?.copy()
-        updatedGameData?.levels?.get(level)?.puzzles?.get(puzzle)?.hintsUsed = hintUsed
+        updatedGameData?.levels?.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.hintsUsed = hintUsed
 
         if (updatedGameData != null) {
             saveData(context, updatedGameData)
         }
     }
 
-
-    fun savePuzzleData(context: Context, levelId: Int, puzzleId: Int) {
+    fun savePuzzleData(
+        context: Context,
+        level: Int,
+        puzzle: String,
+        status: String = "completed",
+        attempts: Int = 1,
+        timeSpent: Int = 1,
+        hintsUsed: Int = 1
+    ) {
         val gameData = readData(context)
 
-        val savedPuzzle = gameData?.levels?.get(levelId)?.puzzles?.get(puzzleId)
+        val updatedPuzzle = gameData?.levels?.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.copy(
+                status = status,
+                attempts = attempts,
+                timeSpent = timeSpent,
+                hintsUsed = hintsUsed
+            )
 
-        val updatedPuzzle = savedPuzzle?.copy(
-            status = "completed",
-            attempts = 1,
-            timeSpent = 1,
-            hintsUsed = 1
-        )
+        val puzzleId =
+            gameData?.levels?.find { it.id == level }?.puzzles?.indexOf(gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle })
 
-        val updatedPuzzles = gameData?.levels?.get(levelId)?.puzzles?.toMutableList().apply {
-            if (updatedPuzzle != null) {
+        val updatedPuzzles = gameData?.levels?.find { it.id == level }?.puzzles?.toMutableList().apply {
+            if (updatedPuzzle != null && puzzleId != null) {
                 this?.set(puzzleId, updatedPuzzle)
             }
         }
 
         val updatedLevel = updatedPuzzles?.let {
-            gameData?.levels?.get(levelId)?.copy(
+            gameData?.levels?.find { it.id == level }?.copy(
                 puzzles = it
             )
         }
 
+        val levelId = gameData?.levels?.indexOf(gameData.levels.find { it.id == level })
+
         val updatedLevels = gameData?.levels?.toMutableList().apply {
-            if (updatedLevel != null) {
+            if (updatedLevel != null && levelId != null) {
                 this?.set(levelId, updatedLevel)
             }
         }
@@ -166,12 +176,12 @@ class SaveManager private constructor() {
     fun saveLevelProgress(activity: Activity, level: Int) {
         val gameData = readData(activity)
         val updatedGameData = gameData?.copy()
-        if (updatedGameData?.levels?.get(level)?.puzzles?.size == LoadManager.getLevelProgress(
+        if (updatedGameData?.levels?.find { it.id == level }?.puzzles?.size == LoadManager.getLevelProgress(
                 activity,
                 0
             )
         ) {
-            updatedGameData.levels[level].isCompleted = true
+            updatedGameData.levels.find { it.id == level }?.isCompleted = true
         }
 
         if (updatedGameData != null) {
@@ -183,7 +193,7 @@ class SaveManager private constructor() {
         val gameData = readData(activity)
         val updatedGameData = gameData?.copy()
         if (updatedGameData != null) {
-            updatedGameData.levels[level].npcDialogs[npc].currentDialogIndex = dialogIndex
+            updatedGameData.levels.find { it.id == level }?.npcDialogs?.find { it.id == npc }?.currentDialogIndex = dialogIndex
             saveData(activity, updatedGameData)
         }
     }

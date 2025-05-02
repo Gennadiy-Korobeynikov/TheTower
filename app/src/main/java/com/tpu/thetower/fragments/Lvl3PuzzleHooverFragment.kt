@@ -32,7 +32,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private lateinit var btnForward: Button
 
 
-    private val puzzleHoover = Lvl3PuzzleHoover("Lvl3PuzzleHooverPuzzle3")
+    private val puzzleHoover = Lvl3PuzzleHoover(3, "vacuum cleaner")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
@@ -63,8 +63,8 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                 "lvl3_puzzle2_hint3",
                 "lvl3_puzzle2_hint4"
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, 3),
-            3, 3
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "vacuum cleaner"),
+            3, "vacuum cleaner"
         )
     }
 

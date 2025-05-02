@@ -31,7 +31,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
     private lateinit var mainScreen: FrameLayout
 
 
-    private val puzzle: Puzzle = Lvl0Puzzle1("Lvl0Puzzle1")
+    private val puzzle: Puzzle = Lvl0Puzzle1(0, "lock")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
@@ -110,8 +110,8 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
                 "lvl0_puzzle1_hint2",
                 "lvl0_puzzle1_hint3"
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 0, 0),
-            0, 0
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 0, "flashlight"),
+            0, "flashlight"
         )
         setupWheels(images)
     }

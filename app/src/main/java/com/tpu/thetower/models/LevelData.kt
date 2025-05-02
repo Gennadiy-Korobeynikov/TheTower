@@ -18,7 +18,7 @@ data class PuzzleData(
 )
 
 data class DialogData(
-    val npcId: Int,
+    val id: Int,
     var currentDialogIndex: Int
 )
 

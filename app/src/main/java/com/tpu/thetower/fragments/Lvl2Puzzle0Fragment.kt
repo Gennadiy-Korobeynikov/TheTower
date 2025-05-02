@@ -113,15 +113,15 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
             listOf(
                 "lvl2_puzzle0_hint",
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, 0),
-            2, 0
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "lock"),
+            2, "lock"
         )
         requireActivity().supportFragmentManager
             .setFragmentResultListener("puzzleChoosing", viewLifecycleOwner) { _, bundle ->
                 val puzzleNum = bundle.getInt("puzzleNum")
                 when (puzzleNum) {
-                    0 -> puzzle = Lvl2Puzzle0("Lvl2Puzzle0")
-                    1 -> puzzle = Lvl2Puzzle2("Lvl2Puzzle2")
+                    0 -> puzzle = Lvl2Puzzle0(2, "lock")
+                    1 -> puzzle = Lvl2Puzzle2(2, "chat")
                 }
                 setupWheels(images)
             }

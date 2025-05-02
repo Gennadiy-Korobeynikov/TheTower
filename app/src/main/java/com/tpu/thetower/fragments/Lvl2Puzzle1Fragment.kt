@@ -24,7 +24,7 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
 
     private lateinit var binding: FragmentLvl2Puzzle1Binding
     private val pinCells = mutableListOf<TextView>()
-    private val puzzle: Puzzle = Lvl2Puzzle1("Lvl2Puzzle1")
+    private val puzzle: Puzzle = Lvl2Puzzle1(2, "password")
 
 
     private lateinit var tvPin1: TextView
@@ -60,15 +60,15 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
             0, 1 -> { // До ввода пароля
                 showKeyboard()
                 hintManager = HintManager(listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3",),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,2),
-                    2,2)
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"password"),
+                    2,"password")
             }
             2, 3 -> { // После ввода пароля
                 completed()
                 hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
                     "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,3),
-                    2,3)
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
+                    2,"chat")
             }
         }
     }

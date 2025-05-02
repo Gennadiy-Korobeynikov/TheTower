@@ -50,8 +50,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         handleSounds()
 
         hintManager = HintManager(listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2", ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,2),
-            3,2) // 11 - подсыпка снотвороного
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"sleeping pills"),
+            3,"sleeping pills") // 11 - подсыпка снотвороного
         FragmentManager.showGoBackArrow(requireActivity())
 
         ivDraggable.post {
@@ -67,10 +67,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             }
             3 -> {
                 hintManager = HintManager(listOf("lvl3_to_coffee_hint1", ),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,2),
-                    2,2) // 11 - подсыпка снотворного
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"sleeping pills"),
+                    2,"sleeping pills") // 11 - подсыпка снотворного
                 FragmentManager.showGoBackArrow(requireActivity())
-                true
                 //TODO охранник спит
             }
         }
@@ -172,7 +171,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             y = zone.y + (zone.height - height) / 2f
 //            visibility = View.VISIBLE
         }
-        saveManager.savePuzzleData(requireContext(), 3, 2)
+        saveManager.savePuzzleData(requireContext(), 3, "sleeping pills")
     }
 
     private fun returnToOriginalPosition(view: View) {

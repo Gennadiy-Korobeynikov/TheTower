@@ -53,13 +53,13 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
         when (levelProgress) {
             0 -> { // До тряски коробки
                 hintManager = HintManager(listOf("lvl3_puzzle0_hint1", "lvl3_puzzle0_hint2", "lvl3_puzzle0_hint3","lvl3_puzzle0_hint4",),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,0),
-                    3,0)
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3, "donuts"),
+                    3,"donuts")
             }
             1 -> { // После тряски коробки
                 hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,0),
-                    3,0)
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts"),
+                    3,"donuts")
             }
         }
         if (levelProgress > 0) {
@@ -119,7 +119,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     private fun Completed() {
         iv0.visibility = View.GONE
         iv1.visibility = View.VISIBLE
-        saveManager.savePuzzleData(requireContext(), 3, 0)
+        saveManager.savePuzzleData(requireContext(), 3, "donuts")
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

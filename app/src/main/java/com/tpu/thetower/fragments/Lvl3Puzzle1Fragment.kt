@@ -41,14 +41,14 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1), Hintable {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl3Puzzle1Binding.bind(view)
-        puzzle = Lvl3Puzzle1("Lvl3Puzzle1")
+        puzzle = Lvl3Puzzle1(3, "buttons")
 
         bindView()
         buttons.addAll(listOf(btn1, btn2, btn3, btn4, btn5, btn6))
         setListeners()
         hintManager = HintManager(listOf("lvl3_puzzle1_hint1", "lvl3_puzzle1_hint2",),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,1),
-            3,1)
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"buttons"),
+            3,"buttons")
     }
 
     private fun bindView() {

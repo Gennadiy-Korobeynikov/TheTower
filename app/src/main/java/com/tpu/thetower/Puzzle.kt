@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 
 // Заготовка под класс головоломок
-abstract class Puzzle(val name: String) {
+abstract class Puzzle(val level: Int, val puzzle: String) {
 
     var isSolved: Boolean = false
     var usedHintsCount: Int = 0
@@ -16,9 +16,8 @@ abstract class Puzzle(val name: String) {
     fun complete(context: Context) {
         isSolved = true
         saveManager = SaveManager.getInstance()
-        val (level_id, puzzle_id) = name.filter { it.isDigit() }.map { it.toString().toInt() }
-        saveManager.savePuzzleData(context, level_id, puzzle_id)
-        Log.i("Puzzle", "${name} completed")
+        saveManager.savePuzzleData(context, level, puzzle, status = "completed")
+        Log.i("Puzzle", "${puzzle} completed")
     }
 
 

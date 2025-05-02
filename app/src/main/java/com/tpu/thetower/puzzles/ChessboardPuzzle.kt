@@ -3,7 +3,7 @@ package com.tpu.thetower.puzzles
 import android.content.Context
 import com.tpu.thetower.Puzzle
 
-class ChessboardPuzzle(name: String) : Puzzle(name) {
+class ChessboardPuzzle(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     private val answer = setOf(0, 8, 16, 63)
 
     override fun checkSolution(context: Context, solution: String): Boolean {
