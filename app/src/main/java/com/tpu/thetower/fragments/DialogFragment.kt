@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.text.HtmlCompat
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 
@@ -35,7 +36,7 @@ class DialogFragment(
         fun updateDialog() {
             // Ещё есть реплики
             if (currentIndex < dialog.messages.size) {
-                tvDialogText.text = dialog.messages[currentIndex]
+                tvDialogText.text = HtmlCompat.fromHtml(dialog.messages[currentIndex], HtmlCompat.FROM_HTML_MODE_LEGACY)
                 tvName.text = dialog.speakers[currentIndex].name
                 ivAvatar.setImageResource(dialog.speakers[currentIndex].avatarId)
                 currentIndex++

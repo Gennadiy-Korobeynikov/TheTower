@@ -139,7 +139,16 @@
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
+        },
+        {
+          "id": 5,
+          "name": "donuts after shaking",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
         }
+
       ],
       "npcDialogs": [
         {
