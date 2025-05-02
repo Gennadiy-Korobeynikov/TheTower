@@ -27,11 +27,8 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
     private lateinit var btnToPuzzle0Lock: Button
     private lateinit var btnToPuzzle0Completed: Button
     private lateinit var btnToPuzzle1: Button
-    private lateinit var btnToPuzzle1Lock: Button
-
-    private lateinit var ivPuzzle0: ImageView
-    private lateinit var ivClick: ImageView
-
+    private lateinit var btnToPuzzle2Lock: Button
+    private lateinit var btnToPuzzle2Completed: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,8 +49,11 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
                 btnToPuzzle0Completed.visibility = View.VISIBLE
             }
             3 -> {
+                btnToPuzzle0Lock.visibility = View.GONE
+                btnToPuzzle0Completed.visibility = View.VISIBLE
+                btnToPuzzle2Lock.visibility = View.GONE
+                btnToPuzzle2Completed.visibility = View.GONE
                 // TODO Что происходит после завершения уровня и открытия последнего замка
-                LevelAccessManager.upgradeAccessLvl(this)
             }
         }
     }
@@ -63,21 +63,13 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
         btnToPuzzle0Lock = binding.btnToPuzzle0Lock
         btnToPuzzle0Completed = binding.btnToPuzzle0Completed
         btnToPuzzle1 = binding.btnToPuzzle1
-        btnToPuzzle1Lock = binding.btnToPuzzle1Lock
-        ivPuzzle0 = binding.ivPuzzle0
-        ivClick = binding.ivClick
+        btnToPuzzle2Lock = binding.btnToPuzzle2Lock
+        btnToPuzzle2Completed = binding.btnToPuzzle2Completed
     }
 
     private fun setListeners() {
         btnToPuzzle0.setOnClickListener {
-            ivPuzzle0.setImageResource(R.drawable.lvl2_puzzle0)
-            ivPuzzle0.visibility = View.VISIBLE
-            ivClick.visibility = View.VISIBLE
-        }
-
-        ivClick.setOnClickListener {
-            ivPuzzle0.visibility = View.GONE
-            ivClick.visibility = View.GONE
+            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2CaesarFragment)
         }
 
         btnToPuzzle0Lock.setOnClickListener {
@@ -86,18 +78,21 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) {
         }
 
         btnToPuzzle0Completed.setOnClickListener {
-            ivPuzzle0.setImageResource(R.drawable.lvl2_puzzle0_completed)
-            ivPuzzle0.visibility = View.VISIBLE
-            ivClick.visibility = View.VISIBLE
+            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PetFragment)
         }
 
         btnToPuzzle1.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2Puzzle1Fragment)
         }
 
-        btnToPuzzle1Lock.setOnClickListener {
+        btnToPuzzle2Lock.setOnClickListener {
             FragmentManager.choosePuzzle(this, 1)
             FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2Puzzle0Fragment)
+        }
+
+        btnToPuzzle2Completed.setOnClickListener {
+            // TODO Как будто сюда можно что-то запихнуть, если нет, то просто удалить
+            LevelAccessManager.upgradeAccessLvl(this)
         }
     }
 

@@ -30,6 +30,7 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
     private lateinit var tvPin4: TextView
     private lateinit var tvPin5: TextView
     private lateinit var tvPin6: TextView
+    private lateinit var tvPin7: TextView
     private lateinit var tvPassword: TextView
 
     private lateinit var pinContainer: LinearLayout
@@ -46,11 +47,11 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         bindView()
         setListeners()
 
-        pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6))
+        pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
         when (LoadManager.getLevelProgress(requireActivity(), 2)) {
-            1 -> showKeyboard()
-            2 -> {
+            0, 1 -> showKeyboard()
+            2, 3 -> {
                 completed()
             }
         }
@@ -63,6 +64,7 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         tvPin4 = binding.tvPin4
         tvPin5 = binding.tvPin5
         tvPin6 = binding.tvPin6
+        tvPin7 = binding.tvPin7
         tvPassword = binding.tvPassword
 
         hiddenInput = binding.hiddenInput

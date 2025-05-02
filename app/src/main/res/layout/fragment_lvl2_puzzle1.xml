@@ -91,6 +91,15 @@
             android:background="@drawable/pin_cell_background"
             android:gravity="center"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_pin7"
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/pin_cell_background"
+            android:gravity="center"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <EditText
@@ -99,6 +108,6 @@
         android:layout_height="0dp"
         android:cursorVisible="false"
         android:importantForAutofill="no"
-        android:maxLength="6" />
+        android:maxLength="7" />
 
 </FrameLayout>

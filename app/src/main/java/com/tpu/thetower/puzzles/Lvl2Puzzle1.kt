@@ -4,7 +4,7 @@ import android.content.Context
 import com.tpu.thetower.Puzzle
 
 class Lvl2Puzzle1(name: String) : Puzzle(name) {
-    private val answer = "cooper"
+    private val answer = "Gerberd"
 
     override fun checkSolution(context: Context, solution: String) : Boolean {
         if (solution == answer){

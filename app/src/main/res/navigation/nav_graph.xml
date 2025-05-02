@@ -119,6 +119,12 @@
         <action
             android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle1Fragment"
             app:destination="@id/lvl2Puzzle1Fragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PetFragment"
+            app:destination="@id/lvl2PetFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2CaesarFragment"
+            app:destination="@id/lvl2CaesarFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl2Puzzle0Fragment"
@@ -183,5 +189,15 @@
         android:id="@+id/lvl3Puzzle1Fragment"
         android:name="com.tpu.thetower.fragments.Lvl3Puzzle1Fragment"
         android:label="Lvl3Puzzle1Fragment" />
+    <fragment
+        android:id="@+id/lvl2CaesarFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2CaesarFragment"
+        android:label="fragment_lvl2_caesar"
+        tools:layout="@layout/fragment_lvl2_caesar" />
+    <fragment
+        android:id="@+id/lvl2PetFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PetFragment"
+        android:label="fragment_lvl2_pet"
+        tools:layout="@layout/fragment_lvl2_pet" />
 
 </navigation>
