@@ -191,6 +191,9 @@
         <action
             android:id="@+id/action_lvl3Fragment_to_keyFragment"
             app:destination="@id/keyFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleEditorFragment"
+            app:destination="@id/lvl3PuzzleEditorFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl3Puzzle0Fragment"
@@ -215,5 +218,10 @@
         android:name="com.tpu.thetower.fragments.Lvl2PetFragment"
         android:label="fragment_lvl2_pet"
         tools:layout="@layout/fragment_lvl2_pet" />
+    <fragment
+        android:id="@+id/lvl3PuzzleEditorFragment"
+        android:name="com.tpu.thetower.fragments.Lvl3PuzzleEditorFragment"
+        android:label="fragment_lvl3_puzzle_editor"
+        tools:layout="@layout/fragment_lvl3_puzzle_editor" />
 
 </navigation>

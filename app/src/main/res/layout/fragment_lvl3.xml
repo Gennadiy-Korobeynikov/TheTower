@@ -110,6 +110,20 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.76" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_puzzle4_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.54" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_puzzle4_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.83" />
+
 
         <ImageView
             android:id="@+id/ivTarget"
@@ -171,6 +185,20 @@
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle4_lock"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle4_lock"
             app:layout_constraintWidth_percent="0.07" />
+
+        <ImageView
+            android:id="@+id/iv_copy"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:src="@drawable/lvl3_puzzle4_copy"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintStart_toStartOf="@id/guideV_puzzle4_copy"
+            app:layout_constraintTop_toTopOf="@id/guideH_puzzle4_copy"
+            app:layout_constraintWidth_percent="0.045" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

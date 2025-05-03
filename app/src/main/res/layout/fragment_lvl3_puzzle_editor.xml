@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    tools:context=".fragments.Lvl3PuzzleEditorFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl3_puzzle4_editor" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Файл замок.tpu не найден"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/iv_key"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:src="@drawable/lvl3_puzzle4_key_0"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_paste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.28" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_paste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_paste"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:backgroundTint="@color/black"
+            android:text="Вставить"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintStart_toStartOf="@id/guideV_paste"
+            app:layout_constraintTop_toTopOf="@id/guideH_paste"
+            app:layout_constraintWidth_percent="0.21" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_next_layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.57" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_next_layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next_layer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:backgroundTint="@color/black"
+            android:text="Следующий слой"
+            app:layout_constraintHeight_percent="0.115"
+            app:layout_constraintStart_toStartOf="@id/guideV_next_layer"
+            app:layout_constraintTop_toTopOf="@id/guideH_next_layer"
+            app:layout_constraintWidth_percent="0.21" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_previous_layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.57" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_previous_layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.78" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_previous_layer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:backgroundTint="@color/black"
+            android:text="Предыдущий слой"
+            app:layout_constraintHeight_percent="0.115"
+            app:layout_constraintStart_toStartOf="@id/guideV_previous_layer"
+            app:layout_constraintTop_toTopOf="@id/guideH_previous_layer"
+            app:layout_constraintWidth_percent="0.21" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

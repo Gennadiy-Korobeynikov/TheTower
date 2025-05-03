@@ -13,12 +13,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
+import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
+import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.puzzles.Lvl3PuzzleKey
 import kotlin.math.roundToInt
 
 data class KeyPin(
@@ -28,11 +32,15 @@ data class KeyPin(
     val maxPosition: Float
 )
 
-class KeyFragment : Fragment(R.layout.fragment_key),Hintable {
+
+class KeyFragment : Fragment(R.layout.fragment_key), Hintable {
 
     private lateinit var keyView: KeyView
     private lateinit var tvKeyPosition: TextView
+    private lateinit var main: ConstraintLayout
     private lateinit var hintManager: HintManager
+    private lateinit var puzzle: Puzzle
+    private var solution = listOf<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,26 +54,44 @@ class KeyFragment : Fragment(R.layout.fragment_key),Hintable {
 
         keyView = view.findViewById(R.id.keyView)
         tvKeyPosition = view.findViewById(R.id.tvKeyPosition)
+        main = view.findViewById(R.id.main)
         val btnReset = view.findViewById<Button>(R.id.btnReset)
+
+        puzzle = Lvl3PuzzleKey(3, "key")
 
         keyView.setOnKeyPinsChangedListener { pins ->
             val positionsText = pins.joinToString(", ") { "${it.currentPosition.roundToInt()}" }
+            solution = pins.map {it.currentPosition.toInt()}
             tvKeyPosition.text = positionsText
+            if (puzzle.checkSolution(requireContext(), solution.joinToString(""))) {
+                main.animate()
+                    .alpha(0.2f)
+                    .setDuration(2500)
+                    .withEndAction {
+                        FragmentManager.goBack(this)
+                    }
+                    .start()
+            }
         }
 
         btnReset.setOnClickListener {
             keyView.resetPins()
         }
 
-        if (LoadManager.isPuzzleCompleted(requireActivity(),3, "lock model")) // Замок вставлен в комп
+        if (LoadManager.isPuzzleCompleted(
+                requireActivity(),
+                3,
+                "lock model"
+            )
+        ) // Замок вставлен в комп
             hintManager = HintManager(
-                listOf("lvl3_puzzle4_hint3",),
+                listOf("lvl3_puzzle4_hint3"),
                 LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
                 3, "key"
             )
         else
             hintManager = HintManager(
-                listOf("lvl3_puzzle4_hint1","lvl3_puzzle4_hint2","lvl3_puzzle4_hint3"),
+                listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
                 LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
                 3, "key"
             )
@@ -73,7 +99,7 @@ class KeyFragment : Fragment(R.layout.fragment_key),Hintable {
     }
 
     override fun useHint() {
-            hintManager.useHint(requireActivity())
+        hintManager.useHint(requireActivity())
 
     }
 }
@@ -108,11 +134,11 @@ class KeyView @JvmOverloads constructor(
     private val positionStep = 50f
 
     private val pins = mutableListOf(
-        KeyPin(initialPosition = 20f, currentPosition = 50f, minPosition = 50f, maxPosition = 400f),
-        KeyPin(initialPosition = 30f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
-        KeyPin(initialPosition = 15f, currentPosition = 50f, minPosition = 50f, maxPosition = 350f),
-        KeyPin(initialPosition = 25f, currentPosition = 50f, minPosition = 50f, maxPosition = 450f),
-        KeyPin(initialPosition = 35f, currentPosition = 50f, minPosition = 50f, maxPosition = 600f)
+        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
+        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
+        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 550f),
+        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
+        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f)
     )
 
     private var activePin: Int? = null
@@ -231,7 +257,6 @@ class KeyView @JvmOverloads constructor(
                         )
 
                         accumulatedDelta -= stepDelta
-
                         onKeyPinsChangedListener?.invoke(pins)
                         invalidate()
                     }
@@ -254,7 +279,6 @@ class KeyView @JvmOverloads constructor(
                                         pin.maxPosition
                                     )
                                 )
-
                                 onKeyPinsChangedListener?.invoke(pins)
                                 invalidate()
                             }
@@ -268,7 +292,6 @@ class KeyView @JvmOverloads constructor(
                 }
             }
         }
-
         return super.onTouchEvent(event)
 
 

@@ -21,7 +21,8 @@ import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3Binding
 
-class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, View.OnDragListener , Hintable{
+class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, View.OnDragListener,
+    Hintable {
     private lateinit var binding: FragmentLvl3Binding
 
     private lateinit var musicManager: MusicManager
@@ -38,6 +39,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
     private lateinit var ivTarget: ImageView
     private lateinit var ivDraggable: ImageView
+    private lateinit var ivCopy: ImageView
 
     private lateinit var originalPosition: Pair<Float, Float>
 
@@ -49,9 +51,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         setListeners()
         handleSounds()
 
-        hintManager = HintManager(listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2", ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"sleeping pills"),
-            3,"sleeping pills") // 11 - подсыпка снотвороного
+        hintManager = HintManager(
+            listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2"),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
+            3, "sleeping pills"
+        ) // 11 - подсыпка снотвороного
         FragmentManager.showGoBackArrow(requireActivity())
 
         ivDraggable.post {
@@ -61,14 +65,18 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             0, 1 -> {
                 btnToPuzzle1.visibility = View.VISIBLE
             }
+
             2 -> {
                 ivDraggable.visibility = View.VISIBLE
                 FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
             }
+
             3 -> {
-                hintManager = HintManager(listOf("lvl3_to_coffee_hint1", ),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"sleeping pills"),
-                    2,"sleeping pills") // 11 - подсыпка снотворного
+                hintManager = HintManager(
+                    listOf("lvl3_to_coffee_hint1"),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
+                    2, "sleeping pills"
+                ) // 11 - подсыпка снотворного
                 FragmentManager.showGoBackArrow(requireActivity())
                 //TODO охранник спит
             }
@@ -83,10 +91,12 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnToPuzzle4Lock = binding.btnToPuzzle4Lock
         ivTarget = binding.ivTarget
         ivDraggable = binding.ivDraggable
+        ivCopy = binding.ivCopy
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
+
         btnToPuzzle0.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3Puzzle0Fragment)
         }
@@ -100,10 +110,49 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         }
 
         btnToPuzzle4.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_keyFragment)
+            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
         }
 
-        btnToPuzzle4
+        btnToPuzzle4Lock.setOnClickListener {
+        }
+
+        var longPressRunnable: Runnable? = null
+        var isLongPressHandled = false
+
+        btnToPuzzle4Lock.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    isLongPressHandled = false
+                    longPressRunnable = Runnable {
+                        ivCopy.visibility = View.VISIBLE
+                        isLongPressHandled = true
+                    }
+                    view.postDelayed(longPressRunnable, 1000)
+                    true
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    if (!isLongPressHandled) {
+                        FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_keyFragment)
+                    }
+                    longPressRunnable?.let { view.removeCallbacks(it) }
+                    true
+                }
+
+                MotionEvent.ACTION_CANCEL -> {
+                    longPressRunnable?.let { view.removeCallbacks(it) }
+                    true
+                }
+
+                else -> false
+            }
+
+        }
+
+        ivCopy.setOnClickListener {
+            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+            ivCopy.visibility = View.GONE
+        }
 
         ivTarget.setOnDragListener(this@Lvl3Fragment)
         ivDraggable.setOnTouchListener(this@Lvl3Fragment)

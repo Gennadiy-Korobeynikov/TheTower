@@ -201,7 +201,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
 
     override fun useHint() {
-        if (!FragmentManager.light)
+        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress")
             hintManager.useHint(requireActivity())
         else {
             if (LoadManager.isLevelCompleted(requireActivity(),0)) {
