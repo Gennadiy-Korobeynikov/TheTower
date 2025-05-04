@@ -110,8 +110,8 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
                 "lvl0_puzzle1_hint2",
                 "lvl0_puzzle1_hint3"
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 0, "flashlight"),
-            0, "flashlight"
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 0, "lock"),
+            0, "lock"
         )
         setupWheels(images)
     }
