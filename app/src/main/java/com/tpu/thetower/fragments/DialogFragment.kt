@@ -36,7 +36,8 @@ class DialogFragment(
         fun updateDialog() {
             // Ещё есть реплики
             if (currentIndex < dialog.messages.size) {
-                tvDialogText.text = HtmlCompat.fromHtml(dialog.messages[currentIndex], HtmlCompat.FROM_HTML_MODE_LEGACY)
+                tvDialogText.text = HtmlCompat.fromHtml(dialog.messages[currentIndex].replace("\n", "<br/>"),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY)
                 tvName.text = dialog.speakers[currentIndex].name
                 ivAvatar.setImageResource(dialog.speakers[currentIndex].avatarId)
                 currentIndex++

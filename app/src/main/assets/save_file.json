@@ -147,8 +147,15 @@
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
+        },
+        {
+        "id": 6,
+        "name": "lock model after pasted",
+        "status": "",
+        "attempts": 0,
+        "timeSpent": 0,
+        "hintsUsed": 0
         }
-
       ],
       "npcDialogs": [
         {
