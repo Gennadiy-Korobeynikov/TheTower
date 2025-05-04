@@ -53,7 +53,6 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
 
 
 
-        pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6))
         pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
         when (LoadManager.getLevelProgress(requireActivity(), 2)) {
@@ -90,11 +89,13 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
     }
 
     private fun setListeners() {
+        pinContainer.setOnClickListener {
+            showKeyboard()
+        }
         hiddenInput.requestFocus()
         hiddenInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val input = s?.toString() ?: ""
-
                 // Обновление отображения ячеек
                 pinCells.forEachIndexed { index, textView ->
                     textView.text = if (index < input.length) input[index].toString() else ""
