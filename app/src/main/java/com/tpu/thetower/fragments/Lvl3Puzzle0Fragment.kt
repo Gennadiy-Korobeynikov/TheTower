@@ -49,24 +49,21 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
 
         saveManager = SaveManager.getInstance()
 
-        val levelProgress = LoadManager.getLevelProgress(requireActivity(), 3)
-        when (levelProgress) {
-            0 -> { // До тряски коробки
+        val puzzleStatus = LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts")
+        when (puzzleStatus) {
+            "in_progress" -> { // До тряски коробки
                 hintManager = HintManager(listOf("lvl3_puzzle0_hint1", "lvl3_puzzle0_hint2", "lvl3_puzzle0_hint3","lvl3_puzzle0_hint4",),
                     LoadManager.getPuzzleUsedHintsCount(requireActivity(),3, "donuts"),
                     3,"donuts")
             }
-            1 -> { // После тряски коробки
+            "completed" -> { // После тряски коробки
                 hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
                     LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts"),
                     3,"donuts")
+                iv0.visibility = View.GONE
+                iv1.visibility = View.VISIBLE
             }
         }
-        if (levelProgress > 0) {
-            iv0.visibility = View.GONE
-            iv1.visibility = View.VISIBLE
-        }
-
     }
 
 
@@ -119,7 +116,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     private fun Completed() {
         iv0.visibility = View.GONE
         iv1.visibility = View.VISIBLE
-        saveManager.savePuzzleData(requireContext(), 3, "donuts")
+        saveManager.savePuzzleData(requireContext(), 3, "donuts", status = "completed")
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

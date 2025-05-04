@@ -32,10 +32,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
     private lateinit var btnToPuzzle1: Button
     private lateinit var btnToPuzzle2Lock: Button
     private lateinit var btnToPuzzle2Completed: Button
-    private lateinit var btnToPuzzle1Lock: Button
-
-    private lateinit var ivPuzzle0: ImageView
-    private lateinit var ivClick: ImageView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,22 +43,14 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
 
         FragmentManager.showGoBackArrow(requireActivity())
 
-        when (LoadManager.getLevelProgress(requireActivity(), 2)) {
-            1 -> {
-                btnToPuzzle0Lock.visibility = View.GONE
-                btnToPuzzle0Completed.visibility = View.VISIBLE
-            }
-            2 -> {
-                btnToPuzzle0Lock.visibility = View.GONE
-                btnToPuzzle0Completed.visibility = View.VISIBLE
-            }
-            3 -> {
-                btnToPuzzle0Lock.visibility = View.GONE
-                btnToPuzzle0Completed.visibility = View.VISIBLE
-                btnToPuzzle2Lock.visibility = View.GONE
-                btnToPuzzle2Completed.visibility = View.GONE
-                // TODO Что происходит после завершения уровня и открытия последнего замка
-            }
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "completed") {
+            btnToPuzzle0Lock.visibility = View.GONE
+            btnToPuzzle0Completed.visibility = View.VISIBLE
+        }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "chat") == "completed") {
+            btnToPuzzle2Lock.visibility = View.GONE
+            btnToPuzzle2Completed.visibility = View.VISIBLE
         }
     }
 

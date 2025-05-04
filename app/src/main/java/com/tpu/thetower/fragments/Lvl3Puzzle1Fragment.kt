@@ -34,7 +34,6 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1), Hintable {
 
     private val buttons = mutableListOf<Button>()
 
-
     private var solution = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,7 +96,7 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1), Hintable {
     }
 
     override fun useHint() {
-        if (LoadManager.getLevelProgress(requireActivity(), 3) == 1) // После тряски пончиков
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts") == "completed") // После тряски пончиков
             hintManager.useHint(requireActivity())
         else
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")

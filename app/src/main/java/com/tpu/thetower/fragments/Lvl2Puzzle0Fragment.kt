@@ -125,7 +125,6 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
     }
 
     private fun passed() {
-//        LevelAccessManager.upgradeAccessLvl(this)
         isSolved = true
         FragmentManager.hideGoBackArrow(requireActivity())
         mainScreen.animate()

@@ -61,26 +61,23 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         ivDraggable.post {
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
         }
-        when (LoadManager.getLevelProgress(requireActivity(), 3)) {
-            0, 1 -> {
-                btnToPuzzle1.visibility = View.VISIBLE
-            }
 
-            2 -> {
-                ivDraggable.visibility = View.VISIBLE
-                FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
-            }
-
-            3 -> {
-                hintManager = HintManager(
-                    listOf("lvl3_to_coffee_hint1"),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
-                    2, "sleeping pills"
-                ) // 11 - подсыпка снотворного
-                FragmentManager.showGoBackArrow(requireActivity())
-                //TODO охранник спит
-            }
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "buttons") == "completed") {
+            btnToPuzzle0.visibility = View.GONE
+            btnToPuzzle1.visibility = View.GONE
+            ivDraggable.visibility = View.VISIBLE
+            FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
         }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") == "completed") {
+            hintManager = HintManager(
+                listOf("lvl3_to_coffee_hint1"),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
+                3, "sleeping pills"
+            )
+            FragmentManager.showGoBackArrow(requireActivity())
+        }
+
     }
 
     private fun bindView() {
@@ -239,7 +236,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     }
 
     override fun useHint() {
-        if (LoadManager.getLevelProgress(requireActivity(), 3) == 3) // Охранник спит
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") == "completed") // Охранник спит
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")
         else
             hintManager.useHint(requireActivity())

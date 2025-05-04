@@ -51,24 +51,21 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
         bindView()
         setListeners()
 
-
-
         pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
-        when (LoadManager.getLevelProgress(requireActivity(), 2)) {
-            0, 1 -> { // До ввода пароля
-                showKeyboard()
-                hintManager = HintManager(listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3",),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"password"),
-                    2,"password")
-            }
-            2, 3 -> { // После ввода пароля
-                completed()
-                hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
-                    "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
-                    2,"chat")
-            }
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "password") == "locked") {
+            showKeyboard()
+            hintManager = HintManager(listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3",),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"password"),
+                2,"password")
+        }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "password") == "completed") {
+            hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
+                "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
+                2,"chat")
+            completed()
         }
     }
 

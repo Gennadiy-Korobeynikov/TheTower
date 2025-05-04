@@ -44,8 +44,8 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private fun setListeners() {
         btnStart.setOnClickListener {
-            FragmentManager.light = false
             saveManager.resetData(requireContext())
+            LoadManager.loadProgress(requireActivity())
             FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
             FragmentManager.hideTitleScreen(requireActivity())
             FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)

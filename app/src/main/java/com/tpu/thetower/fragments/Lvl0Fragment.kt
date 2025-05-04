@@ -63,30 +63,23 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         saveManager = SaveManager.getInstance()
 
-        when (LoadManager.getLevelProgress(requireActivity(), 0)) {
-            0 -> {
-                startAwakeningAnim()
-                saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "in_progress")
-            }
-            1 -> {
-                ivDarkness.visibility = View.GONE
-                ivDarknessFlashlight.visibility = View.GONE
-                btnLightOn.visibility = View.GONE
-                ivBlack.visibility = View.GONE
-            }
+        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
+            startAwakeningAnim()
+            saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "in_progress")
+        }
 
-            2 -> {
-                ivDarkness.visibility = View.GONE
-                ivDarknessFlashlight.visibility = View.GONE
-                btnLightOn.visibility = View.GONE
-                ivBlack.visibility = View.GONE
+        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "completed") {
+            ivDarkness.visibility = View.GONE
+            ivDarknessFlashlight.visibility = View.GONE
+            btnLightOn.visibility = View.GONE
+            ivBlack.visibility = View.GONE
+        }
 
-                ivMain.setImageResource(R.drawable.lvl0_bd_solved)
-                btnToPuzzle1Lock.visibility = View.GONE
-                btnToPuzzle1Lock.visibility = View.GONE
-                btnToElevator.visibility = View.VISIBLE
-
-            }
+        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "lock") == "completed") {
+            ivMain.setImageResource(R.drawable.lvl0_bd_solved)
+            btnToPuzzle1Lock.visibility = View.GONE
+            btnToPuzzle1Lock.visibility = View.GONE
+            btnToElevator.visibility = View.VISIBLE
         }
     }
 
@@ -152,7 +145,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
                         soundManager.playSound(R.raw.sound_of_a_flashlight)
                         ivDarkness.visibility = View.VISIBLE
                     }
-
                 }
             }
         }
@@ -188,7 +180,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     override fun onDestroy() {
         super.onDestroy()
         flashlightManager.stopMonitoring()
-        saveManager.saveLevelProgress(requireActivity(), 0)
     }
 
     override fun onResume() {
