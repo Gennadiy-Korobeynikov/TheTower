@@ -27,6 +27,7 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
     private lateinit var rv3: RecyclerView
     private lateinit var rv4: RecyclerView
     private lateinit var rv5: RecyclerView
+    private val rvList = mutableListOf<RecyclerView>()
 
     private lateinit var mainScreen: FrameLayout
 
@@ -39,51 +40,8 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
 
     private var isSolved = false
 
-    private val images = arrayOf(
+    private val images =
         arrayOf(
-            R.drawable.lvl2_puzzle0_a,
-            R.drawable.lvl2_puzzle0_b,
-            R.drawable.lvl2_puzzle0_c,
-            R.drawable.lvl2_puzzle0_d,
-            R.drawable.lvl2_puzzle0_e,
-            R.drawable.lvl2_puzzle0_h,
-            R.drawable.lvl2_puzzle0_l,
-            R.drawable.lvl2_puzzle0_n,
-            R.drawable.lvl2_puzzle0_u
-        ),
-        arrayOf(
-            R.drawable.lvl2_puzzle0_a,
-            R.drawable.lvl2_puzzle0_b,
-            R.drawable.lvl2_puzzle0_c,
-            R.drawable.lvl2_puzzle0_d,
-            R.drawable.lvl2_puzzle0_e,
-            R.drawable.lvl2_puzzle0_h,
-            R.drawable.lvl2_puzzle0_l,
-            R.drawable.lvl2_puzzle0_n,
-            R.drawable.lvl2_puzzle0_u
-        ),
-        arrayOf(
-            R.drawable.lvl2_puzzle0_a,
-            R.drawable.lvl2_puzzle0_b,
-            R.drawable.lvl2_puzzle0_c,
-            R.drawable.lvl2_puzzle0_d,
-            R.drawable.lvl2_puzzle0_e,
-            R.drawable.lvl2_puzzle0_h,
-            R.drawable.lvl2_puzzle0_l,
-            R.drawable.lvl2_puzzle0_n,
-            R.drawable.lvl2_puzzle0_u
-        ),
-        arrayOf(
-            R.drawable.lvl2_puzzle0_a,
-            R.drawable.lvl2_puzzle0_b,
-            R.drawable.lvl2_puzzle0_c,
-            R.drawable.lvl2_puzzle0_d,
-            R.drawable.lvl2_puzzle0_e,
-            R.drawable.lvl2_puzzle0_h,
-            R.drawable.lvl2_puzzle0_l,
-            R.drawable.lvl2_puzzle0_n,
-            R.drawable.lvl2_puzzle0_u
-        ), arrayOf(
             R.drawable.lvl2_puzzle0_a,
             R.drawable.lvl2_puzzle0_b,
             R.drawable.lvl2_puzzle0_c,
@@ -94,7 +52,6 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
             R.drawable.lvl2_puzzle0_n,
             R.drawable.lvl2_puzzle0_u
         )
-    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -108,6 +65,9 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
                 R.raw.sound_of_segments_rotating_on_the_safe_lock
             )
         )
+
+        rvList.addAll(listOf(rv1, rv2, rv3, rv4, rv5))
+
 
         hintManager = HintManager(
             listOf(
@@ -138,12 +98,10 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
         mainScreen = binding.mainScreen
     }
 
-    private fun setupWheels(data: Array<Array<Int>>) {
-        setupWheel(rv1, data[0], 0)
-        setupWheel(rv2, data[1], 1)
-        setupWheel(rv3, data[2], 2)
-        setupWheel(rv4, data[3], 3)
-        setupWheel(rv5, data[4], 4)
+    private fun setupWheels(data: Array<Int>) {
+        rvList.forEachIndexed { index, rv ->
+            setupWheel(rv, data, index)
+        }
     }
 
     private fun setupWheel(rv: RecyclerView, data: Array<Int>, rvIndex: Int) {
