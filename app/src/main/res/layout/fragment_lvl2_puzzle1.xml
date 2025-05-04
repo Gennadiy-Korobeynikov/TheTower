@@ -104,9 +104,12 @@
 
     <EditText
         android:id="@+id/hidden_input"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         android:cursorVisible="false"
+        android:alpha="0"
+        android:visibility="visible"
+        android:imeOptions="flagNoExtractUi|actionDone"
         android:importantForAutofill="no"
         android:maxLength="7" />
 
