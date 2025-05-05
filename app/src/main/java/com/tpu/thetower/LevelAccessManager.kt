@@ -29,6 +29,9 @@ class LevelAccessManager {
 
         fun upgradeAccessLvl(fragment: Fragment) {
 
+            if (currentAccessLvl == 2) //Для теста
+                currentAccessLvl = -1
+
             currentAccessLvl++
             unlockModules(fragment)
             saveManager.saveAccessLevel(fragment.requireContext() , currentAccessLvl)
