@@ -9,7 +9,7 @@ class HintManager(
     private val hints: List<String>,
     private var usedHintsCount : Int,
     private var level : Int,
-    private var puzzle : Int,
+    private var puzzle : String,
 ) {
     private val saveManager = SaveManager.getInstance()
     companion object {
@@ -50,6 +50,7 @@ class HintManager(
 
 
     fun useHint(activity: Activity) {
+        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle)
 
         // Последняя подсказка - только показываем
         if (usedHintsCount == hints.count()) {
@@ -64,8 +65,8 @@ class HintManager(
     }
 
     fun usedHintsCountIncrease(activity: Activity) {
-        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity,level,puzzle) + 1
-        saveManager.savePuzzleUsedHintsCount(activity,level, puzzle,usedHintsCount)
+        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle) + 1
+        saveManager.savePuzzleUsedHintsCount(activity, level, puzzle, usedHintsCount)
     }
 
 }

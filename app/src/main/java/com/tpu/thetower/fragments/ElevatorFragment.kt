@@ -29,7 +29,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
     private lateinit var btnToLvl3: Button
     private lateinit var btnToLvl4: Button
     private lateinit var btnToLvlTest: Button
-    private lateinit var btnToLvlChessboardTest: Button
 
     private lateinit var lvlButtons : List<Button>
 
@@ -66,7 +65,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         btnToLvl3 = binding.btnElevatorToLvl3
         btnToLvl4 = binding.btnElevatorToLvl4
         btnToLvlTest = binding.btnElevatorToLvlTest
-        btnToLvlChessboardTest = binding.btnElevatorToLvlChessboardTest
 
         lvlButtons = listOf(
             btnToLvl0,
@@ -75,7 +73,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             btnToLvl3,
             btnToLvl4,
             btnToLvlTest,
-            btnToLvlChessboardTest
         )
     }
 
@@ -83,11 +80,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
 
         btnToLvlTest.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
-        }
-
-        btnToLvlChessboardTest.setOnClickListener {
-            soundManager.release()
-            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_chessboardTestFragment)
         }
 
         btnToLvl0.setOnClickListener {
@@ -100,20 +92,24 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl1Fragment)
         }
 
+        btnToLvlTest.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvlTestFragment)
+        }
+
         btnToLvl2.setOnClickListener {
             soundManager.release()
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2Fragment)
         }
 
         btnToLvl3.setOnClickListener {
-            //soundManager.release()
-            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl2PuzzleHooverFragment)
+            FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl3Fragment)
         }
 
         btnToLvl4.setOnClickListener {
             soundManager.release()
             FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl4Fragment)
         }
+
 
 
         requireActivity().supportFragmentManager
@@ -127,6 +123,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator) {
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
         unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }
-        //TODO Обновить дизайн панели управления
+        //TODO Обновить дизайн панели уроавления
     }
 }

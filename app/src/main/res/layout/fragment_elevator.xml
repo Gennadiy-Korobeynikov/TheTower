@@ -74,14 +74,5 @@
         android:layout_marginStart="250dp"
         android:visibility="gone"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_elevator_to_lvl_chessboard_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToLVL ChessboardTEST"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
-        android:layout_marginStart="250dp"
-        android:visibility="visible"/>
 
 </FrameLayout>

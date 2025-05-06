@@ -54,18 +54,11 @@
             android:id="@+id/action_elevatorFragment_to_lvlTestFragment"
             app:destination="@id/lvlTestFragment" />
         <action
-            android:id="@+id/action_elevatorFragment_to_lvl2PuzzleHooverFragment"
-            app:destination="@id/lvl3PuzzleHooverFragment"
-            app:enterAnim="@android:animator/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
             app:destination="@id/lvl2Fragment" />
         <action
-            android:id="@+id/action_elevatorFragment_to_chessboardTestFragment"
-            app:destination="@id/chessboardTestFragment" />
+            android:id="@+id/action_elevatorFragment_to_lvl3Fragment"
+            app:destination="@id/lvl3Fragment" />
         <action
             android:id="@+id/action_elevatorFragment_to_lvl4Fragment"
             app:destination="@id/lvl4Fragment"
@@ -123,6 +116,12 @@
         <action
             android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle1Fragment"
             app:destination="@id/lvl2Puzzle1Fragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PetFragment"
+            app:destination="@id/lvl2PetFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2CaesarFragment"
+            app:destination="@id/lvl2CaesarFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl2Puzzle0Fragment"
@@ -151,11 +150,78 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_chessboardTestFragment"
+            app:destination="@id/chessboardTestFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4Puzzle1Fragment"
+            app:destination="@id/lvl4Puzzle1Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/booksFragment"
         android:name="com.tpu.thetower.fragments.BooksFragment"
         android:label="fragment_books"
         tools:layout="@layout/fragment_books" />
+    <fragment
+        android:id="@+id/keyFragment"
+        android:name="com.tpu.thetower.fragments.KeyFragment"
+        android:label="KeyFragment" />
+    <fragment
+        android:id="@+id/lvl3Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl3Fragment"
+        android:label="fragment_lvl3"
+        tools:layout="@layout/fragment_lvl3" >
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle0Fragment"
+            app:destination="@id/lvl3Puzzle0Fragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle1Fragment"
+            app:destination="@id/lvl3Puzzle1Fragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleHooverFragment"
+            app:destination="@id/lvl3PuzzleHooverFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_keyFragment"
+            app:destination="@id/keyFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleEditorFragment"
+            app:destination="@id/lvl3PuzzleEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lvl3Puzzle0Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl3Puzzle0Fragment"
+        android:label="Lvl3Puzzle0Fragment" />
+    <fragment
+        android:id="@+id/lvl3Puzzle1Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl3Puzzle1Fragment"
+        android:label="Lvl3Puzzle1Fragment" />
+    <fragment
+        android:id="@+id/lvl4Puzzle1Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl4Puzzle1Fragment"
+        android:label="fragment_lvl4_puzzle1"
+        tools:layout="@layout/fragment_lvl4_puzzle1" />
+    <fragment
+        android:id="@+id/lvl2CaesarFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2CaesarFragment"
+        android:label="fragment_lvl2_caesar"
+        tools:layout="@layout/fragment_lvl2_caesar" />
+    <fragment
+        android:id="@+id/lvl2PetFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PetFragment"
+        android:label="fragment_lvl2_pet"
+        tools:layout="@layout/fragment_lvl2_pet" />
+    <fragment
+        android:id="@+id/lvl3PuzzleEditorFragment"
+        android:name="com.tpu.thetower.fragments.Lvl3PuzzleEditorFragment"
+        android:label="fragment_lvl3_puzzle_editor"
+        tools:layout="@layout/fragment_lvl3_puzzle_editor" />
 
 </navigation>

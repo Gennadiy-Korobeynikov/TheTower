@@ -3,7 +3,7 @@ package com.tpu.thetower.puzzles
 import android.content.Context
 import com.tpu.thetower.Puzzle
 
-class Lvl2Puzzle2(name: String) : Puzzle(name) {
+class Lvl2Puzzle2(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     private val answer = "01010"
 
     override fun checkSolution(context: Context, solution: String) : Boolean {

@@ -13,7 +13,7 @@
       "puzzles": [
         {
           "id": 0,
-          "name": "Flashlight",
+          "name": "flashlight",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
@@ -21,7 +21,7 @@
         },
         {
           "id": 1,
-          "name": "Lock",
+          "name": "lock",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
@@ -49,7 +49,7 @@
       "puzzles": [
         {
           "id": 0,
-          "name": "",
+          "name": "lock",
           "status": "in_progress",
           "attempts": 1,
           "timeSpent": 230,
@@ -57,7 +57,7 @@
         },
         {
           "id": 1,
-          "name": "",
+          "name": "caesar",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
@@ -65,7 +65,15 @@
         },
         {
           "id": 2,
-          "name": "",
+          "name": "password",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 3,
+          "name": "chat",
           "status": "",
           "attempts": 0,
           "timeSpent": 0,
@@ -75,6 +83,83 @@
       "npcDialogs": [
         {
           "npcId": 0,
+          "currentDialogIndex": 0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Security room",
+      "isCompleted": false,
+      "puzzles": [
+        {
+          "id": 0,
+          "name": "donuts",
+          "status": "in_progress",
+          "attempts": 1,
+          "timeSpent": 230,
+          "hintsUsed": 0
+        },
+        {
+          "id": 1,
+          "name": "buttons",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 11,
+          "name": "sleeping pills",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 2,
+          "name": "vacuum cleaner",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 3,
+          "name": "lock model",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 4,
+          "name": "key",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 5,
+          "name": "donuts after shaking",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+        "id": 6,
+        "name": "lock model after pasted",
+        "status": "",
+        "attempts": 0,
+        "timeSpent": 0,
+        "hintsUsed": 0
+        }
+      ],
+      "npcDialogs": [
+        {
+          "id": 0,
           "currentDialogIndex": 0
         }
       ]

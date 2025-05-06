@@ -16,12 +16,12 @@
 
     <ImageView
         android:id="@+id/iv_page"
-        android:layout_width="650dp"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/page1_test"
+        android:scaleY="0.9"
+        android:scaleX="1.2"/>
 
-        android:src="@drawable/page1_test" />
 
     <TextView
         android:id="@+id/tv_page_text"
@@ -29,7 +29,9 @@
         android:layout_height="wrap_content"
         tools:text="ТЕКСТ"
         android:layout_gravity="center"
-        android:textSize="80sp"/>
+        android:textSize="22sp"
+        android:layout_marginBottom="145dp"
+        android:layout_marginEnd="255dp"/>
 
 
 

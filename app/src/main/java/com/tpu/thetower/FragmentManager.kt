@@ -119,5 +119,10 @@ class FragmentManager {
             fragment.requireActivity().supportFragmentManager
                 .setFragmentResult("puzzleChoosing", bundleOf("puzzleNum" to puzzleNum))
         }
+
+        fun changeDragAndDropImg(fragment: Fragment, dragAndDropImg : Int) {
+            fragment.requireActivity().supportFragmentManager
+                .setFragmentResult("drag&drop", bundleOf("dragAndDropImg" to dragAndDropImg))
+        }
     }
 }

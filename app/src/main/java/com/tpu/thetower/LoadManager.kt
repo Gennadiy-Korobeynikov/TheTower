@@ -10,6 +10,8 @@ class LoadManager {
     companion object {
 
 
+        public var isASKII = false // TODO Исправить!!!!! длолжно быть через сохранения
+
         private val saveManager = SaveManager.getInstance()
         private lateinit var gameData: SaveManager.SaveData
         private val musicManager = MusicManager.getInstance()
@@ -20,7 +22,8 @@ class LoadManager {
             R.id.action_elevatorFragment_to_lvlTestFragment,
             R.id.action_elevatorFragment_to_lvl0Fragment,
             R.id.action_elevatorFragment_to_lvl1Fragment,
-            R.id.action_elevatorFragment_to_lvl2Fragment
+            R.id.action_elevatorFragment_to_lvl2Fragment,
+            R.id.action_elevatorFragment_to_lvl3Fragment
         )
 
         fun setGameData(activity: Activity) {
@@ -74,20 +77,25 @@ class LoadManager {
 //            return gameData.levels[level].puzzles[puzzle].status
 //        }
 
-        fun getPuzzleUsedHintsCount(activity: Activity, level: Int, puzzle: Int): Int {
+        fun getPuzzleUsedHintsCount(activity: Activity, level: Int, puzzle: String): Int {
             setGameData(activity)
-            return gameData.levels[level].puzzles[puzzle].hintsUsed //Пока так
+            return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.hintsUsed ?: 0 //Пока так
         }
 
         fun getLevelProgress(activity: Activity, level: Int): Int {
             setGameData(activity)
-            return gameData.levels[level].puzzles.count { it.status == "completed" }
+            return gameData.levels.find { it.id == level }?.puzzles?.count { it.status == "completed" } ?: 0
+        }
+
+        fun isPuzzleCompleted(activity: Activity, level: Int, puzzle: String) : Boolean {
+            setGameData(activity)
+            return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.status == "completed"
         }
 
         fun isLevelCompleted(activity: Activity, level: Int): Boolean {
             setGameData(activity)
 
-            return getLevelProgress(activity, level) == gameData.levels[level].puzzles.size
+            return getLevelProgress(activity, level) == gameData.levels.find { it.id == level }?.puzzles?.size
         }
 
         fun getBlockProgress(activity: Activity, borders: Pair<Int, Int>): Int {
@@ -105,13 +113,18 @@ class LoadManager {
         fun getAccessLevel(activity: Activity): Int {
             setGameData(activity)
 
-            return gameData.playerInfo.accessLevel ?: 0
+            return gameData.playerInfo.accessLevel
         }
 
         fun getCurrentDialog(activity: Activity, level: Int, npc: Int): Int {
             setGameData(activity)
 
-            return gameData.levels[level].npcDialogs[npc].currentDialogIndex
+            return gameData.levels.find { it.id == level }?.npcDialogs?.find { it.id == npc }?.currentDialogIndex ?: 0
+        }
+
+        fun getPuzzleStatus(activity: Activity, level: Int, puzzle: String): String {
+            setGameData(activity)
+            return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.status ?: "locked"
         }
     }
 }

@@ -8,6 +8,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
+import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentLvlTestBinding
@@ -18,9 +22,11 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
 
     private lateinit var saveManager: SaveManager
 
+
     private lateinit var binding: FragmentLvlTestBinding
     private val originalPositions = mutableMapOf<View, Pair<Float, Float>>()
     private val zoneOccupants = mutableMapOf<View, View?>()
+
 
 //    private val puzzle: Puzzle = Lvl0Puzzle1("Lvl0Puzzle1")
 
@@ -30,6 +36,7 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvlTestBinding.bind(view)
+
 
         with(binding) {
 
@@ -133,13 +140,13 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
         return false
     }
 
-    private fun placeViewInZone(view: View, zone: View) {
-        view.apply {
-            x = zone.x + (zone.width - width) / 2f
-            y = zone.y + (zone.height - height) / 2f
-            visibility = View.VISIBLE
+        private fun placeViewInZone(view: View, zone: View) {
+            view.apply {
+                x = zone.x + (zone.width - width) / 2f
+                y = zone.y + (zone.height - height) / 2f
+                visibility = View.VISIBLE
+            }
         }
-    }
 
     private fun updateSolution() {
         val targets =
@@ -162,5 +169,6 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
         saveManager = SaveManager.getInstance()
         saveManager.saveCurrentLevel(requireContext(), -1)
     }
+
 
 }

@@ -11,17 +11,20 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl2Puzzle1Binding
 import com.tpu.thetower.puzzles.Lvl2Puzzle1
 
-class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
+class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
 
     private lateinit var binding: FragmentLvl2Puzzle1Binding
     private val pinCells = mutableListOf<TextView>()
-    private val puzzle: Puzzle = Lvl2Puzzle1("Lvl2Puzzle1")
+    private val puzzle: Puzzle = Lvl2Puzzle1(2, "password")
 
 
     private lateinit var tvPin1: TextView
@@ -30,11 +33,13 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
     private lateinit var tvPin4: TextView
     private lateinit var tvPin5: TextView
     private lateinit var tvPin6: TextView
+    private lateinit var tvPin7: TextView
     private lateinit var tvPassword: TextView
 
     private lateinit var pinContainer: LinearLayout
     private lateinit var hiddenInput: EditText
     private lateinit var ivDialog: ImageView
+    private lateinit var hintManager: HintManager
 
 
 
@@ -46,12 +51,24 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         bindView()
         setListeners()
 
+
+
         pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6))
+        pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
         when (LoadManager.getLevelProgress(requireActivity(), 2)) {
-            1 -> showKeyboard()
-            2 -> {
+            0, 1 -> { // До ввода пароля
+                showKeyboard()
+                hintManager = HintManager(listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3",),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"password"),
+                    2,"password")
+            }
+            2, 3 -> { // После ввода пароля
                 completed()
+                hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
+                    "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
+                    2,"chat")
             }
         }
     }
@@ -63,6 +80,7 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         tvPin4 = binding.tvPin4
         tvPin5 = binding.tvPin5
         tvPin6 = binding.tvPin6
+        tvPin7 = binding.tvPin7
         tvPassword = binding.tvPassword
 
         hiddenInput = binding.hiddenInput
@@ -113,7 +131,10 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
     }
 
     private fun completed() {
-
+        hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
+            "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
+            2,"chat")
         hiddenInput.visibility = View.GONE
         pinContainer.visibility = View.GONE
         tvPassword.visibility = View.GONE
@@ -124,5 +145,12 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) {
         super.onPause()
 
         hideKeyboard()
+    }
+
+    override fun useHint() {
+        if (LoadManager.getLevelProgress(requireActivity(), 2) == 1)
+            hintManager.useHint(requireActivity())
+        else
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 }
