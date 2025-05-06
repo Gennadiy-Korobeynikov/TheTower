@@ -38,7 +38,6 @@ class LoadManager {
             LevelAccessManager.currentAccessLvl = gameData.playerInfo.accessLevel
             LevelAccessManager.unlockModules(getCurrFragment(activity))
 
-
         }
 
         private fun getCurrFragment(activity: Activity): Fragment {
