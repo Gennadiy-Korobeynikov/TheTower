@@ -58,10 +58,11 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
             }
             "completed" -> { // После тряски коробки
                 hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
-                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts"),
-                    3,"donuts")
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts after shaking"),
+                    3,"donuts after shaking")
                 iv0.visibility = View.GONE
                 iv1.visibility = View.VISIBLE
+
             }
         }
     }
@@ -114,6 +115,9 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     }
 
     private fun Completed() {
+        hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts after shaking"),
+            3,"donuts after shaking")
         iv0.visibility = View.GONE
         iv1.visibility = View.VISIBLE
         saveManager.savePuzzleData(requireContext(), 3, "donuts", status = "completed")

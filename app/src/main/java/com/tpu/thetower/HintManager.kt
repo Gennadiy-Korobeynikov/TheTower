@@ -50,6 +50,7 @@ class HintManager(
 
 
     fun useHint(activity: Activity) {
+        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle)
 
         // Последняя подсказка - только показываем
         if (usedHintsCount == hints.count()) {
