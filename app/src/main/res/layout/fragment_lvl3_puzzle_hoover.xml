@@ -1,86 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_screen"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/main_screen"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context=".fragments.Lvl3PuzzleHooverFragment">
 
-  <ImageView
-      android:id="@+id/iw_monitor_image"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:src="@drawable/hoover_map_test"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideH_anim_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="-20dp" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideV_anim_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.17" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideV_anim_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.755" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideH_anim_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <ImageView
+        android:id="@+id/iv_monitor_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:foregroundGravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl3_hoover_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_restart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="150dp"
-        tools:text="Въебался в стену!"
+        android:layout_marginEnd="188dp"
         android:textColor="#6B0101"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273"
+        tools:text="Въебался в стену!" />
 
     <TextView
         android:id="@+id/tv_win"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="650dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="124dp"
         android:textColor="#06EB3F"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Победил!" />
 
     <TextView
         android:id="@+id/tv_coordinates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="152dp"
         android:text="(X,Y)"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:layout_gravity="center|end"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="40dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
 
     <TextView
         android:id="@+id/tv_direction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="152dp"
         android:text="direction"
         android:textSize="25sp"
         android:textStyle="italic"
-        android:layout_gravity="center|end"
-        android:layout_marginEnd="50dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
 
     <Button
         android:id="@+id/btn_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Вправо"
         android:layout_gravity="center"
-        android:layout_marginLeft="-60dp"
-        android:layout_marginTop="160dp"/>
+        android:layout_marginEnd="260dp"
+        android:layout_marginBottom="56dp"
+        android:text="Вправо"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <Button
         android:id="@+id/btn_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Влево"
         android:layout_gravity="center"
-        android:layout_marginRight="270dp"
-        android:layout_marginTop="160dp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="Влево"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_forward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginEnd="396dp"
+        android:layout_marginBottom="56dp"
         android:text="Вперёд"
         android:textColor="#0C8102"
-        android:layout_marginLeft="-170dp"
-        android:layout_marginTop="160dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_hoover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/lvl3_hoover"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.23"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideV_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.358" />
+
+    <ImageView
+        android:id="@+id/iv_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/lvl3_hoover_border"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="@+id/guideV_border"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.292" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

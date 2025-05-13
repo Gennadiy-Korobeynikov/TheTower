@@ -1,10 +1,14 @@
 package com.tpu.thetower.fragments
 
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
@@ -15,6 +19,7 @@ import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
 import com.tpu.thetower.puzzles.Direction
 import com.tpu.thetower.puzzles.Lvl3PuzzleHoover
 
+const val ANIM_DURATION = 800L
 
 class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover), Hintable {
 
@@ -24,21 +29,27 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private lateinit var tvDirection: TextView
     private lateinit var tvRestart: TextView
     private lateinit var tvWin : TextView
-    private lateinit var iwTest : ImageView
+
+    private lateinit var ivBg : ImageView
+    private lateinit var ivHoover : ImageView
 
 
     private lateinit var btnRight: Button
     private lateinit var btnLeft: Button
+
     private lateinit var btnForward: Button
+
+    private lateinit var mainLayout: ConstraintLayout
 
 
     private val puzzleHoover = Lvl3PuzzleHoover(3, "vacuum cleaner")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
-
-
     private var restart : Boolean = false
+    private var onStartPosition : Boolean = true
     private var win : Boolean = false
+
+
 
 
 
@@ -66,6 +77,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "vacuum cleaner"),
             3, "vacuum cleaner"
         )
+
     }
 
     private fun bindView() {
@@ -77,35 +89,164 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         btnRight = binding.btnRight
         btnLeft = binding.btnLeft
         btnForward = binding.btnForward
-        iwTest = binding.iwMonitorImage
+        ivBg = binding.ivMonitorImage
+        ivHoover = binding.ivHoover
+
+        mainLayout = binding.mainScreen
     }
 
 
+    private fun rotateHooverAnim(clockwise : Boolean) {
+        changeButtonsState(false)
+        puzzleHoover.changeDirection(clockwise = clockwise)
+        val value = if (clockwise) 90f else -90f
+        ivHoover.animate().rotationBy(value).setDuration(300).withEndAction {
+            test()
+            changeButtonsState(true)
+        }.start()
+    }
+
     private  fun setListeners() {
         btnLeft.setOnClickListener {
-            puzzleHoover.changeDirection(clockwise = false)
-            test()
+           rotateHooverAnim(false)
         }
         btnRight.setOnClickListener {
-            puzzleHoover.changeDirection(clockwise = true)
-            test()
+            rotateHooverAnim(true)
         }
+
+
         btnForward.setOnClickListener {
+
             tvRestart.text = ""
             tvWin.text = ""
-            iwTest.setImageResource(R.drawable.lvl3_puzzle_hoover_noise_test)
-            puzzleHoover.moveForward()
-            restart = puzzleHoover.isWall()
-            win = puzzleHoover.checkSolution(requireContext())
-            test()
+            changeButtonsState(false)
+            if (onStartPosition) { //В начале
+                moveHooverAnim(puzzleHoover.currDirection)
+            }
+            else {
+                btnForward.postDelayed({
+                    puzzleHoover.moveForward()
+                    restart = puzzleHoover.isWall()
+                    win = puzzleHoover.checkSolution(requireContext())
+                    test()
+                    changeButtonsState(true)
+                }, 1000)
+            }
         }
+    }
+
+    private fun changeButtonsState(state : Boolean) {
+        btnLeft.isEnabled = state
+        btnRight.isEnabled = state
+        btnForward.isEnabled = state
+    }
+
+    private fun moveHooverAnim(direction: Direction) {
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(mainLayout)
+
+        // Сброс всех ограничений для iv_hoover
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.START)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.END)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.TOP)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.BOTTOM)
+
+        when (direction) {
+            Direction.Left -> {
+                // Привязываем к  (слева)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.START, R.id.guideV_anim_left, ConstraintSet.START)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            }
+            Direction.Right -> {
+                // Привязываем к  (справа)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.END, R.id.guideV_anim_right, ConstraintSet.END)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            }
+            Direction.Up -> {
+                // Привязываем к (выход за экран вверх)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.TOP, R.id.guideH_anim_up, ConstraintSet.TOP)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+            }
+            Direction.Down -> {
+                // Привязываем к (снизу)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.BOTTOM, R.id.guideH_anim_down, ConstraintSet.BOTTOM)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
+                constraintSet.connect(R.id.iv_hoover, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+            }
+        }
+
+        val transition = ChangeBounds()
+        transition.duration = ANIM_DURATION
+
+        transition.addListener(object : android.transition.Transition.TransitionListener {
+            override fun onTransitionEnd(transition: android.transition.Transition?) {
+                transition?.removeListener(this)
+                if (puzzleHoover.currDirection != Direction.Up) {
+                    // Возврат на исходную позицию (центр)
+                    ivHoover.postDelayed({
+                        moveHooverToCenter()
+                    }, 1000)
+                } else {
+                    onStartPosition = false
+                    puzzleHoover.moveForward()
+//                    restart = puzzleHoover.isWall()
+//                    win = puzzleHoover.checkSolution(requireContext())
+                    test()
+                    changeButtonsState(true)
+                }
+            }
+            override fun onTransitionStart(transition: android.transition.Transition?) {}
+            override fun onTransitionCancel(transition: android.transition.Transition?) {}
+            override fun onTransitionPause(transition: android.transition.Transition?) {}
+            override fun onTransitionResume(transition: android.transition.Transition?) {}
+        })
+
+        TransitionManager.beginDelayedTransition(mainLayout, transition)
+        constraintSet.applyTo(mainLayout)
+    }
+
+    private fun moveHooverToCenter() {
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(mainLayout)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.START)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.END)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.TOP)
+        constraintSet.clear(R.id.iv_hoover, ConstraintSet.BOTTOM)
+        // Центрируем по всем сторонам
+        constraintSet.connect(R.id.iv_hoover, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
+        constraintSet.connect(R.id.iv_hoover, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+        constraintSet.connect(R.id.iv_hoover, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        constraintSet.connect(R.id.iv_hoover, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+
+        val transition = ChangeBounds()
+        transition.duration = ANIM_DURATION
+
+        transition.addListener(object : android.transition.Transition.TransitionListener {
+            override fun onTransitionEnd(transition: android.transition.Transition?) {
+                transition?.removeListener(this)
+                test()
+                onStartPosition = true
+                changeButtonsState(true)
+            }
+            override fun onTransitionStart(transition: android.transition.Transition?) {}
+            override fun onTransitionCancel(transition: android.transition.Transition?) {}
+            override fun onTransitionPause(transition: android.transition.Transition?) {}
+            override fun onTransitionResume(transition: android.transition.Transition?) {}
+        })
+
+        TransitionManager.beginDelayedTransition(mainLayout, transition)
+        constraintSet.applyTo(mainLayout)
     }
 
 // Временно для тестирования
     private fun test() {
         if (restart) {
-            iwTest.setImageResource(R.drawable.hoover_map_test)
             tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
+            ivHoover.animate().rotation(0f).setDuration(300).start()
+            moveHooverToCenter()
             restart = false
         }
 

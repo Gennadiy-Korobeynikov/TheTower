@@ -6,18 +6,22 @@ import com.tpu.thetower.Puzzle
 class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
 
     private val isCorrectCell  = arrayOf(
-        arrayOf(false,false,false,false,false),
-        arrayOf(false,true,true,false,false),
-        arrayOf(false,false,true,true,false),
-        arrayOf(false,false,false,true,false),
-        arrayOf(false,false,false,false,false),
+        arrayOf(false, false, false, false, false, false, false, false, false),
+        arrayOf(false, false, false, false, false, false, false, false, false),
+        arrayOf(false, false, true, false, false, false, false, false, false),
+        arrayOf(false, false, true,  true,  true,  false, false, false, false),
+        arrayOf(false, false, false, false, true,  true,  false, false, false),
+        arrayOf(false, false, false, false, false, true,  false, false, false),
+        arrayOf(false, false, false, false, false, true,  false, false, false),
+        arrayOf(false, false, false, true,  true,  true,  false, false, false),
+        arrayOf(false, false, false, true,  false, false, false, false, false),
     )
 
     private val directions =  arrayOf(
+        Direction.Up,
         Direction.Right,
         Direction.Down,
         Direction.Left,
-        Direction.Up
     )
 
     private val winPositionX = 3
@@ -26,16 +30,16 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
 // для теста public - потом раскомментить
 
     /*private*/ var dirIndex = 0
-    /*private*/ var currPositionX = 1
-    /*private*/ var currPositionY = 1
-    /*private*/ var currDirection : Direction = Direction.Right
+    /*private*/ var currPositionX = 3
+    /*private*/ var currPositionY = 8
+    /*private*/ var currDirection : Direction = Direction.Up
 
 
 
     private fun setInitValues() {
-        currPositionX = 1
-        currPositionY = 1
-        currDirection = Direction.Right
+        currPositionX = 3
+        currPositionY = 8
+        currDirection = Direction.Up
         dirIndex = 0
     }
 
