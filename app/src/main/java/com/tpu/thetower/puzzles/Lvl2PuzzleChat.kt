@@ -3,8 +3,8 @@ package com.tpu.thetower.puzzles
 import android.content.Context
 import com.tpu.thetower.Puzzle
 
-class Lvl3Puzzle1(level: Int, puzzle: String) : Puzzle(level, puzzle) {
-    private val answer = "165243"
+class Lvl2PuzzleChat(level: Int, puzzle: String) : Puzzle(level, puzzle) {
+    private val answer = "01010"
 
     override fun checkSolution(context: Context, solution: String) : Boolean {
         if (solution == answer){

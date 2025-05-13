@@ -95,11 +95,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     private fun setListeners() {
 
         btnToPuzzle0.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3Puzzle0Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleButtonsFragment)
         }
 
         btnToPuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3Puzzle1Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
         }
 
         btnToPuzzle3.setOnClickListener {
@@ -111,6 +111,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         }
 
         btnToPuzzle4Lock.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleKeyFragment)
         }
 
         var longPressRunnable: Runnable? = null
@@ -130,7 +131,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
                 MotionEvent.ACTION_UP -> {
                     if (!isLongPressHandled) {
-                        FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_keyFragment)
+//                        FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_keyFragment)
                     }
                     longPressRunnable?.let { view.removeCallbacks(it) }
                     true

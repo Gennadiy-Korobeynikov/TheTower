@@ -1,20 +1,15 @@
 package com.tpu.thetower.fragments
 
-import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
@@ -22,8 +17,6 @@ import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl0Binding
 import com.tpu.thetower.devicemanagers.FlashlightManager
-import kotlin.concurrent.thread
-import kotlin.reflect.KProperty
 
 
 class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
@@ -106,7 +99,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         }
 
         btnToPuzzle1Lock.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0Puzzle1Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0PuzzleLockFragment)
             FragmentManager.showGoBackArrow(requireActivity())
         }
 

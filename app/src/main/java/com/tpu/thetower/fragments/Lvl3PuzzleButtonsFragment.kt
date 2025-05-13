@@ -1,6 +1,5 @@
 package com.tpu.thetower.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -13,12 +12,12 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.databinding.FragmentLvl3Puzzle1Binding
-import com.tpu.thetower.puzzles.Lvl3Puzzle1
+import com.tpu.thetower.databinding.FragmentLvl3PuzzleButtonsBinding
+import com.tpu.thetower.puzzles.Lvl3PuzzleButtons
 
-class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1), Hintable {
+class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons), Hintable {
 
-    private lateinit var binding: FragmentLvl3Puzzle1Binding
+    private lateinit var binding: FragmentLvl3PuzzleButtonsBinding
 
     private lateinit var btn1: Button
     private lateinit var btn2: Button
@@ -39,8 +38,8 @@ class Lvl3Puzzle1Fragment : Fragment(R.layout.fragment_lvl3_puzzle1), Hintable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl3Puzzle1Binding.bind(view)
-        puzzle = Lvl3Puzzle1(3, "buttons")
+        binding = FragmentLvl3PuzzleButtonsBinding.bind(view)
+        puzzle = Lvl3PuzzleButtons(3, "buttons")
 
         bindView()
         buttons.addAll(listOf(btn1, btn2, btn3, btn4, btn5, btn6))

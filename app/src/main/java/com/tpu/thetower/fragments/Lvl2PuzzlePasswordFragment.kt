@@ -17,14 +17,14 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.databinding.FragmentLvl2Puzzle1Binding
-import com.tpu.thetower.puzzles.Lvl2Puzzle1
+import com.tpu.thetower.databinding.FragmentLvl2PuzzlePasswordBinding
+import com.tpu.thetower.puzzles.Lvl2PuzzleLock1
 
-class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
+class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_password) , Hintable{
 
-    private lateinit var binding: FragmentLvl2Puzzle1Binding
+    private lateinit var binding: FragmentLvl2PuzzlePasswordBinding
     private val pinCells = mutableListOf<TextView>()
-    private val puzzle: Puzzle = Lvl2Puzzle1(2, "password")
+    private val puzzle: Puzzle = Lvl2PuzzleLock1(2, "password")
 
 
     private lateinit var tvPin1: TextView
@@ -46,7 +46,7 @@ class Lvl2Puzzle1Fragment : Fragment(R.layout.fragment_lvl2_puzzle1) , Hintable{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2Puzzle1Binding.bind(view)
+        binding = FragmentLvl2PuzzlePasswordBinding.bind(view)
 
         bindView()
         setListeners()
