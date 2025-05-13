@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     tools:context=".fragments.Lvl2Fragment">
 
@@ -151,6 +151,5 @@
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle1"
             app:layout_constraintWidth_percent="0.34" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </FrameLayout>

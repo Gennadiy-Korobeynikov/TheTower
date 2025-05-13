@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/rootLayout"
-    tools:context=".fragments.HUDFragment"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:context=".fragments.HUDFragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -30,10 +30,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="25dp"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        android:src="@drawable/menu"
-        android:layout_marginEnd="25dp"/>
+        android:src="@drawable/menu" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:layout_height="45dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="65dp"
-        android:background="@drawable/button_outline"/>
+        android:background="@drawable/button_outline" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_hint"
@@ -60,15 +60,15 @@
         android:layout_height="45dp"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="100dp"
-        android:background="@drawable/button_outline"/>
+        android:background="@drawable/button_outline" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/ivDraggable"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_triangle_drag1" />
+        android:src="@drawable/ic_triangle_drag1"
+        android:visibility="gone" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -77,17 +77,18 @@
         android:layout_height="45dp"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="150dp"
-        android:background="@drawable/button_outline"/>
+        android:background="@drawable/button_outline"
+        android:visibility="visible" />
 
 
-<!--   Временно для теста -->
+    <!--   Временно для теста -->
     <TextView
         android:id="@+id/tv_test_hint_recovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="25sp"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
 
 </FrameLayout>

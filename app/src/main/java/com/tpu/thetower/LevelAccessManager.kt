@@ -16,16 +16,20 @@ class LevelAccessManager {
         )
 
         var currentAccessLvl = 0
-        val topUnlockedLvlsForModules: List<Int> = listOf(0, 2, 3, 4, 5)
+        val topUnlockedLvlsForModules: List<Int> = listOf(0, 2, 3, 4)
+
+        fun getCardImage(): Int {
+             return cardImageIds[currentAccessLvl]
+        }
 
         fun unlockModules(fragment: Fragment) {
-            FragmentManager.changeAccessCardImg(fragment, cardImageIds[currentAccessLvl])
+            FragmentManager.changeAccessCardImg(fragment, getCardImage())
             FragmentManager.changeUnlockedModules(fragment, currentAccessLvl)
         }
 
         fun upgradeAccessLvl(fragment: Fragment) {
 
-            if (currentAccessLvl in 0..<topUnlockedLvlsForModules.size - 1) currentAccessLvl++
+            if (currentAccessLvl in 0..< topUnlockedLvlsForModules.size - 1) currentAccessLvl++
             unlockModules(fragment)
             saveManager.saveAccessLevel(fragment.requireContext(), currentAccessLvl)
         }

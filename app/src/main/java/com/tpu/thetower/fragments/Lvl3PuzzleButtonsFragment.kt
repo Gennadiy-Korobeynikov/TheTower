@@ -65,7 +65,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
         buttons.forEach { button ->
             button.setOnClickListener { view ->
                 val clickedButton = view as Button
-                solution += clickedButton.text.toString()
+                solution += clickedButton.text
                 clickedButton.isClickable = false
                 clickedButton.setBackgroundResource(R.drawable.lvl3_puzzle1_button_on)
                 checkSolution()
