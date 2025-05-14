@@ -24,7 +24,7 @@ class Lvl2CaesarFragment : Fragment(R.layout.fragment_lvl2_caesar), Hintable {
     }
 
     override fun useHint() {
-        if ( LoadManager.getLevelProgress(requireActivity(), 2) == 0) // До открытия первого замка
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "in_progress") // До открытия первого замка
             hintManager.useHint(requireActivity())
         else
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")

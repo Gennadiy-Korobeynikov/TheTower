@@ -143,7 +143,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     }
 
     override fun useHint() {
-        if (LoadManager.getLevelProgress(requireActivity(), 2) == 1)
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "caesar") == "completed")
             hintManager.useHint(requireActivity())
         else
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")

@@ -35,6 +35,7 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
         btnMenu.setOnClickListener {
             FragmentManager.showMenu(requireActivity())
+            FragmentManager.updateProgressBar(this)
         }
 
         requireActivity().supportFragmentManager

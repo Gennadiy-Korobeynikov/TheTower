@@ -125,6 +125,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
                 if (it.isVisible) {
                     soundManager.release()
                     FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
+                    FragmentManager.showGoBackArrow(requireActivity())
                 }
             }
         }
