@@ -173,21 +173,21 @@ class SaveManager private constructor() {
 
     }
 
-    fun saveLevelProgress(activity: Activity, level: Int) {
-        val gameData = readData(activity)
-        val updatedGameData = gameData?.copy()
-        if (updatedGameData?.levels?.find { it.id == level }?.puzzles?.size == LoadManager.getLevelProgress(
-                activity,
-                0
-            )
-        ) {
-            updatedGameData.levels.find { it.id == level }?.isCompleted = true
-        }
-
-        if (updatedGameData != null) {
-            saveData(activity, updatedGameData)
-        }
-    }
+//    fun saveLevelProgress(activity: Activity, level: Int) {
+//        val gameData = readData(activity)
+//        val updatedGameData = gameData?.copy()
+//        if (updatedGameData?.levels?.find { it.id == level }?.puzzles?.size == LoadManager.getLevelProgress(
+//                activity,
+//                0
+//            )
+//        ) {
+//            updatedGameData.levels.find { it.id == level }?.isCompleted = true
+//        }
+//
+//        if (updatedGameData != null) {
+//            saveData(activity, updatedGameData)
+//        }
+//    }
 
     fun saveCurrentDialog(activity: Activity, level: Int, npc: Int, dialogIndex: Int) {
         val gameData = readData(activity)

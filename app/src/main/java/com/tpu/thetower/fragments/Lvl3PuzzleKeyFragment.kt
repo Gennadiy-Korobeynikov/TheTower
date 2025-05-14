@@ -12,16 +12,19 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.SaveManager
+import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
 import kotlin.math.roundToInt
 
@@ -33,12 +36,19 @@ data class KeyPin(
 )
 
 
-class KeyFragment : Fragment(R.layout.fragment_key), Hintable {
+class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hintable {
+
+    private lateinit var binding: FragmentLvl3PuzzleKeyBinding
 
     private lateinit var keyView: KeyView
     private lateinit var tvKeyPosition: TextView
     private lateinit var main: ConstraintLayout
+    private lateinit var ivLock: ImageView
+    private lateinit var btnCopy: Button
+
     private lateinit var hintManager: HintManager
+    private lateinit var saveManager: SaveManager
+
     private lateinit var puzzle: Puzzle
     private var solution = listOf<Int>()
 
@@ -46,17 +56,29 @@ class KeyFragment : Fragment(R.layout.fragment_key), Hintable {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_key, container, false)
+        return inflater.inflate(R.layout.fragment_lvl3_puzzle_key, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        keyView = view.findViewById(R.id.keyView)
-        tvKeyPosition = view.findViewById(R.id.tvKeyPosition)
-        main = view.findViewById(R.id.main)
-        val btnReset = view.findViewById<Button>(R.id.btnReset)
+        binding = FragmentLvl3PuzzleKeyBinding.bind(view)
 
+        keyView = binding.keyView
+        tvKeyPosition = binding.tvKeyPosition
+        main = binding.main
+        ivLock = binding.ivLock
+        btnCopy = binding.btnCopy
+
+        saveManager = SaveManager.getInstance()
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed") {
+            ivLock.layoutParams = RelativeLayout.LayoutParams(
+                200,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+            )
+            keyView.visibility = View.VISIBLE
+        }
         puzzle = Lvl3PuzzleKey(3, "key")
 
         keyView.setOnKeyPinsChangedListener { pins ->
@@ -74,16 +96,12 @@ class KeyFragment : Fragment(R.layout.fragment_key), Hintable {
             }
         }
 
-        btnReset.setOnClickListener {
-            keyView.resetPins()
+        btnCopy.setOnClickListener {
+            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+
         }
 
-        if (LoadManager.isPuzzleCompleted(
-                requireActivity(),
-                3,
-                "lock model"
-            )
-        ) // Замок вставлен в комп
+        if (LoadManager.isPuzzleCompleted(requireActivity(), 3, "lock model")) // Замок вставлен в комп
             hintManager = HintManager(
                 listOf("lvl3_puzzle4_hint3"),
                 LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
@@ -95,12 +113,10 @@ class KeyFragment : Fragment(R.layout.fragment_key), Hintable {
                 LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
                 3, "key"
             )
-
     }
 
     override fun useHint() {
         hintManager.useHint(requireActivity())
-
     }
 }
 
@@ -125,6 +141,12 @@ class KeyView @JvmOverloads constructor(
         color = Color.RED
         style = Paint.Style.STROKE
         strokeWidth = 4f
+    }
+
+    private val borderPinPaint = Paint().apply {
+        color = Color.parseColor("#808080")
+        style = Paint.Style.STROKE
+        strokeWidth = 2f
     }
 
     private var keyBaseWidth = 40f
@@ -177,20 +199,41 @@ class KeyView @JvmOverloads constructor(
         pins.forEachIndexed { index, pin ->
             val pinY = keyBaseY + index * (keyBaseHeight / pins.size)
             val pinHeight = keyBaseHeight / pins.size
+            val pinXStart = keyBaseX + keyBaseWidth
 
             canvas.drawRect(
-                keyBaseX + keyBaseWidth,
+                pinXStart,
                 pinY,
-                keyBaseX + keyBaseWidth + pin.currentPosition,
+                pinXStart + pin.currentPosition,
                 pinY + pinHeight,
                 pinPaint
             )
 
+            val numberOfSteps = (pin.currentPosition / positionStep).toInt()
+            for (i in 1..numberOfSteps) {
+                val lineX = pinXStart + i * positionStep
+                canvas.drawLine(
+                    lineX,
+                    pinY,
+                    lineX,
+                    pinY + pinHeight,
+                    borderPinPaint
+                )
+            }
+
+            canvas.drawRect(
+                pinXStart,
+                pinY,
+                pinXStart + pin.currentPosition,
+                pinY + pinHeight,
+                borderPinPaint
+            )
+
             if (activePin == index) {
                 canvas.drawRect(
-                    keyBaseX + keyBaseWidth,
+                    pinXStart,
                     pinY,
-                    keyBaseX + keyBaseWidth + pin.currentPosition,
+                    pinXStart + pin.currentPosition,
                     pinY + pinHeight,
                     activePinPaint
                 )
@@ -293,8 +336,6 @@ class KeyView @JvmOverloads constructor(
             }
         }
         return super.onTouchEvent(event)
-
-
     }
 
     fun resetPins() {

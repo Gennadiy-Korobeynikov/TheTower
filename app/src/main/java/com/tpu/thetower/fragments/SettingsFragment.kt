@@ -26,7 +26,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private lateinit var btnBack: Button
     private lateinit var sbMusic: SeekBar
     private lateinit var sbSound: SeekBar
-    private lateinit var progressBar: ProgressBar
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +36,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         setListeners()
         handleSounds()
 
-        progressBar.progress = LoadManager.getBlockProgress(requireActivity(), Pair(0, 0))
     }
 
     private fun bindView() {
@@ -45,7 +43,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         btnBack = binding.btnBack
         sbMusic = binding.musicVolumeSeekBar
         sbSound = binding.soundVolumeSeekBar
-        progressBar = binding.progressBar
     }
 
     private fun setListeners() {

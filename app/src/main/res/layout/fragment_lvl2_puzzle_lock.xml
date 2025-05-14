@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_screen"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Lvl0Puzzle1Fragment">
-
+    android:orientation="horizontal"
+    tools:context=".fragments.Lvl2PuzzleLockFragment">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lvl0_bd_light" />
+        android:src="@drawable/lvl2_bg" />
 
     <LinearLayout
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:rotation="90">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="0.085" />
+            android:layout_weight="0.067" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image1"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.16"
+            android:layout_weight="0.135"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_image" />
@@ -37,14 +38,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="0.055" />
+            android:layout_weight="0.043" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image2"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.16"
+            android:layout_weight="0.135"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_image" />
@@ -52,14 +53,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="0.055" />
+            android:layout_weight="0.043" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image3"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.16"
+            android:layout_weight="0.135"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_image" />
@@ -67,14 +68,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="0.055" />
+            android:layout_weight="0.043" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_image4"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.16"
+            android:layout_weight="0.135"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_image" />
@@ -82,7 +83,22 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="0.043" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image5"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.135"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_image" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.082" />
     </LinearLayout>
 
     <ImageView
@@ -90,15 +106,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
-        android:src="@drawable/lvl0_puzzle1_shadow" />
+        android:layout_marginEnd="13dp"
+        android:rotation="90"
+        android:src="@drawable/lvl2_puzzle0_shadow" />
 
     <ImageView
         android:id="@+id/iv_lock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/lvl0_puzzle1_lock" />
-
+        android:rotation="90"
+        android:src="@drawable/lvl2_puzzle0_lock" />
 
 </FrameLayout>

@@ -115,24 +115,6 @@
                 android:layout_marginBottom="16dp"
                 android:background="#CCCCCC" />
 
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:max="100"
-                android:progress="0"
-                android:progressTint="#FF0000" />
-
-            <!-- Разделитель -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="16dp"
-                android:background="#CCCCCC" />
-
             <!-- Кнопка назад -->
             <Button
                 android:id="@+id/btn_back"

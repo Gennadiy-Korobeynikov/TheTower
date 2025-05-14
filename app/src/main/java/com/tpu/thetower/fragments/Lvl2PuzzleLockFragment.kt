@@ -12,15 +12,15 @@ import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl2Puzzle0Binding
-import com.tpu.thetower.puzzles.Lvl2Puzzle0
-import com.tpu.thetower.puzzles.Lvl2Puzzle2
+import com.tpu.thetower.databinding.FragmentLvl2PuzzleLockBinding
+import com.tpu.thetower.puzzles.Lvl2PuzzleLock0
+import com.tpu.thetower.puzzles.Lvl2PuzzleChat
 import com.tpu.thetower.utils.WheelSetupHelper
 
 
-class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
+class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hintable {
 
-    private lateinit var binding: FragmentLvl2Puzzle0Binding
+    private lateinit var binding: FragmentLvl2PuzzleLockBinding
 
     private lateinit var rv1: RecyclerView
     private lateinit var rv2: RecyclerView
@@ -56,7 +56,7 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2Puzzle0Binding.bind(view)
+        binding = FragmentLvl2PuzzleLockBinding.bind(view)
         bindView()
         soundManager = SoundManager.getInstance()
         soundManager.loadSound(
@@ -80,8 +80,8 @@ class Lvl2Puzzle0Fragment : Fragment(R.layout.fragment_lvl2_puzzle0), Hintable {
             .setFragmentResultListener("puzzleChoosing", viewLifecycleOwner) { _, bundle ->
                 val puzzleNum = bundle.getInt("puzzleNum")
                 when (puzzleNum) {
-                    0 -> puzzle = Lvl2Puzzle0(2, "lock")
-                    1 -> puzzle = Lvl2Puzzle2(2, "chat")
+                    0 -> puzzle = Lvl2PuzzleLock0(2, "lock")
+                    1 -> puzzle = Lvl2PuzzleChat(2, "chat")
                 }
                 setupWheels(images)
             }

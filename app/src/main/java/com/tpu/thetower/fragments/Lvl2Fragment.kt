@@ -70,7 +70,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
 
         btnToPuzzle0Lock.setOnClickListener {
             FragmentManager.choosePuzzle(this, 0)
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2Puzzle0Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
         }
 
         btnToPuzzle0Completed.setOnClickListener {
@@ -78,12 +78,12 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
         }
 
         btnToPuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2Puzzle1Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzlePasswordFragment)
         }
 
         btnToPuzzle2Lock.setOnClickListener {
             FragmentManager.choosePuzzle(this, 1)
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2Puzzle0Fragment)
+            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
         }
 
         btnToPuzzle2Completed.setOnClickListener {

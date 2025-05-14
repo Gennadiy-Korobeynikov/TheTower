@@ -58,6 +58,11 @@ class LoadManager {
             )
         }
 
+        fun getCurrentLevel(activity: Activity): Int {
+            setGameData(activity)
+            return gameData.playerInfo.currentLevel
+        }
+
 
         fun loadSettings(activity: Activity) {
             setGameData(activity)
@@ -81,9 +86,10 @@ class LoadManager {
             return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.hintsUsed ?: 0 //Пока так
         }
 
-        fun getLevelProgress(activity: Activity, level: Int): Int {
+        fun getLevelProgress(activity: Activity, level: Int): Pair<Int, Int> {
             setGameData(activity)
-            return gameData.levels.find { it.id == level }?.puzzles?.count { it.status == "completed" } ?: 0
+            return Pair(gameData.levels.find { it.id == level }?.puzzles?.count { it.status == "completed" }
+                ?: 0, gameData.levels.find { it.id == level }?.puzzles?.size ?: 0)
         }
 
         fun isPuzzleCompleted(activity: Activity, level: Int, puzzle: String) : Boolean {
@@ -93,8 +99,8 @@ class LoadManager {
 
         fun isLevelCompleted(activity: Activity, level: Int): Boolean {
             setGameData(activity)
-
-            return getLevelProgress(activity, level) == gameData.levels.find { it.id == level }?.puzzles?.size
+            val (solvedPuzzles, allPuzzles) = getLevelProgress(activity, level)
+            return solvedPuzzles == allPuzzles
         }
 
         fun getBlockProgress(activity: Activity, borders: Pair<Int, Int>): Int {
@@ -111,13 +117,11 @@ class LoadManager {
 
         fun getAccessLevel(activity: Activity): Int {
             setGameData(activity)
-
             return gameData.playerInfo.accessLevel
         }
 
         fun getCurrentDialog(activity: Activity, level: Int, npc: Int): Int {
             setGameData(activity)
-
             return gameData.levels.find { it.id == level }?.npcDialogs?.find { it.id == npc }?.currentDialogIndex ?: 0
         }
 

@@ -7,20 +7,18 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
-import com.tpu.thetower.databinding.FragmentLvl3Puzzle0Binding
+import com.tpu.thetower.databinding.FragmentLvl3PuzzleDonutsBinding
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEventListener, Hintable {
+class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts), SensorEventListener, Hintable {
     private lateinit var sensorManager: SensorManager
     private var lastUpdate: Long = 0
     private var lastShake: Long = 0
@@ -31,7 +29,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     private lateinit var iv0: ImageView
     private lateinit var iv1: ImageView
 
-    private lateinit var binding: FragmentLvl3Puzzle0Binding
+    private lateinit var binding: FragmentLvl3PuzzleDonutsBinding
 
     private lateinit var saveManager: SaveManager
     private lateinit var hintManager: HintManager
@@ -42,7 +40,7 @@ class Lvl3Puzzle0Fragment : Fragment(R.layout.fragment_lvl3_puzzle0), SensorEven
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl3Puzzle0Binding.bind(view)
+        binding = FragmentLvl3PuzzleDonutsBinding.bind(view)
 
         iv0 = binding.iv0
         iv1 = binding.iv1

@@ -14,14 +14,14 @@ import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl0Puzzle1Binding
-import com.tpu.thetower.puzzles.Lvl0Puzzle1
+import com.tpu.thetower.databinding.FragmentLvl0PuzzleLockBinding
+import com.tpu.thetower.puzzles.Lvl0PuzzleLock
 import com.tpu.thetower.utils.WheelSetupHelper
 
 
-class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
+class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hintable {
 
-    private lateinit var binding: FragmentLvl0Puzzle1Binding
+    private lateinit var binding: FragmentLvl0PuzzleLockBinding
 
     private lateinit var rv1: RecyclerView
     private lateinit var rv2: RecyclerView
@@ -31,7 +31,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
     private lateinit var mainScreen: FrameLayout
 
 
-    private val puzzle: Puzzle = Lvl0Puzzle1(0, "lock")
+    private val puzzle: Puzzle = Lvl0PuzzleLock(0, "lock")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
 
@@ -93,7 +93,7 @@ class Lvl0Puzzle1Fragment : Fragment(R.layout.fragment_lvl0_puzzle1), Hintable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl0Puzzle1Binding.bind(view)
+        binding = FragmentLvl0PuzzleLockBinding.bind(view)
         bindView()
 
         soundManager = SoundManager.getInstance()

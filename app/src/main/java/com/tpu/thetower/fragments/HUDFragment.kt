@@ -35,12 +35,17 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
         btnMenu.setOnClickListener {
             FragmentManager.showMenu(requireActivity())
+            FragmentManager.updateProgressBar(this)
         }
 
         requireActivity().supportFragmentManager
             .setFragmentResultListener("accessCardUpgrading", viewLifecycleOwner) { _, bundle ->
                 val accessCardImgId = bundle.getInt("accessCardImgId")
-                ivAccessCard.setImageResource(accessCardImgId)
+                if (accessCardImgId == 0) ivAccessCard.visibility = View.GONE
+                else {
+                    ivAccessCard.setImageResource(accessCardImgId)
+                    ivAccessCard.visibility = View.VISIBLE
+                }
             }
 
         requireActivity().supportFragmentManager

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
@@ -34,10 +34,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
+        <ImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lvl3_puzzle4_key_lock" />
+
         <com.tpu.thetower.fragments.KeyView
             android:id="@+id/keyView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="visible" />
     </FrameLayout>
 
     <TextView
@@ -59,19 +66,19 @@
         android:layout_marginBottom="16dp"
         android:textColor="#555555"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnReset"
+        app:layout_constraintBottom_toTopOf="@+id/btnCopy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="20, 30, 15, 25, 35" />
 
     <Button
-        android:id="@+id/btnReset"
+        android:id="@+id/btnCopy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Сбросить положение ключа"
+        android:text="Копировать замок"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

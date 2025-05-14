@@ -16,8 +16,6 @@ class FragmentManager {
 
     companion object {
 
-        var light : Boolean = false  // Временный костыль для демо
-
         fun changeBG(from : Fragment, to : Int, bundle: Bundle = Bundle()) {
             from.findNavController().navigate(to, bundle)
         }
@@ -56,8 +54,6 @@ class FragmentManager {
         fun hideSettings(activity: Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_settings).visibility = View.GONE
         }
-
-
 
         fun hideHUD(activity : Activity) {
             activity.findViewById<FragmentContainerView>(R.id.fcv_hud).visibility = View.GONE
@@ -116,13 +112,18 @@ class FragmentManager {
         }
 
         fun choosePuzzle(fragment: Fragment, puzzleNum: Int) {
-            fragment.requireActivity().supportFragmentManager
-                .setFragmentResult("puzzleChoosing", bundleOf("puzzleNum" to puzzleNum))
+                fragment.requireActivity().supportFragmentManager
+                    .setFragmentResult("puzzleChoosing", bundleOf("puzzleNum" to puzzleNum))
         }
 
         fun changeDragAndDropImg(fragment: Fragment, dragAndDropImg : Int) {
             fragment.requireActivity().supportFragmentManager
                 .setFragmentResult("drag&drop", bundleOf("dragAndDropImg" to dragAndDropImg))
+        }
+
+        fun updateProgressBar(fragment: Fragment) {
+            fragment.requireActivity().supportFragmentManager
+                .setFragmentResult("updateProgressBar", bundleOf())
         }
     }
 }

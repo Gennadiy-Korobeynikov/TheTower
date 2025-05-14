@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     tools:context=".fragments.Lvl3Fragment">
 
@@ -124,7 +124,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.83" />
 
-
         <ImageView
             android:id="@+id/ivTarget"
             android:layout_width="0dp"
@@ -199,8 +198,6 @@
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle4_copy"
             app:layout_constraintWidth_percent="0.045" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </FrameLayout>

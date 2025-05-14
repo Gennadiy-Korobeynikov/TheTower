@@ -30,8 +30,8 @@
         android:label="fragment_lvl0"
         tools:layout="@layout/fragment_lvl0" >
         <action
-            android:id="@+id/action_lvl0Fragment_to_lvl0Puzzle1Fragment"
-            app:destination="@id/lvl0Puzzle1Fragment" />
+            android:id="@+id/action_lvl0Fragment_to_lvl0PuzzleLockFragment"
+            app:destination="@id/lvl0PuzzleLockFragment" />
     </fragment>
     <fragment
         android:id="@+id/elevatorFragment"
@@ -86,11 +86,6 @@
         app:destination="@id/titleScreenFragment"
         app:enterAnim="@android:anim/fade_in" />
     <fragment
-        android:id="@+id/lvl0Puzzle1Fragment"
-        android:name="com.tpu.thetower.fragments.Lvl0Puzzle1Fragment"
-        android:label="fragment_lvl0_puzzle1"
-        tools:layout="@layout/fragment_lvl0_puzzle1" />
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.tpu.thetower.fragments.SettingsFragment"
         android:label="fragment_settings"
@@ -111,28 +106,18 @@
         android:label="fragment_lvl2"
         tools:layout="@layout/fragment_lvl2" >
         <action
-            android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle0Fragment"
-            app:destination="@id/lvl2Puzzle0Fragment" />
-        <action
-            android:id="@+id/action_lvl2Fragment_to_lvl2Puzzle1Fragment"
-            app:destination="@id/lvl2Puzzle1Fragment" />
-        <action
             android:id="@+id/action_lvl2Fragment_to_lvl2PetFragment"
             app:destination="@id/lvl2PetFragment" />
         <action
             android:id="@+id/action_lvl2Fragment_to_lvl2CaesarFragment"
             app:destination="@id/lvl2CaesarFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleLockFragment"
+            app:destination="@id/lvl2PuzzleLockFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzlePasswordFragment"
+            app:destination="@id/lvl2PuzzlePasswordFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/lvl2Puzzle0Fragment"
-        android:name="com.tpu.thetower.fragments.Lvl2Puzzle0Fragment"
-        android:label="fragment_lvl2_puzzle0"
-        tools:layout="@layout/fragment_lvl2_puzzle0" />
-    <fragment
-        android:id="@+id/lvl2Puzzle1Fragment"
-        android:name="com.tpu.thetower.fragments.Lvl2Puzzle1Fragment"
-        android:label="fragment_lvl2_puzzle1"
-        tools:layout="@layout/fragment_lvl2_puzzle1" />
     <fragment
         android:id="@+id/chessboardTestFragment"
         android:name="com.tpu.thetower.fragments.ChessboardTestFragment"
@@ -171,38 +156,26 @@
         android:label="fragment_books"
         tools:layout="@layout/fragment_books" />
     <fragment
-        android:id="@+id/keyFragment"
-        android:name="com.tpu.thetower.fragments.KeyFragment"
-        android:label="KeyFragment" />
-    <fragment
         android:id="@+id/lvl3Fragment"
         android:name="com.tpu.thetower.fragments.Lvl3Fragment"
         android:label="fragment_lvl3"
         tools:layout="@layout/fragment_lvl3" >
         <action
-            android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle0Fragment"
-            app:destination="@id/lvl3Puzzle0Fragment" />
-        <action
-            android:id="@+id/action_lvl3Fragment_to_lvl3Puzzle1Fragment"
-            app:destination="@id/lvl3Puzzle1Fragment" />
-        <action
             android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleHooverFragment"
             app:destination="@id/lvl3PuzzleHooverFragment" />
         <action
-            android:id="@+id/action_lvl3Fragment_to_keyFragment"
-            app:destination="@id/keyFragment" />
-        <action
             android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleEditorFragment"
             app:destination="@id/lvl3PuzzleEditorFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleKeyFragment"
+            app:destination="@id/lvl3PuzzleKeyFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleDonutsFragment"
+            app:destination="@id/lvl3PuzzleDonutsFragment" />
+        <action
+            android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleButtonsFragment"
+            app:destination="@id/lvl3PuzzleButtonsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/lvl3Puzzle0Fragment"
-        android:name="com.tpu.thetower.fragments.Lvl3Puzzle0Fragment"
-        android:label="Lvl3Puzzle0Fragment" />
-    <fragment
-        android:id="@+id/lvl3Puzzle1Fragment"
-        android:name="com.tpu.thetower.fragments.Lvl3Puzzle1Fragment"
-        android:label="Lvl3Puzzle1Fragment" />
     <fragment
         android:id="@+id/lvl4Puzzle1Fragment"
         android:name="com.tpu.thetower.fragments.Lvl4Puzzle1Fragment"
@@ -223,5 +196,32 @@
         android:name="com.tpu.thetower.fragments.Lvl3PuzzleEditorFragment"
         android:label="fragment_lvl3_puzzle_editor"
         tools:layout="@layout/fragment_lvl3_puzzle_editor" />
+    <fragment
+        android:id="@+id/lvl3PuzzleKeyFragment"
+        android:name="com.tpu.thetower.fragments.Lvl3PuzzleKeyFragment"
+        android:label="Lvl3PuzzleKeyFragment" />
+    <fragment
+        android:id="@+id/lvl3PuzzleDonutsFragment"
+        android:name="com.tpu.thetower.fragments.Lvl3PuzzleDonutsFragment"
+        android:label="Lvl3PuzzleDonutsFragment" />
+    <fragment
+        android:id="@+id/lvl3PuzzleButtonsFragment"
+        android:name="com.tpu.thetower.fragments.Lvl3PuzzleButtonsFragment"
+        android:label="Lvl3PuzzleButtonsFragment" />
+    <fragment
+        android:id="@+id/lvl2PuzzleLockFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzleLockFragment"
+        android:label="fragment_lvl2_puzzle_lock"
+        tools:layout="@layout/fragment_lvl2_puzzle_lock" />
+    <fragment
+        android:id="@+id/lvl2PuzzlePasswordFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzlePasswordFragment"
+        android:label="fragment_lvl2_puzzle_password"
+        tools:layout="@layout/fragment_lvl2_puzzle_password" />
+    <fragment
+        android:id="@+id/lvl0PuzzleLockFragment"
+        android:name="com.tpu.thetower.fragments.Lvl0PuzzleLockFragment"
+        android:label="fragment_lvl0_puzzle_lock"
+        tools:layout="@layout/fragment_lvl0_puzzle_lock" />
 
 </navigation>
