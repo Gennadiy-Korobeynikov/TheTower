@@ -129,7 +129,10 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     }
 
     private fun completed() {
-
+        hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
+            "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
+            2,"chat")
         hiddenInput.visibility = View.GONE
         pinContainer.visibility = View.GONE
         tvPassword.visibility = View.GONE

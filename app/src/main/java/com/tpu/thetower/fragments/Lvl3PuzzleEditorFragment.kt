@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -15,13 +17,14 @@ import com.tpu.thetower.databinding.FragmentLvl3Binding
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleEditorBinding
 
 
-class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor) {
+class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor), Hintable {
 
     private lateinit var binding: FragmentLvl3PuzzleEditorBinding
 
     private lateinit var btnPaste: Button
     private lateinit var btnNextLayer: Button
     private lateinit var btnPreviousLayer: Button
+    private lateinit var hintManager: HintManager
 
     private lateinit var tvText: TextView
     private lateinit var ivKey: ImageView
@@ -43,6 +46,16 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor) 
         setListeners()
         saveManager = SaveManager.getInstance()
 
+        hintManager = HintManager(
+            listOf(
+                "lvl3_puzzle3_hint1",
+                "lvl3_puzzle3_hint2",
+                "lvl3_puzzle3_hint3",
+                "lvl3_puzzle3_hint4",
+                "lvl3_puzzle3_hint5",
+            ),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "lock model"),
+            3, "lock model")
 
         isCopied = LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "in_progress"
         isPasted = LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "completed"
@@ -74,6 +87,10 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor) 
                 isPasted = true
                 saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "completed")
                 ivKey.visibility = View.VISIBLE
+                hintManager = HintManager(
+                    listOf("lvl3_puzzle3_hint6",),
+                    LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "lock model after pasted"),
+                    3, "lock model after pasted")
             } else {
                 tvText.text = "В буфере обмена ничего нет"
             }
@@ -96,6 +113,11 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor) 
             }
             }
         }
+    }
+
+
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
     }
 
 }
