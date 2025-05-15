@@ -125,8 +125,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             }
             else {
                 btnForward.postDelayed({
-                    puzzleHoover.moveForward()
-                    restart = puzzleHoover.isWall()
+                    restart = !puzzleHoover.moveForward()
                     win = puzzleHoover.checkSolution(requireContext())
                     test()
                     changeButtonsState(true)
@@ -262,7 +261,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                 Direction.Down -> "Вниз"
                 Direction.Up -> "Вверх"
             }
-        tvCoordinates.text = "${puzzleHoover.currPositionX- 1 } ${puzzleHoover.currPositionY -1  }"
+        tvCoordinates.text = "${puzzleHoover.currPositionX} ${puzzleHoover.currPositionY}"
 
     }
 
