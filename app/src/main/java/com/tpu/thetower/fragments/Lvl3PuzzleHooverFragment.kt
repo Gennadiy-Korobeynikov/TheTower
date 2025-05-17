@@ -5,6 +5,7 @@ import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +21,7 @@ import com.tpu.thetower.puzzles.Direction
 import com.tpu.thetower.puzzles.Lvl3PuzzleHoover
 
 const val ANIM_DURATION = 800L
+const val ANIM_DURATION_UP = 2000L
 
 class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover), Hintable {
 
@@ -34,10 +36,10 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private lateinit var ivHoover : ImageView
 
 
-    private lateinit var btnRight: Button
-    private lateinit var btnLeft: Button
+    private lateinit var btnRight: ImageButton
+    private lateinit var btnLeft: ImageButton
 
-    private lateinit var btnForward: Button
+    private lateinit var btnForward: ImageButton
 
     private lateinit var mainLayout: ConstraintLayout
 
@@ -123,7 +125,11 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             if (onStartPosition) { //В начале
                 moveHooverAnim(puzzleHoover.currDirection)
             }
-            else {
+            else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currDirection == Direction.Down )
+            { // Вернулись назад (небольшой костыль, ни на что не влияет, просто тут уже дело времени, которого мало
+                moveHooverToCenter(back = true)
+            }
+            else { // Двигаемся внутри вентиляции
                 btnForward.postDelayed({
                     restart = !puzzleHoover.moveForward()
                     win = puzzleHoover.checkSolution(requireContext())
@@ -135,9 +141,14 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     }
 
     private fun changeButtonsState(state : Boolean) {
+        val alpha = if (state) 1f else 0.5f
         btnLeft.isEnabled = state
         btnRight.isEnabled = state
         btnForward.isEnabled = state
+
+        btnLeft.alpha = alpha
+        btnRight.alpha = alpha
+        btnForward.alpha = alpha
     }
 
     private fun moveHooverAnim(direction: Direction) {
@@ -178,7 +189,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         }
 
         val transition = ChangeBounds()
-        transition.duration = ANIM_DURATION
+        transition.duration = if (direction == Direction.Up) ANIM_DURATION_UP else ANIM_DURATION
 
         transition.addListener(object : android.transition.Transition.TransitionListener {
             override fun onTransitionEnd(transition: android.transition.Transition?) {
@@ -187,7 +198,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                     // Возврат на исходную позицию (центр)
                     ivHoover.postDelayed({
                         moveHooverToCenter()
-                    }, 1000)
+                    }, 750)
                 } else {
                     onStartPosition = false
                     puzzleHoover.moveForward()
@@ -207,7 +218,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         constraintSet.applyTo(mainLayout)
     }
 
-    private fun moveHooverToCenter() {
+    private fun moveHooverToCenter(back : Boolean = false) {
         val constraintSet = ConstraintSet()
         constraintSet.clone(mainLayout)
         constraintSet.clear(R.id.iv_hoover, ConstraintSet.START)
@@ -221,7 +232,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         constraintSet.connect(R.id.iv_hoover, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
 
         val transition = ChangeBounds()
-        transition.duration = ANIM_DURATION
+        transition.duration = if (back) ANIM_DURATION_UP else ANIM_DURATION
 
         transition.addListener(object : android.transition.Transition.TransitionListener {
             override fun onTransitionEnd(transition: android.transition.Transition?) {

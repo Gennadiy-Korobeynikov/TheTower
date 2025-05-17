@@ -37,12 +37,12 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     private val winPositionX = 6
     private val winPositionY = 0
 
-// для теста public - потом раскомментить
 
-    /*private*/ var dirIndex = 0
-    /*private*/ var currPositionX = 6
-    /*private*/ var currPositionY = 14
-    /*private*/ var currDirection : Direction = Direction.Up
+
+    private var dirIndex = 0
+    var currPositionX = 6
+    var currPositionY = 14
+    var currDirection : Direction = Direction.Up
 
 
 

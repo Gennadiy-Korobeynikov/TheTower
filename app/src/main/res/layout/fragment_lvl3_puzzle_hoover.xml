@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="-20dp" />
+        app:layout_constraintGuide_begin="-1dp" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="80dp"
         android:text="direction"
         android:textSize="25sp"
         android:textStyle="italic"
@@ -103,40 +103,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.669" />
 
-    <Button
-        android:id="@+id/btn_right"
+
+    <LinearLayout
+        android:id="@+id/ll_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="260dp"
-        android:layout_marginBottom="56dp"
-        android:text="Вправо"
+        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="15dp">
 
+        <ImageButton
+            android:id="@+id/btn_left"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/lvl3_rotate_left_btn" />
 
-    <Button
-        android:id="@+id/btn_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="48dp"
-        android:text="Влево"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageButton
+            android:id="@+id/btn_forward"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/lvl3_forward_btn"
+            android:layout_marginBottom="25dp"/>
 
-    <Button
-        android:id="@+id/btn_forward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="396dp"
-        android:layout_marginBottom="56dp"
-        android:text="Вперёд"
-        android:textColor="#0C8102"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageButton
+            android:id="@+id/btn_right"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/lvl3_rotate_right_btn" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_hoover"
