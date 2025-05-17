@@ -74,6 +74,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             btnToPuzzle1Lock.visibility = View.GONE
             btnToElevator.visibility = View.VISIBLE
         }
+
+
+
     }
 
     private fun bindView() {
@@ -116,6 +119,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         ivDarkness.setOnClickListener {
             DialogManager.startDialog(requireActivity(), "lvl0_dark")
+            // Тестирование !!!
+            flashlightManager.toggleFlashlight(true)
         }
 
         btnLightOn.setOnClickListener {
