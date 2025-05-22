@@ -66,14 +66,20 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
             ivBlack.visibility = View.GONE
+            enableButtons()
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 0, "lock") == "completed") {
             ivMain.setImageResource(R.drawable.lvl0_bd_solved)
             btnToPuzzle1Lock.visibility = View.GONE
             btnToPuzzle1Lock.visibility = View.GONE
-            btnToElevator.visibility = View.VISIBLE
         }
+    }
+
+    private fun enableButtons() {
+        btnToElevator.visibility = View.VISIBLE
+        btnToPuzzle1.visibility = View.VISIBLE
+        btnToPuzzle1Lock.visibility = View.VISIBLE
     }
 
     private fun bindView() {
@@ -125,6 +131,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             flashlightManager.toggleFlashlight(false) // Выкл фонарик
             flashlightManager.stopMonitoring()
             saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "completed")
+            enableButtons()
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->

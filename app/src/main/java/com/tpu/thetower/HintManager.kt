@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 class HintManager(
     private val hints: List<String>,
     private var usedHintsCount : Int,
-    private var level : Int,
-    private var puzzle : String,
+    private val level : Int,
+    private val puzzle : String,
 ) {
     private val saveManager = SaveManager.getInstance()
     companion object {
@@ -17,6 +17,7 @@ class HintManager(
         private var timer: CountDownTimer? = null
         private val totalTimeToRecover = 10_000L  // Пока 10 сек для теста
         private val updateInterval = 2_000L  // Пока 2 сек
+        private var lastPuzzletName  = ""
 
         private fun startHintRecovery(activity: Activity, hintManager: HintManager) {
             timer?.cancel()
@@ -52,16 +53,35 @@ class HintManager(
     fun useHint(activity: Activity) {
         usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle)
 
-        // Последняя подсказка - только показываем
-        if (usedHintsCount == hints.count()) {
-            DialogManager.startDialog(activity, hints[usedHintsCount - 1])
-            return
-        }
+        // Если в предыдущий раз подсказка была вызвана на этом фрагменте или это не первая подсказка
+        if (lastPuzzletName == puzzle || usedHintsCount>0) {
 
-        DialogManager.startDialog(activity,hints[usedHintsCount])
-        if (isNewHintAvaliable) {
-            startHintRecovery(activity, this)
+            // Последняя подсказка - только показываем
+            if (usedHintsCount == hints.count()) {
+                DialogManager.startDialog(activity, hints[usedHintsCount - 1])
+                return
+            }
+
+            // Показываем текущую подсказку, если она новая или ещё не восстановилась старая на этом же фрагменте
+            if (lastPuzzletName == puzzle || isNewHintAvaliable)
+                DialogManager.startDialog(activity, hints[usedHintsCount])
+
+            // Показываем предыдущую подсказку
+            else
+                DialogManager.startDialog(activity, hints[usedHintsCount-1])
+
+            if (isNewHintAvaliable) {
+                startHintRecovery(activity, this)
+                lastPuzzletName = puzzle
+            }
+
         }
+        else if (isNewHintAvaliable) {
+            DialogManager.startDialog(activity, hints[usedHintsCount])
+            startHintRecovery(activity, this)
+            lastPuzzletName = puzzle
+        }
+        // else звук или ещё что-то, типа "подсказка не готова" TODO
     }
 
     fun usedHintsCountIncrease(activity: Activity) {

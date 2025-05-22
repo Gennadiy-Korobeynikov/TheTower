@@ -54,7 +54,8 @@
             app:layout_constraintHeight_percent="0.70"
             app:layout_constraintStart_toStartOf="@id/guideV_elevator"
             app:layout_constraintTop_toTopOf="@id/guideH_elevator"
-            app:layout_constraintWidth_percent="0.16" />
+            app:layout_constraintWidth_percent="0.16"
+            android:visibility="gone"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_puzzle1_lock"
@@ -79,7 +80,8 @@
             app:layout_constraintHeight_percent="0.30"
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle1_lock"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle1_lock"
-            app:layout_constraintWidth_percent="0.1" />
+            app:layout_constraintWidth_percent="0.1"
+            android:visibility="gone"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_puzzle1"
@@ -104,7 +106,8 @@
             app:layout_constraintHeight_percent="0.40"
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle1"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle1"
-            app:layout_constraintWidth_percent="0.12" />
+            app:layout_constraintWidth_percent="0.12"
+            android:visibility="gone"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_light_on"
