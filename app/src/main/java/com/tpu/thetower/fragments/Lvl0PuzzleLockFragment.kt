@@ -153,7 +153,6 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
     }
 
     private fun passed() {
-        LevelAccessManager.upgradeAccessLvl(this)
         isSolved = true
         FragmentManager.hideGoBackArrow(requireActivity())
         mainScreen.animate()

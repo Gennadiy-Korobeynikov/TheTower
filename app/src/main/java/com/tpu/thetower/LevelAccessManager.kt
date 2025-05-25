@@ -9,6 +9,7 @@ class LevelAccessManager {
         private val saveManager = SaveManager.getInstance()
         private val cardImageIds: List<Int> = listOf(
             R.drawable.card,
+            R.drawable.card,
             R.drawable.test_card1,
             R.drawable.test_card2,
             R.drawable.test_card3,
@@ -22,9 +23,11 @@ class LevelAccessManager {
              return cardImageIds[currentAccessLvl]
         }
 
+        //TODO Разобраться в необходимости кода
+
         fun unlockModules(fragment: Fragment) {
-            FragmentManager.changeAccessCardImg(fragment, getCardImage())
-            FragmentManager.changeUnlockedModules(fragment, currentAccessLvl)
+//            FragmentManager.changeAccessCardImg(fragment, getCardImage())
+//            FragmentManager.changeUnlockedModules(fragment, currentAccessLvl)
         }
 
         fun upgradeAccessLvl(fragment: Fragment) {

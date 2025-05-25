@@ -33,6 +33,9 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
     private lateinit var btnToPuzzle2Lock: Button
     private lateinit var btnToPuzzle2Completed: Button
 
+    private lateinit var ivBgBlurred: ImageView
+    private lateinit var ivCard: ImageView
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +53,8 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 2, "chat") == "completed") {
             btnToPuzzle2Lock.visibility = View.GONE
-            btnToPuzzle2Completed.visibility = View.VISIBLE
+            if (!LoadManager.getLevelStatus(requireActivity(), 2))
+                btnToPuzzle2Completed.visibility = View.VISIBLE
         }
     }
 
@@ -61,6 +65,8 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
         btnToPuzzle1 = binding.btnToPuzzle1
         btnToPuzzle2Lock = binding.btnToPuzzle2Lock
         btnToPuzzle2Completed = binding.btnToPuzzle2Completed
+        ivBgBlurred = binding.ivBgBlurred
+        ivCard = binding.ivCard
     }
 
     private fun setListeners() {
@@ -87,7 +93,17 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
         }
 
         btnToPuzzle2Completed.setOnClickListener {
-            // TODO Как будто сюда можно что-то запихнуть, если нет, то просто удалить
+            FragmentManager.hideGoBackArrow(requireActivity())
+            ivBgBlurred.visibility = View.VISIBLE
+            ivCard.visibility = View.VISIBLE
+            saveManager.saveLevelStatus(requireContext(), 2)
+        }
+
+        ivBgBlurred.setOnClickListener {
+            ivBgBlurred.visibility = View.GONE
+            ivCard.visibility = View.GONE
+            btnToPuzzle2Completed.visibility = View.GONE
+            FragmentManager.showGoBackArrow(requireActivity())
             LevelAccessManager.upgradeAccessLvl(this)
         }
     }

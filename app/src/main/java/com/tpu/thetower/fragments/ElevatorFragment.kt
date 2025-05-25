@@ -71,6 +71,12 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         ivDraggable.post {
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
         }
+
+        // TODO WARNING!!! ВНИМАНИЕ!!! ДАЛЬШЕ КОСТЫЛЬ
+        if (LoadManager.getAccessLevel(requireActivity()) != 0)
+            FragmentManager.changeAccessCardImg(this, LevelAccessManager.getCardImage())
+
+        // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
     }
 
     private fun bindView() {
@@ -132,6 +138,9 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         ivCardReader.setOnDragListener(this@ElevatorFragment)
         ivDraggable.setOnTouchListener(this@ElevatorFragment)
+
+
+        //TODO Разобраться в необходимости кода
 
 //        requireActivity().supportFragmentManager
 //            .setFragmentResultListener("moduleUnlocking", viewLifecycleOwner) { _, bundle ->
@@ -205,5 +214,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         view.x = originalPosition.first
         view.y = originalPosition.second
         view.visibility = View.VISIBLE
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        FragmentManager.changeAccessCardImg(this, 0)
     }
 }

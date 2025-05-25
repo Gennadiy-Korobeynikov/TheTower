@@ -120,6 +120,16 @@ class SaveManager private constructor() {
         }
     }
 
+    fun saveLevelStatus(context: Context, level: Int) {
+        val gameData = readData(context)
+        val updatedGameData = gameData?.copy()
+        updatedGameData?.levels?.find { it.id == level }?.isCompleted = true
+
+        if (updatedGameData != null) {
+            saveData(context, updatedGameData)
+        }
+    }
+
     fun savePuzzleData(
         context: Context,
         level: Int,

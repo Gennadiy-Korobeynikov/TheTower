@@ -36,8 +36,6 @@ class LoadManager {
             DialogManager.loadDialogs(activity)
 
             LevelAccessManager.currentAccessLvl = gameData.playerInfo.accessLevel
-            LevelAccessManager.unlockModules(getCurrFragment(activity))
-
         }
 
         private fun getCurrFragment(activity: Activity): Fragment {
@@ -48,7 +46,7 @@ class LoadManager {
             setGameData(activity)
             val savedLevel = gameData.playerInfo.currentLevel
             val bundle = Bundle().apply {
-                // Потом убрать + 1, потому что пропадёт тестовый уровень
+                // TODO Потом убрать + 1, потому что пропадёт тестовый уровень
                 putString("saved_level", levels[savedLevel + 1].toString())
             }
             FragmentManager.changeBG(
@@ -95,6 +93,11 @@ class LoadManager {
         fun isPuzzleCompleted(activity: Activity, level: Int, puzzle: String) : Boolean {
             setGameData(activity)
             return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.status == "completed"
+        }
+
+        fun getLevelStatus(activity: Activity, level: Int): Boolean {
+            setGameData(activity)
+            return gameData.levels.find { it.id == level }?.isCompleted ?: false
         }
 
         fun isLevelCompleted(activity: Activity, level: Int): Boolean {
