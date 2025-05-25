@@ -171,8 +171,8 @@
     <string name="lvl2_puzzle3_hint3">TODO</string>
     <string name="lvl2_puzzle3_hint4_1">TODO</string>
     <string name="lvl2_puzzle3_hint4_2">TODO</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="blank"></string>
+
 
 
 </resources>

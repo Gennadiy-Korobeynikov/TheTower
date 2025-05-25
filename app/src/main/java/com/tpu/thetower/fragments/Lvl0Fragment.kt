@@ -70,6 +70,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
             ivBlack.visibility = View.GONE
+            enableButtons()
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 0, "lock") == "completed") {
@@ -79,6 +80,12 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             if (!LoadManager.getLevelStatus(requireActivity(), 0))
                 btnLvlCompleted.visibility = View.VISIBLE
         }
+    }
+
+    private fun enableButtons() {
+        btnToElevator.visibility = View.VISIBLE
+        btnToPuzzle1.visibility = View.VISIBLE
+        btnToPuzzle1Lock.visibility = View.VISIBLE
     }
 
     private fun bindView() {
@@ -137,6 +144,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         ivDarkness.setOnClickListener {
             DialogManager.startDialog(requireActivity(), "lvl0_dark")
+            // Тестирование !!!
+            flashlightManager.toggleFlashlight(true)
         }
 
         btnLightOn.setOnClickListener {
@@ -146,6 +155,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             flashlightManager.toggleFlashlight(false) // Выкл фонарик
             flashlightManager.stopMonitoring()
             saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "completed")
+            enableButtons()
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
