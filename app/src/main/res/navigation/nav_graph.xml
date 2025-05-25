@@ -112,11 +112,14 @@
             android:id="@+id/action_lvl2Fragment_to_lvl2CaesarFragment"
             app:destination="@id/lvl2CaesarFragment" />
         <action
-            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleLockFragment"
-            app:destination="@id/lvl2PuzzleLockFragment" />
-        <action
             android:id="@+id/action_lvl2Fragment_to_lvl2PuzzlePasswordFragment"
             app:destination="@id/lvl2PuzzlePasswordFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleChatFragment"
+            app:destination="@id/lvl2PuzzleChatFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleLockFragment"
+            app:destination="@id/lvl2PuzzleLockFragment" />
     </fragment>
     <fragment
         android:id="@+id/chessboardTestFragment"
@@ -209,11 +212,6 @@
         android:name="com.tpu.thetower.fragments.Lvl3PuzzleButtonsFragment"
         android:label="Lvl3PuzzleButtonsFragment" />
     <fragment
-        android:id="@+id/lvl2PuzzleLockFragment"
-        android:name="com.tpu.thetower.fragments.Lvl2PuzzleLockFragment"
-        android:label="fragment_lvl2_puzzle_lock"
-        tools:layout="@layout/fragment_lvl2_puzzle_lock" />
-    <fragment
         android:id="@+id/lvl2PuzzlePasswordFragment"
         android:name="com.tpu.thetower.fragments.Lvl2PuzzlePasswordFragment"
         android:label="fragment_lvl2_puzzle_password"
@@ -223,5 +221,15 @@
         android:name="com.tpu.thetower.fragments.Lvl0PuzzleLockFragment"
         android:label="fragment_lvl0_puzzle_lock"
         tools:layout="@layout/fragment_lvl0_puzzle_lock" />
+    <fragment
+        android:id="@+id/lvl2PuzzleChatFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzleChatFragment"
+        android:label="fragment_lvl2_puzzle_chat"
+        tools:layout="@layout/fragment_lvl2_puzzle_chat" />
+    <fragment
+        android:id="@+id/lvl2PuzzleLockFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzleLockFragment"
+        android:label="fragment_lvl2_puzzle_lock"
+        tools:layout="@layout/fragment_lvl2_puzzle_lock" />
 
 </navigation>

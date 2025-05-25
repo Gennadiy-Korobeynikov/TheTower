@@ -13,14 +13,14 @@ import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl2PuzzleLockBinding
-import com.tpu.thetower.puzzles.Lvl2PuzzleLock
+import com.tpu.thetower.databinding.FragmentLvl2PuzzleChatBinding
+import com.tpu.thetower.puzzles.Lvl2PuzzleChat
 import com.tpu.thetower.utils.WheelSetupHelper
 
 
-class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hintable {
+class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hintable {
 
-    private lateinit var binding: FragmentLvl2PuzzleLockBinding
+    private lateinit var binding: FragmentLvl2PuzzleChatBinding
 
     private lateinit var rv1: RecyclerView
     private lateinit var rv2: RecyclerView
@@ -56,7 +56,7 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2PuzzleLockBinding.bind(view)
+        binding = FragmentLvl2PuzzleChatBinding.bind(view)
         bindView()
         soundManager = SoundManager.getInstance()
         soundManager.loadSound(
@@ -75,7 +75,7 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "lock"),
             2, "lock"
         )
-        puzzle = Lvl2PuzzleLock(2, "lock")
+        puzzle = Lvl2PuzzleChat(2, "chat")
         setupWheels(images)
     }
 

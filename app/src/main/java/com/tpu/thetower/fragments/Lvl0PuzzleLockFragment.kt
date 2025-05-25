@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
@@ -29,7 +30,6 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
     private lateinit var rv4: RecyclerView
 
     private lateinit var mainScreen: FrameLayout
-
 
     private val puzzle: Puzzle = Lvl0PuzzleLock(0, "lock")
     private lateinit var hintManager: HintManager
@@ -121,7 +121,6 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
         rv2 = binding.rvImage2
         rv3 = binding.rvImage3
         rv4 = binding.rvImage4
-
         mainScreen = binding.mainScreen
     }
 
@@ -136,6 +135,8 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
         WheelSetupHelper.setupWheel(
             rv = rv,
             data = data,
+            layoutImage = R.layout.item_image,
+            orientation = LinearLayoutManager.HORIZONTAL,
             rvIndex = rvIndex,
             solution = solution,
             context = requireContext(),
@@ -170,6 +171,4 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
     override fun useHint() {
         hintManager.useHint(this.requireActivity())
     }
-
-
 }

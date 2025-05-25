@@ -16,6 +16,8 @@ object WheelSetupHelper {
     fun setupWheel(
         rv: RecyclerView,
         data: Array<Int>,
+        layoutImage: Int,
+        orientation: Int,
         rvIndex: Int,
         solution: CharArray,
         context: Context,
@@ -25,10 +27,10 @@ object WheelSetupHelper {
         isSolvedRef: () -> Boolean,
         onSolvedListener: WheelSolvedListener,
     ) {
-        val adapter = ImageCodeAdapter(data)
+        val adapter = ImageCodeAdapter(data, layoutImage)
         rv.adapter = adapter
 
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager = LinearLayoutManager(context, orientation, false)
         rv.layoutManager = layoutManager
 
         val snapHelper = LimitedSpeedLinearSnapHelper()

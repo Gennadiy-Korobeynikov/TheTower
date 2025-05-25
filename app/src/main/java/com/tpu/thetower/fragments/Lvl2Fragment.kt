@@ -18,7 +18,7 @@ import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2Binding
 
 
-class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
+class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     private lateinit var binding: FragmentLvl2Binding
 
@@ -75,7 +75,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
         }
 
         btnToPuzzle0Lock.setOnClickListener {
-            FragmentManager.choosePuzzle(this, 0)
             FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
         }
 
@@ -88,8 +87,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
         }
 
         btnToPuzzle2Lock.setOnClickListener {
-            FragmentManager.choosePuzzle(this, 1)
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
+            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleChatFragment)
         }
 
         btnToPuzzle2Completed.setOnClickListener {
@@ -119,7 +117,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2) , Hintable {
             )
         )
     }
-
 
     override fun onResume() {
         super.onResume()

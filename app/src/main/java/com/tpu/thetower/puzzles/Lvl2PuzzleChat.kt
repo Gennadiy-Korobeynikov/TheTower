@@ -4,7 +4,7 @@ import android.content.Context
 import com.tpu.thetower.Puzzle
 
 class Lvl2PuzzleChat(level: Int, puzzle: String) : Puzzle(level, puzzle) {
-    private val answer = "01010"
+    private val answer = "00000"
 
     override fun checkSolution(context: Context, solution: String) : Boolean {
         if (solution == answer){

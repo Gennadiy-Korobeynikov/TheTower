@@ -111,11 +111,6 @@ class FragmentManager {
                 ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))
         }
 
-        fun choosePuzzle(fragment: Fragment, puzzleNum: Int) {
-                fragment.requireActivity().supportFragmentManager
-                    .setFragmentResult("puzzleChoosing", bundleOf("puzzleNum" to puzzleNum))
-        }
-
         fun changeDragAndDropImg(fragment: Fragment, dragAndDropImg : Int) {
             fragment.requireActivity().supportFragmentManager
                 .setFragmentResult("drag&drop", bundleOf("dragAndDropImg" to dragAndDropImg))
