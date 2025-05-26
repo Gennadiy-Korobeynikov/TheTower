@@ -29,6 +29,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     private lateinit var btnToBookQr: Button
     private lateinit var btnToBookBlur: Button
     private lateinit var btnToBookHistory: Button
+    private lateinit var btnToBookHelp: Button
 
     private lateinit var btnToChessboardPuzzle: Button
     private lateinit var btnToTimeLinePuzzle1: Button
@@ -50,14 +51,19 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         btnToBookQr = binding.btnToBookQr
         btnToBookBlur = binding.btnToBookBlur
         btnToBookHistory = binding.btnToBookHistory
+        btnToBookHelp = binding.btnToBookHelp
+
+
         btnToChessboardPuzzle = binding.btnToChessboardPuzzle
         btnToTimeLinePuzzle1 = binding.btnToPuzzle1
     }
 
     private fun setListeners() {
-        btnToBookBabel.setOnClickListener {
-            openBook("babel")
-        }
+        btnToBookBabel.setOnClickListener { openBook("babel") }
+        btnToBookQr.setOnClickListener { openBook("qr") }
+        btnToBookBlur.setOnClickListener { openBook("blur") }
+        btnToBookHistory.setOnClickListener { openBook("history") }
+        btnToBookHelp.setOnClickListener { openBook("help") }
 
         btnToBookAskii.setOnClickListener {
 
@@ -65,6 +71,8 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         val book : String =  if (LoadManager.isASKII) "askii_b" else "askii_a" // TODO Исправить!!!!! длолжно быть через сохранения
             openBook(book)
         }
+
+
 
         btnToChessboardPuzzle.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_chessboardTestFragment)

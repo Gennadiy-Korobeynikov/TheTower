@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import com.tpu.thetower.FragmentManager
 
 import com.tpu.thetower.R
@@ -17,7 +18,7 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 
 class BookFragment(
     private val pages : List<Int>,
-    private val texts : List<String>
+    private val texts : List<Pair<String, String>>
 ) : Fragment(R.layout.fragment_book) {
 
     private lateinit var binding : FragmentBookBinding
@@ -25,7 +26,9 @@ class BookFragment(
     private var currPageNumber = 0
 
     private  lateinit var ivPage : ImageView
-    private lateinit var tvText : TextView
+    private lateinit var tvTextLeft : TextView
+    private lateinit var tvTextRight : TextView
+    private var pageCount : Int = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,13 +37,17 @@ class BookFragment(
         binding = FragmentBookBinding.bind(view)
         bindView()
         setListeners()
-        tvText.text = texts[0]
+        tvTextLeft.text = texts[0].first
+        tvTextRight.text = texts[0].second
+        ivPage.setImageResource(pages[0])
+        pageCount = maxOf(pages.size , texts.size)
 
     }
 
     private fun bindView() {
         ivPage = binding.ivPage
-        tvText = binding.tvPageText
+        tvTextLeft = binding.tvPageTextLeft
+        tvTextRight = binding.tvPageTextRight
 
     }
 
@@ -55,7 +62,7 @@ class BookFragment(
 
                 if (x > width / 2) {
                     // Правая часть — вперёд
-                    if (currPageNumber < pages.count() - 1) {
+                    if (currPageNumber < pageCount - 1) {
                         currPageNumber++
                     }
 
@@ -66,8 +73,18 @@ class BookFragment(
                     }
 
                 }
-                ivPage.setImageResource(pages[currPageNumber])
-                tvText.text = texts[currPageNumber]
+
+                val newPage = if (currPageNumber >= pages.size) R.drawable.lvl4_book_blank else pages[currPageNumber]
+
+                val newTextLeft = if (currPageNumber >= texts.size) getString(R.string.blank)
+                    else HtmlCompat.fromHtml(texts[currPageNumber].first , HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+                val newTextRight = if (currPageNumber >= texts.size) getString(R.string.blank)
+                    else HtmlCompat.fromHtml(texts[currPageNumber].second, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+                ivPage.setImageResource(newPage)
+                tvTextLeft.text = newTextLeft
+                tvTextRight.text = newTextRight
                 return@setOnTouchListener true
             }
             true

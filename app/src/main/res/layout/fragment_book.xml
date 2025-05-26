@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_dialog"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,32 +8,40 @@
     tools:context=".fragments.BookFragment"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/iv_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/book_test" />
 
     <ImageView
         android:id="@+id/iv_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/page1_test"
-        android:scaleY="0.9"
-        android:scaleX="1.2"/>
+        android:scaleY="1"
+        android:scaleX="1"
+        android:src="@drawable/lvl4_book_blank"/>
 
 
     <TextView
-        android:id="@+id/tv_page_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_page_text_left"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        tools:text="ТЕКСТ"
-        android:layout_gravity="center"
-        android:textSize="22sp"
-        android:layout_marginBottom="145dp"
-        android:layout_marginEnd="255dp"/>
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/iv_page"
+        app:layout_constraintTop_toTopOf="@id/iv_page"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="16dp"
+        tools:text="TEXT1" />
+
+    <TextView
+        android:id="@+id/tv_page_text_right"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_page"
+        app:layout_constraintTop_toTopOf="@id/iv_page"
+        android:layout_marginEnd="178dp"
+        android:layout_marginTop="16dp"
+        tools:text="TEXT2" />
 
 
 
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
