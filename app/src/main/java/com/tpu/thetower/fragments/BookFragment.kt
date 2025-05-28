@@ -18,7 +18,8 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 
 class BookFragment(
     private val pages : List<Int>,
-    private val texts : List<Pair<String, String>>
+    private val texts : List<Pair<String, String>>,
+    private val hasLink : Boolean
 ) : Fragment(R.layout.fragment_book) {
 
     private lateinit var binding : FragmentBookBinding
@@ -28,6 +29,7 @@ class BookFragment(
     private  lateinit var ivPage : ImageView
     private lateinit var tvTextLeft : TextView
     private lateinit var tvTextRight : TextView
+    private lateinit var btnLink : Button
     private var pageCount : Int = 0
 
 
@@ -42,17 +44,33 @@ class BookFragment(
         ivPage.setImageResource(pages[0])
         pageCount = maxOf(pages.size , texts.size)
 
+
+
     }
 
     private fun bindView() {
         ivPage = binding.ivPage
         tvTextLeft = binding.tvPageTextLeft
         tvTextRight = binding.tvPageTextRight
+        btnLink = binding.btnLink
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
+
+        if (hasLink) {
+            btnLink.visibility = View.VISIBLE
+            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
+            val url = if (texts.size == 3) getString(R.string.lvl4_book_help_link) // Scan QR link
+                else getString(R.string.lvl4_book_babel_link)                      // Babel link
+            intent.data = android.net.Uri.parse(url)
+            btnLink.setOnClickListener {
+                startActivity(intent)
+            }
+
+        }
+
 
         ivPage.setOnTouchListener { iv, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {

@@ -13,9 +13,9 @@
         android:id="@+id/iv_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleY="1"
         android:scaleX="1"
-        android:src="@drawable/lvl4_book_blank"/>
+        android:scaleY="1"
+        android:src="@drawable/lvl4_book_blank" />
 
 
     <TextView
@@ -41,6 +41,20 @@
         android:layout_marginEnd="178dp"
         android:layout_marginTop="16dp"
         tools:text="TEXT2" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_page_text_left"
+        app:layout_constraintStart_toStartOf="@+id/iv_page"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_outline"
+        android:visibility="gone"/>
+
+
 
 
 
