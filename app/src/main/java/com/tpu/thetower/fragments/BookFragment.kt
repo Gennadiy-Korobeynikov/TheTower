@@ -29,6 +29,7 @@ class BookFragment(
     private  lateinit var ivPage : ImageView
     private lateinit var tvTextLeft : TextView
     private lateinit var tvTextRight : TextView
+    private lateinit var tvTitle : TextView
     private lateinit var btnLink : Button
     private var pageCount : Int = 0
 
@@ -39,6 +40,9 @@ class BookFragment(
         binding = FragmentBookBinding.bind(view)
         bindView()
         setListeners()
+        tvTitle.text = texts[0].first
+        tvTitle.visibility = View.VISIBLE
+        tvTextLeft.visibility = View.GONE
         tvTextLeft.text = texts[0].first
         tvTextRight.text = texts[0].second
         ivPage.setImageResource(pages[0])
@@ -52,6 +56,7 @@ class BookFragment(
         ivPage = binding.ivPage
         tvTextLeft = binding.tvPageTextLeft
         tvTextRight = binding.tvPageTextRight
+        tvTitle = binding.tvTitle
         btnLink = binding.btnLink
 
     }
@@ -99,6 +104,16 @@ class BookFragment(
 
                 val newTextRight = if (currPageNumber >= texts.size) getString(R.string.blank)
                     else HtmlCompat.fromHtml(texts[currPageNumber].second, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+                if(currPageNumber == 0) {
+                    tvTitle.text = newTextLeft
+                    tvTitle.visibility = View.VISIBLE
+                    tvTextLeft.visibility = View.GONE
+                }
+                else{
+                    tvTitle.visibility = View.GONE
+                    tvTextLeft.visibility = View.VISIBLE
+                }
 
                 ivPage.setImageResource(newPage)
                 tvTextLeft.text = newTextLeft
