@@ -4,15 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.MotionEvent
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
-import com.tpu.thetower.FragmentManager
-
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentBookBinding
 

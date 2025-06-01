@@ -1,12 +1,8 @@
 package com.tpu.thetower.fragments
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
-import android.view.MotionEvent
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
-import com.tpu.thetower.databinding.FragmentBookBinding
 
 
 class BooksFragment : Fragment(R.layout.fragment_books) {
