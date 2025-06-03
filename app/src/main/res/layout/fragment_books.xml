@@ -9,11 +9,6 @@
     android:orientation="horizontal">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/book_test" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_book"
         android:layout_width="match_parent"
