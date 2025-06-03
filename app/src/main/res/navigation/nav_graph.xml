@@ -66,6 +66,13 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl5Fragment"
+            app:destination="@id/lvl5Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/lvl1Fragment"
@@ -223,5 +230,10 @@
         android:name="com.tpu.thetower.fragments.Lvl0PuzzleLockFragment"
         android:label="fragment_lvl0_puzzle_lock"
         tools:layout="@layout/fragment_lvl0_puzzle_lock" />
+    <fragment
+        android:id="@+id/lvl5Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl5Fragment"
+        android:label="fragment_lvl5"
+        tools:layout="@layout/fragment_lvl5" />
 
 </navigation>

@@ -43,6 +43,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     private lateinit var btnToLvl2: Button
     private lateinit var btnToLvl3: Button
     private lateinit var btnToLvl4: Button
+    private lateinit var btnToLvl5: Button
 
     private lateinit var lvlButtons : List<Button>
     private lateinit var lvlActions: List<Int>
@@ -87,14 +88,17 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         btnToLvl2 = binding.btnElevatorToLvl2
         btnToLvl3 = binding.btnElevatorToLvl3
         btnToLvl4 = binding.btnElevatorToLvl4
+        btnToLvl5 = binding.btnElevatorToLvl5
 
-        lvlButtons = listOf(btnToLvl0, btnToLvl1, btnToLvl2, btnToLvl3, btnToLvl4)
+        lvlButtons = listOf(btnToLvl0, btnToLvl1, btnToLvl2, btnToLvl3, btnToLvl4, btnToLvl5)
         lvlActions = listOf(
             R.id.action_elevatorFragment_to_lvl0Fragment,
             R.id.action_elevatorFragment_to_lvl1Fragment,
             R.id.action_elevatorFragment_to_lvl2Fragment,
             R.id.action_elevatorFragment_to_lvl3Fragment,
             R.id.action_elevatorFragment_to_lvl4Fragment,
+            R.id.action_elevatorFragment_to_lvl5Fragment,
+
         )
     }
 
