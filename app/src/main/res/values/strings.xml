@@ -169,6 +169,7 @@
     <string name="lvl2_puzzle3_hint3">TODO</string>
     <string name="lvl2_puzzle3_hint4_1">TODO</string>
     <string name="lvl2_puzzle3_hint4_2">TODO</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="lvl4_book_askii_title">%3A%2F%2Flibraryofbabel.info%2Fanglishize.cgi%3F217r0sm5b8bnmdqnkz9cmjryg5dqvay7xtdkg40btwtg38r7g4nsprmonb22k50fu2ino3yotitp2</string>
     <string name="lvl4_book_babel_title">TODO</string>
@@ -187,6 +188,7 @@
     <string name="blank">" "</string>
     <string name="lvl4_book_help_link">0t7aljjrrw8m65qxse8824hyhbazdd5stj86tk5rab143gzk05qml5bck5970cdhc2iriu2aznkuzcitp8l7ae731ijrz0rlr6fb3nk26i97j3mw2qyttrwi5msx6bbwzsfhgip4ukhj2mrns15ix88ppsxgq242os7f6q2dfkpvpwj8f8k0kj9my2lo6-w2-s5-v07%3A1&amp;utf=1</string>
     <string name="lvl4_book_babel_link">" https://vk.com/away.php?to=https"</string>
+
 
 
 </resources>
