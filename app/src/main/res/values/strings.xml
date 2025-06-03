@@ -125,8 +125,6 @@
     <string name="lvl2_puzzle1_password">Enter the password</string>
     <!--#############################################-->
     <string name="lvl4_book_babel_text1">1</string>
-    <string name="lvl4_book_babel_text2">2</string>
-    <string name="lvl4_book_babel_text3">3</string>
     <string name="lvl2_computer">TODO</string>
     <string name="hint_is_not_here">TODO</string>
     <string name="lvl2_puzzle0_hint">TODO</string>
@@ -137,10 +135,10 @@
     <string name="lvl2_puzzle2_hint1">TODO</string>
     <string name="lvl2_puzzle2_hint2">TODO</string>
     <string name="lvl2_puzzle2_hint3">TODO</string>
-    <string name="lvl4_book_askii_text1_a">TODO</string>
-    <string name="lvl4_book_askii_text2_a">TODO</string>
-    <string name="lvl4_book_askii_text1_b">TODO</string>
-    <string name="lvl4_book_askii_text2_b">TODO</string>
+    <string name="lvl4_book_askii_text1_a">rj53ghxjiw98ofqydmsjhdhdq4zpjht2hl8r9gcs2iuha1n5vkcl9aqrlrctw4fr7dzbzcak4bkc7km911u0o1q3t0bzmbeecodkucl4j3k441q6lj1wm6q49vb29a4e7nl6jeuuvdb0maujn3rsetcquisq67e43vqlk</string>
+    <string name="lvl4_book_askii_text2_a">pozhuj7vk3ahaf167x912fhblrguuufckb6du8m2g9fkx6vhwqgo6r1oc52jzwfnnb8dimhebc8p1hac8e6rnmrz2tvy4ig2dqi6z85v6ugawmdo1cn1of8cclcu8g8h31p4h1e62gk2piolm8mcjdv1ionxo7hrq12vfvmgt2adhzferafz5vf1w</string>
+    <string name="lvl4_book_askii_text1_b">uvykfovcvjfcq9rfhjopiskhomvviaxc91xjatjq6xwmrv6cjw5qn298tgewb7ibxppcozec33qebk1kyw6vuj0mf1dum2aftk8gcjd5557h4z5179rm7njyvigdfo2jmzpjfy0qh3b2osc7gqkqrtslq5dsrklq121n1jo9ks1ppm9v5oosu4lafrfd0np9vvduivt</string>
+    <string name="lvl4_book_askii_text2_b">tnzocoi1xt26h3vmz7dk6n6t103euf96b2a0iy4en1pxh7615zr5x8u2lej9nd2lr1ukbf3vi08mbsoags3dfvhbnw0vq6x54nvum2ufers68je8b6u0k1et1paw8lokfoedn8z5mnfvfpcctmqn4accojt0gqqgnlxm5sx3v6eao77sxjlrloaxzrp7qxleqevfx62kc3io84</string>
     <string name="lvl4_puzzle1_askii">TODO</string>
     <string name="lvl4_puzzle1_normal">TODO</string>
     <string name="lvl3_puzzle0_hint1_1">TODO</string>
@@ -187,7 +185,25 @@
     <string name="lvl2_puzzle3_hint3">TODO</string>
     <string name="lvl2_puzzle3_hint4_1">TODO</string>
     <string name="lvl2_puzzle3_hint4_2">TODO</string>
-    <string name="blank"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="lvl4_book_askii_title">%3A%2F%2Flibraryofbabel.info%2Fanglishize.cgi%3F217r0sm5b8bnmdqnkz9cmjryg5dqvay7xtdkg40btwtg38r7g4nsprmonb22k50fu2ino3yotitp2</string>
+    <string name="lvl4_book_babel_title">TODO</string>
+    <string name="lvl4_book_history_title">azjapl80im9le2oh8f87nbo5w8rcp1km95y8nqbkunad99egrol0xm27petlr6xnpg9ie0uhwxfm6nzdzcgemjivlyzc5fugkfa728mpi41tpw9ybo98lpod925wkzb2qzp8h4ruzzntxa6x0zb</string>
+    <string name="lvl4_book_history_text1">q6jp839yrg0bhs0nltre71k8qyeti8jy3jv1xu11a8mnxyh61ap3ash8gd7202ine41sd3x0i4qeuays9yy8pmt0gm1z9zfnlwk2yooaessu38lh0bvm7</string>
+    <string name="lvl4_book_history_text3">5c0jwzp2urh958l0ifl8r3ici1qajwidep04nkgycca8035156gdiobwiwslk2f03po1pyhwzua8xye0rp5xyua37plv4ejo2jermc</string>
+    <string name="lvl4_book_history_text2">wsaz3fa9s7jirjnhd5qyvutnai0nw35deyctyumrxge2xgigo5gabv51u8ol6de6pmjgs0u5owk1kws2dy5hor4s8rmcwivx2r0emll6np3a8exhramipqf7v5e</string>
+    <string name="lvl4_book_help_title">4zzflbz9k62l418n01a6c560bdzvzc6lm0iri8pk60qm8s4w19tm9nt58bwxqvygkrcyv6plvlolyu9lapeb9j75sqsch0</string>
+    <string name="lvl4_book_help_text1">qoltk5ltf507c9p27wr2frq38ikdhkixtsfch24ooka8sin1rivh0ndvcxct5o0ev3vb4h8o790vsqxoc5a0nuqcnjvtwp</string>
+    <string name="lvl4_book_help_text2">5c9prfenwslenaubwoyuf0viafuarcqp3ly3hogxsr21hat7b0ogksvd5nh43sa6p2q3uwfrq2vu7fxu6ocox29xl8tfdty</string>
+    <string name="lvl4_book_help_text3">d08pcmm8270jd3ztmjzkncz7655qo5cyh9v66mf5qj8ztdkxzzi5viruhfzgwhik63nkhss5wgz4kdwtv9dmgs1wuvnepokzvyvlqggww3uo60b4h54yiqjp63s6b3mrzjqvbfde3rc4cxvblyl0q4wdzf</string>
+    <string name="lvl4_book_qr_title">TODO</string>
+    <string name="lvl4_book_qr_text1">TODO</string>
+    <string name="lvl4_book_blur_title">TODO</string>
+    <string name="lvl4_book_blur_text1">TODO</string>
+    <string name="blank">" "</string>
+    <string name="lvl4_book_help_link">0t7aljjrrw8m65qxse8824hyhbazdd5stj86tk5rab143gzk05qml5bck5970cdhc2iriu2aznkuzcitp8l7ae731ijrz0rlr6fb3nk26i97j3mw2qyttrwi5msx6bbwzsfhgip4ukhj2mrns15ix88ppsxgq242os7f6q2dfkpvpwj8f8k0kj9my2lo6-w2-s5-v07%3A1&amp;utf=1</string>
+    <string name="lvl4_book_babel_link">" https://vk.com/away.php?to=https"</string>
 
 
 </resources>
