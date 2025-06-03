@@ -80,6 +80,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         btnToPuzzle0Completed.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PetFragment)
+            soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
         btnToPuzzle1.setOnClickListener {
@@ -95,6 +96,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
             ivBgBlurred.visibility = View.VISIBLE
             ivCard.visibility = View.VISIBLE
             saveManager.saveLevelStatus(requireContext(), 2)
+            soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
         ivBgBlurred.setOnClickListener {
@@ -103,6 +105,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
             btnToPuzzle2Completed.visibility = View.GONE
             FragmentManager.showGoBackArrow(requireActivity())
             LevelAccessManager.upgradeAccessLvl(this)
+            soundManager.playSound(R.raw.sound_of_drawer_closing)
         }
     }
 
@@ -112,8 +115,8 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         soundManager.init()
         soundManager.loadSound(
             requireContext(), listOf(
-                R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening
+                R.raw.sound_of_drawer_opening,
+                R.raw.sound_of_drawer_closing
             )
         )
     }

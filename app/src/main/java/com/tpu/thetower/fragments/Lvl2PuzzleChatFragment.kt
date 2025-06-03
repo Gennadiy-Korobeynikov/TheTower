@@ -59,6 +59,7 @@ class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hin
         binding = FragmentLvl2PuzzleChatBinding.bind(view)
         bindView()
         soundManager = SoundManager.getInstance()
+        soundManager.init()
         soundManager.loadSound(
             requireContext(), listOf(
                 R.raw.sound_of_the_lock_opening,

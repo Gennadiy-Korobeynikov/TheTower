@@ -15,8 +15,10 @@ import com.tpu.thetower.DialogManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2PuzzlePasswordBinding
 import com.tpu.thetower.puzzles.Lvl2PuzzlePassword
 
@@ -24,6 +26,8 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
 
     private lateinit var binding: FragmentLvl2PuzzlePasswordBinding
     private val pinCells = mutableListOf<TextView>()
+    private lateinit var keyboardSounds: List<Int>
+    private var currentSoundIndex = 0
     private val puzzle: Puzzle = Lvl2PuzzlePassword(2, "password")
 
     private lateinit var tvPin1: TextView
@@ -39,6 +43,9 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     private lateinit var hiddenInput: EditText
     private lateinit var ivDialog: ImageView
     private lateinit var hintManager: HintManager
+    private lateinit var soundManager: SoundManager
+    private lateinit var musicManager: MusicManager
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,6 +54,15 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
 
         bindView()
         setListeners()
+
+        keyboardSounds = listOf(
+            R.raw.sound_of_keyboard_button_press_1,
+            R.raw.sound_of_keyboard_button_press_2,
+            R.raw.sound_of_keyboard_button_press_3,
+            R.raw.sound_of_keyboard_button_press_4
+        )
+
+        handleSounds()
 
         pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
@@ -106,7 +122,10 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                soundManager.playSound(keyboardSounds[currentSoundIndex])
+                currentSoundIndex = (currentSoundIndex + 1) % keyboardSounds.size
+            }
         })
     }
 
@@ -141,6 +160,16 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         pinContainer.visibility = View.GONE
         tvPassword.visibility = View.GONE
         ivDialog.visibility = View.VISIBLE
+    }
+
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init(maxStreamsNumber = 2)
+        soundManager.loadSound(
+            requireContext(),
+            keyboardSounds
+        )
     }
 
     override fun onPause() {

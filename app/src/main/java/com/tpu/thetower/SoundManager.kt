@@ -27,16 +27,18 @@ class SoundManager private constructor() {
         }
     }
 
-    fun init() {
+    fun init(maxStreamsNumber: Int = 5) {
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
 
         soundPool = SoundPool.Builder()
-            .setMaxStreams(5) // Количество одновременно проигрываемых звуков
+            .setMaxStreams(maxStreamsNumber) // Количество одновременно проигрываемых звуков
             .setAudioAttributes(audioAttributes)
             .build()
+
+        
     }
 
     fun loadSound(context: Context, soundResIds: List<Int>){
@@ -48,9 +50,9 @@ class SoundManager private constructor() {
         }
     }
 
-    fun playSound(soundResId: Int) {
+    fun playSound(soundResId: Int, repeat: Int = 0) {
         val soundId = soundMap[soundResId] ?: return
-        soundPool?.play(soundId, volume, volume, 1, 0, 1.0f)
+        soundPool?.play(soundId, volume, volume, 1, repeat, 1.0f)
     }
 
 //    fun playSoundWithDelay(soundResId: Int, delayMillis: Long) {

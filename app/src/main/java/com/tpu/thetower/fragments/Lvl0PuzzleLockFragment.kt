@@ -97,6 +97,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
         bindView()
 
         soundManager = SoundManager.getInstance()
+        soundManager.init()
         soundManager.loadSound(
             requireContext(), listOf(
                 R.raw.sound_of_the_lock_opening,

@@ -19,7 +19,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_triangle_drag1"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl3_puzzle_sleeping_pills"
         android:visibility="gone" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

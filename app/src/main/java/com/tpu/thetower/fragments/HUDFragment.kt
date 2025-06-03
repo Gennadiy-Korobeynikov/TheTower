@@ -53,7 +53,7 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
                 val dragAndDropImg = bundle.getInt("dragAndDropImg")
                 when (dragAndDropImg) {
                     0 -> ivDraggable.visibility = View.GONE
-                    R.drawable.ic_triangle_drag1 -> {
+                    R.drawable.lvl3_puzzle_sleeping_pills -> {
                         ivDraggable.setImageResource(dragAndDropImg)
                         ivDraggable.visibility = View.VISIBLE
                     }

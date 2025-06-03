@@ -122,6 +122,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             ivPuzzle1.visibility = View.VISIBLE
             DialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
             ivClick.visibility = View.VISIBLE
+            soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
         btnLvlCompleted.setOnClickListener {
@@ -140,6 +141,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         ivClick.setOnClickListener {
             ivPuzzle1.visibility = View.GONE
             ivClick.visibility = View.GONE
+            soundManager.playSound(R.raw.sound_of_drawer_closing)
         }
 
         ivDarkness.setOnClickListener {
@@ -156,6 +158,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             flashlightManager.stopMonitoring()
             saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "completed")
             enableButtons()
+            soundManager.playSound(R.raw.sound_of_light_switch)
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
@@ -195,7 +198,10 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         soundManager.loadSound(
             requireContext(), listOf(
                 R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening
+                R.raw.sound_of_an_elevator_door_opening,
+                R.raw.sound_of_drawer_opening,
+                R.raw.sound_of_drawer_closing,
+                R.raw.sound_of_light_switch
             )
         )
     }

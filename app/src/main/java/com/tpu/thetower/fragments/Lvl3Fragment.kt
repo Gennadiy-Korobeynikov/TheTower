@@ -46,14 +46,14 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl3Binding.bind(view)
         bindView()
-        setListeners()
         handleSounds()
+        setListeners()
 
         hintManager = HintManager(
             listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2"),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
             3, "sleeping pills"
-        ) // 11 - подсыпка снотвороного
+        )
         FragmentManager.showGoBackArrow(requireActivity())
 
         ivDraggable.post {
@@ -63,8 +63,10 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "buttons") == "completed") {
             btnToPuzzle0.visibility = View.GONE
             btnToPuzzle1.visibility = View.GONE
-            ivDraggable.visibility = View.VISIBLE
-            FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
+            if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") != "completed") {
+                ivDraggable.visibility = View.VISIBLE
+                FragmentManager.changeDragAndDropImg(this, R.drawable.lvl3_puzzle_sleeping_pills)
+            }
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") == "completed") {
@@ -74,8 +76,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
                 3, "sleeping pills"
             )
             FragmentManager.showGoBackArrow(requireActivity())
+            ivTarget.visibility = View.GONE
+            soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
         }
-
     }
 
     private fun bindView() {
@@ -152,7 +155,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         ivTarget.setOnDragListener(this@Lvl3Fragment)
         ivDraggable.setOnTouchListener(this@Lvl3Fragment)
-
     }
 
     private fun handleSounds() {
@@ -161,8 +163,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         soundManager.init()
         soundManager.loadSound(
             requireContext(), listOf(
-                R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening
+                R.raw.sound_of_guard_snoring
             )
         )
     }
@@ -176,9 +177,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             val shadowBuilder = DragShadowBuilder(view)
             view?.startDragAndDrop(data, shadowBuilder, view, 0)
             true
-        } else {
-            false
-        }
+        } else false
     }
 
     override fun onDrag(targetView: View, event: DragEvent?): Boolean {
@@ -216,10 +215,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 //            visibility = View.VISIBLE
         }
         saveManager.savePuzzleData(requireContext(), 3, "sleeping pills")
+        soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
     }
 
     private fun returnToOriginalPosition(view: View) {
-        FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
+        FragmentManager.changeDragAndDropImg(this, R.drawable.lvl3_puzzle_sleeping_pills)
         view.x = originalPosition.first
         view.y = originalPosition.second
         view.visibility = View.VISIBLE
@@ -231,6 +231,12 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         saveManager = SaveManager.getInstance()
         saveManager.saveCurrentLevel(requireContext(), 3)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        soundManager.release()
     }
 
     override fun useHint() {

@@ -28,7 +28,6 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
     private lateinit var binding: FragmentLvl1Binding
 
     private lateinit var musicManager: MusicManager
-    private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
 
     private lateinit var btnNpcReceptionist: Button
@@ -42,7 +41,6 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
         bindView()
         setListeners()
         handleSounds()
-
     }
 
     private fun bindView() {
@@ -77,14 +75,6 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
-        soundManager.init()
-        soundManager.loadSound(
-            requireContext(), listOf(
-                R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening
-            )
-        )
     }
 
 
