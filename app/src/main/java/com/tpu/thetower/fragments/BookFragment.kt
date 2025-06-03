@@ -2,16 +2,13 @@ package com.tpu.thetower.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.MotionEvent
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
-import com.tpu.thetower.FragmentManager
-
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentBookBinding
 
@@ -19,7 +16,6 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 class BookFragment(
     private val pages : List<Int>,
     private val texts : List<Pair<String, String>>,
-    private val hasLink : Boolean
 ) : Fragment(R.layout.fragment_book) {
 
     private lateinit var binding : FragmentBookBinding
@@ -29,9 +25,8 @@ class BookFragment(
     private  lateinit var ivPage : ImageView
     private lateinit var tvTextLeft : TextView
     private lateinit var tvTextRight : TextView
-    private lateinit var btnLink : Button
+    private lateinit var tvTitle : TextView
     private var pageCount : Int = 0
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,37 +34,28 @@ class BookFragment(
         binding = FragmentBookBinding.bind(view)
         bindView()
         setListeners()
+        tvTitle.text = texts[0].first
+        tvTitle.visibility = View.VISIBLE
+        tvTextLeft.visibility = View.GONE
         tvTextLeft.text = texts[0].first
         tvTextRight.text = texts[0].second
+        tvTextLeft.movementMethod = LinkMovementMethod.getInstance()
+        tvTextRight.movementMethod = LinkMovementMethod.getInstance()
         ivPage.setImageResource(pages[0])
         pageCount = maxOf(pages.size , texts.size)
-
-
-
     }
 
     private fun bindView() {
         ivPage = binding.ivPage
         tvTextLeft = binding.tvPageTextLeft
         tvTextRight = binding.tvPageTextRight
-        btnLink = binding.btnLink
+        tvTitle = binding.tvTitle
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
 
-        if (hasLink) {
-            btnLink.visibility = View.VISIBLE
-            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
-            val url = if (texts.size == 3) getString(R.string.lvl4_book_help_link) // Scan QR link
-                else getString(R.string.lvl4_book_babel_link)                      // Babel link
-            intent.data = android.net.Uri.parse(url)
-            btnLink.setOnClickListener {
-                startActivity(intent)
-            }
-
-        }
 
 
         ivPage.setOnTouchListener { iv, event ->
@@ -99,6 +85,16 @@ class BookFragment(
 
                 val newTextRight = if (currPageNumber >= texts.size) getString(R.string.blank)
                     else HtmlCompat.fromHtml(texts[currPageNumber].second, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+                if(currPageNumber == 0) {
+                    tvTitle.text = newTextLeft
+                    tvTitle.visibility = View.VISIBLE
+                    tvTextLeft.visibility = View.GONE
+                }
+                else{
+                    tvTitle.visibility = View.GONE
+                    tvTextLeft.visibility = View.VISIBLE
+                }
 
                 ivPage.setImageResource(newPage)
                 tvTextLeft.text = newTextLeft
