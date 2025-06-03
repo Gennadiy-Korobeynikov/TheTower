@@ -212,6 +212,29 @@ class DialogManager {
                             )
                         )
                         {} ,
+
+                "lvl2_start" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl2_start)
+                            ),
+                            listOfNotNull(
+                                characters["John"]
+                            )
+                        )
+                        {} ,
+
+                "lvl2_computer_lore" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl2_computer_lore)
+                            ),
+                            listOfNotNull(
+                                characters["John"]
+                            )
+                        )
+                        {} ,
+
                 "lvl2_puzzle0_hint" to
                         Dialog(
                             listOf(
@@ -352,6 +375,47 @@ class DialogManager {
 
 
 // Lvl 3 ---------------------------------------
+
+                "lvl3_npc_security" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl3_npc_security1),
+                                getString(activity, R.string.lvl3_npc_security2),
+                                getString(activity, R.string.lvl3_npc_security3),
+                                getString(activity, R.string.lvl3_npc_security4),
+                                getString(activity, R.string.lvl3_npc_security5)
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                                characters["security"],
+                                characters["John"],
+                                characters["security"],
+                                characters["John"]
+                            )
+                        )
+                        {},
+
+                "lvl3_computer" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl3_computer)
+                            ),
+                            listOfNotNull(
+                                characters["security"]
+                            )
+                        )
+                        {},
+
+                "lvl3_donuts" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl3_donuts)
+                            ),
+                            listOfNotNull(
+                                characters["security"]
+                            )
+                        )
+                        {},
 
                 "lvl3_to_puzzle0_hint1" to
                         Dialog(
@@ -700,7 +764,8 @@ class DialogManager {
         fun loadCharacters() {
             characters = mapOf(
                 "John" to Character("Джон", R.drawable.character_avatar_test),
-                "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist)
+                "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist),
+                "security" to Character("Охранник", R.drawable.npc_avatar_receptionist)
             )
         }
 

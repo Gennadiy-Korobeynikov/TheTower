@@ -81,7 +81,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
 
     private fun checkSolution() {
         if (solution.length == 6) {
-            if (puzzle.checkSolution(requireContext(), solution)) {
+            if (puzzle.checkSolution(requireActivity(), solution)) {
                 soundManager.playSound(R.raw.sound_of_the_lock_opening)
                 mainScreen.animate()
                     .alpha(0.2f)

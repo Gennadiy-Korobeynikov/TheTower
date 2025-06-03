@@ -49,7 +49,7 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test) {
         val solutionString = cellStates
             .mapIndexedNotNull { idx, sel -> if (sel) idx.toString() else null }
             .joinToString(";")
-        if (puzzle.checkSolution(requireContext(), solutionString)) {
+        if (puzzle.checkSolution(requireActivity(), solutionString)) {
             passed()
         }
     }

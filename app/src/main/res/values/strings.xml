@@ -104,6 +104,22 @@
     <!--##################################################-->
 
     <!--############################## Lvl2 #################################-->
+    <string name="lvl2_start">TODO</string>
+    <string name="lvl2_computer_lore">TODO</string>
+    <!--##################################################-->
+
+
+    <!--############################## Lvl3 #################################-->
+    <string name="lvl3_npc_security1">TODO</string>
+    <string name="lvl3_npc_security2">TODO</string>
+    <string name="lvl3_npc_security3">TODO</string>
+    <string name="lvl3_npc_security4">TODO</string>
+    <string name="lvl3_npc_security5">TODO</string>
+
+    <string name="lvl3_computer">TODO</string>
+    <string name="lvl3_donuts">TODO</string>
+    <!--##################################################-->
+
 
     <!--################# Lvl2Puzzle1 ##############-->
     <string name="lvl2_puzzle1_password">Enter the password</string>
@@ -172,8 +188,6 @@
     <string name="lvl2_puzzle3_hint4_1">TODO</string>
     <string name="lvl2_puzzle3_hint4_2">TODO</string>
     <string name="blank"></string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

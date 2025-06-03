@@ -49,6 +49,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         handleSounds()
         setListeners()
 
+        saveManager = SaveManager.getInstance()
+
         hintManager = HintManager(
             listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2"),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
@@ -58,6 +60,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         ivDraggable.post {
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
+        }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts") == "locked") {
+            DialogManager.startDialog(requireActivity(), "lvl3_npc_security")
+            saveManager.savePuzzleData(requireContext(), 3, "donuts", status = "in_progress")
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "buttons") == "completed") {
@@ -96,6 +103,10 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     private fun setListeners() {
 
         btnToPuzzle0.setOnClickListener {
+            if (LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts after shaking") == "locked") {
+                DialogManager.startDialog(requireActivity(), "lvl3_donuts")
+                saveManager.savePuzzleData(requireContext(), 3, "donuts after shaking", status = "in_progress")
+            }
             FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
         }
 
@@ -104,11 +115,21 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         }
 
         btnToPuzzle3.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
+            if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") != "completed") {
+                DialogManager.startDialog(requireActivity(), "lvl3_computer")
+            }
+            else {
+                FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
+            }
         }
 
         btnToPuzzle4.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
+            if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") != "completed") {
+                DialogManager.startDialog(requireActivity(), "lvl3_computer")
+            }
+            else {
+                FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
+            }
         }
 
         btnToPuzzle4Lock.setOnClickListener {

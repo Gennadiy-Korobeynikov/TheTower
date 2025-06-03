@@ -140,7 +140,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
             orientation = LinearLayoutManager.HORIZONTAL,
             rvIndex = rvIndex,
             solution = solution,
-            context = requireContext(),
+            activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
             rotationSoundResId = R.raw.sound_of_segments_rotating_on_the_safe_lock,

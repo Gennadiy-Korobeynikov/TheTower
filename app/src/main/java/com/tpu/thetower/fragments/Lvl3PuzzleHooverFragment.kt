@@ -130,7 +130,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                 btnForward.postDelayed({
                     restart = !puzzleHoover.moveForward()
                     if (!restart) soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
-                    win = puzzleHoover.checkSolution(requireContext())
+                    win = puzzleHoover.checkSolution(requireActivity())
                     test()
                     changeButtonsState(true)
                 }, 1000)

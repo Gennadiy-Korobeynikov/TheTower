@@ -1,5 +1,6 @@
 package com.tpu.thetower.utils
 
+import android.app.Activity
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,7 @@ object WheelSetupHelper {
         orientation: Int,
         rvIndex: Int,
         solution: CharArray,
-        context: Context,
+        activity: Activity,
         puzzle: Puzzle,
         soundManager: SoundManager?,
         rotationSoundResId: Int?,
@@ -30,7 +31,7 @@ object WheelSetupHelper {
         val adapter = ImageCodeAdapter(data, layoutImage)
         rv.adapter = adapter
 
-        val layoutManager = LinearLayoutManager(context, orientation, false)
+        val layoutManager = LinearLayoutManager(activity, orientation, false)
         rv.layoutManager = layoutManager
 
         val snapHelper = LimitedSpeedLinearSnapHelper()
@@ -51,7 +52,7 @@ object WheelSetupHelper {
                         val digit = position % data.size
                         solution[rvIndex] = digit.digitToChar()
 
-                        val isCorrectSolution = puzzle.checkSolution(context, String(solution))
+                        val isCorrectSolution = puzzle.checkSolution(activity, String(solution))
 
                         if (isCorrectSolution && !isSolvedRef()) {
                             onSolvedListener.onPuzzleSolved()

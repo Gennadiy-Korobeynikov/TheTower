@@ -46,6 +46,13 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         FragmentManager.showGoBackArrow(requireActivity())
 
+        saveManager = SaveManager.getInstance()
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "locked") {
+            DialogManager.startDialog(requireActivity(), "lvl2_start")
+            saveManager.savePuzzleData(requireContext(), 2, "lock", status = "in_progress")
+        }
+
         if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "completed") {
             btnToPuzzle0Lock.visibility = View.GONE
             btnToPuzzle0Completed.visibility = View.VISIBLE

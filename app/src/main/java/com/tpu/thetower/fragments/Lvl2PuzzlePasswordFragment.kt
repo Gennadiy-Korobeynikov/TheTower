@@ -115,7 +115,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                     textView.text = if (index < input.length) input[index].toString() else ""
                 }
 
-                if (puzzle.checkSolution(requireContext(), input)) {
+                if (puzzle.checkSolution(requireActivity(), input)) {
                     completed()
                     hideKeyboard()
                 }
