@@ -172,7 +172,11 @@
     <string name="lvl2_puzzle3_hint4_1">TODO</string>
     <string name="lvl2_puzzle3_hint4_2">TODO</string>
     <string name="blank"></string>
-
+    <string name="lvl2_puzzle1_chat_1">TODO</string>
+    <string name="lvl2_puzzle1_chat_2">TODO</string>
+    <string name="lvl2_puzzle1_chat_3">TODO</string>
+    <string name="lvl2_puzzle1_chat_4">TODO</string>
+    <string name="lvl2_puzzle1_chat_james">TODO</string>
 
 
 </resources>

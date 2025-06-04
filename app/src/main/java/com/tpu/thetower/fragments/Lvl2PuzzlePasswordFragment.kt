@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.HintManager
@@ -39,6 +40,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     private lateinit var pinContainer: LinearLayout
     private lateinit var hiddenInput: EditText
     private lateinit var ivDialog: ImageView
+    private lateinit var textChat: ConstraintLayout
     private lateinit var hintManager: HintManager
 
 
@@ -81,6 +83,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
 
         hiddenInput = binding.hiddenInput
         pinContainer = binding.pinContainer
+        textChat = binding.clChatText
         ivDialog = binding.ivDialog
 
     }
@@ -137,6 +140,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         pinContainer.visibility = View.GONE
         tvPassword.visibility = View.GONE
         ivDialog.visibility = View.VISIBLE
+        textChat.visibility = View.VISIBLE
     }
 
     override fun onPause() {
