@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_lvl0Fragment_to_lvl0PuzzleLockFragment"
             app:destination="@id/lvl0PuzzleLockFragment" />
+        <action
+            android:id="@+id/action_lvl0Fragment_to_lvl0CompletedFragment"
+            app:destination="@id/lvl0CompletedFragment" />
     </fragment>
     <fragment
         android:id="@+id/elevatorFragment"
@@ -243,5 +246,10 @@
         android:name="com.tpu.thetower.fragments.Lvl2PuzzleLockFragment"
         android:label="fragment_lvl2_puzzle_lock"
         tools:layout="@layout/fragment_lvl2_puzzle_lock" />
+    <fragment
+        android:id="@+id/lvl0CompletedFragment"
+        android:name="com.tpu.thetower.fragments.Lvl0CompletedFragment"
+        android:label="fragment_lvl0_completed"
+        tools:layout="@layout/fragment_lvl0_completed" />
 
 </navigation>

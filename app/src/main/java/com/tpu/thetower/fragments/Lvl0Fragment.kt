@@ -42,9 +42,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     private lateinit var ivPuzzle1: ImageView
     private lateinit var ivClick: ImageView
     private lateinit var ivMain: ImageView
-    private lateinit var ivCard: ImageView
-    private lateinit var ivBgBlurred: ImageView
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,9 +57,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         saveManager = SaveManager.getInstance()
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
+        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "locked") {
             startAwakeningAnim()
-            saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "in_progress")
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "completed") {
@@ -101,8 +97,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         btnLightOn = binding.btnLightOn
         ivClick = binding.ivClick
         ivMain = binding.ivMain
-        ivCard = binding.ivCard
-        ivBgBlurred = binding.ivBgBlurred
+
     }
 
     private fun setListeners() {
@@ -126,16 +121,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         }
 
         btnLvlCompleted.setOnClickListener {
-            ivBgBlurred.visibility = View.VISIBLE
-            ivCard.visibility = View.VISIBLE
-            saveManager.saveLevelStatus(requireContext(), 0)
-        }
-
-        ivBgBlurred.setOnClickListener {
-            ivBgBlurred.visibility = View.GONE
-            ivCard.visibility = View.GONE
-            btnLvlCompleted.visibility = View.GONE
-            LevelAccessManager.upgradeAccessLvl(this)
+            FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0CompletedFragment)
         }
 
         ivClick.setOnClickListener {
@@ -146,8 +132,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         ivDarkness.setOnClickListener {
             DialogManager.startDialog(requireActivity(), "lvl0_dark")
-            // Тестирование !!!
-            flashlightManager.toggleFlashlight(true)
+//            // Тестирование !!!
+//            flashlightManager.toggleFlashlight(true)
         }
 
         btnLightOn.setOnClickListener {
@@ -163,14 +149,16 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
             requireActivity().runOnUiThread {
-                if (isFlashlightOn && LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
+                if (isFlashlightOn && LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "locked") {
                     soundManager.playSound(R.raw.sound_of_a_flashlight)
                     DialogManager.startDialog(requireActivity(),"lvl0_flashlight_on")
+                    saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "in_progress")
                     ivDarkness.visibility = View.GONE
                 } else {
                     if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
                         soundManager.playSound(R.raw.sound_of_a_flashlight)
                         ivDarkness.visibility = View.VISIBLE
+                        saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "locked")
                     }
                 }
             }
@@ -209,7 +197,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
     override fun onDestroy() {
         super.onDestroy()
+        flashlightManager.toggleFlashlight(false) // Выкл фонарик
         flashlightManager.stopMonitoring()
+        saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "locked")
     }
 
     override fun onResume() {

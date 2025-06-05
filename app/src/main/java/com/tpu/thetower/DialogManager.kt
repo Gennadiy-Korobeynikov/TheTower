@@ -153,6 +153,28 @@ class DialogManager {
                         )
                         {},
 
+                "lvl0_access_card" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl0_access_card)
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {},
+
+                "lvl0_access_card_got" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl0_access_card_got)
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {},
+
                 "lvl1_npc_receptionist" to
                         Dialog(
                             listOf(
