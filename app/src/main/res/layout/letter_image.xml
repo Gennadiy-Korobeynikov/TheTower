@@ -5,4 +5,4 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:scaleType="fitCenter"
-    android:src="@drawable/lvl2_puzzle0_c"/>
+    android:src="@drawable/lvl2_puzzle0_с"/>

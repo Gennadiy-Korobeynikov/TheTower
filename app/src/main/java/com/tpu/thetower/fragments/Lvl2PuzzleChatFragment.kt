@@ -41,16 +41,16 @@ class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hin
 
     private val images =
         arrayOf(
-            R.drawable.lvl2_puzzle0_c,
-            R.drawable.lvl2_puzzle0_d,
-            R.drawable.lvl2_puzzle0_h,
-            R.drawable.lvl2_puzzle0_i,
-            R.drawable.lvl2_puzzle0_l,
-            R.drawable.lvl2_puzzle0_m,
-            R.drawable.lvl2_puzzle0_n,
-            R.drawable.lvl2_puzzle0_o,
-            R.drawable.lvl2_puzzle0_u,
-            R.drawable.lvl2_puzzle0_v
+            R.drawable.lvl2_puzzle0_letter_c,
+            R.drawable.lvl2_puzzle0_letter_d,
+            R.drawable.lvl2_puzzle0_letter_h,
+            R.drawable.lvl2_puzzle0_letter_i,
+            R.drawable.lvl2_puzzle0_letter_l,
+            R.drawable.lvl2_puzzle0_letter_m,
+            R.drawable.lvl2_puzzle0_letter_n,
+            R.drawable.lvl2_puzzle0_letter_o,
+            R.drawable.lvl2_puzzle0_letter_u,
+            R.drawable.lvl2_puzzle0_letter_v
         )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

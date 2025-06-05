@@ -14,7 +14,7 @@
         {
           "id": 0,
           "name": "flashlight",
-          "status": "in_progress",
+          "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0

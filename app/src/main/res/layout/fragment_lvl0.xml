@@ -38,7 +38,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.19" />
 
-        <!-- горизонтальная на 10% от верха картинки -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_elevator"
             android:layout_width="wrap_content"
@@ -64,7 +63,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.52" />
 
-        <!-- горизонтальная на 10% от верха картинки -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_puzzle1_lock"
             android:layout_width="wrap_content"
@@ -90,7 +88,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0" />
 
-        <!-- горизонтальная на 10% от верха картинки -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_puzzle1"
             android:layout_width="wrap_content"
@@ -116,7 +113,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.77" />
 
-        <!-- горизонтальная на 10% от верха картинки -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_light_on"
             android:layout_width="wrap_content"
@@ -141,7 +137,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.52" />
 
-        <!-- горизонтальная на 10% от верха картинки -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_lvl_completed"
             android:layout_width="wrap_content"
@@ -197,26 +192,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:src="@drawable/lvl0_puzzle1"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/iv_bg_blurred"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/lvl0_bd_solved_blurred"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/iv_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
-        android:src="@drawable/card"
         android:visibility="gone" />
 
     <ImageView

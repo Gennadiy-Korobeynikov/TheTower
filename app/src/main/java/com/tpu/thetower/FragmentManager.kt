@@ -105,7 +105,7 @@ class FragmentManager {
                 .setFragmentResult("moduleUnlocking", bundleOf("currAccessLevel" to currAccessLevel))
         }
 
-        fun updateHintStateImg(activity: Activity, step : String ) { // Временно передаём строку, потом - Int
+        fun updateHintStateImg(activity: Activity, step : Int ) { // Временно передаём строку, потом - Int
 
             (activity as? AppCompatActivity)?.supportFragmentManager
                 ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))

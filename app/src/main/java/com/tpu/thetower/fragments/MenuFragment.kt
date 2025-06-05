@@ -38,20 +38,11 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         setListeners()
         handleSounds()
 
-        requireActivity().supportFragmentManager
-            .setFragmentResultListener("updateProgressBar", viewLifecycleOwner) { _, bundle ->
-                val (solvedPuzzles, allPuzzles) = LoadManager.getLevelProgress(requireActivity(), LoadManager.getCurrentLevel(requireActivity()))
-                if (allPuzzles != 0)
-                    progressBar.progress = solvedPuzzles * 100 / allPuzzles
-                else
-                    progressBar.progress = 0
-            }
-
     }
 
     private fun bindView() {
         btnResume = binding.btnResume
-        btnToTitleScreen = binding.btnToTitlescreen
+        btnToTitleScreen = binding.btnToTitleScreen
         progressBar = binding.progressBar
     }
 
@@ -66,6 +57,15 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
             FragmentManager.showTitleScreen(requireActivity())
         }
+
+        requireActivity().supportFragmentManager
+            .setFragmentResultListener("updateProgressBar", viewLifecycleOwner) { _, bundle ->
+                val (solvedPuzzles, allPuzzles) = LoadManager.getLevelProgress(requireActivity(), LoadManager.getCurrentLevel(requireActivity()))
+                if (allPuzzles != 0)
+                    progressBar.progress = solvedPuzzles * 100 / allPuzzles
+                else
+                    progressBar.progress = 0
+            }
 
     }
 

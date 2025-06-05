@@ -8,7 +8,7 @@ class LevelAccessManager {
     companion object {
         private val saveManager = SaveManager.getInstance()
         private val cardImageIds: List<Int> = listOf(
-            R.drawable.card,
+            R.drawable.card, // Костыль, не трогать
             R.drawable.card,
             R.drawable.test_card1,
             R.drawable.test_card2,
