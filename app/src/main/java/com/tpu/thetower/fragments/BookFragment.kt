@@ -16,6 +16,7 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 class BookFragment(
     private val pages : List<Int>,
     private val texts : List<Pair<String, String>>,
+    private val hasLink: Boolean
 ) : Fragment(R.layout.fragment_book) {
 
     private lateinit var binding : FragmentBookBinding
@@ -25,6 +26,8 @@ class BookFragment(
     private  lateinit var ivPage : ImageView
     private lateinit var tvTextLeft : TextView
     private lateinit var tvTextRight : TextView
+    private lateinit var tvLinkLeft : TextView
+    private lateinit var tvLinkRight : TextView
     private lateinit var tvTitle : TextView
     private var pageCount : Int = 0
 
@@ -39,8 +42,8 @@ class BookFragment(
         tvTextLeft.visibility = View.GONE
         tvTextLeft.text = texts[0].first
         tvTextRight.text = texts[0].second
-        tvTextLeft.movementMethod = LinkMovementMethod.getInstance()
-        tvTextRight.movementMethod = LinkMovementMethod.getInstance()
+        tvLinkLeft.movementMethod = LinkMovementMethod.getInstance()
+        tvLinkRight.movementMethod = LinkMovementMethod.getInstance()
         ivPage.setImageResource(pages[0])
         pageCount = maxOf(pages.size , texts.size)
     }
@@ -49,14 +52,69 @@ class BookFragment(
         ivPage = binding.ivPage
         tvTextLeft = binding.tvPageTextLeft
         tvTextRight = binding.tvPageTextRight
+        tvLinkLeft = binding.tvPageLinkLeft
+        tvLinkRight = binding.tvPageLinkRight
         tvTitle = binding.tvTitle
+    }
 
+    private fun flipPage() {
+        val newPage = if (currPageNumber >= pages.size) R.drawable.lvl4_book_blank else pages[currPageNumber]
+
+        val newTextLeft = if (currPageNumber >= texts.size) getString(R.string.blank)
+        else HtmlCompat.fromHtml(texts[currPageNumber].first , HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+        val newTextRight = if (currPageNumber >= texts.size) getString(R.string.blank)
+        else HtmlCompat.fromHtml(texts[currPageNumber].second, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+        if(currPageNumber == 0) {
+            tvTitle.text = newTextLeft
+            tvTitle.visibility = View.VISIBLE
+            tvTextLeft.visibility = View.GONE
+        }
+        else{
+            tvTitle.visibility = View.GONE
+            tvTextLeft.visibility = View.VISIBLE
+        }
+
+        ivPage.setImageResource(newPage)
+        tvTextLeft.text = newTextLeft
+        tvTextRight.text = newTextRight
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
 
+        if (hasLink) {
+            if (texts.size == 3) {
+                tvLinkRight.text = HtmlCompat.fromHtml(getString(R.string.lvl4_book_help_link) , HtmlCompat.FROM_HTML_MODE_LEGACY)
+            } else {
+                tvLinkLeft.text = HtmlCompat.fromHtml(getString(R.string.lvl4_book_babel_link) , HtmlCompat.FROM_HTML_MODE_LEGACY)
+            }
+        }
 
+//        tvTextLeft.setOnTouchListener { tv, event ->
+//            if (event.action == MotionEvent.ACTION_DOWN) {
+//                tv.performClick()
+//                if (currPageNumber > 0) {
+//                    currPageNumber--
+//                }
+//                flipPage()
+//                return@setOnTouchListener true
+//            }
+//            true
+//        }
+//
+//        tvTextRight.setOnTouchListener { tv, event ->
+//            if (event.action == MotionEvent.ACTION_DOWN) {
+//                tv.performClick()
+//                if (currPageNumber < pageCount - 1) {
+//                    currPageNumber++
+//                }
+//                flipPage()
+//                return@setOnTouchListener true
+//            }
+//            true
+//        }
 
         ivPage.setOnTouchListener { iv, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -95,7 +153,24 @@ class BookFragment(
                     tvTitle.visibility = View.GONE
                     tvTextLeft.visibility = View.VISIBLE
                 }
+                if (hasLink) {
 
+                    if (texts.size == 3 && currPageNumber == 1) {
+                        tvLinkRight.visibility = View.VISIBLE
+                        tvLinkLeft.visibility = View.GONE
+                    } else if (currPageNumber == 1) {
+                        tvLinkLeft.visibility = View.VISIBLE
+                        tvLinkRight.visibility = View.GONE
+                    }
+                    else{
+                        tvLinkLeft.visibility = View.GONE
+                        tvLinkRight.visibility = View.GONE
+                    }
+                }
+                else {
+                    tvLinkLeft.visibility = View.GONE
+                    tvLinkRight.visibility = View.GONE
+                }
                 ivPage.setImageResource(newPage)
                 tvTextLeft.text = newTextLeft
                 tvTextRight.text = newTextRight
