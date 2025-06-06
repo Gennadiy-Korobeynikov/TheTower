@@ -57,29 +57,6 @@ class BookFragment(
         tvTitle = binding.tvTitle
     }
 
-    private fun flipPage() {
-        val newPage = if (currPageNumber >= pages.size) R.drawable.lvl4_book_blank else pages[currPageNumber]
-
-        val newTextLeft = if (currPageNumber >= texts.size) getString(R.string.blank)
-        else HtmlCompat.fromHtml(texts[currPageNumber].first , HtmlCompat.FROM_HTML_MODE_LEGACY)
-
-        val newTextRight = if (currPageNumber >= texts.size) getString(R.string.blank)
-        else HtmlCompat.fromHtml(texts[currPageNumber].second, HtmlCompat.FROM_HTML_MODE_LEGACY)
-
-        if(currPageNumber == 0) {
-            tvTitle.text = newTextLeft
-            tvTitle.visibility = View.VISIBLE
-            tvTextLeft.visibility = View.GONE
-        }
-        else{
-            tvTitle.visibility = View.GONE
-            tvTextLeft.visibility = View.VISIBLE
-        }
-
-        ivPage.setImageResource(newPage)
-        tvTextLeft.text = newTextLeft
-        tvTextRight.text = newTextRight
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
