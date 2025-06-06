@@ -11,11 +11,20 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
 
     private lateinit var  bookPages : Map<String, List<Int>>
     private lateinit var  bookTexts : Map<String, List<Pair<String, String>>>
+    private lateinit var  bookHasLink : Map<String, Boolean>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        bookHasLink = mapOf(
+            "babel" to true,
+            "askii_a" to false,
+            "askii_b" to  false,
+            "qr" to  false,
+            "blur" to  false ,
+            "history" to false,
+            "help" to  true
+        )
 
         bookPages = mapOf(
             "babel" to listOf(
@@ -96,7 +105,7 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
     private fun openBook(book : String) {
 
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fcv_book, BookFragment(bookPages[book]!!, bookTexts[book]!!), "BookFragment")
+            .replace(R.id.fcv_book, BookFragment(bookPages[book]!!, bookTexts[book]!!, bookHasLink[book]!!), "BookFragment")
             .commit()
     }
 

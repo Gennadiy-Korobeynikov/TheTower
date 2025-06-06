@@ -74,6 +74,23 @@
             tools:text="TEXT1" />
 
 
+        <TextView
+            android:id="@+id/tv_page_link_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="11sp"
+            android:fontFamily="serif"
+            android:justificationMode="inter_word"
+            android:linksClickable="true"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_text_left"
+            app:layout_constraintTop_toBottomOf="@id/tv_page_text_left"
+            tools:text="TEXT1"
+            android:visibility="gone"/>
+
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_text_right"
             android:layout_width="wrap_content"
@@ -100,6 +117,21 @@
             app:layout_constraintStart_toStartOf="@id/guideV_text_right"
             app:layout_constraintTop_toTopOf="@id/guideH_text_right"
             tools:text="@string/lvl4_book_help_text2" />
+        <TextView
+            android:id="@+id/tv_page_link_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="11sp"
+            android:fontFamily="serif"
+            android:justificationMode="inter_word"
+            android:linksClickable="true"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_text_right"
+            app:layout_constraintTop_toBottomOf="@id/tv_page_text_right"
+            tools:text="TEXT1"
+            android:visibility="gone"/>
 
 
 
