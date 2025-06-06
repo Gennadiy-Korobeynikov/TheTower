@@ -1,94 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".fragments.HUDFragment">
+    tools:context=".fragments.DialogFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:adjustViewBounds="false"
-        android:scaleType="fitXY"
-        android:src="@drawable/panel" />
-
-    <ImageView
-        android:id="@+id/iv_access_card"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideV_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="250dp"
-        android:adjustViewBounds="false"
-        android:scaleX="0.9"
-        android:scaleY="0.9"
-        android:src="@drawable/card" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="25dp"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/menu" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="350dp"
-        android:adjustViewBounds="false"
-        android:scaleX="0.6"
-        android:scaleY="0.6"
-        android:src="@drawable/hint" />
-
+        android:id="@+id/iv_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/menu_button"
+        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintStart_toStartOf="@id/guideV_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_menu"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="65dp"
-        android:background="@drawable/button_outline" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintStart_toStartOf="@id/guideV_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1"
+        android:background="@android:color/transparent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideV_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.876" />
+
+    <ImageView
+        android:id="@+id/iv_hint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/hint4_full"
+        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintEnd_toStartOf="@id/guideV_hint"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_hint"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_vertical|end"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/button_outline" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintEnd_toStartOf="@id/guideV_hint"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1"
+        android:background="@android:color/transparent" />
 
     <ImageView
-        android:id="@+id/ivDraggable"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_triangle_drag1"
-        android:visibility="gone" />
+        android:id="@+id/iv_access_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/card"
+        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintEnd_toStartOf="@id/btn_hint"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintWidth_percent="0.1" />
 
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_test_upgr_access_lvl"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_vertical|end"
-        android:layout_marginEnd="150dp"
-        android:background="@drawable/button_outline"
-        android:visibility="visible" />
-
-
-    <!--   Временно для теста -->
-    <TextView
-        android:id="@+id/tv_test_hint_recovery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:textSize="25sp" />
-
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

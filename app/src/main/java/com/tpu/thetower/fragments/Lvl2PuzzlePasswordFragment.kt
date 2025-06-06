@@ -17,17 +17,20 @@ import com.tpu.thetower.DialogManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2PuzzlePasswordBinding
-import com.tpu.thetower.puzzles.Lvl2PuzzleLock1
+import com.tpu.thetower.puzzles.Lvl2PuzzlePassword
 
-class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_password) , Hintable{
+class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_password), Hintable {
 
     private lateinit var binding: FragmentLvl2PuzzlePasswordBinding
     private val pinCells = mutableListOf<TextView>()
-    private val puzzle: Puzzle = Lvl2PuzzleLock1(2, "password")
-
+    private lateinit var keyboardSounds: List<Int>
+    private var currentSoundIndex = 0
+    private val puzzle: Puzzle = Lvl2PuzzlePassword(2, "password")
 
     private lateinit var tvPin1: TextView
     private lateinit var tvPin2: TextView
@@ -47,7 +50,8 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     private lateinit var btnJames: AppCompatButton
     private lateinit var btnAmanda: AppCompatButton
     private lateinit var hintManager: HintManager
-
+    private lateinit var soundManager: SoundManager
+    private lateinit var musicManager: MusicManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,20 +62,35 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         bindView()
         setListeners()
 
+        keyboardSounds = listOf(
+            R.raw.sound_of_keyboard_button_press_1,
+            R.raw.sound_of_keyboard_button_press_2,
+            R.raw.sound_of_keyboard_button_press_3,
+            R.raw.sound_of_keyboard_button_press_4
+        )
+
+        handleSounds()
+
         pinCells.addAll(listOf(tvPin1, tvPin2, tvPin3, tvPin4, tvPin5, tvPin6, tvPin7))
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 2, "password") == "locked") {
             showKeyboard()
-            hintManager = HintManager(listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3",),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"password"),
-                2,"password")
+            hintManager = HintManager(
+                listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3"),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "password"),
+                2, "password"
+            )
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 2, "password") == "completed") {
-            hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
-                "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
-                2,"chat")
+            hintManager = HintManager(
+                listOf(
+                    "lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
+                    "lvl2_puzzle3_hint3", "lvl2_puzzle3_hint4", "lvl2_puzzle3_hint5"
+                ),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "chat"),
+                2, "chat"
+            )
             completed()
         }
     }
@@ -85,7 +104,6 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         tvPin6 = binding.tvPin6
         tvPin7 = binding.tvPin7
         tvPassword = binding.tvPassword
-
         hiddenInput = binding.hiddenInput
         pinContainer = binding.pinContainer
         chatNames = binding.clChatNames
@@ -120,16 +138,17 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                     textView.text = if (index < input.length) input[index].toString() else ""
                 }
 
-                if (puzzle.checkSolution(requireContext(), input)) {
+                if (puzzle.checkSolution(requireActivity(), input)) {
                     completed()
                     hideKeyboard()
                 }
-
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                soundManager.playSound(keyboardSounds[currentSoundIndex])
+                currentSoundIndex = (currentSoundIndex + 1) % keyboardSounds.size
+            }
         })
     }
 
@@ -138,7 +157,8 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
             requestFocus()
             post {
                 context?.let {
-                    val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm =
+                        it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
                 }
             }
@@ -151,16 +171,30 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     }
 
     private fun completed() {
-        hintManager = HintManager(listOf("lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
-            "lvl2_puzzle3_hint3","lvl2_puzzle3_hint4","lvl2_puzzle3_hint5"),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"chat"),
-            2,"chat")
+        hintManager = HintManager(
+            listOf(
+                "lvl2_puzzle3_hint1", "lvl2_puzzle3_hint2",
+                "lvl2_puzzle3_hint3", "lvl2_puzzle3_hint4", "lvl2_puzzle3_hint5"
+            ),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "chat"),
+            2, "chat"
+        )
         hiddenInput.visibility = View.GONE
         pinContainer.visibility = View.GONE
         tvPassword.visibility = View.GONE
         ivDialog.visibility = View.VISIBLE
         chatNames.visibility = View.VISIBLE
         jamesChat.visibility = View.VISIBLE
+    }
+
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init(maxStreamsNumber = 2)
+        soundManager.loadSound(
+            requireContext(),
+            keyboardSounds
+        )
     }
 
     override fun onPause() {

@@ -1,6 +1,5 @@
 package com.tpu.thetower.fragments
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.os.Bundle
 import android.view.DragEvent
@@ -38,7 +37,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
     private lateinit var ivTarget: ImageView
     private lateinit var ivDraggable: ImageView
-    private lateinit var ivCopy: ImageView
 
     private lateinit var originalPosition: Pair<Float, Float>
 
@@ -46,25 +44,39 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl3Binding.bind(view)
         bindView()
-        setListeners()
         handleSounds()
+        setListeners()
+
+        saveManager = SaveManager.getInstance()
 
         hintManager = HintManager(
             listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2"),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
             3, "sleeping pills"
-        ) // 11 - подсыпка снотвороного
+        )
         FragmentManager.showGoBackArrow(requireActivity())
 
         ivDraggable.post {
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
         }
 
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts") == "locked") {
+            DialogManager.startDialog(requireActivity(), "lvl3_npc_security")
+            saveManager.savePuzzleData(requireContext(), 3, "donuts", status = "in_progress")
+        }
+
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "buttons") == "completed") {
             btnToPuzzle0.visibility = View.GONE
             btnToPuzzle1.visibility = View.GONE
-            ivDraggable.visibility = View.VISIBLE
-            FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
+            if (LoadManager.getPuzzleStatus(
+                    requireActivity(),
+                    3,
+                    "sleeping pills"
+                ) != "completed"
+            ) {
+                ivDraggable.visibility = View.VISIBLE
+                FragmentManager.changeDragAndDropImg(this, R.drawable.lvl3_puzzle_sleeping_pills)
+            }
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") == "completed") {
@@ -74,8 +86,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
                 3, "sleeping pills"
             )
             FragmentManager.showGoBackArrow(requireActivity())
+            ivTarget.visibility = View.GONE
+            soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
         }
-
     }
 
     private fun bindView() {
@@ -86,13 +99,25 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnToPuzzle4Lock = binding.btnToPuzzle4Lock
         ivTarget = binding.ivTarget
         ivDraggable = binding.ivDraggable
-        ivCopy = binding.ivCopy
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
 
         btnToPuzzle0.setOnClickListener {
+            if (LoadManager.getPuzzleStatus(
+                    requireActivity(),
+                    3,
+                    "donuts after shaking"
+                ) == "locked"
+            ) {
+                DialogManager.startDialog(requireActivity(), "lvl3_donuts")
+                saveManager.savePuzzleData(
+                    requireContext(),
+                    3,
+                    "donuts after shaking",
+                    status = "in_progress"
+                )
+            }
             FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
         }
 
@@ -101,58 +126,37 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         }
 
         btnToPuzzle3.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
+            if (LoadManager.getPuzzleStatus(
+                    requireActivity(),
+                    3,
+                    "sleeping pills"
+                ) != "completed"
+            ) {
+                DialogManager.startDialog(requireActivity(), "lvl3_computer")
+            } else {
+                FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
+            }
         }
 
         btnToPuzzle4.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
+            if (LoadManager.getPuzzleStatus(
+                    requireActivity(),
+                    3,
+                    "sleeping pills"
+                ) != "completed"
+            ) {
+                DialogManager.startDialog(requireActivity(), "lvl3_computer")
+            } else {
+                FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
+            }
         }
 
         btnToPuzzle4Lock.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleKeyFragment)
         }
 
-        var longPressRunnable: Runnable? = null
-        var isLongPressHandled = false
-
-        btnToPuzzle4Lock.setOnTouchListener { view, motionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    isLongPressHandled = false
-                    longPressRunnable = Runnable {
-                        ivCopy.visibility = View.VISIBLE
-                        isLongPressHandled = true
-                    }
-                    view.postDelayed(longPressRunnable, 1000)
-                    true
-                }
-
-                MotionEvent.ACTION_UP -> {
-                    if (!isLongPressHandled) {
-//                        FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_keyFragment)
-                    }
-                    longPressRunnable?.let { view.removeCallbacks(it) }
-                    true
-                }
-
-                MotionEvent.ACTION_CANCEL -> {
-                    longPressRunnable?.let { view.removeCallbacks(it) }
-                    true
-                }
-
-                else -> false
-            }
-
-        }
-
-        ivCopy.setOnClickListener {
-            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
-            ivCopy.visibility = View.GONE
-        }
-
         ivTarget.setOnDragListener(this@Lvl3Fragment)
         ivDraggable.setOnTouchListener(this@Lvl3Fragment)
-
     }
 
     private fun handleSounds() {
@@ -161,8 +165,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         soundManager.init()
         soundManager.loadSound(
             requireContext(), listOf(
-                R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening
+                R.raw.sound_of_guard_snoring
             )
         )
     }
@@ -176,9 +179,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             val shadowBuilder = DragShadowBuilder(view)
             view?.startDragAndDrop(data, shadowBuilder, view, 0)
             true
-        } else {
-            false
-        }
+        } else false
     }
 
     override fun onDrag(targetView: View, event: DragEvent?): Boolean {
@@ -216,10 +217,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 //            visibility = View.VISIBLE
         }
         saveManager.savePuzzleData(requireContext(), 3, "sleeping pills")
+        soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
     }
 
     private fun returnToOriginalPosition(view: View) {
-        FragmentManager.changeDragAndDropImg(this, R.drawable.ic_triangle_drag1)
+        FragmentManager.changeDragAndDropImg(this, R.drawable.lvl3_puzzle_sleeping_pills)
         view.x = originalPosition.first
         view.y = originalPosition.second
         view.visibility = View.VISIBLE
@@ -233,8 +235,19 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         saveManager.saveCurrentLevel(requireContext(), 3)
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        soundManager.release()
+    }
+
     override fun useHint() {
-        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") == "completed") // Охранник спит
+        if (LoadManager.getPuzzleStatus(
+                requireActivity(),
+                3,
+                "sleeping pills"
+            ) == "completed"
+        ) // Охранник спит
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")
         else
             hintManager.useHint(requireActivity())

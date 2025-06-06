@@ -27,12 +27,12 @@ class HintManager(
                 override fun onTick(millisUntilFinished: Long) {
                     FragmentManager.updateHintStateImg(
                         activity,
-                        ((totalTimeToRecover - millisUntilFinished) / updateInterval).toString()
+                        ((totalTimeToRecover - millisUntilFinished) / updateInterval).toInt()
                     )
                 }
 
                 override fun onFinish() {
-                    FragmentManager.updateHintStateImg(activity, "Подсказка готова")
+                    FragmentManager.updateHintStateImg(activity, 0)
                     isNewHintAvaliable = true
                     if (hintManager.usedHintsCount < hintManager.hints.count())
                         hintManager.usedHintsCountIncrease(activity)

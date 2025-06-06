@@ -1,5 +1,6 @@
 package com.tpu.thetower.puzzles
 
+import android.app.Activity
 import android.content.Context
 import com.tpu.thetower.Puzzle
 
@@ -83,10 +84,10 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
 //        return false
 //    }
 
-    override fun checkSolution(context: Context, solution: String): Boolean {
+    override fun checkSolution(activity: Activity, solution: String): Boolean {
         if (currPositionX == winPositionX && currPositionY == winPositionY) {
              // Пока не работает
-            //super.complete(context)
+            super.complete(activity)
             return true
         }
         return false

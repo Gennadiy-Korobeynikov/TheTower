@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_lvl0Fragment_to_lvl0PuzzleLockFragment"
             app:destination="@id/lvl0PuzzleLockFragment" />
+        <action
+            android:id="@+id/action_lvl0Fragment_to_lvl0CompletedFragment"
+            app:destination="@id/lvl0CompletedFragment" />
     </fragment>
     <fragment
         android:id="@+id/elevatorFragment"
@@ -55,22 +58,32 @@
             app:destination="@id/lvlTestFragment" />
         <action
             android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
-            app:destination="@id/lvl2Fragment" />
+            app:destination="@id/lvl2Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_elevatorFragment_to_lvl3Fragment"
-            app:destination="@id/lvl3Fragment" />
+            app:destination="@id/lvl3Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_elevatorFragment_to_lvl4Fragment"
             app:destination="@id/lvl4Fragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_elevatorFragment_to_lvl5Fragment"
             app:destination="@id/lvl5Fragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_elevatorFragment_to_lvl6Fragment"
+            app:destination="@id/lvl6Fragment"
+            app:enterAnim="@android:anim/fade_in"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
@@ -106,7 +119,15 @@
         android:id="@+id/lvl3PuzzleHooverFragment"
         android:name="com.tpu.thetower.fragments.Lvl3PuzzleHooverFragment"
         android:label="fragment_lvl2_puzzle_hoover"
-        tools:layout="@layout/fragment_lvl3_puzzle_hoover" />
+        tools:layout="@layout/fragment_lvl3_puzzle_hoover" >
+        <action
+            android:id="@+id/action_lvl3PuzzleHooverFragment_to_lvl3Fragment"
+            app:destination="@id/lvl3Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/lvl2Fragment"
         android:name="com.tpu.thetower.fragments.Lvl2Fragment"
@@ -119,11 +140,14 @@
             android:id="@+id/action_lvl2Fragment_to_lvl2CaesarFragment"
             app:destination="@id/lvl2CaesarFragment" />
         <action
-            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleLockFragment"
-            app:destination="@id/lvl2PuzzleLockFragment" />
-        <action
             android:id="@+id/action_lvl2Fragment_to_lvl2PuzzlePasswordFragment"
             app:destination="@id/lvl2PuzzlePasswordFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleChatFragment"
+            app:destination="@id/lvl2PuzzleChatFragment" />
+        <action
+            android:id="@+id/action_lvl2Fragment_to_lvl2PuzzleLockFragment"
+            app:destination="@id/lvl2PuzzleLockFragment" />
     </fragment>
     <fragment
         android:id="@+id/chessboardTestFragment"
@@ -216,11 +240,6 @@
         android:name="com.tpu.thetower.fragments.Lvl3PuzzleButtonsFragment"
         android:label="Lvl3PuzzleButtonsFragment" />
     <fragment
-        android:id="@+id/lvl2PuzzleLockFragment"
-        android:name="com.tpu.thetower.fragments.Lvl2PuzzleLockFragment"
-        android:label="fragment_lvl2_puzzle_lock"
-        tools:layout="@layout/fragment_lvl2_puzzle_lock" />
-    <fragment
         android:id="@+id/lvl2PuzzlePasswordFragment"
         android:name="com.tpu.thetower.fragments.Lvl2PuzzlePasswordFragment"
         android:label="fragment_lvl2_puzzle_password"
@@ -235,5 +254,62 @@
         android:name="com.tpu.thetower.fragments.Lvl5Fragment"
         android:label="fragment_lvl5"
         tools:layout="@layout/fragment_lvl5" />
+    <fragment
+        android:id="@+id/lvl2PuzzleChatFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzleChatFragment"
+        android:label="fragment_lvl2_puzzle_chat"
+        tools:layout="@layout/fragment_lvl2_puzzle_chat" />
+    <fragment
+        android:id="@+id/lvl2PuzzleLockFragment"
+        android:name="com.tpu.thetower.fragments.Lvl2PuzzleLockFragment"
+        android:label="fragment_lvl2_puzzle_lock"
+        tools:layout="@layout/fragment_lvl2_puzzle_lock" />
+    <fragment
+        android:id="@+id/lvl0CompletedFragment"
+        android:name="com.tpu.thetower.fragments.Lvl0CompletedFragment"
+        android:label="fragment_lvl0_completed"
+        tools:layout="@layout/fragment_lvl0_completed" />
+    <fragment
+        android:id="@+id/lvl6Fragment"
+        android:name="com.tpu.thetower.fragments.Lvl6Fragment"
+        android:label="fragment_lvl6"
+        tools:layout="@layout/fragment_lvl6" >
+        <action
+            android:id="@+id/action_lvl6Fragment_to_lvl6MainPanelFragment"
+            app:destination="@id/lvl6MainPanelFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_lvl6Fragment_to_lvl6PanelsFragment"
+            app:destination="@id/lvl6PanelsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_lvl6Fragment_to_lvl6LockFragment"
+            app:destination="@id/lvl6LockFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/lvl6MainPanelFragment"
+        android:name="com.tpu.thetower.fragments.Lvl6MainPanelFragment"
+        android:label="fragment_lvl6_main_panel"
+        tools:layout="@layout/fragment_lvl6_main_panel" />
+    <fragment
+        android:id="@+id/lvl6PanelsFragment"
+        android:name="com.tpu.thetower.fragments.Lvl6PanelsFragment"
+        android:label="fragment_lvl6_panels"
+        tools:layout="@layout/fragment_lvl6_panels" />
+    <fragment
+        android:id="@+id/lvl6LockFragment"
+        android:name="com.tpu.thetower.fragments.Lvl6LockFragment"
+        android:label="fragment_lvl6_lock"
+        tools:layout="@layout/fragment_lvl6_lock" />
 
 </navigation>

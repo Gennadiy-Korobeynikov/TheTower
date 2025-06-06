@@ -10,8 +10,10 @@ import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleButtonsBinding
 import com.tpu.thetower.puzzles.Lvl3PuzzleButtons
 
@@ -30,9 +32,10 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
 
     private lateinit var puzzle: Puzzle
     private lateinit var hintManager: HintManager
+    private lateinit var musicManager: MusicManager
+    private lateinit var soundManager: SoundManager
 
     private val buttons = mutableListOf<Button>()
-
     private var solution = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +50,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
         hintManager = HintManager(listOf("lvl3_puzzle1_hint1", "lvl3_puzzle1_hint2",),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"buttons"),
             3,"buttons")
+        handleSounds()
     }
 
     private fun bindView() {
@@ -65,6 +69,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
         buttons.forEach { button ->
             button.setOnClickListener { view ->
                 val clickedButton = view as Button
+                soundManager.playSound(R.raw.sound_of_button_press)
                 solution += clickedButton.text
                 clickedButton.isClickable = false
                 clickedButton.setBackgroundResource(R.drawable.lvl3_puzzle1_button_on)
@@ -76,7 +81,8 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
 
     private fun checkSolution() {
         if (solution.length == 6) {
-            if (puzzle.checkSolution(requireContext(), solution)) {
+            if (puzzle.checkSolution(requireActivity(), solution)) {
+                soundManager.playSound(R.raw.sound_of_the_lock_opening)
                 mainScreen.animate()
                     .alpha(0.2f)
                     .setDuration(2500)
@@ -99,5 +105,17 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
             hintManager.useHint(requireActivity())
         else
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")
+    }
+
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init()
+        soundManager.loadSound(
+            requireContext(), listOf(
+                R.raw.sound_of_button_press,
+                R.raw.sound_of_the_lock_opening
+                )
+        )
     }
 }

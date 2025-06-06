@@ -17,7 +17,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     private lateinit var musicManager: MusicManager
-    private lateinit var soundManager: SoundManager
+    protected lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +66,12 @@ class MainActivity : AppCompatActivity() {
     private fun setManagers() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
+        soundManager.init()
+        soundManager.loadSound(
+            this, listOf(
+                R.raw.sound_of_guard_snoring
+            )
+        )
         saveManager = SaveManager.getInstance()
     }
 

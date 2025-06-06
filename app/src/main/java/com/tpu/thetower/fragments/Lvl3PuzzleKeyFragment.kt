@@ -85,7 +85,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             val positionsText = pins.joinToString(", ") { "${it.currentPosition.roundToInt()}" }
             solution = pins.map {it.currentPosition.toInt()}
             tvKeyPosition.text = positionsText
-            if (puzzle.checkSolution(requireContext(), solution.joinToString(""))) {
+            if (puzzle.checkSolution(requireActivity(), solution.joinToString(""))) {
                 main.animate()
                     .alpha(0.2f)
                     .setDuration(2500)

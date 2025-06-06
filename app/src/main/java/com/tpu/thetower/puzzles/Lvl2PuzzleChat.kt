@@ -1,14 +1,15 @@
 package com.tpu.thetower.puzzles
 
+import android.app.Activity
 import android.content.Context
 import com.tpu.thetower.Puzzle
 
 class Lvl2PuzzleChat(level: Int, puzzle: String) : Puzzle(level, puzzle) {
-    private val answer = "01010"
+    private val answer = "00000"
 
-    override fun checkSolution(context: Context, solution: String) : Boolean {
+    override fun checkSolution(activity: Activity, solution: String) : Boolean {
         if (solution == answer){
-            super.complete(context)
+            super.complete(activity)
             return true
         }
         return false

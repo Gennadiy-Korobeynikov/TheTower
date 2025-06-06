@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    tools:context=".fragments.Lvl6LockFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl6_bg_blur" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="@id/guideV_1"
+            app:layout_constraintTop_toTopOf="@id/guideH_1"
+            app:layout_constraintWidth_percent="0.38"
+            tools:listitem="@layout/item_lvl6_image" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.365"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="@id/guideV_1"
+            app:layout_constraintTop_toTopOf="@id/guideH_2"
+            app:layout_constraintWidth_percent="0.38"
+            tools:listitem="@layout/item_lvl6_image" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.492"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="@id/guideV_1"
+            app:layout_constraintTop_toTopOf="@id/guideH_3"
+            app:layout_constraintWidth_percent="0.38"
+            tools:listitem="@layout/item_lvl6_image" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.616"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="@id/guideV_1"
+            app:layout_constraintTop_toTopOf="@id/guideH_4"
+            app:layout_constraintWidth_percent="0.38"
+            tools:listitem="@layout/item_lvl6_image" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.748"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="@id/guideV_1"
+            app:layout_constraintTop_toTopOf="@id/guideH_5"
+            app:layout_constraintWidth_percent="0.38"
+            tools:listitem="@layout/item_lvl6_image" />
+
+
+        <ImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/lvl6_lock"
+            android:visibility="visible"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
