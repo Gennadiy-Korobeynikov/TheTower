@@ -41,7 +41,7 @@ class DialogFragment(
                 tvName.text = dialog.speakers[currentIndex].name
                 ivAvatar.setImageResource(dialog.speakers[currentIndex].avatarId)
                 currentIndex++
-            // Полседняя реплика
+            // Последняя реплика
             } else {
                 FragmentManager.hideDialog(requireActivity())  // Закрываем диалог
                 dialog.onDialogEnd()  // Вызываем функцию завершения
