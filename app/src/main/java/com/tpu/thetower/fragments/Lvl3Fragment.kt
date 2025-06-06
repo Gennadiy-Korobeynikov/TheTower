@@ -96,6 +96,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed") {
             ivBg.setImageResource(R.drawable.lvl3_bg_hoover_with_key)
             btnKey.visibility = View.VISIBLE
+            btnToPuzzle3.visibility = View.GONE
+            btnToMap.visibility = View.GONE
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "key") == "completed") {
@@ -157,6 +159,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnKey.setOnClickListener {
             ivBg.setImageResource(R.drawable.lvl3_bg_hoover_no_key)
             btnKey.visibility = View.GONE
+            btnToPuzzle4Lock.visibility = View.VISIBLE
         }
 
         btnToPuzzle4.setOnClickListener {

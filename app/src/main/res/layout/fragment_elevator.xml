@@ -31,25 +31,25 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/access_card_2"
-            app:layout_constraintHeight_percent="0.12"
-            app:layout_constraintWidth_percent="0.08"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@id/guideV_access_card"
-            android:visibility="gone"/>
+            app:layout_constraintHeight_percent="0.12"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.08" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_card_reader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.78" />
+            app:layout_constraintGuide_percent="0.79" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_card_reader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.16" />
+            app:layout_constraintGuide_percent="0.18" />
 
         <ImageView
             android:id="@+id/iv_card_reader"
@@ -73,14 +73,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.43" />
+            app:layout_constraintGuide_percent="0.41" />
 
         <ImageView
             android:id="@+id/iv_panel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
-            android:src="@drawable/elevator_panel"
+            android:src="@drawable/elevator_panel_full"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintStart_toStartOf="@id/guideV_panel"
             app:layout_constraintTop_toTopOf="@id/guideH_panel"
@@ -106,7 +106,7 @@
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/elevator_panel"
+        android:src="@drawable/elevator_panel_full"
         android:visibility="gone" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,90 +120,101 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.43" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_buttons_column2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.515" />
+            app:layout_constraintGuide_percent="0.466" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_buttons_row1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.245" />
+            app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_buttons_row2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.387" />
+            app:layout_constraintGuide_percent="0.181" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_buttons_row3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.525" />
+            app:layout_constraintGuide_percent="0.312" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_buttons_row4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.67" />
+            app:layout_constraintGuide_percent="0.442" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_buttons_row5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.81" />
+            app:layout_constraintGuide_percent="0.571" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_buttons_row6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_buttons_row7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.828" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_elevator_to_lvl0"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@drawable/elevator_btn_lvl0_off"
+            android:clickable="false"
             android:visibility="visible"
-            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHeight_percent="0.12"
             app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row1"
+            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row7"
             app:layout_constraintWidth_percent="0.07" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_elevator_to_lvl1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@drawable/elevator_btn_lvl1_off"
+            android:clickable="false"
             android:visibility="visible"
-            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHeight_percent="0.12"
             app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row2"
+            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row6"
             app:layout_constraintWidth_percent="0.07" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_elevator_to_lvl2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@drawable/elevator_btn_lvl2_off"
+            android:clickable="false"
             android:visibility="visible"
-            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHeight_percent="0.12"
             app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row3"
+            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row5"
             app:layout_constraintWidth_percent="0.07" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_elevator_to_lvl3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@drawable/elevator_btn_lvl3_off"
+            android:clickable="false"
             android:visibility="visible"
-            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHeight_percent="0.12"
             app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
             app:layout_constraintTop_toTopOf="@id/guideH_buttons_row4"
             app:layout_constraintWidth_percent="0.07" />
@@ -212,66 +223,36 @@
             android:id="@+id/btn_elevator_to_lvl4"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@drawable/elevator_btn_lvl4_off"
+            android:clickable="false"
             android:visibility="visible"
-            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHeight_percent="0.12"
             app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row5"
+            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row3"
             app:layout_constraintWidth_percent="0.07" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_elevator_to_lvl5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@drawable/elevator_btn_lvl5_off"
+            android:clickable="false"
             android:visibility="visible"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column2"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row1"
+            app:layout_constraintHeight_percent="0.12"
+            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
+            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row2"
             app:layout_constraintWidth_percent="0.07" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_elevator_to_lvl6"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
-            android:visibility="gone"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column2"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row2"
-            app:layout_constraintWidth_percent="0.07" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_elevator_to_lvl7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/button_outline"
-            android:visibility="gone"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column2"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row3"
-            app:layout_constraintWidth_percent="0.07" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_elevator_to_lvl8"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/button_outline"
-            android:visibility="gone"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column2"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row4"
-            app:layout_constraintWidth_percent="0.07" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_elevator_to_lvl9"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/button_outline"
-            android:visibility="gone"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column2"
-            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row5"
+            android:background="@drawable/elevator_btn_lvl6_off"
+            android:clickable="false"
+            android:visibility="visible"
+            app:layout_constraintHeight_percent="0.12"
+            app:layout_constraintStart_toStartOf="@id/guideV_buttons_column1"
+            app:layout_constraintTop_toTopOf="@id/guideH_buttons_row1"
             app:layout_constraintWidth_percent="0.07" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

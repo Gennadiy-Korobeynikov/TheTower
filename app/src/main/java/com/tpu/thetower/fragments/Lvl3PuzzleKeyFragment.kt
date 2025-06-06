@@ -24,7 +24,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
-import kotlin.math.roundToInt
 
 data class KeyPin(
     val initialPosition: Float,

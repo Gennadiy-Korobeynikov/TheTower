@@ -1,7 +1,6 @@
 package com.tpu.thetower.puzzles
 
 import android.app.Activity
-import android.content.Context
 import com.tpu.thetower.Puzzle
 
 class Lvl3PuzzleKey(level: Int, puzzle: String) : Puzzle(level, puzzle) {
