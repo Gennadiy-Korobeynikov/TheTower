@@ -170,6 +170,31 @@
             app:layout_constraintTop_toTopOf="@id/guideH_map"
             app:layout_constraintWidth_percent="0.125" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.835" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.814" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_key"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="@id/guideV_key"
+            app:layout_constraintTop_toTopOf="@id/guideH_key"
+            app:layout_constraintWidth_percent="0.07" />
+
         <!-- Puzzle editor -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_puzzle4"
@@ -241,6 +266,16 @@
         android:clickable="true"
         android:scaleType="fitCenter"
         android:src="@drawable/lvl3_map"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_access_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl3_access_card"
         android:visibility="gone" />
 
 </FrameLayout>

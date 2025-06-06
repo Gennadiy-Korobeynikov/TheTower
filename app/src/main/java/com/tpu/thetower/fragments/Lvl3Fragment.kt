@@ -13,6 +13,7 @@ import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
+import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
@@ -33,6 +34,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     private lateinit var btnToPuzzle1: Button
     private lateinit var btnToPuzzle3: Button
     private lateinit var btnToMap: Button
+    private lateinit var btnKey: Button
     private lateinit var btnToPuzzle4: Button
     private lateinit var btnToPuzzle4Lock: Button
     private lateinit var btnToAccessCard: Button
@@ -41,6 +43,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     private lateinit var ivDraggable: ImageView
     private lateinit var ivBg: ImageView
     private lateinit var ivMap: ImageView
+    private lateinit var ivAccessCard: ImageView
 
     private lateinit var originalPosition: Pair<Float, Float>
 
@@ -90,7 +93,10 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             btnToMap.visibility = View.VISIBLE
         }
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed")
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed") {
+            ivBg.setImageResource(R.drawable.lvl3_bg_hoover_with_key)
+            btnKey.visibility = View.VISIBLE
+        }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "key") == "completed") {
             ivBg.setImageResource(R.drawable.lvl3_bg_last)
@@ -105,6 +111,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnToPuzzle1 = binding.btnToPuzzle1
         btnToPuzzle3 = binding.btnToPuzzle3
         btnToMap = binding.btnToMap
+        btnKey = binding.btnKey
         btnToPuzzle4 = binding.btnToPuzzle4
         btnToPuzzle4Lock = binding.btnToPuzzle4Lock
         btnToAccessCard = binding.btnToAccessCard
@@ -112,6 +119,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         ivDraggable = binding.ivDraggable
         ivBg = binding.ivBg
         ivMap = binding.ivMap
+        ivAccessCard = binding.ivAccessCard
     }
 
     private fun setListeners() {
@@ -146,6 +154,11 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             FragmentManager.showGoBackArrow(requireActivity())
         }
 
+        btnKey.setOnClickListener {
+            ivBg.setImageResource(R.drawable.lvl3_bg_hoover_no_key)
+            btnKey.visibility = View.GONE
+        }
+
         btnToPuzzle4.setOnClickListener {
             if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") != "completed") {
                 DialogManager.startDialog(requireActivity(), "lvl3_computer")
@@ -156,6 +169,16 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         btnToPuzzle4Lock.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleKeyFragment)
+        }
+
+        btnToAccessCard.setOnClickListener {
+            ivAccessCard.visibility = View.VISIBLE
+            LevelAccessManager.upgradeAccessLvl(this)
+        }
+
+        ivAccessCard.setOnClickListener {
+            ivAccessCard.visibility = View.GONE
+            btnToAccessCard.visibility = View.GONE
         }
 
         ivTarget.setOnDragListener(this@Lvl3Fragment)
@@ -214,6 +237,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
     private fun placeViewInZone(view: View, zone: View) {
         ivBg.setImageResource(R.drawable.lvl3_bg_guard_sleeping)
+        ivTarget.visibility = View.GONE
+        btnToMap.visibility = View.VISIBLE
         saveManager.savePuzzleData(requireContext(), 3, "sleeping pills")
         soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
     }

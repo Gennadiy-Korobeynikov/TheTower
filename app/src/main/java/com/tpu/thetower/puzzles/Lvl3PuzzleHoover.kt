@@ -98,8 +98,8 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
 
 
 sealed class Direction(val dx: Int, val dy: Int) {
-    data object Left : Direction(-1, 0)
-    data object Right : Direction(1, 0)
+    data object Left : Direction(1, 0)
+    data object Right : Direction(-1, 0)
     data object Up : Direction(0, -1)
     data object Down : Direction(0, 1)
 }

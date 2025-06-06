@@ -58,12 +58,12 @@
         android:layout_marginEnd="188dp"
         android:textColor="#6B0101"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.273"
-        tools:text="Въебался в стену!"
-        android:visibility="gone"/>
+        tools:text="Въебался в стену!" />
 
     <TextView
         android:id="@+id/tv_win"
@@ -72,11 +72,11 @@
         android:layout_marginStart="124dp"
         android:textColor="#06EB3F"
         android:textSize="25sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Победил!"
-        android:visibility="gone"/>
+        tools:text="Победил!" />
 
     <TextView
         android:id="@+id/tv_coordinates"
@@ -87,10 +87,10 @@
         android:text="(X,Y)"
         android:textSize="50sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_direction"
@@ -101,23 +101,23 @@
         android:text="direction"
         android:textSize="25sp"
         android:textStyle="italic"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669"
-        android:visibility="gone"/>
+        app:layout_constraintVertical_bias="0.669" />
 
 
     <LinearLayout
         android:id="@+id/ll_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="15dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/btn_left"
@@ -131,10 +131,10 @@
             android:id="@+id/btn_forward"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginBottom="25dp"
             android:background="#00FFFFFF"
             android:scaleType="fitCenter"
-            android:src="@drawable/lvl3_forward_btn"
-            android:layout_marginBottom="25dp"/>
+            android:src="@drawable/lvl3_forward_btn" />
 
         <ImageButton
             android:id="@+id/btn_right"
@@ -149,12 +149,12 @@
         android:id="@+id/iv_hoover"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/lvl3_hoover"
+        android:src="@drawable/lvl3_hoover_with_key"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.23"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.23" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -174,6 +174,5 @@
         app:layout_constraintStart_toStartOf="@+id/guideV_border"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.292" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
