@@ -258,7 +258,6 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
             FragmentManager.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
             FragmentManager.changeBG(this, R.id.lvl3Fragment)
-            // Проигать звук врещания , Поменять фото и открыть кнопку поднятия ключа (пылесос приехал)
             //win = false
         }
 

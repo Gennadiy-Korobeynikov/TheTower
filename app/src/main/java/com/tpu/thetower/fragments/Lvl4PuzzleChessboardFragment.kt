@@ -1,44 +1,39 @@
 package com.tpu.thetower.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
-import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
-import com.tpu.thetower.databinding.FragmentChessboardTestBinding
-import com.tpu.thetower.puzzles.ChessboardPuzzle
+import com.tpu.thetower.databinding.FragmentLvl4PuzzleChessboardBinding
+import com.tpu.thetower.puzzles.Lvl4ChessboardPuzzle
 
 
-class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hintable {
-    private lateinit var binding: FragmentChessboardTestBinding
+class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_chessboard), Hintable {
+    private lateinit var binding: FragmentLvl4PuzzleChessboardBinding
     private val cellStates = MutableList(64) { false }
 
-    private val puzzle: Puzzle = ChessboardPuzzle(4, "chess")
+    private val puzzle: Puzzle = Lvl4ChessboardPuzzle(4, "chess")
     private lateinit var saveManager: SaveManager
     private lateinit var hintManager: HintManager
 
-
     private lateinit var board: GridLayout
-
 
     private fun bind() {
         board = binding.gridBoard
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentChessboardTestBinding.bind(view)
+        binding = FragmentLvl4PuzzleChessboardBinding.bind(view)
         saveManager = SaveManager.getInstance()
         bind()
         hintManager = HintManager(
@@ -99,7 +94,7 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hint
 
 
     private fun passed() {
-        Log.i("Puzzle", "Passed")
+        FragmentManager.goBack(this)
     }
 
     override fun useHint() {

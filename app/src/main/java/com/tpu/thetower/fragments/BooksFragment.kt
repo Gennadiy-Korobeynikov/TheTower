@@ -145,8 +145,6 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
                 openBook(book)
             }
 
-
-
     }
 
     private fun openBook(book : String) {
@@ -154,8 +152,6 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
             .replace(R.id.fcv_book, BookFragment(bookPages[book]!!, bookTexts[book]!!, bookHints[book], bookHasLink[book]!!), "BookFragment")
             .commit()
     }
-
-
 
 
 }

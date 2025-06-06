@@ -140,36 +140,28 @@
             app:destination="@id/lvl2PuzzleLockFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chessboardTestFragment"
-        android:name="com.tpu.thetower.fragments.ChessboardTestFragment"
-        android:label="fragment_chessboard_test"
-        tools:layout="@layout/fragment_chessboard_test" />
-    <fragment
         android:id="@+id/lvl4Fragment"
         android:name="com.tpu.thetower.fragments.Lvl4Fragment"
         android:label="fragment_lvl4"
         tools:layout="@layout/fragment_lvl4" >
         <action
-            android:id="@+id/action_lvl4Fragment_to_booksFragment"
-            app:destination="@id/booksFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_lvl4Fragment_to_lvl4PuzzleChessboardFragment"
+            app:destination="@id/lvl4PuzzleChessboardFragment" />
         <action
-            android:id="@+id/action_lvl4Fragment_to_chessboardTestFragment"
-            app:destination="@id/chessboardTestFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_lvl4Fragment_to_lvl4ChessFragment"
+            app:destination="@id/lvl4ChessFragment" />
         <action
-            android:id="@+id/action_lvl4Fragment_to_lvl4Puzzle1Fragment"
-            app:destination="@id/lvl4Puzzle1Fragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_lvl4Fragment_to_lvl4TimelineFragment"
+            app:destination="@id/lvl4TimelineFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4RavenFragment"
+            app:destination="@id/lvl4RavenFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4SequencePaperFragment"
+            app:destination="@id/lvl4SequencePaperFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4BookcaseFragment"
+            app:destination="@id/lvl4BookcaseFragment" />
     </fragment>
     <fragment
         android:id="@+id/booksFragment"
@@ -197,11 +189,6 @@
             android:id="@+id/action_lvl3Fragment_to_lvl3PuzzleButtonsFragment"
             app:destination="@id/lvl3PuzzleButtonsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/lvl4Puzzle1Fragment"
-        android:name="com.tpu.thetower.fragments.Lvl4Puzzle1Fragment"
-        android:label="fragment_lvl4_puzzle1"
-        tools:layout="@layout/fragment_lvl4_puzzle1" />
     <fragment
         android:id="@+id/lvl2CaesarFragment"
         android:name="com.tpu.thetower.fragments.Lvl2CaesarFragment"
@@ -259,5 +246,38 @@
         android:name="com.tpu.thetower.fragments.Lvl0CompletedFragment"
         android:label="fragment_lvl0_completed"
         tools:layout="@layout/fragment_lvl0_completed" />
+    <fragment
+        android:id="@+id/lvl4PuzzleChessboardFragment"
+        android:name="com.tpu.thetower.fragments.Lvl4PuzzleChessboardFragment"
+        android:label="fragment_lvl4_puzzle_chessboard"
+        tools:layout="@layout/fragment_lvl4_puzzle_chessboard" />
+    <fragment
+        android:id="@+id/lvl4ChessFragment"
+        android:name="com.tpu.thetower.fragments.Lvl4ChessFragment"
+        android:label="fragment_lvl4_chess"
+        tools:layout="@layout/fragment_lvl4_chess" />
+    <fragment
+        android:id="@+id/lvl4TimelineFragment"
+        android:name="com.tpu.thetower.fragments.Lvl4TimelineFragment"
+        android:label="fragment_lvl4_timeline"
+        tools:layout="@layout/fragment_lvl4_timeline" />
+    <fragment
+        android:id="@+id/lvl4RavenFragment"
+        android:name="com.tpu.thetower.fragments.Lvl4RavenFragment"
+        android:label="Lvl4RavenFragment" />
+    <fragment
+        android:id="@+id/lvl4BookcaseFragment"
+        android:name="com.tpu.thetower.fragments.Lvl4BookcaseFragment"
+        android:label="fragment_lvl4_bookcase"
+        tools:layout="@layout/fragment_lvl4_bookcase" >
+        <action
+            android:id="@+id/action_lvl4BookcaseFragment_to_booksFragment"
+            app:destination="@id/booksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lvl4SequencePaperFragment"
+        android:name="com.tpu.thetower.fragments.Lvl4SequencePaperFragment"
+        android:label="fragment_lvl4_sequence_paper"
+        tools:layout="@layout/fragment_lvl4_sequence_paper" />
 
 </navigation>

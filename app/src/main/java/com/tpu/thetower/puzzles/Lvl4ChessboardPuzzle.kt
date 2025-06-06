@@ -1,11 +1,10 @@
 package com.tpu.thetower.puzzles
 
 import android.app.Activity
-import android.content.Context
 import com.tpu.thetower.Puzzle
 
-class ChessboardPuzzle(level: Int, puzzle: String) : Puzzle(level, puzzle) {
-    private val answer = setOf(0, 8, 16, 63)
+class Lvl4ChessboardPuzzle(level: Int, puzzle: String) : Puzzle(level, puzzle) {
+    private val answer = setOf(10, 16, 22, 36, 40, 50)
 
     override fun checkSolution(activity: Activity, solution: String): Boolean {
         val solutionSet = solution

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".fragments.Lvl4BookcaseFragment">
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl4_bookcase" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_book_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.593" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_book_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book_help"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_help"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_help"
+            app:layout_constraintWidth_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_book_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.555" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_book_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.46" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_1"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_1"
+            app:layout_constraintWidth_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_book_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.444" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_book_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.28" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_2"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_2"
+            app:layout_constraintWidth_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_book_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.519" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_book_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.28" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_3"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_3"
+            app:layout_constraintWidth_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_book_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.405" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_book_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.82" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_4"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_4"
+            app:layout_constraintWidth_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_book_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.555" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_book_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.097" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book_5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_5"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_5"
+            app:layout_constraintWidth_percent="0.04" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
