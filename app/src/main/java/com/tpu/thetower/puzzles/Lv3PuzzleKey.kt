@@ -5,7 +5,7 @@ import android.content.Context
 import com.tpu.thetower.Puzzle
 
 class Lvl3PuzzleKey(level: Int, puzzle: String) : Puzzle(level, puzzle) {
-    private val answer = "400300250450350"
+    private val answer = "5010015010050"
 
     override fun checkSolution(activity: Activity, solution: String) : Boolean {
         if (solution == answer){

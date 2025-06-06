@@ -37,7 +37,7 @@
             android:id="@+id/btn_lock_to_copy"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_outline"
+            android:background="@android:color/transparent"
             app:layout_constraintHeight_percent="0.8"
             app:layout_constraintStart_toStartOf="@id/guideV_lock_to_copy"
             app:layout_constraintTop_toTopOf="@id/guideH_lock_to_copy"
@@ -62,102 +62,160 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
+            android:visibility="gone"
             app:layout_constraintHeight_percent="0.29"
             app:layout_constraintStart_toStartOf="@id/guideV_copy"
             app:layout_constraintTop_toTopOf="@id/guideH_copy"
-            app:layout_constraintWidth_percent="0.16"
-            android:visibility="gone"/>
+            app:layout_constraintWidth_percent="0.16" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_pins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.864" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_pins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.547" />
+
+        <com.tpu.thetower.fragments.KeyView
+            android:id="@+id/key_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="@id/guideV_pins"
+            app:layout_constraintTop_toTopOf="@id/guideH_pins"
+            app:layout_constraintWidth_percent="0.103" />
+
+        <ImageView
+            android:id="@+id/iv_key"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl3_key"
+            android:visibility="visible"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_key"
+            app:layout_constraintTop_toTopOf="@id/guideH_key"
+            app:layout_constraintWidth_percent="0.6" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_apply"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/lvl3_key_btn"
+            app:layout_constraintHeight_percent="0.18"
+            app:layout_constraintStart_toStartOf="@id/guideV_key"
+            app:layout_constraintTop_toTopOf="@+id/guideH_lock_to_copy"
+            app:layout_constraintBottom_toTopOf="@id/guideH_key"
+            app:layout_constraintWidth_percent="0.1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
 
 
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:id="@+id/main"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:background="#F5F5F5">-->
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:id="@+id/main"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="#F5F5F5">-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvTitle"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="#333333"-->
+    <!--        android:textSize="24sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:text=""-->
-<!--        android:textColor="#333333"-->
-<!--        android:textSize="24sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/keyContainer"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:layout_marginBottom="8dp"-->
+    <!--        android:background="#E0E0E0"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/tvPositionLabel"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tvTitle">-->
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/keyContainer"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:background="#E0E0E0"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/tvPositionLabel"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tvTitle">-->
+    <!--        <ImageView-->
+    <!--            android:id="@+id/iv_lock"-->
+    <!--            android:layout_width="200dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:src="@drawable/lvl3_puzzle4_key_lock" />-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_lock"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/lvl3_puzzle4_key_lock" />-->
+    <!--        <com.tpu.thetower.fragments.KeyView-->
+    <!--            android:id="@+id/keyView"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:visibility="visible" />-->
+    <!--    </FrameLayout>-->
 
-<!--        <com.tpu.thetower.fragments.KeyView-->
-<!--            android:id="@+id/keyView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:visibility="visible" />-->
-<!--    </FrameLayout>-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvPositionLabel"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="8dp"-->
+    <!--        android:text="Текущее положение ключа:"-->
+    <!--        android:textColor="#333333"-->
+    <!--        android:textSize="18sp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/tvKeyPosition"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvPositionLabel"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:text="Текущее положение ключа:"-->
-<!--        android:textColor="#333333"-->
-<!--        android:textSize="18sp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/tvKeyPosition"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvKeyPosition"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="16dp"-->
+    <!--        android:textColor="#555555"-->
+    <!--        android:textSize="16sp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/btnlock_to_copy"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        tools:text="20, 30, 15, 25, 35" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvKeyPosition"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:textColor="#555555"-->
-<!--        android:textSize="16sp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/btnlock_to_copy"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        tools:text="20, 30, 15, 25, 35" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/btnlock_to_copy"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="16dp"-->
+    <!--        android:paddingStart="16dp"-->
+    <!--        android:paddingEnd="16dp"-->
+    <!--        android:text="Копировать замок"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-<!--    <Button-->
-<!--        android:id="@+id/btnlock_to_copy"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:paddingStart="16dp"-->
-<!--        android:paddingEnd="16dp"-->
-<!--        android:text="Копировать замок"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
