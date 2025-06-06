@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 
 import androidx.fragment.app.Fragment
@@ -22,7 +23,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    //private lateinit var saveManager: SaveManager
+    private lateinit var saveManager: SaveManager
 
     private lateinit var btnToBookBabel: Button
     private lateinit var btnToBookAskii: Button
@@ -34,6 +35,15 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     private lateinit var btnToChessboardPuzzle: Button
     private lateinit var btnToTimeLinePuzzle1: Button
 
+    private lateinit var btnChess: Button
+    private lateinit var btnChessboard: Button
+    private lateinit var btnTimeline: Button
+    private lateinit var btnRaven: Button
+    private lateinit var btnBookcase: Button
+    private lateinit var btnSequencePaper: Button
+
+    private lateinit var ivBg: ImageView
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,53 +52,73 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         bindView()
         setListeners()
         handleSounds()
-       // saveManager = SaveManager.getInstance()
+        saveManager = SaveManager.getInstance()
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 4, "chess") == "completed") {
+            btnChess.visibility = View.GONE
+            btnChessboard.visibility = View.GONE
+            ivBg.setImageResource(R.drawable.lvl4_bg_chess_completed)
+            btnTimeline.visibility = View.VISIBLE
+        }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 4, "timeline") == "completed") {
+            btnTimeline.visibility = View.GONE
+            ivBg.setImageResource(R.drawable.lvl4_bg_timeline_completed)
+            btnRaven.visibility = View.VISIBLE
+            btnSequencePaper.visibility = View.VISIBLE
+            btnBookcase.visibility = View.VISIBLE
+        }
     }
 
     private fun bindView() {
-        btnToBookBabel = binding.btnToBookBabel
-        btnToBookAskii = binding.btnToBookAskii
-        btnToBookQr = binding.btnToBookQr
-        btnToBookBlur = binding.btnToBookBlur
-        btnToBookHistory = binding.btnToBookHistory
-        btnToBookHelp = binding.btnToBookHelp
-
-
-        btnToChessboardPuzzle = binding.btnToChessboardPuzzle
-        btnToTimeLinePuzzle1 = binding.btnToPuzzle1
+        btnChess = binding.btnChess
+        btnChessboard = binding.btnChessboard
+        btnTimeline = binding.btnTimeline
+        btnRaven = binding.btnRaven
+        btnBookcase = binding.btnBookcase
+        btnSequencePaper = binding.btnSequencePaper
+        ivBg = binding.ivBg
     }
 
     private fun setListeners() {
-        btnToBookBabel.setOnClickListener { openBook("babel") }
-        btnToBookQr.setOnClickListener { openBook("qr") }
-        btnToBookBlur.setOnClickListener { openBook("blur") }
-        btnToBookHistory.setOnClickListener { openBook("history") }
-        btnToBookHelp.setOnClickListener { openBook("help") }
+//        btnToBookBabel.setOnClickListener { openBook("babel") }
+//        btnToBookQr.setOnClickListener { openBook("qr") }
+//        btnToBookBlur.setOnClickListener { openBook("blur") }
+//        btnToBookHistory.setOnClickListener { openBook("history") }
+//
+//        btnToBookAskii.setOnClickListener {
+//
+//            //val book : String =  if (LoadManager.isPuzzleCompleted(requireActivity(),4,2)) "askii_a" else "askii_b"
+//        val book : String =  if (LoadManager.isASKII) "askii_b" else "askii_a" // TODO Исправить!!!!! длолжно быть через сохранения
+//            openBook(book)
+//        }
 
-        btnToBookAskii.setOnClickListener {
-
-            //val book : String =  if (LoadManager.isPuzzleCompleted(requireActivity(),4,2)) "askii_a" else "askii_b"
-        val book : String =  if (LoadManager.isASKII) "askii_b" else "askii_a" // TODO Исправить!!!!! длолжно быть через сохранения
-            openBook(book)
+        btnChess.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4PuzzleChessboardFragment)
         }
 
-
-
-        btnToChessboardPuzzle.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_chessboardTestFragment)
+        btnChessboard.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4ChessFragment)
         }
 
-        btnToTimeLinePuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this,R.id.action_lvl4Fragment_to_lvl4Puzzle1Fragment)
+        btnTimeline.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4TimelineFragment)
+        }
+
+        btnRaven.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4RavenFragment)
+        }
+
+        btnBookcase.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4BookcaseFragment)
+        }
+
+        btnSequencePaper.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4SequencePaperFragment)
         }
 
     }
 
-    private fun openBook(book : String) {
-        FragmentManager.changeBG(this,R.id.action_lvl4Fragment_to_booksFragment)
-        requireActivity().supportFragmentManager
-            .setFragmentResult("bookOpening", bundleOf("book" to book))
-    }
 
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
@@ -103,11 +133,11 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     }
 
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//        saveManager = SaveManager.getInstance()
-//        saveManager.saveCurrentLevel(requireContext(), 4)
-//    }
+    override fun onResume() {
+        super.onResume()
+
+        saveManager = SaveManager.getInstance()
+        saveManager.saveCurrentLevel(requireContext(), 4)
+    }
 
 }

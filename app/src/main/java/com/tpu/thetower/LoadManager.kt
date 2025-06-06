@@ -19,11 +19,13 @@ class LoadManager {
 
 
         private val levels = listOf(
-            R.id.action_elevatorFragment_to_lvlTestFragment,
             R.id.action_elevatorFragment_to_lvl0Fragment,
             R.id.action_elevatorFragment_to_lvl1Fragment,
             R.id.action_elevatorFragment_to_lvl2Fragment,
-            R.id.action_elevatorFragment_to_lvl3Fragment
+            R.id.action_elevatorFragment_to_lvl3Fragment,
+            R.id.action_elevatorFragment_to_lvl4Fragment,
+            R.id.action_elevatorFragment_to_lvl5Fragment,
+//            R.id.action_elevatorFragment_to_lvl6Fragment
         )
 
         fun setGameData(activity: Activity) {
@@ -47,7 +49,7 @@ class LoadManager {
             val savedLevel = gameData.playerInfo.currentLevel
             val bundle = Bundle().apply {
                 // TODO Потом убрать + 1, потому что пропадёт тестовый уровень
-                putString("saved_level", levels[savedLevel + 1].toString())
+                putString("saved_level", levels[savedLevel].toString())
             }
             FragmentManager.changeBG(
                 getCurrFragment(activity),

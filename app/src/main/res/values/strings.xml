@@ -324,6 +324,8 @@
     <string name="lvl2_puzzle1_chat2_4">TODO</string>
     <string name="lvl2_puzzle1_chat_amanda">TODO</string>
     <string name="lvl2_puzzle1_chat2_5">TODO</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
