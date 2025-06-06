@@ -8,20 +8,12 @@
     tools:context=".fragments.Lvl3Fragment">
 
     <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl3_bg" />
-
-    <ImageView
-        android:id="@+id/ivDraggable"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="fitCenter"
-        android:src="@drawable/lvl3_puzzle_sleeping_pills"
-        android:visibility="gone" />
+        android:src="@drawable/lvl3_bg_start" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -94,7 +86,7 @@
             app:layout_constraintGuide_percent="0.62" />
 
         <ImageView
-            android:id="@+id/ivTarget"
+            android:id="@+id/iv_target"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
@@ -102,6 +94,31 @@
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle2"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle2"
             app:layout_constraintWidth_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_draggable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.86" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_draggable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.293" />
+
+        <ImageView
+            android:id="@+id/iv_draggable"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl3_sleeping_pills"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.13"
+            app:layout_constraintStart_toStartOf="@id/guideV_draggable"
+            app:layout_constraintTop_toTopOf="@id/guideH_draggable"
+            app:layout_constraintWidth_percent="0.04" />
 
         <!-- Puzzle vacuum cleaner -->
         <androidx.constraintlayout.widget.Guideline
@@ -127,6 +144,31 @@
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle3"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle3"
             app:layout_constraintWidth_percent="0.19" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.675" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.09" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_map"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintStart_toStartOf="@id/guideV_map"
+            app:layout_constraintTop_toTopOf="@id/guideH_map"
+            app:layout_constraintWidth_percent="0.125" />
 
         <!-- Puzzle editor -->
         <androidx.constraintlayout.widget.Guideline
@@ -159,26 +201,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.87" />
+            app:layout_constraintGuide_percent="0.13" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_puzzle4_lock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.23" />
+            app:layout_constraintGuide_percent="0.17" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_to_puzzle_4_lock"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            app:layout_constraintHeight_percent="0.12"
+            app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle4_lock"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle4_lock"
-            app:layout_constraintWidth_percent="0.07" />
-
+            app:layout_constraintWidth_percent="0.04" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl3_map"
+        android:visibility="gone" />
 
 </FrameLayout>

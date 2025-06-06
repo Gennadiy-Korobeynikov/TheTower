@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
+import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
@@ -22,20 +25,16 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
     private lateinit var binding: FragmentLvl3PuzzleEditorBinding
 
     private lateinit var btnPaste: Button
-    private lateinit var btnNextLayer: Button
-    private lateinit var btnPreviousLayer: Button
-    private lateinit var hintManager: HintManager
+    private lateinit var btnFirstLayer: Button
+    private lateinit var btnSecondLayer: Button
 
-    private lateinit var tvText: TextView
-    private lateinit var ivKey: ImageView
+    private lateinit var ivBg: ImageView
 
     private lateinit var saveManager: SaveManager
+    private lateinit var hintManager: HintManager
 
-    private var isCopied = false
-    private var isPasted = false
     private var keyLayers = mutableListOf<Int>()
     private var currentIndex = 0
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,62 +56,53 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "lock model"),
             3, "lock model")
 
-        isCopied = LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "in_progress"
-        isPasted = LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "completed"
-        if (isPasted) {
-            ivKey.visibility = View.VISIBLE
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "completed") {
+           Paste()
         }
-        keyLayers = mutableListOf(
-            R.drawable.lvl3_puzzle4_key_0,
-            R.drawable.lvl3_puzzle4_key_1,
-            R.drawable.lvl3_puzzle4_key_2,
-            R.drawable.lvl3_puzzle4_key_3,
-            R.drawable.lvl3_puzzle4_key_4,
-            R.drawable.lvl3_puzzle4_key_5
-        )
+        FragmentManager.showGoBackArrow(requireActivity())
     }
 
     private fun bindView() {
         btnPaste = binding.btnPaste
-        btnNextLayer = binding.btnNextLayer
-        btnPreviousLayer = binding.btnPreviousLayer
-        tvText = binding.tvText
-        ivKey = binding.ivKey
+        btnFirstLayer = binding.btnFirstLayer
+        btnSecondLayer = binding.btnSecondLayer
+        ivBg = binding.ivBg
     }
 
     private fun setListeners() {
 
         btnPaste.setOnClickListener {
-            if (isCopied) {
-                isPasted = true
+            if (LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "in_progress") {
+                Paste()
                 saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "completed")
-                ivKey.visibility = View.VISIBLE
                 hintManager = HintManager(
                     listOf("lvl3_puzzle3_hint6",),
                     LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "lock model after pasted"),
                     3, "lock model after pasted")
             } else {
-                tvText.text = "В буфере обмена ничего нет"
+                val snackBar = Snackbar.make(
+                    ivBg,
+                    getString(R.string.lvl3_paste),
+                    Toast.LENGTH_SHORT
+                )
+                snackBar.show()
             }
         }
 
-        btnNextLayer.setOnClickListener {
-            if (isPasted) {
-                if (currentIndex in 0..<keyLayers.size - 1) {
-                    currentIndex++
-                    ivKey.setImageResource(keyLayers[currentIndex])
-                }
-            }
+        btnFirstLayer.setOnClickListener {
+            ivBg.setImageResource(R.drawable.lvl3_model_front)
         }
 
-        btnPreviousLayer.setOnClickListener {
-            if (isPasted) {
-                if (currentIndex in 1..keyLayers.size) {
-                    currentIndex--
-                    ivKey.setImageResource(keyLayers[currentIndex])
-            }
-            }
+        btnSecondLayer.setOnClickListener {
+            ivBg.setImageResource(R.drawable.lvl3_model_back)
         }
+    }
+
+    private fun Paste() {
+        ivBg.setImageResource(R.drawable.lvl3_model_front)
+        btnPaste.visibility = View.GONE
+        btnFirstLayer.visibility = View.VISIBLE
+        btnSecondLayer.visibility = View.VISIBLE
     }
 
 
