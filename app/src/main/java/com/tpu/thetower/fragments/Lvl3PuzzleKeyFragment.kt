@@ -1,5 +1,6 @@
 package com.tpu.thetower.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,16 +8,13 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
@@ -35,71 +33,51 @@ data class KeyPin(
     val maxPosition: Float
 )
 
-
 class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hintable {
 
     private lateinit var binding: FragmentLvl3PuzzleKeyBinding
 
     private lateinit var keyView: KeyView
-    private lateinit var tvKeyPosition: TextView
-    private lateinit var main: ConstraintLayout
-    private lateinit var ivLock: ImageView
+    private lateinit var btnLockToCopy: Button
     private lateinit var btnCopy: Button
+
+    private lateinit var ivBg: ImageView
 
     private lateinit var hintManager: HintManager
     private lateinit var saveManager: SaveManager
 
     private lateinit var puzzle: Puzzle
     private var solution = listOf<Int>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_lvl3_puzzle_key, container, false)
-    }
+    var longPressRunnable: Runnable? = null
+    var isLongPressHandled = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl3PuzzleKeyBinding.bind(view)
 
-        keyView = binding.keyView
-        tvKeyPosition = binding.tvKeyPosition
-        main = binding.main
-        ivLock = binding.ivLock
-        btnCopy = binding.btnCopy
+        bindView()
+        setListeners()
 
         saveManager = SaveManager.getInstance()
-
-        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed") {
-            ivLock.layoutParams = RelativeLayout.LayoutParams(
-                200,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            )
-            keyView.visibility = View.VISIBLE
-        }
         puzzle = Lvl3PuzzleKey(3, "key")
 
-        keyView.setOnKeyPinsChangedListener { pins ->
-            val positionsText = pins.joinToString(", ") { "${it.currentPosition.roundToInt()}" }
-            solution = pins.map {it.currentPosition.toInt()}
-            tvKeyPosition.text = positionsText
-            if (puzzle.checkSolution(requireActivity(), solution.joinToString(""))) {
-                main.animate()
-                    .alpha(0.2f)
-                    .setDuration(2500)
-                    .withEndAction {
-                        FragmentManager.goBack(this)
-                    }
-                    .start()
-            }
-        }
+        FragmentManager.showGoBackArrow(requireActivity())
 
-        btnCopy.setOnClickListener {
-            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
-
-        }
+//        keyView.setOnKeyPinsChangedListener { pins ->
+//            val positionsText = pins.joinToString(", ") { "${it.currentPosition.roundToInt()}" }
+//            solution = pins.map { it.currentPosition.toInt() }
+////            tvKeyPosition.text = positionsText
+////            if (puzzle.checkSolution(requireActivity(), solution.joinToString(""))) {
+////                main.animate()
+////                    .alpha(0.2f)
+////                    .setDuration(2500)
+////                    .withEndAction {
+////                        FragmentManager.goBack(this)
+////                    }
+////                    .start()
+////            }
+//        }
 
         if (LoadManager.isPuzzleCompleted(requireActivity(), 3, "lock model")) // Замок вставлен в комп
             hintManager = HintManager(
@@ -115,9 +93,73 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             )
     }
 
+    private fun bindView() {
+        btnLockToCopy = binding.btnLockToCopy
+        btnCopy = binding.btnCopy
+        ivBg = binding.ivBg
+        //        keyView = binding.keyView
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setListeners() {
+
+        btnCopy.setOnClickListener {
+            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+        }
+
+        btnCopy.setOnClickListener {
+            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+            btnCopy.visibility = View.GONE
+            ivBg.setImageResource(R.drawable.lvl3_lock)
+
+            val snackBar = Snackbar.make(
+                ivBg,
+                getString(R.string.lvl3_copy),
+                Toast.LENGTH_SHORT
+            )
+            snackBar.show()
+        }
+
+
+        btnLockToCopy.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    isLongPressHandled = false
+                    longPressRunnable = Runnable {
+                        ivBg.setImageResource(R.drawable.lvl3_lock_copy)
+                        btnLockToCopy.visibility = View.GONE
+                        btnCopy.visibility = View.VISIBLE
+                        isLongPressHandled = true
+                    }
+                    view.postDelayed(longPressRunnable, 1000)
+                    true
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    longPressRunnable?.let { view.removeCallbacks(it) }
+                    true
+                }
+
+                MotionEvent.ACTION_CANCEL -> {
+                    longPressRunnable?.let { view.removeCallbacks(it) }
+                    true
+                }
+
+                else -> false
+            }
+
+        }
+
+    }
+
+
     override fun useHint() {
         hintManager.useHint(requireActivity())
     }
+
+
+
+
 }
 
 // Пользовательский View для отображения и взаимодействия с ключом

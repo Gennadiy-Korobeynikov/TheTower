@@ -793,7 +793,7 @@ class DialogManager {
                 "john_thinking" to Character("Джон", R.drawable.john_thinking),
                 "john_angry" to Character("Джон", R.drawable.john_angry),
                 "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist),
-                "security" to Character("Охранник", R.drawable.npc_avatar_receptionist)
+                "security" to Character("Охранник", R.drawable.npc_avatar_security)
             )
         }
 
