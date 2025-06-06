@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentHudBinding
 
@@ -85,11 +83,11 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
             .setFragmentResultListener("hintImgUpdating", viewLifecycleOwner) { _, bundle ->
                 val step = bundle.getInt("step")
                 when (step) {
-                    5 -> ivHint.setImageResource(R.drawable.hint0)
-                    4 -> ivHint.setImageResource(R.drawable.hint1)
+                    1 -> ivHint.setImageResource(R.drawable.hint0)
+                    2 -> ivHint.setImageResource(R.drawable.hint1)
                     3 -> ivHint.setImageResource(R.drawable.hint2)
-                    2 -> ivHint.setImageResource(R.drawable.hint3)
-                    1, 0 -> ivHint.setImageResource(R.drawable.hint4_full)
+                    4 -> ivHint.setImageResource(R.drawable.hint3)
+                    5, 0 -> ivHint.setImageResource(R.drawable.hint4_full)
                 }
             }
 
@@ -97,7 +95,6 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
     private fun bindView() {
         ivHint = binding.ivHint
-        ivAccessCard = binding.ivAccessCard
         btnHint = binding.btnHint
         btnMenu = binding.btnMenu
     }

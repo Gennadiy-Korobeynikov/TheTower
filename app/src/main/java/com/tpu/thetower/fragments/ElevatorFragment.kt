@@ -3,16 +3,15 @@ package com.tpu.thetower.fragments
 import android.content.ClipData
 import android.os.Bundle
 import android.view.DragEvent
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
@@ -21,11 +20,11 @@ import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
-import com.tpu.thetower.databinding.FragmentLvl0Binding
 
-class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListener, View.OnDragListener {
+class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListener,
+    View.OnDragListener {
 
-    private lateinit var binding : FragmentElevatorBinding
+    private lateinit var binding: FragmentElevatorBinding
     private lateinit var soundManager: SoundManager
     private lateinit var saveManager: SaveManager
     private lateinit var musicManager: MusicManager
@@ -45,7 +44,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     private lateinit var btnToLvl4: Button
     private lateinit var btnToLvl5: Button
 
-    private lateinit var lvlButtons : List<Button>
+    private lateinit var lvlButtons: List<Button>
     private lateinit var lvlActions: List<Int>
 
     private lateinit var originalPosition: Pair<Float, Float>
@@ -74,9 +73,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         }
 
         // TODO WARNING!!! ВНИМАНИЕ!!! ДАЛЬШЕ КОСТЫЛЬ
-        if (LoadManager.getAccessLevel(requireActivity()) != 0)
-            FragmentManager.changeAccessCardImg(this, LevelAccessManager.getCardImage())
-
+        if (LoadManager.getAccessLevel(requireActivity()) != 0) {
+            ivDraggable.visibility = View.VISIBLE
+            ivDraggable.setImageResource(LevelAccessManager.getCardImage())
+        }
         // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
     }
 
@@ -105,7 +105,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             R.id.action_elevatorFragment_to_lvl4Fragment,
             R.id.action_elevatorFragment_to_lvl5Fragment,
 
-        )
+            )
     }
 
     private fun setListeners() {
@@ -132,7 +132,15 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         lvlButtons.forEach {
             it.setOnClickListener {
-                if (it.isVisible) {
+                if (it == btnToLvl2) {
+                    if (!LoadManager.getLevelStatus(requireActivity(), 1)) {
+                        DialogManager.startDialog(requireActivity(), "lvl1_elevator")
+                    } else if (it.isVisible) {
+                        soundManager.release()
+                        FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
+                        FragmentManager.showGoBackArrow(requireActivity())
+                    }
+                } else if (it.isVisible) {
                     soundManager.release()
                     FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
                     FragmentManager.showGoBackArrow(requireActivity())
@@ -153,7 +161,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 //            }
     }
 
-    private fun unlockLvls(currAccessLevel : Int) {
+    private fun unlockLvls(currAccessLevel: Int) {
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
         unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }
@@ -163,8 +171,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
         return if (event?.action == MotionEvent.ACTION_DOWN) {
             view?.visibility = View.INVISIBLE
-            FragmentManager.changeAccessCardImg(this, 0)
-
 
             val data = ClipData.newPlainText("", "")
             val shadowBuilder = DragShadowBuilder(view)
@@ -186,7 +192,8 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
             DragEvent.ACTION_DROP -> {
                 if (targetView == ivCardReader) {
-                    placeViewInZone(draggedView, targetView)
+                    returnToOriginalPosition(draggedView)
+                    currAccessLevel = LoadManager.getAccessLevel(requireActivity())
                 } else {
                     returnToOriginalPosition(draggedView)
                 }
@@ -203,26 +210,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         return false
     }
 
-    private fun placeViewInZone(view: View, zone: View) {
-        view.apply {
-            x = zone.x + (zone.width - width) / 2f
-            y = zone.y + (zone.height - height) / 2f
-//            visibility = View.VISIBLE
-        }
-        FragmentManager.changeAccessCardImg(this, LevelAccessManager.getCardImage())
-        currAccessLevel = LoadManager.getAccessLevel(requireActivity())
-    }
-
     private fun returnToOriginalPosition(view: View) {
-        FragmentManager.changeAccessCardImg(this, LevelAccessManager.getCardImage())
         view.x = originalPosition.first
         view.y = originalPosition.second
         view.visibility = View.VISIBLE
     }
 
-    override fun onPause() {
-        super.onPause()
-
-        FragmentManager.changeAccessCardImg(this, 0)
-    }
 }

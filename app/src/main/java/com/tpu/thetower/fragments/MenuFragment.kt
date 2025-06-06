@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.LoadManager
@@ -13,7 +12,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentMenuBinding
-import com.tpu.thetower.databinding.FragmentSettingsBinding
 
 
 class MenuFragment : Fragment(R.layout.fragment_menu) {
@@ -60,7 +58,10 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
         requireActivity().supportFragmentManager
             .setFragmentResultListener("updateProgressBar", viewLifecycleOwner) { _, bundle ->
-                val (solvedPuzzles, allPuzzles) = LoadManager.getLevelProgress(requireActivity(), LoadManager.getCurrentLevel(requireActivity()))
+                val (solvedPuzzles, allPuzzles) = LoadManager.getLevelProgress(
+                    requireActivity(),
+                    LoadManager.getCurrentLevel(requireActivity())
+                )
                 if (allPuzzles != 0)
                     progressBar.progress = solvedPuzzles * 100 / allPuzzles
                 else
