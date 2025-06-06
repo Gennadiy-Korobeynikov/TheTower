@@ -87,7 +87,7 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     override fun checkSolution(activity: Activity, solution: String): Boolean {
         if (currPositionX == winPositionX && currPositionY == winPositionY) {
              // Пока не работает
-            //super.complete(context)
+            super.complete(activity)
             return true
         }
         return false
