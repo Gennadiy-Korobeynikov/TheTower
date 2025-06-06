@@ -20,57 +20,46 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/menu_button"
-        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toStartOf="@id/guideV_menu"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.1" />
+        app:layout_constraintWidth_percent="0.08" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_menu"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.16"
+        android:background="@android:color/transparent"
+        app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toStartOf="@id/guideV_menu"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.1"
-        android:background="@android:color/transparent" />
+        app:layout_constraintWidth_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideV_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.876" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <ImageView
         android:id="@+id/iv_hint"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/hint4_full"
-        app:layout_constraintHeight_percent="0.16"
         app:layout_constraintEnd_toStartOf="@id/guideV_hint"
+        app:layout_constraintHeight_percent="0.12"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.1" />
+        app:layout_constraintWidth_percent="0.08" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_hint"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.16"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@id/guideV_hint"
+        app:layout_constraintHeight_percent="0.12"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.1"
-        android:background="@android:color/transparent" />
-
-    <ImageView
-        android:id="@+id/iv_access_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/card"
-        app:layout_constraintHeight_percent="0.16"
-        app:layout_constraintEnd_toStartOf="@id/btn_hint"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        app:layout_constraintWidth_percent="0.1" />
+        app:layout_constraintWidth_percent="0.08" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
