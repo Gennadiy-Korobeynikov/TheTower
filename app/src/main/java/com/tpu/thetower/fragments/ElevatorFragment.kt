@@ -47,6 +47,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     private lateinit var btnToLvl6: Button
 
     private lateinit var lvlButtons: List<Button>
+    private var openedLvlButtons: MutableList<Button> = mutableListOf()
     private lateinit var lvlActions: List<Int>
 
     private lateinit var originalPosition: Pair<Float, Float>
@@ -136,15 +137,15 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         lvlButtons.forEach {
             it.setOnClickListener {
-                if (it == btnToLvl2) {
+                if (it == btnToLvl2 && it in openedLvlButtons) {
                     if (!LoadManager.getLevelStatus(requireActivity(), 1)) {
                         DialogManager.startDialog(requireActivity(), "lvl1_elevator")
-                    } else if (it.isVisible) {
+                    } else {
                         soundManager.release()
                         FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
                         FragmentManager.showGoBackArrow(requireActivity())
                     }
-                } else if (it.isVisible) {
+                } else if (it in openedLvlButtons) {
                     soundManager.release()
                     FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
                     FragmentManager.showGoBackArrow(requireActivity())
@@ -168,8 +169,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     private fun unlockLvls(currAccessLevel: Int) {
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
-        unlockingLvls.forEach { lvlButtons[it].visibility = View.VISIBLE }
-        //TODO Обновить дизайн панели уроавления
+        unlockingLvls.forEach {
+            openedLvlButtons.add(lvlButtons[it])
+            lvlButtons[it].setBackgroundResource(android.R.color.transparent)
+            lvlButtons[it].isClickable = true
+        }
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
