@@ -109,7 +109,15 @@
         android:id="@+id/lvl3PuzzleHooverFragment"
         android:name="com.tpu.thetower.fragments.Lvl3PuzzleHooverFragment"
         android:label="fragment_lvl2_puzzle_hoover"
-        tools:layout="@layout/fragment_lvl3_puzzle_hoover" />
+        tools:layout="@layout/fragment_lvl3_puzzle_hoover" >
+        <action
+            android:id="@+id/action_lvl3PuzzleHooverFragment_to_lvl3Fragment"
+            app:destination="@id/lvl3Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/lvl2Fragment"
         android:name="com.tpu.thetower.fragments.Lvl2Fragment"

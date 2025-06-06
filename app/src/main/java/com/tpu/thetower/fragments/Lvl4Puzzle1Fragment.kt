@@ -8,6 +8,8 @@ import android.widget.GridLayout
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
@@ -17,10 +19,11 @@ import com.tpu.thetower.databinding.FragmentLvl4Puzzle1Binding
 import com.tpu.thetower.puzzles.ChessboardPuzzle
 
 
-class Lvl4Puzzle1Fragment : Fragment(R.layout.fragment_lvl4_puzzle1) {
+class Lvl4Puzzle1Fragment : Fragment(R.layout.fragment_lvl4_puzzle1), Hintable {
     private lateinit var binding: FragmentLvl4Puzzle1Binding
 
     private lateinit var saveManager: SaveManager
+    private lateinit var hintManager: HintManager
 
 
     private lateinit var toggleBtnAskii : ToggleButton
@@ -39,6 +42,13 @@ class Lvl4Puzzle1Fragment : Fragment(R.layout.fragment_lvl4_puzzle1) {
         toggleBtnAskii.isChecked = LoadManager.isASKII // TODO Исправить!!!!! длолжно быть через сохранения
 
 
+        hintManager = HintManager(
+            listOf(
+                "lvl4_askiiBtn_hint1", "lvl4_askiiBtn_hint2"
+            ),
+            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "askiibtn"),
+            4, "askiibtn"
+        )
         toggleBtnAskii.setOnCheckedChangeListener { buttonView, isChecked ->
             var dialog : String
             if (isChecked) { // TODO Исправить!!!!! длолжно быть через сохранения
@@ -52,6 +62,10 @@ class Lvl4Puzzle1Fragment : Fragment(R.layout.fragment_lvl4_puzzle1) {
             DialogManager.startDialog(requireActivity(),dialog)
         }
 
+    }
+
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
     }
 
 }

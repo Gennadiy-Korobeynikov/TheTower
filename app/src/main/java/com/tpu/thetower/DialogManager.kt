@@ -51,7 +51,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_flashlight_on),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -63,7 +63,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_light_on),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -74,7 +74,7 @@ class DialogManager {
                                 getString(activity , R.string.no_hints),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -84,7 +84,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_puzzle0_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -95,7 +95,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_puzzle0_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -106,7 +106,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_to_puzzle1_hint),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -117,7 +117,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_puzzle1_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -127,7 +127,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_puzzle1_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -137,7 +137,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl0_puzzle1_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -148,7 +148,7 @@ class DialogManager {
                                 getString(activity, R.string.lvl0_puzzle1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {},
@@ -159,7 +159,7 @@ class DialogManager {
                                 getString(activity, R.string.lvl0_access_card)
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {},
@@ -170,7 +170,7 @@ class DialogManager {
                                 getString(activity, R.string.lvl0_access_card_got)
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {},
@@ -194,17 +194,17 @@ class DialogManager {
                             ),
                             listOfNotNull(
                                 characters["receptionist"],
-                                characters["John"],
+                                characters["John_thinking"],
                                 characters["receptionist"],
-                                characters["John"],
+                                characters["John_thinking"],
                                 characters["receptionist"],
-                                characters["John"],
+                                characters["John_thinking"],
                                 characters["receptionist"],
                                 characters["receptionist"],
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                                 characters["receptionist"],
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         { nextDialog(activity, 1, 0)}  ,
@@ -219,7 +219,7 @@ class DialogManager {
                                 ),
                             listOfNotNull(
                                 characters["receptionist"],
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {}  ,
@@ -230,7 +230,7 @@ class DialogManager {
                                 getString(activity , R.string.hint_is_not_here),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -241,7 +241,7 @@ class DialogManager {
                                 getString(activity, R.string.lvl2_start)
                             ),
                             listOfNotNull(
-                                characters["John"]
+                                characters["John_thinking"]
                             )
                         )
                         {} ,
@@ -252,7 +252,7 @@ class DialogManager {
                                 getString(activity, R.string.lvl2_computer_lore)
                             ),
                             listOfNotNull(
-                                characters["John"]
+                                characters["John_thinking"]
                             )
                         )
                         {} ,
@@ -263,7 +263,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle0_hint),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -273,7 +273,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle1_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -283,7 +283,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle1_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -293,27 +293,41 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle1_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
                 "lvl2_puzzle1_hint4" to
                         Dialog(
                             listOf(
-                                getString(activity , R.string.lvl2_puzzle1_hint4),
+                                getString(activity , R.string.lvl2_puzzle1_hint4_1),
+                                getString(activity , R.string.lvl2_puzzle1_hint4_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
+                "lvl2_puzzle1_hint5" to
+                        Dialog(
+                            listOf(
+                                getString(activity , R.string.lvl2_puzzle1_hint5),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {} ,
+
+
                 "lvl2_puzzle2_hint1" to
                         Dialog(
                             listOf(
                                 getString(activity , R.string.lvl2_puzzle2_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -323,7 +337,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle2_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -334,7 +348,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle2_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -347,7 +361,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle3_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -357,7 +371,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle3_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -367,7 +381,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle3_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -378,8 +392,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle3_hint4_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -389,7 +403,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle3_hint5),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -408,11 +422,11 @@ class DialogManager {
                                 getString(activity, R.string.lvl3_npc_security5)
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                                 characters["security"],
-                                characters["John"],
+                                characters["John_thinking"],
                                 characters["security"],
-                                characters["John"]
+                                characters["John_thinking"]
                             )
                         )
                         {},
@@ -445,7 +459,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_to_puzzle0_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -455,7 +469,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_to_puzzle0_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -467,8 +481,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint1_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -480,8 +494,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint2_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -492,7 +506,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -502,7 +516,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint4),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -513,7 +527,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint5),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -525,8 +539,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint6_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -537,8 +551,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle0_hint7_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -552,7 +566,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle1_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -564,8 +578,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle1_hint2_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -580,9 +594,9 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_to_coffee_hint1_3),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -595,7 +609,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle2_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -605,7 +619,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle2_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -615,7 +629,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle2_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -625,7 +639,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle2_hint4),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -638,8 +652,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle3_hint1_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -649,7 +663,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle3_hint2),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -659,7 +673,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle3_hint3),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -671,8 +685,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle3_hint4_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -683,8 +697,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle3_hint5_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -695,8 +709,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle3_hint6_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -711,7 +725,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle4_hint1),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -722,8 +736,8 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle4_hint2_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -734,11 +748,589 @@ class DialogManager {
                                 getString(activity , R.string.lvl3_puzzle4_hint3_2),
                             ),
                             listOfNotNull(
-                                characters["John"],
-                                characters["John"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
+
+
+
+
+                "lvl4_chess_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_chess_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_chess_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_chess_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_chess_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_chess_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_chess_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_chess_hint4),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_timeline_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_timeline_hint1_1),
+                                getString(activity, R.string.lvl4_timeline_hint1_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_timeline_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_timeline_hint2_1),
+                                getString(activity, R.string.lvl4_timeline_hint2_2),
+                                getString(activity, R.string.lvl4_timeline_hint2_3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_askiiBtn_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_askiiBtn_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_askiiBtn_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_askiiBtn_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_sequencepaper_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_sequencepaper_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_sequencepaper_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_sequencepaper_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_sequencepaper_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_sequencepaper_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl4_book_askii_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_askii_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl4_book_babel_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_babel_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl4_book_babel_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_babel_hint2_1),
+                                getString(activity, R.string.lvl4_book_babel_hint2_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl4_book_babel_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_babel_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl4_book_babel_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_babel_hint4_1),
+                                getString(activity, R.string.lvl4_book_babel_hint4_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl4_book_babel_hint5" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_babel_hint5_1),
+                                getString(activity, R.string.lvl4_book_babel_hint5_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl4_book_qr_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_qr_hint1_1),
+                                getString(activity, R.string.lvl4_book_qr_hint1_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_qr_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_qr_hint2_1),
+                                getString(activity, R.string.lvl4_book_qr_hint2_2),
+                                getString(activity, R.string.lvl4_book_qr_hint2_3),
+
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_qr_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_qr_hint3_1),
+                                getString(activity, R.string.lvl4_book_qr_hint3_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_qr_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_qr_hint4_1),
+                                getString(activity, R.string.lvl4_book_qr_hint4_2),
+                                getString(activity, R.string.lvl4_book_qr_hint4_3),
+
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+
+                "lvl4_book_blur_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_blur_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_blur_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_blur_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_blur_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_blur_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+
+
+                "lvl4_book_history_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_history_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_history_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_history_hint2_1),
+                                getString(activity, R.string.lvl4_book_history_hint2_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_history_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_history_hint3_1),
+                                getString(activity, R.string.lvl4_book_history_hint3_2),
+                                getString(activity, R.string.lvl4_book_history_hint3_3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_history_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_history_hint4),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_history_hint5" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_history_hint5),),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl4_book_history_hint6" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl4_book_history_hint6_1),
+                                getString(activity, R.string.lvl4_book_history_hint6_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+
+
+
+                "lvl5_bluetoothOff_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_bluetoothOff_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl5_bluetoothOff_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_bluetoothOff_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl5_bluetoothOff_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_bluetoothOff_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl5_bluetoothOn_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_bluetoothOn_hint1_1),
+                                getString(activity, R.string.lvl5_bluetoothOn_hint1_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl5_bluetoothOn_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_bluetoothOn_hint2_1),
+                                getString(activity, R.string.lvl5_bluetoothOn_hint2_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl5_horns_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_horns_hint1_1),
+                                getString(activity, R.string.lvl5_horns_hint1_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl5_horns_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_horns_hint2_1),
+                                getString(activity, R.string.lvl5_horns_hint2_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl5_horns_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_horns_hint3_1),
+                                getString(activity, R.string.lvl5_horns_hint3_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+
+                "lvl5_fish_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_fish_hint1_1),
+                                getString(activity, R.string.lvl5_fish_hint1_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+                "lvl5_fish_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_fish_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl5_fish_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_fish_hint3_1),
+                                getString(activity, R.string.lvl5_fish_hint3_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl5_map_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_map_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+
+                "lvl5_map_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_map_hint2_1),
+                                getString(activity, R.string.lvl5_map_hint2_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+                "lvl5_map_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_map_hint3_1),
+                                getString(activity, R.string.lvl5_map_hint3_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
+
+                "lvl5_general_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_general_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl5_general_hint2" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_general_hint2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl5_general_hint3" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_general_hint3),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+                "lvl5_general_hint4" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_general_hint4_1),
+                                getString(activity, R.string.lvl5_general_hint4_2),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
+
+
 
 
 
@@ -760,7 +1352,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl4_puzzle1_askii),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
@@ -771,10 +1363,13 @@ class DialogManager {
                                 getString(activity , R.string.lvl4_puzzle1_normal),
                             ),
                             listOfNotNull(
-                                characters["John"],
+                                characters["John_thinking"],
                             )
                         )
                         {} ,
+
+
+
 
 
 
@@ -785,7 +1380,9 @@ class DialogManager {
 
         fun loadCharacters() {
             characters = mapOf(
-                "John" to Character("Джон", R.drawable.character_avatar_test),
+                "John" to Character("Джон", R.drawable.john_default),
+                "John_thinking" to Character("Джон", R.drawable.john_thinking),
+                "John_default" to Character("Джон", R.drawable.john_default),
                 "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist),
                 "security" to Character("Охранник", R.drawable.npc_avatar_receptionist)
             )

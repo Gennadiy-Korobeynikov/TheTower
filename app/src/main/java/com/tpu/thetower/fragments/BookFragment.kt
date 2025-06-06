@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentBookBinding
 
@@ -16,7 +19,8 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 class BookFragment(
     private val pages : List<Int>,
     private val texts : List<Pair<String, String>>,
-) : Fragment(R.layout.fragment_book) {
+    private val hintManager: HintManager?
+) : Fragment(R.layout.fragment_book), Hintable {
 
     private lateinit var binding : FragmentBookBinding
 
@@ -103,6 +107,14 @@ class BookFragment(
             }
             true
         }
+    }
+
+    override fun useHint() {
+        if (hintManager != null) {
+            hintManager.useHint(requireActivity())
+        }
+        else
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 
 }

@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
@@ -121,7 +122,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                 soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
                 moveHooverAnim(puzzleHoover.currDirection)
             }
-            else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currDirection == Direction.Down )
+            else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currPositionX == 6 && puzzleHoover.currDirection == Direction.Down )
             { // Вернулись назад (небольшой костыль, ни на что не влияет, просто тут уже дело времени, которого мало
                 soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
                 moveHooverToCenter(back = true)
@@ -253,15 +254,17 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private fun test() {
         if (restart) {
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_bumping)
-            tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
+            //tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
             ivHoover.animate().rotation(0f).setDuration(300).start()
             moveHooverToCenter()
             restart = false
         }
 
         if (win) {
-            tvWin.text = "Победил!"
-            win = false
+            FragmentManager.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
+            FragmentManager.changeBG(this, R.id.lvl3Fragment)
+            // Проигать звук врещания , Поменять фото и открыть кнопку поднятия ключа (пылесос приехал)
+            //win = false
         }
 
         tvDirection.text =
