@@ -35,6 +35,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     private lateinit var btnToMap: Button
     private lateinit var btnToPuzzle4: Button
     private lateinit var btnToPuzzle4Lock: Button
+    private lateinit var btnToAccessCard: Button
 
     private lateinit var ivTarget: ImageView
     private lateinit var ivDraggable: ImageView
@@ -88,6 +89,15 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             ivTarget.visibility = View.GONE
             btnToMap.visibility = View.VISIBLE
         }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed")
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "key") == "completed") {
+            ivBg.setImageResource(R.drawable.lvl3_bg_last)
+            btnToPuzzle4Lock.visibility = View.GONE
+            btnToPuzzle4.visibility = View.GONE
+            btnToAccessCard.visibility = View.VISIBLE
+        }
     }
 
     private fun bindView() {
@@ -97,6 +107,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnToMap = binding.btnToMap
         btnToPuzzle4 = binding.btnToPuzzle4
         btnToPuzzle4Lock = binding.btnToPuzzle4Lock
+        btnToAccessCard = binding.btnToAccessCard
         ivTarget = binding.ivTarget
         ivDraggable = binding.ivDraggable
         ivBg = binding.ivBg

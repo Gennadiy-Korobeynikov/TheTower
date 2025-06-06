@@ -195,7 +195,6 @@
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle4"
             app:layout_constraintWidth_percent="0.175" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_puzzle4_lock"
             android:layout_width="wrap_content"
@@ -215,10 +214,22 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
+            android:visibility="gone"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_puzzle4_lock"
             app:layout_constraintTop_toTopOf="@id/guideH_puzzle4_lock"
             app:layout_constraintWidth_percent="0.04" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_access_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.31"
+            app:layout_constraintStart_toStartOf="@id/guideV_puzzle3"
+            app:layout_constraintBottom_toTopOf="@id/guideH_puzzle4"
+            app:layout_constraintWidth_percent="0.065" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
