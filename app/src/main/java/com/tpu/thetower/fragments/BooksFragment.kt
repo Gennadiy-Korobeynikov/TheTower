@@ -150,7 +150,6 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
     }
 
     private fun openBook(book : String) {
-
         parentFragmentManager.beginTransaction()
             .replace(R.id.fcv_book, BookFragment(bookPages[book]!!, bookTexts[book]!!, bookHasLink[book]!!, bookHints[book]), "BookFragment")
             .commit()
