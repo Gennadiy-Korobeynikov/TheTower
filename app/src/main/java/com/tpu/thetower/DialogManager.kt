@@ -190,7 +190,6 @@ class DialogManager {
                                 getString(activity , R.string.lvl1_npc_receptionist10),
                                 getString(activity , R.string.lvl1_npc_receptionist11),
                                 getString(activity , R.string.lvl1_npc_receptionist12),
-
                             ),
                             listOfNotNull(
                                 characters["receptionist"],
