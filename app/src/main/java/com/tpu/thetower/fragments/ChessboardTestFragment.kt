@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.GridLayout
+import android.widget.ImageView
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.HintManager
@@ -21,7 +22,7 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hint
     private lateinit var binding: FragmentChessboardTestBinding
     private val cellStates = MutableList(64) { false }
 
-    private val puzzle: Puzzle = ChessboardPuzzle(4,"chess")
+    private val puzzle: Puzzle = ChessboardPuzzle(4, "chess")
     private lateinit var saveManager: SaveManager
     private lateinit var hintManager: HintManager
 
@@ -40,10 +41,10 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hint
         binding = FragmentChessboardTestBinding.bind(view)
         saveManager = SaveManager.getInstance()
         bind()
-        val screenHeight = requireContext().resources.displayMetrics.heightPixels
-        val boardPx = (screenHeight * 0.7).toInt()
-        setupBoard(boardPx)
-
+        board.post {
+            val boardPx = board.width //
+            setupBoard(boardPx)
+        }
 
         hintManager = HintManager(
             listOf(
@@ -54,10 +55,10 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hint
         )
     }
 
-    private fun switchCellState(cell: View, index: Int) {
+    private fun switchCellState(cell: ImageView, index: Int) {
         cellStates[index] = !cellStates[index]
-        cell.setBackgroundColor(
-            if (cellStates[index]) Color.BLACK else Color.WHITE
+        cell.setImageResource(
+            if (cellStates[index]) R.drawable.pressed_button else R.drawable.unpressed_button
         )
         val solutionString = cellStates
             .mapIndexedNotNull { idx, sel -> if (sel) idx.toString() else null }
@@ -68,16 +69,18 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hint
     }
 
     private fun setupBoard(boardPx: Int) {
-        val cellSize = boardPx / 8
+        val cellSize = boardPx / 8 - 16
         board.rowCount = 8
         board.columnCount = 8
 
         for (i in 0 until 64) {
-            val cell = View(requireContext()).apply {
-                setBackgroundColor(Color.WHITE)
+            val cell = ImageView(requireContext()).apply {
+                setImageResource(R.drawable.unpressed_button)
+                setBackgroundResource(0)
                 setOnClickListener {
-                    switchCellState(it, i)
+                    switchCellState(this, i)
                 }
+                scaleType = ImageView.ScaleType.CENTER_CROP
             }
 
             val params = GridLayout.LayoutParams().apply {
@@ -85,7 +88,7 @@ class ChessboardTestFragment : Fragment(R.layout.fragment_chessboard_test), Hint
                 height = cellSize
                 rowSpec = GridLayout.spec(i / 8)
                 columnSpec = GridLayout.spec(i % 8)
-                setMargins(1, 1, 1, 1)
+                setMargins(0, 0, 18, 16)
             }
 
             board.addView(cell, params)

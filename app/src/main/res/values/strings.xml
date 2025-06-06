@@ -129,6 +129,8 @@
     <string name="lvl2_puzzle1_password">Enter the password</string>
     <!--#############################################-->
     <string name="lvl4_book_babel_text1">1</string>
+    <string name="lvl4_book_babel_text2">2</string>
+    <string name="lvl4_book_babel_text3">3</string>
     <string name="lvl2_computer">TODO</string>
     <string name="hint_is_not_here">TODO</string>
     <string name="lvl2_puzzle0_hint">TODO</string>
@@ -291,6 +293,18 @@
     <string name="lvl2_puzzle1_hint4_2">TODO</string>
     <string name="lvl2_puzzle1_hint5">TODO</string>
     <string name="lvl6_lock_hint1">TODO</string>
+
+    <string name="lvl2_puzzle1_chat1_1">TODO</string>
+    <string name="lvl2_puzzle1_chat1_2">TODO</string>
+    <string name="lvl2_puzzle1_chat1_3">TODO</string>
+    <string name="lvl2_puzzle1_chat1_4">TODO</string>
+    <string name="lvl2_puzzle1_chat_james">TODO</string>
+    <string name="lvl2_puzzle1_chat2_1">TODO</string>
+    <string name="lvl2_puzzle1_chat2_2">TODO</string>
+    <string name="lvl2_puzzle1_chat2_3">TODO</string>
+    <string name="lvl2_puzzle1_chat2_4">TODO</string>
+    <string name="lvl2_puzzle1_chat_amanda">TODO</string>
+    <string name="lvl2_puzzle1_chat2_5">TODO</string>
 
 
 </resources>
