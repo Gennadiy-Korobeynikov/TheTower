@@ -460,6 +460,19 @@
 
     <!--################# Lvl2Puzzle1 ##############-->
     <string name="lvl2_puzzle1_password">Введите пароль</string>
+    <string name="lvl2_puzzle1_chat_james">Джеймс</string>
+    <string name="lvl2_puzzle1_chat1_1">Ротань ч льропатд ьнюн льс1ь рд Мпон Анмь</string>
+    <string name="lvl2_puzzle1_chat1_2">Джеймс, почему из-за того, что ты, такой дурак, умудрился после  чистки клавиатуры сбиться и неправильно поставить клавиши на место, я должна мучиться с разбором этой белиберды?!</string>
+    <string name="lvl2_puzzle1_chat1_3">Ты собираешься как-то решать эту проблему?</string>
+    <string name="lvl2_puzzle1_chat1_4">гнь</string>
+    <string name="lvl2_puzzle1_chat_amanda">Аманда Байнс</string>
+    <string name="lvl2_puzzle1_chat2_1">Предоставьте информацию о Саре Вест.</string>
+    <string name="lvl2_puzzle1_chat2_2">5 секунд, пожалуйста</string>
+    <string name="lvl2_puzzle1_chat2_3">Хорошо, я жду</string>
+    <string name="lvl2_puzzle1_chat2_4">[Данные удалены]</string>
+    <string name="lvl2_puzzle1_chat2_5">Принято!</string>
+
+
     <!--#############################################-->
 
 

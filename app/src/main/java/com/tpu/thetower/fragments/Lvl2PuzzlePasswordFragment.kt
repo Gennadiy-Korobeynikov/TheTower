@@ -10,6 +10,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.HintManager
@@ -42,6 +44,11 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     private lateinit var pinContainer: LinearLayout
     private lateinit var hiddenInput: EditText
     private lateinit var ivDialog: ImageView
+    private lateinit var chatNames: ConstraintLayout
+    private lateinit var jamesChat: ConstraintLayout
+    private lateinit var amandaChat: ConstraintLayout
+    private lateinit var btnJames: AppCompatButton
+    private lateinit var btnAmanda: AppCompatButton
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
     private lateinit var musicManager: MusicManager
@@ -99,10 +106,26 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         tvPassword = binding.tvPassword
         hiddenInput = binding.hiddenInput
         pinContainer = binding.pinContainer
+        chatNames = binding.clChatNames
+        jamesChat = binding.clChatJames
+        amandaChat = binding.clChatAmanda
         ivDialog = binding.ivDialog
+        btnJames = binding.btnToJames
+        btnAmanda = binding.btnToAmanda
+
     }
 
     private fun setListeners() {
+        btnJames.setOnClickListener {
+            amandaChat.visibility = View.GONE
+            jamesChat.visibility = View.VISIBLE
+            ivDialog.setImageResource(R.drawable.lvl2_puzzle1_chat1)
+        }
+        btnAmanda.setOnClickListener {
+            amandaChat.visibility = View.VISIBLE
+            jamesChat.visibility = View.GONE
+            ivDialog.setImageResource(R.drawable.lvl2_puzzle1_chat2)
+        }
         pinContainer.setOnClickListener {
             showKeyboard()
         }
@@ -119,6 +142,8 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                     completed()
                     hideKeyboard()
                 }
+
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -160,6 +185,8 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         pinContainer.visibility = View.GONE
         tvPassword.visibility = View.GONE
         ivDialog.visibility = View.VISIBLE
+        chatNames.visibility = View.VISIBLE
+        jamesChat.visibility = View.VISIBLE
     }
 
     private fun handleSounds() {
