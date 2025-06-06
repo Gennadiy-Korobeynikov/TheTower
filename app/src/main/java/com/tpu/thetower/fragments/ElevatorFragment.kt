@@ -107,6 +107,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             R.id.action_elevatorFragment_to_lvl3Fragment,
             R.id.action_elevatorFragment_to_lvl4Fragment,
             R.id.action_elevatorFragment_to_lvl5Fragment,
+            R.id.action_elevatorFragment_to_lvl6Fragment
 
             )
     }

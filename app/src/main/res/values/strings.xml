@@ -71,14 +71,12 @@
     <string name="lvl1_npc_receptionist7"> К сожалению, Вы нам не сказали цели вашего визита. Но, Вы вчера о чем-то кричали, просили нас, даже требовали. </string>
     <string name="lvl1_npc_receptionist8"> Мне жаль, но из вашей бессвязной речи мы поняли только то, что Вы говорили о дочери.</string>
     <string name="lvl1_npc_receptionist9"> Зачем мне вам говорить о моей доч…</string>
-    <string name="lvl1_npc_receptionist10">Господи! Моя дочка! [Имя]! Где она?! </string>
-    <string name="lvl1_npc_receptionist11"> [Успакаивает гг, боясь, что у того снова припадок]</string>
-    <string name="lvl1_npc_receptionist12"> [Здесь нужно дописать диалог]… Я найду её! С вашей помощью или без, я найду [Имя]! </string>
 
     <string name="lvl1_npc_receptionist_2_1"> О, это снова Вы. Вам уже полегчало? Разузнали что-то про Вашу дочь? </string>
     <string name="lvl1_npc_receptionist_2_2"> Я знаю, что она где-то здесь. </string>
 
     <!--###########################################-->
+
 
     <!--##############################################################################################################-->
 
@@ -305,8 +303,7 @@
     <string name="lvl2_puzzle1_hint4_1">TODO</string>
     <string name="lvl2_puzzle1_hint4_2">TODO</string>
     <string name="lvl2_puzzle1_hint5">TODO</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lvl6_lock_hint1">TODO</string>
 
 
 </resources>

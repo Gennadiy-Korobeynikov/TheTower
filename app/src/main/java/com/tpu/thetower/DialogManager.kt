@@ -1330,6 +1330,16 @@ class DialogManager {
                             )
                         )
                         {},
+                "lvl6_lock_hint1" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl6_lock_hint1),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"],
+                            )
+                        )
+                        {},
 
 
 
