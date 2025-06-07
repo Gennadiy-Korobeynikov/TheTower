@@ -251,7 +251,52 @@
               "currentDialogIndex": 0
             }
           ]
+        },
+    {
+      "id": 5,
+      "name": "Fisher",
+      "isCompleted": false,
+      "puzzles": [
+        {
+          "id": 0,
+          "name": "bluetooth",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 1,
+          "name": "moose",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 2,
+          "name": "fish rack",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 3,
+          "name": "map",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
         }
+      ],
+      "npcDialogs": [
+        {
+          "id": 0,
+          "currentDialogIndex": 0
+        }
+      ]
+    }
       ],
       "gameSettings": {
         "soundVolume": 0.5,

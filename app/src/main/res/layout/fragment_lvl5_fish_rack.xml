@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".fragments.Lvl5Fragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl5_fish_rack" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_fish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.31" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.31" />
+
+        <ImageView
+            android:id="@+id/iv_fish1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl5_fish_1"
+            app:layout_constraintHeight_percent="0.34"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish1"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_target1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.34"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish1"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.375" />
+
+        <ImageView
+            android:id="@+id/iv_fish2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl5_fish_2"
+            app:layout_constraintHeight_percent="0.36"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish2"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_target2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.36"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish2"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.46" />
+
+        <ImageView
+            android:id="@+id/iv_fish3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl5_fish_3"
+            app:layout_constraintHeight_percent="0.38"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish3"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_target3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.38"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish3"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
+        <ImageView
+            android:id="@+id/iv_fish4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl5_fish_4"
+            app:layout_constraintHeight_percent="0.38"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish4"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_target4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.38"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish4"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.615" />
+
+        <ImageView
+            android:id="@+id/iv_fish5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl5_fish_5"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish5"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_target5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish5"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.08" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
