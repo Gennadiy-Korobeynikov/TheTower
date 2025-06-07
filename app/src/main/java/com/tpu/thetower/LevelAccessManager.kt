@@ -17,7 +17,7 @@ class LevelAccessManager {
         )
 
         var currentAccessLvl = 0
-        val topUnlockedLvlsForModules: List<Int> = listOf(6, 2, 3, 5, 6)
+        val topUnlockedLvlsForModules: List<Int> = listOf(1, 2, 3, 4, 5, 6)
 
         fun getCardImage(): Int {
              return cardImageIds[currentAccessLvl]
