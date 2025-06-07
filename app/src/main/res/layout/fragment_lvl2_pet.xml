@@ -11,13 +11,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl2_bg_blurred" />
+        android:src="@drawable/lvl2_dog" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/lvl2_puzzle0_completed" />
 </FrameLayout>
