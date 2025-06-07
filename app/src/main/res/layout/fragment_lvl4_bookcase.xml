@@ -44,123 +44,123 @@
             app:layout_constraintWidth_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_book_1"
+            android:id="@+id/guideV_book_blur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.555" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_book_1"
+            android:id="@+id/guideH_book_blur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.46" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_book_1"
+            android:id="@+id/btn_book_blur"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
             app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="@id/guideV_book_1"
-            app:layout_constraintTop_toTopOf="@id/guideH_book_1"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_blur"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_blur"
             app:layout_constraintWidth_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_book_2"
+            android:id="@+id/guideV_book_askii"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.444" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_book_2"
+            android:id="@+id/guideH_book_askii"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.28" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_book_2"
+            android:id="@+id/btn_book_askii"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
             app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="@id/guideV_book_2"
-            app:layout_constraintTop_toTopOf="@id/guideH_book_2"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_askii"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_askii"
             app:layout_constraintWidth_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_book_3"
+            android:id="@+id/guideV_book_qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.519" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_book_3"
+            android:id="@+id/guideH_book_qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.28" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_book_3"
+            android:id="@+id/btn_book_qr"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
             app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="@id/guideV_book_3"
-            app:layout_constraintTop_toTopOf="@id/guideH_book_3"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_qr"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_qr"
             app:layout_constraintWidth_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_book_4"
+            android:id="@+id/guideV_book_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.405" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_book_4"
+            android:id="@+id/guideH_book_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.82" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_book_4"
+            android:id="@+id/btn_book_history"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
             app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="@id/guideV_book_4"
-            app:layout_constraintTop_toTopOf="@id/guideH_book_4"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_history"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_history"
             app:layout_constraintWidth_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_book_5"
+            android:id="@+id/guideV_book_babel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.555" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_book_5"
+            android:id="@+id/guideH_book_babel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.097" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_book_5"
+            android:id="@+id/btn_book_babel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
             app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="@id/guideV_book_5"
-            app:layout_constraintTop_toTopOf="@id/guideH_book_5"
+            app:layout_constraintStart_toStartOf="@id/guideV_book_babel"
+            app:layout_constraintTop_toTopOf="@id/guideH_book_babel"
             app:layout_constraintWidth_percent="0.04" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
