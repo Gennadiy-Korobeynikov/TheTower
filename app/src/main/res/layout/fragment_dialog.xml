@@ -3,24 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_dialog"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:orientation="horizontal"
     tools:context=".fragments.DialogFragment">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideV_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.225" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideH_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.744" />
 
     <ImageView
         android:id="@+id/iv_avatar"
@@ -28,73 +15,114 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:src="@drawable/npc_avatar_receptionist"
-        app:layout_constraintBottom_toTopOf="@id/guideH_avatar"
+        app:layout_constraintBottom_toTopOf="@id/cl_dialog"
         app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintStart_toStartOf="@id/guideV_avatar"
-        app:layout_constraintWidth_percent="0.15" />
-
-    <ImageView
-        android:id="@+id/iv_message_box"
-        android:layout_width="wrap_content"
-        android:layout_height="115dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/dialog_box"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintWidth_percent="0.3"
+        android:visibility="visible"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideV_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.26" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="bottom|center">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideH_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.72" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Имя"
-        android:textAlignment="center"
-        android:textColor="#FFDFDF"
-        android:textSize="20sp"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="@id/guideV_name"
-        app:layout_constraintTop_toTopOf="@id/guideH_name"
-        app:layout_constraintWidth_percent="0.156" />
+        <ImageView
+            android:id="@+id/kostyl"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/npc_avatar_receptionist"
+            app:layout_constraintBottom_toTopOf="@id/guideH_avatar"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_avatar"
+            app:layout_constraintWidth_percent="0.15"
+            android:visibility="invisible"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideV_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.222" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideH_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.78" />
+        <ImageView
+            android:id="@+id/iv_message_box"
+            android:layout_width="wrap_content"
+            android:layout_height="115dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/dialog_box"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_dialog_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:text="Тут будет очень трогательная история..."
-        android:textColor="#FFDFDF"
-        app:layout_constraintHeight_percent="0.16"
-        app:layout_constraintStart_toStartOf="@id/guideV_text"
-        app:layout_constraintTop_toTopOf="@id/guideH_text"
-        app:layout_constraintWidth_percent="0.53" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Имя"
+            android:textAlignment="center"
+            android:textColor="#FFDFDF"
+            android:textSize="18sp"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="@id/guideV_name"
+            app:layout_constraintTop_toTopOf="@id/guideH_name"
+            app:layout_constraintWidth_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <TextView
+            android:id="@+id/tv_dialog_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:text="Тут будет очень трогательная история..."
+            android:textColor="#FFDFDF"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="@id/guideV_text"
+            app:layout_constraintTop_toTopOf="@id/guideH_text"
+            app:layout_constraintWidth_percent="0.85" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
