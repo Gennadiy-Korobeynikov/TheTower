@@ -15,11 +15,11 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
     private lateinit var binding: FragmentLvl4BookcaseBinding
 
     private lateinit var btnBookHelp: Button
-    private lateinit var btnBook1: Button
-    private lateinit var btnBook2: Button
-    private lateinit var btnBook3: Button
-    private lateinit var btnBook4: Button
-    private lateinit var btnBook5: Button
+    private lateinit var btnBookBlur: Button
+    private lateinit var btnBookAskii: Button
+    private lateinit var btnBookQr: Button
+    private lateinit var btnBookHistory: Button
+    private lateinit var btnBookBabel: Button
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,11 +35,11 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
 
     private fun bindView() {
         btnBookHelp = binding.btnBookHelp
-        btnBook1 = binding.btnBook1
-        btnBook2 = binding.btnBook2
-        btnBook3 = binding.btnBook3
-        btnBook4 = binding.btnBook4
-        btnBook5 = binding.btnBook5
+        btnBookBlur = binding.btnBookBlur
+        btnBookAskii = binding.btnBookAskii
+        btnBookQr = binding.btnBookQr
+        btnBookHistory = binding.btnBookHistory
+        btnBookBabel = binding.btnBookBabel
     }
 
     private fun setListeners() {
@@ -48,16 +48,31 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
             openBook("help")
         }
 
-        // Честно, не знаю, что за что отвечает, так что не рискну добавлять
+        btnBookBlur.setOnClickListener {
+            openBook("blur")
+        }
 
+        btnBookAskii.setOnClickListener {
+            val book: String = if (LoadManager.getPuzzleStatus(
+                    requireActivity(),
+                    4,
+                    "askiibtn"
+                ) == "locked"
+            ) "askii_a" else "askii_b"
+            openBook(book)
+        }
 
-        val book: String = if (LoadManager.getPuzzleStatus(
-                requireActivity(),
-                4,
-                "askiibtn"
-            ) == "locked"
-        ) "askii_a" else "askii_b"
+        btnBookQr.setOnClickListener {
+            openBook("qr")
+        }
 
+        btnBookHistory.setOnClickListener {
+            openBook("history")
+        }
+
+        btnBookBabel.setOnClickListener {
+            openBook("babel")
+        }
     }
 
     private fun openBook(book: String) {

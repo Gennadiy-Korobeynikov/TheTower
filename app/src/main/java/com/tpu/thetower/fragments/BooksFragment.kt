@@ -31,33 +31,33 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
 
         bookPages = mapOf(
             "babel" to listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_blue,
                 R.drawable.lvl4_book_babel1,
                 R.drawable.lvl4_book_babel2,
             ),
             "askii_a" to  listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_orange,
             ),
             "askii_b" to  listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_orange,
 
             ),
             "qr" to  listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_red,
                 R.drawable.lvl4_qr3,
                 R.drawable.lvl4_qr1,
                 R.drawable.lvl4_qr2,
             ),
             "blur" to  listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_blue,
                 R.drawable.lvl4_book_blur1,
                 R.drawable.lvl4_book_blur2,
             ),
             "history" to  listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_purple,
             ),
             "help" to  listOf(
-                R.drawable.lvl4_book_cover_blue,
+                R.drawable.lvl4_book_green,
                 R.drawable.lvl4_book_blank,
                 R.drawable.lvl4_book_help1,
             ),

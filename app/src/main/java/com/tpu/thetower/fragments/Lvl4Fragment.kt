@@ -81,17 +81,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     }
 
     private fun setListeners() {
-//        btnToBookBabel.setOnClickListener { openBook("babel") }
-//        btnToBookQr.setOnClickListener { openBook("qr") }
-//        btnToBookBlur.setOnClickListener { openBook("blur") }
-//        btnToBookHistory.setOnClickListener { openBook("history") }
-//
-//        btnToBookAskii.setOnClickListener {
-//
-//            //val book : String =  if (LoadManager.isPuzzleCompleted(requireActivity(),4,2)) "askii_a" else "askii_b"
-//        val book : String =  if (LoadManager.isASKII) "askii_b" else "askii_a" // TODO Исправить!!!!! длолжно быть через сохранения
-//            openBook(book)
-//        }
 
         btnChess.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4PuzzleChessboardFragment)

@@ -43,6 +43,10 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
         )
 
         saveManager = SaveManager.getInstance()
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 4, "askiibtn") == "in_progress") {
+            ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
+        }
     }
 
     private fun bindView() {
