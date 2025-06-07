@@ -244,6 +244,12 @@
         <action
             android:id="@+id/action_lvl5Fragment_to_lvl5FishRackFragment"
             app:destination="@id/lvl5FishRackFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment"
+            app:destination="@id/lvl5PuzzleBluetoothFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleMooseFragment"
+            app:destination="@id/lvl5PuzzleMooseFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl2PuzzleChatFragment"
@@ -339,5 +345,13 @@
         android:id="@+id/lvl5FishRackFragment"
         android:name="com.tpu.thetower.fragments.Lvl5FishRackFragment"
         android:label="Lvl5FishRackFragment" />
+    <fragment
+        android:id="@+id/lvl5PuzzleBluetoothFragment"
+        android:name="com.tpu.thetower.fragments.Lvl5PuzzleBluetoothFragment"
+        android:label="Lvl5PuzzleBluetoothFragment" />
+    <fragment
+        android:id="@+id/lvl5PuzzleMooseFragment"
+        android:name="com.tpu.thetower.fragments.Lvl5PuzzleMooseFragment"
+        android:label="Lvl5PuzzleMooseFragment" />
 
 </navigation>
