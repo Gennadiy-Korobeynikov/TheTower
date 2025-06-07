@@ -8,11 +8,12 @@
     tools:context=".fragments.Lvl1Fragment">
 
     <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl1_bg" />
+        android:src="@drawable/lvl1_after_clicks" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -65,6 +66,40 @@
             app:layout_constraintStart_toStartOf="@id/guideV_chandelier"
             app:layout_constraintTop_toTopOf="@id/guideH_chandelier"
             app:layout_constraintWidth_percent="0.16" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_access_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.38" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_access_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.82" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_access_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="@id/guideV_access_card"
+            app:layout_constraintTop_toTopOf="@id/guideH_access_card"
+            app:layout_constraintWidth_percent="0.06" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_access_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl1_access_card"
+        android:visibility="gone" />
 
 </FrameLayout>
