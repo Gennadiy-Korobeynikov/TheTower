@@ -51,6 +51,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
         btnChandelier = binding.btnChandelier
         btnAccessCard = binding.btnAccessCard
         ivBg = binding.ivBg
+        ivAccessCard = binding.ivAccessCard
     }
 
     private fun setListeners() {
