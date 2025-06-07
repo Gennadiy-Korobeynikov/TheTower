@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.LoadManager
 
@@ -36,8 +37,9 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
     private lateinit var btnMoose: Button
     private lateinit var btnFish: Button
     private lateinit var btnMap: Button
+    private lateinit var btnMoosePaper: Button
 
-
+    private lateinit var ivBg: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,6 +56,8 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         if (LoadManager.getPuzzleStatus(requireActivity(), 5, "moose") == "completed") {
             btnFishRack.visibility = View.VISIBLE
             btnMoose.visibility = View.GONE
+            ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
+            btnMoosePaper.visibility = View.VISIBLE
         }
     }
 
@@ -62,7 +66,7 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         btnMoose = binding.btnMoose
         btnFish = binding.btnFish
         btnMap = binding.btnMap
-
+        ivBg = binding.ivBg
     }
 
     private fun setListeners() {
@@ -77,6 +81,10 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
         btnFish.setOnClickListener {
             FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment)
+        }
+
+        btnMoosePaper.setOnClickListener {
+            DialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
         }
     }
 
