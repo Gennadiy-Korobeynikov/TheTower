@@ -1120,6 +1120,17 @@ class DialogManager {
                         )
                         {},
 
+                "lvl5_moose_paper" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_moose_paper),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
 
 
                 "lvl5_bluetoothOff_hint1" to
