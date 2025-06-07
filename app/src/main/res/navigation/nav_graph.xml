@@ -240,7 +240,11 @@
         android:id="@+id/lvl5Fragment"
         android:name="com.tpu.thetower.fragments.Lvl5Fragment"
         android:label="fragment_lvl5"
-        tools:layout="@layout/fragment_lvl5" />
+        tools:layout="@layout/fragment_lvl5" >
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5FishRackFragment"
+            app:destination="@id/lvl5FishRackFragment" />
+    </fragment>
     <fragment
         android:id="@+id/lvl2PuzzleChatFragment"
         android:name="com.tpu.thetower.fragments.Lvl2PuzzleChatFragment"
@@ -331,5 +335,9 @@
         android:name="com.tpu.thetower.fragments.Lvl6LockFragment"
         android:label="fragment_lvl6_lock"
         tools:layout="@layout/fragment_lvl6_lock" />
+    <fragment
+        android:id="@+id/lvl5FishRackFragment"
+        android:name="com.tpu.thetower.fragments.Lvl5FishRackFragment"
+        android:label="Lvl5FishRackFragment" />
 
 </navigation>

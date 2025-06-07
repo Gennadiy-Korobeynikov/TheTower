@@ -1,23 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     tools:context=".fragments.Lvl5Fragment">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/lvl5_bg_test" />
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl5_bg_first" />
 
-    <ImageView
-        android:id="@+id/iv_bluetooth"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/lvl5_bluetooth_test"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:visibility="gone"/>
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.26" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_fish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_fish"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.34"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish"
+            app:layout_constraintWidth_percent="0.23" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.517" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.297" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_map"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintStart_toStartOf="@id/guideV_map"
+            app:layout_constraintTop_toTopOf="@id/guideH_map"
+            app:layout_constraintWidth_percent="0.135" 
+            android:visibility="gone"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_fish_rack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_fish_rack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.14" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_fish_rack"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish_rack"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish_rack"
+            app:layout_constraintWidth_percent="0.32"
+            android:visibility="gone"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_moose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_moose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_moose"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toStartOf="@id/guideV_moose"
+            app:layout_constraintTop_toTopOf="@id/guideH_moose"
+            android:visibility="gone"
+            app:layout_constraintWidth_percent="0.165" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>
