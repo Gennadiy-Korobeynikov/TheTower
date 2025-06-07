@@ -34,7 +34,16 @@
       "id": 1,
       "name": "Reception",
       "isCompleted": false,
-      "puzzles": [],
+      "puzzles": [
+        {
+          "id": 0,
+          "name": "chandelier",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        }
+      ],
       "npcDialogs": [
         {
           "npcId": 0,
