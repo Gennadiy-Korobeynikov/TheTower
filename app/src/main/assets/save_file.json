@@ -253,8 +253,8 @@
           ]
         },
     {
-      "id": 4,
-      "name": "Library",
+      "id": 5,
+      "name": "Fisher",
       "isCompleted": false,
       "puzzles": [
         {
@@ -267,7 +267,7 @@
         },
         {
           "id": 1,
-          "name": "timeline",
+          "name": "moose",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
@@ -275,7 +275,7 @@
         },
         {
           "id": 2,
-          "name": "askiibtn",
+          "name": "fish rack",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
@@ -283,7 +283,7 @@
         },
         {
           "id": 3,
-          "name": "sequence_paper",
+          "name": "map",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,

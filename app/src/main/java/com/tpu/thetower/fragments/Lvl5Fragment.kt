@@ -50,6 +50,11 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         if (LoadManager.getPuzzleStatus(requireActivity(), 5, "bluetooth") == "completed") {
             btnMoose.visibility = View.VISIBLE
         }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 5, "moose") == "completed") {
+            btnFishRack.visibility = View.VISIBLE
+            btnMoose.visibility = View.GONE
+        }
     }
 
     private fun bindView() {
@@ -67,7 +72,11 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         }
 
         btnMoose.setOnClickListener {
-//            FragmentManager.changeBG(this, R.id.)
+            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleMooseFragment)
+        }
+
+        btnFish.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment)
         }
     }
 

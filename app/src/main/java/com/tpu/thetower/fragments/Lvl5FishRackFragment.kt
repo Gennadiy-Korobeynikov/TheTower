@@ -14,6 +14,7 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5FishRackBinding
 import com.tpu.thetower.fragments.Lvl4TimelineFragment
 import com.tpu.thetower.puzzles.Lvl4PuzzleTimeline
+import com.tpu.thetower.puzzles.Lvl5PuzzleFishRack
 
 class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
     View.OnTouchListener,
@@ -23,7 +24,7 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
     private val originalPositions = mutableMapOf<View, Pair<Float, Float>>()
     private val zoneOccupants = mutableMapOf<View, View?>()
 
-//    private val puzzle: Puzzle = Lvl4PuzzleFishes(5, "fishes")
+    private val puzzle: Puzzle = Lvl5PuzzleFishRack(5, "fish rack")
 
     private var solution = charArrayOf('-', '-', '-', '-', '-', '-', '-', '-', '-', '-')
 
