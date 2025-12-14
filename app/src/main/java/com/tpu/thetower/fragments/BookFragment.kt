@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentBookBinding
 
@@ -16,8 +19,9 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 class BookFragment(
     private val pages : List<Int>,
     private val texts : List<Pair<String, String>>,
-    private val hasLink: Boolean
-) : Fragment(R.layout.fragment_book) {
+    private val hasLink: Boolean,
+    private val hintManager: HintManager?
+) : Fragment(R.layout.fragment_book), Hintable {
 
     private lateinit var binding : FragmentBookBinding
 
@@ -55,8 +59,8 @@ class BookFragment(
         tvLinkLeft = binding.tvPageLinkLeft
         tvLinkRight = binding.tvPageLinkRight
         tvTitle = binding.tvTitle
-    }
 
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
@@ -69,29 +73,6 @@ class BookFragment(
             }
         }
 
-//        tvTextLeft.setOnTouchListener { tv, event ->
-//            if (event.action == MotionEvent.ACTION_DOWN) {
-//                tv.performClick()
-//                if (currPageNumber > 0) {
-//                    currPageNumber--
-//                }
-//                flipPage()
-//                return@setOnTouchListener true
-//            }
-//            true
-//        }
-//
-//        tvTextRight.setOnTouchListener { tv, event ->
-//            if (event.action == MotionEvent.ACTION_DOWN) {
-//                tv.performClick()
-//                if (currPageNumber < pageCount - 1) {
-//                    currPageNumber++
-//                }
-//                flipPage()
-//                return@setOnTouchListener true
-//            }
-//            true
-//        }
 
         ivPage.setOnTouchListener { iv, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -155,6 +136,14 @@ class BookFragment(
             }
             true
         }
+    }
+
+    override fun useHint() {
+        if (hintManager != null) {
+            hintManager.useHint(requireActivity())
+        }
+        else
+            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 
 }

@@ -35,6 +35,8 @@
     <string name="sound_volume">Sound Effects Volume</string>
     <string name="game_language">Game Language</string>
     <string name="back_button">Back</string>
+    <string name="resume">Resume</string>
+    <string name="main_screen">Main screen</string>
 
     <!-- Массив для языков -->
     <string-array name="language_options">
@@ -51,6 +53,8 @@
     <string name="lvl0_dark">TODO</string>
     <string name="lvl0_flashlight_on">TODO</string>
     <string name="lvl0_light_on">TODO</string>
+    <string name="lvl0_access_card">TODO</string>
+    <string name="lvl0_access_card_got">TODO</string>
     <!--###########################################-->
 
 
@@ -104,6 +108,22 @@
     <!--##################################################-->
 
     <!--############################## Lvl2 #################################-->
+    <string name="lvl2_start">TODO</string>
+    <string name="lvl2_computer_lore">TODO</string>
+    <!--##################################################-->
+
+
+    <!--############################## Lvl3 #################################-->
+    <string name="lvl3_npc_security1">TODO</string>
+    <string name="lvl3_npc_security2">TODO</string>
+    <string name="lvl3_npc_security3">TODO</string>
+    <string name="lvl3_npc_security4">TODO</string>
+    <string name="lvl3_npc_security5">TODO</string>
+
+    <string name="lvl3_computer">TODO</string>
+    <string name="lvl3_donuts">TODO</string>
+    <!--##################################################-->
+
 
     <!--################# Lvl2Puzzle1 ##############-->
     <string name="lvl2_puzzle1_password">Enter the password</string>
@@ -186,10 +206,94 @@
     <string name="lvl4_book_qr_title">TODO</string>
     <string name="lvl4_book_qr_text1">TODO</string>
     <string name="lvl4_book_blur_title">TODO</string>
+    <string name="blank">" "</string>
     <string name="lvl4_book_help_link">0t7aljjrrw8m65qxse8824hyhbazdd5stj86tk5rab143gzk05qml5bck5970cdhc2iriu2aznkuzcitp8l7ae731ijrz0rlr6fb3nk26i97j3mw2qyttrwi5msx6bbwzsfhgip4ukhj2mrns15ix88ppsxgq242os7f6q2dfkpvpwj8f8k0kj9my2lo6-w2-s5-v07%3A1&amp;utf=1</string>
     <string name="lvl4_book_babel_link">" https://vk.com/away.php?to=https"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lvl2_puzzle1_hint5_1">TODO</string>
+    <string name="lvl2_puzzle1_hint5_2">TODO</string>
+    <string name="lvl2_puzzle1_hint6">TODO</string>
+    <string name="lvl4_chess_hint1">TODO</string>
+    <string name="lvl4_chess_hint2">TODO</string>
+    <string name="lvl4_chess_hint3">TODO</string>
+    <string name="lvl4_chess_hint4">TODO</string>
+    <string name="lvl4_timeline_hint1_1">TODO</string>
+    <string name="lvl4_timeline_hint1_2">TODO</string>
+    <string name="lvl4_timeline_hint2_1">TODO</string>
+    <string name="lvl4_timeline_hint2_2">TODO</string>
+    <string name="lvl4_timeline_hint2_3">TODO</string>
+    <string name="lvl4_askiiBtn_hint1">TODO</string>
+    <string name="lvl4_askiiBtn_hint2">TODO</string>
+    <string name="lvl4_sequencepaper_hint1">TODO</string>
+    <string name="lvl4_sequencepaper_hint2">TODO</string>
+    <string name="lvl4_sequencepaper_hint3">TODO</string>
+    <string name="lvl4_book_askii_hint1">TODO</string>
+    <string name="lvl4_book_babel_hint1">TODO</string>
+    <string name="lvl4_book_babel_hint2_1">TODO</string>
+    <string name="lvl4_book_babel_hint2_2">TODO</string>
+    <string name="lvl4_book_babel_hint3">TODO</string>
+    <string name="lvl4_book_babel_hint4_1">TODO</string>
+    <string name="lvl4_book_babel_hint4_2">TODO</string>
+    <string name="lvl4_book_babel_hint5_1">TODO</string>
+    <string name="lvl4_book_babel_hint5_2">TODO</string>
+    <string name="lvl4_book_qr_hint1_1">TODO</string>
+    <string name="lvl4_book_qr_hint1_2">TODO</string>
+    <string name="lvl4_book_qr_hint2_1">TODO</string>
+    <string name="lvl4_book_qr_hint2_2">TODO</string>
+    <string name="lvl4_book_qr_hint2_3">TODO</string>
+    <string name="lvl4_book_qr_hint3_1">TODO</string>
+    <string name="lvl4_book_qr_hint3_2">TODO</string>
+    <string name="lvl4_book_qr_hint4_1">TODO</string>
+    <string name="lvl4_book_qr_hint4_2">TODO</string>
+    <string name="lvl4_book_qr_hint4_3">TODO</string>
+    <string name="lvl4_book_blur_hint1">TODO</string>
+    <string name="lvl4_book_blur_hint2">TODO</string>
+    <string name="lvl4_book_blur_hint3">TODO</string>
+    <string name="lvl4_book_history_hint1">TODO</string>
+    <string name="lvl4_book_history_hint3_1">TODO</string>
+    <string name="lvl4_book_history_hint3_2">TODO</string>
+    <string name="lvl4_book_history_hint3_3">TODO</string>
+    <string name="lvl4_book_history_hint4">TODO</string>
+    <string name="lvl4_book_history_hint5">TODO</string>
+    <string name="lvl4_book_history_hint6_1">TODO</string>
+    <string name="lvl4_book_history_hint6_2">TODO</string>
+    <string name="lvl5_bluetoothOff_hint1">TODO</string>
+    <string name="lvl5_bluetoothOff_hint2">TODO</string>
+    <string name="lvl5_bluetoothOff_hint3">TODO</string>
+    <string name="lvl5_bluetoothOn_hint1_1">TODO</string>
+    <string name="lvl5_bluetoothOn_hint1_2">TODO</string>
+    <string name="lvl5_bluetoothOn_hint2_1">TODO</string>
+    <string name="lvl5_bluetoothOn_hint2_2">TODO</string>
+    <string name="lvl5_horns_hint1_1">TODO</string>
+    <string name="lvl5_horns_hint1_2">TODO</string>
+    <string name="lvl5_horns_hint2_1">TODO</string>
+    <string name="lvl5_horns_hint2_2">TODO</string>
+    <string name="lvl5_horns_hint3_1">TODO</string>
+    <string name="lvl5_horns_hint3_2">TODO</string>
+    <string name="lvl5_fish_hint1_1">TODO</string>
+    <string name="lvl5_fish_hint1_2">TODO</string>
+    <string name="lvl5_fish_hint2">TODO</string>
+    <string name="lvl5_fish_hint3_1">TODO</string>
+    <string name="lvl5_map_hint1">TODO</string>
+    <string name="lvl5_map_hint2_1">TODO</string>
+    <string name="lvl5_map_hint2_2">TODO</string>
+    <string name="lvl5_map_hint3_1">TODO</string>
+    <string name="lvl5_map_hint3_2">TODO</string>
+    <string name="lvl5_general_hint1">TODO</string>
+    <string name="lvl5_general_hint2">TODO</string>
+    <string name="lvl5_general_hint3">TODO</string>
+    <string name="lvl5_general_hint4_1">TODO</string>
+    <string name="lvl5_general_hint4_2">TODO</string>
+    <string name="lvl4_book_history_hint2_1">TODO</string>
+    <string name="lvl4_book_history_hint2_2">TODO</string>
+    <string name="lvl2_puzzle3_hint6">TODO</string>
+    <string name="lvl5_fish_hint3_2">TODO</string>
+    <string name="lvl2_puzzle1_hint4_1">TODO</string>
+    <string name="lvl2_puzzle1_hint4_2">TODO</string>
+    <string name="lvl2_puzzle1_hint5">TODO</string>
+    <string name="lvl6_lock_hint1">TODO</string>
 
-    <string name="blank"></string>
     <string name="lvl2_puzzle1_chat1_1">TODO</string>
     <string name="lvl2_puzzle1_chat1_2">TODO</string>
     <string name="lvl2_puzzle1_chat1_3">TODO</string>

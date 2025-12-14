@@ -3,16 +3,14 @@ package com.tpu.thetower.fragments
 import android.content.ClipData
 import android.os.Bundle
 import android.view.DragEvent
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
@@ -21,7 +19,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
-import com.tpu.thetower.databinding.FragmentLvl0Binding
 
 class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListener, View.OnDragListener {
 
@@ -44,6 +41,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     private lateinit var btnToLvl3: Button
     private lateinit var btnToLvl4: Button
     private lateinit var btnToLvl5: Button
+    private lateinit var btnToLvl6: Button
 
     private lateinit var lvlButtons : List<Button>
     private lateinit var lvlActions: List<Int>
@@ -72,6 +70,12 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         ivDraggable.post {
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
         }
+
+        // TODO WARNING!!! ВНИМАНИЕ!!! ДАЛЬШЕ КОСТЫЛЬ
+        if (LoadManager.getAccessLevel(requireActivity()) != 0)
+            FragmentManager.changeAccessCardImg(this, LevelAccessManager.getCardImage())
+
+        // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
     }
 
     private fun bindView() {
@@ -89,8 +93,9 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         btnToLvl3 = binding.btnElevatorToLvl3
         btnToLvl4 = binding.btnElevatorToLvl4
         btnToLvl5 = binding.btnElevatorToLvl5
+        btnToLvl6 = binding.btnElevatorToLvl6
 
-        lvlButtons = listOf(btnToLvl0, btnToLvl1, btnToLvl2, btnToLvl3, btnToLvl4, btnToLvl5)
+        lvlButtons = listOf(btnToLvl0, btnToLvl1, btnToLvl2, btnToLvl3, btnToLvl4, btnToLvl5, btnToLvl6)
         lvlActions = listOf(
             R.id.action_elevatorFragment_to_lvl0Fragment,
             R.id.action_elevatorFragment_to_lvl1Fragment,
@@ -98,6 +103,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             R.id.action_elevatorFragment_to_lvl3Fragment,
             R.id.action_elevatorFragment_to_lvl4Fragment,
             R.id.action_elevatorFragment_to_lvl5Fragment,
+            R.id.action_elevatorFragment_to_lvl6Fragment
 
         )
     }
@@ -136,6 +142,9 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         ivCardReader.setOnDragListener(this@ElevatorFragment)
         ivDraggable.setOnTouchListener(this@ElevatorFragment)
+
+
+        //TODO Разобраться в необходимости кода
 
 //        requireActivity().supportFragmentManager
 //            .setFragmentResultListener("moduleUnlocking", viewLifecycleOwner) { _, bundle ->
@@ -209,5 +218,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         view.x = originalPosition.first
         view.y = originalPosition.second
         view.visibility = View.VISIBLE
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        FragmentManager.changeAccessCardImg(this, 0)
     }
 }

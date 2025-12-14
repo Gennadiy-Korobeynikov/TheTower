@@ -19,9 +19,8 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_hud"
-        android:layout_width="600dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.HUDFragment"
         android:visibility="gone"/>
 
@@ -43,7 +42,6 @@
         android:layout_gravity="bottom"
         android:visibility="gone"
         android:clickable="true" />
-
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -92,10 +90,5 @@
         android:name="com.tpu.thetower.fragments.SettingsFragment"
         android:visibility="gone"
         android:clickable="true"/>
-
-
-
-
-
 
 </FrameLayout>

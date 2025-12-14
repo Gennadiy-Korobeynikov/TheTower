@@ -12,8 +12,10 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
+import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleDonutsBinding
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -33,6 +35,8 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
 
     private lateinit var saveManager: SaveManager
     private lateinit var hintManager: HintManager
+    private lateinit var soundManager: SoundManager
+    private lateinit var musicManager: MusicManager
 
     // Пороговые значения
     private val shakeThreshold = 3500 // Чувствительность к тряске
@@ -46,6 +50,7 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
         iv1 = binding.iv1
 
         saveManager = SaveManager.getInstance()
+        handleSounds()
 
         val puzzleStatus = LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts")
         when (puzzleStatus) {
@@ -101,6 +106,7 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
                 ) / diffTime * 10000
 
                 if (speed > shakeThreshold) {
+                    soundManager.playSound(R.raw.sound_of_donuts_shaking)
                     lastShake = currentTime
                     Completed()
                 }
@@ -127,5 +133,16 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
 
     override fun useHint() {
         hintManager.useHint(requireActivity())
+    }
+
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init(maxStreamsNumber = 1)
+        soundManager.loadSound(
+            requireContext(), listOf(
+                R.raw.sound_of_donuts_shaking
+            )
+        )
     }
 }

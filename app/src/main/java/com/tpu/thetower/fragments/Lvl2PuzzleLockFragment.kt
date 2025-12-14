@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
@@ -13,8 +14,7 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2PuzzleLockBinding
-import com.tpu.thetower.puzzles.Lvl2PuzzleLock0
-import com.tpu.thetower.puzzles.Lvl2PuzzleChat
+import com.tpu.thetower.puzzles.Lvl2PuzzleLock
 import com.tpu.thetower.utils.WheelSetupHelper
 
 
@@ -31,7 +31,6 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
 
     private lateinit var mainScreen: FrameLayout
 
-
     private lateinit var puzzle: Puzzle
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
@@ -42,15 +41,16 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
 
     private val images =
         arrayOf(
-            R.drawable.lvl2_puzzle0_a,
-            R.drawable.lvl2_puzzle0_b,
             R.drawable.lvl2_puzzle0_c,
             R.drawable.lvl2_puzzle0_d,
-            R.drawable.lvl2_puzzle0_e,
             R.drawable.lvl2_puzzle0_h,
+            R.drawable.lvl2_puzzle0_i,
             R.drawable.lvl2_puzzle0_l,
+            R.drawable.lvl2_puzzle0_m,
             R.drawable.lvl2_puzzle0_n,
-            R.drawable.lvl2_puzzle0_u
+            R.drawable.lvl2_puzzle0_o,
+            R.drawable.lvl2_puzzle0_u,
+            R.drawable.lvl2_puzzle0_v
         )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +59,7 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
         binding = FragmentLvl2PuzzleLockBinding.bind(view)
         bindView()
         soundManager = SoundManager.getInstance()
+        soundManager.init()
         soundManager.loadSound(
             requireContext(), listOf(
                 R.raw.sound_of_the_lock_opening,
@@ -68,7 +69,6 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
 
         rvList.addAll(listOf(rv1, rv2, rv3, rv4, rv5))
 
-
         hintManager = HintManager(
             listOf(
                 "lvl2_puzzle0_hint",
@@ -76,16 +76,8 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "lock"),
             2, "lock"
         )
-        requireActivity().supportFragmentManager
-            .setFragmentResultListener("puzzleChoosing", viewLifecycleOwner) { _, bundle ->
-                val puzzleNum = bundle.getInt("puzzleNum")
-                when (puzzleNum) {
-                    0 -> puzzle = Lvl2PuzzleLock0(2, "lock")
-                    1 -> puzzle = Lvl2PuzzleChat(2, "chat")
-                }
-                setupWheels(images)
-            }
-
+        puzzle = Lvl2PuzzleLock(2, "lock")
+        setupWheels(images)
     }
 
     private fun bindView() {
@@ -94,7 +86,6 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
         rv3 = binding.rvImage3
         rv4 = binding.rvImage4
         rv5 = binding.rvImage5
-//
         mainScreen = binding.mainScreen
     }
 
@@ -108,9 +99,11 @@ class Lvl2PuzzleLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hin
         WheelSetupHelper.setupWheel(
             rv = rv,
             data = data,
+            layoutImage = R.layout.letter_image,
+            orientation = LinearLayoutManager.VERTICAL,
             rvIndex = rvIndex,
             solution = solution,
-            context = requireContext(),
+            activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
             rotationSoundResId = R.raw.sound_of_segments_rotating_on_the_safe_lock,

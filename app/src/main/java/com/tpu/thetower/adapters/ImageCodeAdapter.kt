@@ -6,11 +6,11 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.R
 
-class ImageCodeAdapter(private val items: Array<Int>) : RecyclerView.Adapter<ImageCodeAdapter.ImageCodeViewHolder>() {
+class ImageCodeAdapter(private val items: Array<Int>, private val layoutImage: Int) : RecyclerView.Adapter<ImageCodeAdapter.ImageCodeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageCodeViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_image, parent, false) as ImageView
+            .inflate(layoutImage, parent, false) as ImageView
         return ImageCodeViewHolder(view)
     }
 

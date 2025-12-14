@@ -1,5 +1,6 @@
 package com.tpu.thetower
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 
@@ -11,12 +12,12 @@ abstract class Puzzle(val level: Int, val puzzle: String) {
 
     private lateinit var saveManager: SaveManager
 
-    abstract fun checkSolution(context: Context, solution : String = ""): Boolean
+    abstract fun checkSolution(activity: Activity, solution : String = ""): Boolean
 
-    fun complete(context: Context) {
+    fun complete(activity: Activity) {
         isSolved = true
         saveManager = SaveManager.getInstance()
-        saveManager.savePuzzleData(context, level, puzzle, status = "completed")
+        saveManager.savePuzzleData(activity, level, puzzle, status = "completed")
         Log.i("Puzzle", "${puzzle} completed")
     }
 

@@ -62,7 +62,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.273"
-        tools:text="Въебался в стену!" />
+        tools:text="Въебался в стену!"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_win"
@@ -74,7 +75,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Победил!" />
+        tools:text="Победил!"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_coordinates"
@@ -87,7 +89,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_direction"
@@ -101,7 +104,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669" />
+        app:layout_constraintVertical_bias="0.669"
+        android:visibility="gone"/>
 
 
     <LinearLayout

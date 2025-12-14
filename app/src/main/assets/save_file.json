@@ -14,7 +14,7 @@
         {
           "id": 0,
           "name": "flashlight",
-          "status": "in_progress",
+          "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
@@ -50,7 +50,7 @@
         {
           "id": 0,
           "name": "lock",
-          "status": "in_progress",
+          "status": "locked",
           "attempts": 1,
           "timeSpent": 230,
           "hintsUsed": 0
@@ -95,7 +95,7 @@
         {
           "id": 0,
           "name": "donuts",
-          "status": "in_progress",
+          "status": "locked",
           "attempts": 1,
           "timeSpent": 230,
           "hintsUsed": 0
@@ -143,31 +143,110 @@
         {
           "id": 5,
           "name": "donuts after shaking",
-          "status": "",
+          "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
         },
         {
-        "id": 6,
-        "name": "lock model after pasted",
-        "status": "",
-        "attempts": 0,
-        "timeSpent": 0,
-        "hintsUsed": 0
+          "id": 6,
+          "name": "lock model after pasted",
+          "status": "",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        }],
+      "npcDialogs": []
+      },
+        {
+          "id": 4,
+          "name": "Library",
+          "isCompleted": false,
+          "puzzles": [
+            {
+              "id": 0,
+              "name": "chess",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 1,
+              "name": "timeline",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 2,
+              "name": "askiibtn",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 3,
+              "name": "sequence_paper",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 4,
+              "name": "book_askii",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 5,
+              "name": "book_babel",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 6,
+              "name": "book_qr",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 7,
+              "name": "book_blur",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            },
+            {
+              "id": 8,
+              "name": "book_history",
+              "status": "locked",
+              "attempts": 0,
+              "timeSpent": 0,
+              "hintsUsed": 0
+            }
+          ],
+          "npcDialogs": [
+            {
+              "id": 0,
+              "currentDialogIndex": 0
+            }
+          ]
         }
       ],
-      "npcDialogs": [
-        {
-          "id": 0,
-          "currentDialogIndex": 0
-        }
-      ]
+      "gameSettings": {
+        "soundVolume": 0.5,
+        "musicVolume": 0.5,
+        "language": "ru"
+      }
     }
-  ],
-  "gameSettings": {
-    "soundVolume": 0.5,
-    "musicVolume": 0.5,
-    "language": "ru"
-  }
-}

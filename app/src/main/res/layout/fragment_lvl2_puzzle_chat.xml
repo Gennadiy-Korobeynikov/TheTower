@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".fragments.Lvl2PuzzleChatFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl2_bg_blurred" />
+
+    <ImageView
+        android:id="@+id/iv_lock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl2_puzzle_lock" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_column1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.236" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_column2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.352" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_column3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.46" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_column4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.569" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_column5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.677" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_row1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.28"
+            app:layout_constraintStart_toStartOf="@id/guideV_column1"
+            app:layout_constraintTop_toTopOf="@id/guideH_row1"
+            app:layout_constraintWidth_percent="0.086"
+            tools:listitem="@layout/letter_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.28"
+            app:layout_constraintStart_toStartOf="@id/guideV_column2"
+            app:layout_constraintTop_toTopOf="@id/guideH_row1"
+            app:layout_constraintWidth_percent="0.076"
+            tools:listitem="@layout/letter_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.28"
+            app:layout_constraintStart_toStartOf="@id/guideV_column3"
+            app:layout_constraintTop_toTopOf="@id/guideH_row1"
+            app:layout_constraintWidth_percent="0.076"
+            tools:listitem="@layout/letter_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.28"
+            app:layout_constraintStart_toStartOf="@id/guideV_column4"
+            app:layout_constraintTop_toTopOf="@id/guideH_row1"
+            app:layout_constraintWidth_percent="0.076"
+            tools:listitem="@layout/letter_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_percent="0.28"
+            app:layout_constraintStart_toStartOf="@id/guideV_column5"
+            app:layout_constraintTop_toTopOf="@id/guideH_row1"
+            app:layout_constraintWidth_percent="0.078"
+            tools:listitem="@layout/letter_image" />
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

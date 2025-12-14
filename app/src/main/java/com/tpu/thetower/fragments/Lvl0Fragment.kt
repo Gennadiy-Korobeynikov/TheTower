@@ -10,6 +10,7 @@ import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
+import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
@@ -33,6 +34,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     private lateinit var btnToPuzzle1: Button
     private lateinit var btnToPuzzle1Lock: Button
     private lateinit var btnLightOn: ImageButton
+    private lateinit var btnLvlCompleted: Button
 
     private lateinit var ivDarkness: ImageView
     private lateinit var ivDarknessFlashlight: ImageView
@@ -40,7 +42,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     private lateinit var ivPuzzle1: ImageView
     private lateinit var ivClick: ImageView
     private lateinit var ivMain: ImageView
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,9 +57,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         saveManager = SaveManager.getInstance()
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
+        if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "locked") {
             startAwakeningAnim()
-            saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "in_progress")
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "completed") {
@@ -73,10 +73,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             ivMain.setImageResource(R.drawable.lvl0_bd_solved)
             btnToPuzzle1Lock.visibility = View.GONE
             btnToPuzzle1Lock.visibility = View.GONE
+            if (!LoadManager.getLevelStatus(requireActivity(), 0))
+                btnLvlCompleted.visibility = View.VISIBLE
         }
-
-
-
     }
 
     private fun enableButtons() {
@@ -90,6 +89,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         btnToElevator = binding.btnToElevator
         btnToPuzzle1 = binding.btnToPuzzle1
         btnToPuzzle1Lock = binding.btnToPuzzle1Lock
+        btnLvlCompleted = binding.btnLvlCompleted
         ivDarkness = binding.ivDarkness
         ivDarknessFlashlight = binding.ivDarknessFlashlight
         ivBlack = binding.ivBlack
@@ -97,6 +97,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         btnLightOn = binding.btnLightOn
         ivClick = binding.ivClick
         ivMain = binding.ivMain
+
     }
 
     private fun setListeners() {
@@ -116,17 +117,23 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             ivPuzzle1.visibility = View.VISIBLE
             DialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
             ivClick.visibility = View.VISIBLE
+            soundManager.playSound(R.raw.sound_of_drawer_opening)
+        }
+
+        btnLvlCompleted.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl0Fragment_to_lvl0CompletedFragment)
         }
 
         ivClick.setOnClickListener {
             ivPuzzle1.visibility = View.GONE
             ivClick.visibility = View.GONE
+            soundManager.playSound(R.raw.sound_of_drawer_closing)
         }
 
         ivDarkness.setOnClickListener {
             DialogManager.startDialog(requireActivity(), "lvl0_dark")
-            // Тестирование !!!
-            flashlightManager.toggleFlashlight(true)
+//            // Тестирование !!!
+//            flashlightManager.toggleFlashlight(true)
         }
 
         btnLightOn.setOnClickListener {
@@ -137,18 +144,21 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             flashlightManager.stopMonitoring()
             saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "completed")
             enableButtons()
+            soundManager.playSound(R.raw.sound_of_light_switch)
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
             requireActivity().runOnUiThread {
-                if (isFlashlightOn && LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
+                if (isFlashlightOn && LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "locked") {
                     soundManager.playSound(R.raw.sound_of_a_flashlight)
                     DialogManager.startDialog(requireActivity(),"lvl0_flashlight_on")
+                    saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "in_progress")
                     ivDarkness.visibility = View.GONE
                 } else {
                     if (LoadManager.getPuzzleStatus(requireActivity(), 0, "flashlight") == "in_progress") {
                         soundManager.playSound(R.raw.sound_of_a_flashlight)
                         ivDarkness.visibility = View.VISIBLE
+                        saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "locked")
                     }
                 }
             }
@@ -176,7 +186,10 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         soundManager.loadSound(
             requireContext(), listOf(
                 R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening
+                R.raw.sound_of_an_elevator_door_opening,
+                R.raw.sound_of_drawer_opening,
+                R.raw.sound_of_drawer_closing,
+                R.raw.sound_of_light_switch
             )
         )
     }
@@ -184,7 +197,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
     override fun onDestroy() {
         super.onDestroy()
+        flashlightManager.toggleFlashlight(false) // Выкл фонарик
         flashlightManager.stopMonitoring()
+        saveManager.savePuzzleData(requireContext(), 0, "flashlight", status = "locked")
     }
 
     override fun onResume() {

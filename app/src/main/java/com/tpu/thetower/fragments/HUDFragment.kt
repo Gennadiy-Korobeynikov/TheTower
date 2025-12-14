@@ -18,21 +18,30 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
     private lateinit var binding: FragmentHudBinding
 
+    private lateinit var ivHint: ImageView
+    private lateinit var ivAccessCard: ImageView
+
+    private lateinit var btnMenu: Button
+    private lateinit var btnHint: Button
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentHudBinding.bind(view)
-        val btnMenu: Button = binding.btnMenu
-        val btnHint: Button = binding.btnHint
-        val ivAccessCard: ImageView = binding.ivAccessCard
-        val tvTestHint: TextView = binding.tvTestHintRecovery
-        val ivDraggable: ImageView = binding.ivDraggable
 
-        val btnTestUpgrAccessLvl = binding.btnTestUpgrAccessLvl
-        btnTestUpgrAccessLvl.setOnClickListener {
-            LevelAccessManager.upgradeAccessLvl(this)
-        }
+        bindView()
+        setListeners()
+//        val tvTestHint: TextView = binding.tvTestHintRecovery
+//        val ivDraggable: ImageView = binding.ivDraggable
+//
+//        val btnTestUpgrAccessLvl = binding.btnTestUpgrAccessLvl
+//        btnTestUpgrAccessLvl.setOnClickListener {
+//            LevelAccessManager.upgradeAccessLvl(this)
+//        }
 
+    }
+
+    private fun setListeners() {
         btnMenu.setOnClickListener {
             FragmentManager.showMenu(requireActivity())
             FragmentManager.updateProgressBar(this)
@@ -48,17 +57,17 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
                 }
             }
 
-        requireActivity().supportFragmentManager
-            .setFragmentResultListener("drag&drop", viewLifecycleOwner) { _, bundle ->
-                val dragAndDropImg = bundle.getInt("dragAndDropImg")
-                when (dragAndDropImg) {
-                    0 -> ivDraggable.visibility = View.GONE
-                    R.drawable.ic_triangle_drag1 -> {
-                        ivDraggable.setImageResource(dragAndDropImg)
-                        ivDraggable.visibility = View.VISIBLE
-                    }
-                }
-            }
+//        requireActivity().supportFragmentManager
+//            .setFragmentResultListener("drag&drop", viewLifecycleOwner) { _, bundle ->
+//                val dragAndDropImg = bundle.getInt("dragAndDropImg")
+//                when (dragAndDropImg) {
+//                    0 -> ivDraggable.visibility = View.GONE
+//                    R.drawable.lvl3_puzzle_sleeping_pills -> {
+//                        ivDraggable.setImageResource(dragAndDropImg)
+//                        ivDraggable.visibility = View.VISIBLE
+//                    }
+//                }
+//            }
 
 
         btnHint.setOnClickListener {
@@ -74,11 +83,23 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
         requireActivity().supportFragmentManager
             .setFragmentResultListener("hintImgUpdating", viewLifecycleOwner) { _, bundle ->
-                val step = bundle.getString("step")
-                tvTestHint.text = step
+                val step = bundle.getInt("step")
+                when (step) {
+                    5 -> ivHint.setImageResource(R.drawable.hint0)
+                    4 -> ivHint.setImageResource(R.drawable.hint1)
+                    3 -> ivHint.setImageResource(R.drawable.hint2)
+                    2 -> ivHint.setImageResource(R.drawable.hint3)
+                    1, 0 -> ivHint.setImageResource(R.drawable.hint4_full)
+                }
             }
 
+    }
 
+    private fun bindView() {
+        ivHint = binding.ivHint
+        ivAccessCard = binding.ivAccessCard
+        btnHint = binding.btnHint
+        btnMenu = binding.btnMenu
     }
 
 }

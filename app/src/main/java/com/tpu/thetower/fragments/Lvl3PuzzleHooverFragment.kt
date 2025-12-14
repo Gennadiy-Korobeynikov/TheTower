@@ -11,9 +11,11 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
+import com.tpu.thetower.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
@@ -35,25 +37,20 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private lateinit var ivBg : ImageView
     private lateinit var ivHoover : ImageView
 
-
     private lateinit var btnRight: ImageButton
     private lateinit var btnLeft: ImageButton
-
     private lateinit var btnForward: ImageButton
 
     private lateinit var mainLayout: ConstraintLayout
 
-
     private val puzzleHoover = Lvl3PuzzleHoover(3, "vacuum cleaner")
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
+    private lateinit var musicManager: MusicManager
+
     private var restart : Boolean = false
     private var onStartPosition : Boolean = true
     private var win : Boolean = false
-
-
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,6 +59,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         bindView()
         setListeners()
         test()
+        handleSounds()
 
 //        soundManager = SoundManager.getInstance()
 //        soundManager.loadSound(requireContext(), listOf(
@@ -87,13 +85,11 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         tvDirection = binding.tvDirection
         tvRestart = binding.tvRestart
         tvWin = binding.tvWin
-
         btnRight = binding.btnRight
         btnLeft = binding.btnLeft
         btnForward = binding.btnForward
         ivBg = binding.ivMonitorImage
         ivHoover = binding.ivHoover
-
         mainLayout = binding.mainScreen
     }
 
@@ -108,31 +104,34 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         }.start()
     }
 
-    private  fun setListeners() {
+    private fun setListeners() {
         btnLeft.setOnClickListener {
-           rotateHooverAnim(false)
+            rotateHooverAnim(false)
+            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_left)
         }
         btnRight.setOnClickListener {
             rotateHooverAnim(true)
+            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
         }
 
-
         btnForward.setOnClickListener {
-
             tvRestart.text = ""
             tvWin.text = ""
             changeButtonsState(false)
             if (onStartPosition) { //В начале
+                soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
                 moveHooverAnim(puzzleHoover.currDirection)
             }
-            else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currDirection == Direction.Down )
+            else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currPositionX == 6 && puzzleHoover.currDirection == Direction.Down )
             { // Вернулись назад (небольшой костыль, ни на что не влияет, просто тут уже дело времени, которого мало
+                soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
                 moveHooverToCenter(back = true)
             }
             else { // Двигаемся внутри вентиляции
                 btnForward.postDelayed({
                     restart = !puzzleHoover.moveForward()
-                    win = puzzleHoover.checkSolution(requireContext())
+                    if (!restart) soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
+                    win = puzzleHoover.checkSolution(requireActivity())
                     test()
                     changeButtonsState(true)
                 }, 1000)
@@ -254,15 +253,18 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
 // Временно для тестирования
     private fun test() {
         if (restart) {
-            tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
+            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_bumping)
+            //tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
             ivHoover.animate().rotation(0f).setDuration(300).start()
             moveHooverToCenter()
             restart = false
         }
 
         if (win) {
-            tvWin.text = "Победил!"
-            win = false
+            FragmentManager.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
+            FragmentManager.changeBG(this, R.id.lvl3Fragment)
+            // Проигать звук врещания , Поменять фото и открыть кнопку поднятия ключа (пылесос приехал)
+            //win = false
         }
 
         tvDirection.text =
@@ -280,5 +282,17 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         hintManager.useHint(requireActivity())
     }
 
-
+    private fun handleSounds() {
+        musicManager = MusicManager.getInstance()
+        soundManager = SoundManager.getInstance()
+        soundManager.init()
+        soundManager.loadSound(
+            requireContext(), listOf(
+                R.raw.sound_of_vacuum_cleaner_bumping,
+                R.raw.sound_of_vacuum_cleaner_driving_right,
+                R.raw.sound_of_vacuum_cleaner_driving_left,
+                R.raw.sound_of_vacuum_cleaner_driving_straight
+                )
+        )
+    }
 }
