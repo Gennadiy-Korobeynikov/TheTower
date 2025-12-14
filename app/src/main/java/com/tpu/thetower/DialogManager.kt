@@ -175,6 +175,28 @@ class DialogManager {
                         )
                         {},
 
+                "lvl0_access_card" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl0_access_card)
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {},
+
+                "lvl0_access_card_got" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl0_access_card_got)
+                            ),
+                            listOfNotNull(
+                                characters["John"],
+                            )
+                        )
+                        {},
+
                 "lvl1_npc_receptionist" to
                         Dialog(
                             listOf(
@@ -190,7 +212,6 @@ class DialogManager {
                                 getString(activity , R.string.lvl1_npc_receptionist10),
                                 getString(activity , R.string.lvl1_npc_receptionist11),
                                 getString(activity , R.string.lvl1_npc_receptionist12),
-
                             ),
                             listOfNotNull(
                                 characters["receptionist"],
@@ -315,7 +336,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle1_hint5),
                             ),
                             listOfNotNull(
-                                characters["John_thinking"],
+                                characters["john_thinking"],
                             )
                         )
                         {} ,
@@ -1119,6 +1140,17 @@ class DialogManager {
                         )
                         {},
 
+                "lvl5_moose_paper" to
+                        Dialog(
+                            listOf(
+                                getString(activity, R.string.lvl5_moose_paper),
+                            ),
+                            listOfNotNull(
+                                characters["John_thinking"]
+                            )
+                        )
+                        {},
+
 
 
                 "lvl5_bluetoothOff_hint1" to
@@ -1394,7 +1426,7 @@ class DialogManager {
                 "John_thinking" to Character("Джон", R.drawable.john_thinking),
                 "John_default" to Character("Джон", R.drawable.john_default),
                 "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist),
-                "security" to Character("Охранник", R.drawable.npc_avatar_receptionist)
+                "security" to Character("Охранник", R.drawable.npc_avatar_security)
             )
         }
 

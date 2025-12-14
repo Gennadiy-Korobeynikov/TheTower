@@ -108,7 +108,7 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
                 if (speed > shakeThreshold) {
                     soundManager.playSound(R.raw.sound_of_donuts_shaking)
                     lastShake = currentTime
-                    Completed()
+                    completed()
                 }
 
                 lastX = x
@@ -118,7 +118,7 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
         }
     }
 
-    private fun Completed() {
+    private fun completed() {
         hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts after shaking"),
             3,"donuts after shaking")

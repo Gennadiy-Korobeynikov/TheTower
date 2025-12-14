@@ -8,16 +8,16 @@ class LevelAccessManager {
     companion object {
         private val saveManager = SaveManager.getInstance()
         private val cardImageIds: List<Int> = listOf(
-            R.drawable.card, // Костыль, не трогать
-            R.drawable.card,
-            R.drawable.test_card1,
-            R.drawable.test_card2,
-            R.drawable.test_card3,
-            R.drawable.test_card4,
+            R.drawable.access_card_2, // Костыль, не трогать
+            R.drawable.access_card_2,
+            R.drawable.access_card_3,
+            R.drawable.access_card_4,
+            R.drawable.access_card_5,
+            R.drawable.access_card_6
         )
 
         var currentAccessLvl = 0
-        val topUnlockedLvlsForModules: List<Int> = listOf(0, 2, 3, 5)
+        val topUnlockedLvlsForModules: List<Int> = listOf(0, 2, 3, 4, 5, 6)
 
         fun getCardImage(): Int {
              return cardImageIds[currentAccessLvl]

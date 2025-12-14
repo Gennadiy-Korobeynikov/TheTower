@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -61,11 +60,6 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         test()
         handleSounds()
 
-//        soundManager = SoundManager.getInstance()
-//        soundManager.loadSound(requireContext(), listOf(
-//            R.raw.sound_of_the_lock_opening,
-//            R.raw.sound_of_segments_rotating_on_the_safe_lock
-//        ))
 
         hintManager = HintManager(
             listOf(
@@ -261,9 +255,9 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         }
 
         if (win) {
+            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
             FragmentManager.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
             FragmentManager.changeBG(this, R.id.lvl3Fragment)
-            // Проигать звук врещания , Поменять фото и открыть кнопку поднятия ключа (пылесос приехал)
             //win = false
         }
 

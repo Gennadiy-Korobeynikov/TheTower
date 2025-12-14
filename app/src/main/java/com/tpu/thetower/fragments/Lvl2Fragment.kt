@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
-import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.LevelAccessManager
 import com.tpu.thetower.LoadManager
@@ -33,8 +32,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
     private lateinit var btnToPuzzle2Lock: Button
     private lateinit var btnToPuzzle2Completed: Button
 
-    private lateinit var ivBgBlurred: ImageView
-    private lateinit var ivCard: ImageView
+    private lateinit var ivAccessCard: ImageView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,8 +70,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         btnToPuzzle1 = binding.btnToPuzzle1
         btnToPuzzle2Lock = binding.btnToPuzzle2Lock
         btnToPuzzle2Completed = binding.btnToPuzzle2Completed
-        ivBgBlurred = binding.ivBgBlurred
-        ivCard = binding.ivCard
+        ivAccessCard = binding.ivAccessCard
     }
 
     private fun setListeners() {
@@ -100,20 +97,19 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         btnToPuzzle2Completed.setOnClickListener {
             FragmentManager.hideGoBackArrow(requireActivity())
-            ivBgBlurred.visibility = View.VISIBLE
-            ivCard.visibility = View.VISIBLE
-            saveManager.saveLevelStatus(requireContext(), 2)
+            ivAccessCard.visibility = View.VISIBLE
             soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
-        ivBgBlurred.setOnClickListener {
-            ivBgBlurred.visibility = View.GONE
-            ivCard.visibility = View.GONE
+        ivAccessCard.setOnClickListener {
+            ivAccessCard.visibility = View.GONE
+            saveManager.saveLevelStatus(requireContext(), 2)
             btnToPuzzle2Completed.visibility = View.GONE
             FragmentManager.showGoBackArrow(requireActivity())
             LevelAccessManager.upgradeAccessLvl(this)
             soundManager.playSound(R.raw.sound_of_drawer_closing)
         }
+
     }
 
     private fun handleSounds() {
@@ -136,10 +132,9 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
     }
 
     override fun useHint() {
-        if (LoadManager.isLevelCompleted(requireActivity(),2)) {
+        if (LoadManager.isLevelCompleted(requireActivity(), 2)) {
             DialogManager.startDialog(requireActivity(), "no_hints")
-        }
-        else
+        } else
             DialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 

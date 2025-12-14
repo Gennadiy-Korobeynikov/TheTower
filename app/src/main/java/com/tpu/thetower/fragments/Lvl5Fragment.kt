@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.LoadManager
 
@@ -30,14 +31,15 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    //private lateinit var saveManager: SaveManager
+    private lateinit var saveManager: SaveManager
 
-    private lateinit var ivTest: ImageView
+    private lateinit var btnFishRack: Button
+    private lateinit var btnMoose: Button
+    private lateinit var btnFish: Button
+    private lateinit var btnMap: Button
+    private lateinit var btnMoosePaper: Button
 
-
-    private lateinit var bluetoothReceiver : BroadcastReceiver
-
-
+    private lateinit var ivBg: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,27 +47,45 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         bindView()
         setListeners()
         handleSounds()
-       // saveManager = SaveManager.getInstance()
+        saveManager = SaveManager.getInstance()
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 5, "bluetooth") == "completed") {
+            btnMoose.visibility = View.VISIBLE
+        }
+
+        if (LoadManager.getPuzzleStatus(requireActivity(), 5, "moose") == "completed") {
+            btnFishRack.visibility = View.VISIBLE
+            btnMoose.visibility = View.GONE
+            ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
+            btnMoosePaper.visibility = View.VISIBLE
+        }
     }
 
     private fun bindView() {
-        ivTest = binding.ivBluetooth
-
-
+        btnFishRack = binding.btnFishRack
+        btnMoose = binding.btnMoose
+        btnFish = binding.btnFish
+        btnMap = binding.btnMap
+        ivBg = binding.ivBg
     }
 
     private fun setListeners() {
 
-        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        bluetoothReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val state = intent?.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
-                if (state == BluetoothAdapter.STATE_ON || state == BluetoothAdapter.STATE_OFF) {
-                    ivTest.isVisible = !ivTest.isVisible
-                }
-            }
+        btnFishRack.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5FishRackFragment)
         }
-        requireContext().registerReceiver(bluetoothReceiver, filter)
+
+        btnMoose.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleMooseFragment)
+        }
+
+        btnFish.setOnClickListener {
+            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment)
+        }
+
+        btnMoosePaper.setOnClickListener {
+            DialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
+        }
     }
 
 
@@ -85,11 +105,11 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
     }
 
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//        saveManager = SaveManager.getInstance()
-//        saveManager.saveCurrentLevel(requireContext(), 4)
-//    }
+    override fun onResume() {
+        super.onResume()
+
+        saveManager = SaveManager.getInstance()
+        saveManager.saveCurrentLevel(requireContext(), 5)
+    }
 
 }

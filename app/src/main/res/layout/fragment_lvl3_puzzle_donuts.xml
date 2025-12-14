@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl3_puzzle0_0" />
+        android:src="@drawable/lvl3_donuts_1" />
 
     <ImageView
         android:id="@+id/iv_1"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl3_puzzle0_1"
+        android:src="@drawable/lvl3_donuts_2"
         android:visibility="gone" />
 
 

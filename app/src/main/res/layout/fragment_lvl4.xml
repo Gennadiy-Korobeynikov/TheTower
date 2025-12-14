@@ -1,85 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     tools:context=".fragments.Lvl4Fragment">
 
     <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/lvl4_test" />
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lvl4_bg_first" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_book_babel"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="0dp"
-        android:background="@drawable/button_outline" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_book_askii"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-100dp"
-        android:background="@drawable/button_outline" />
+        <!-- Puzzle chess -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_chessboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.22" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_book_qr"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-200dp"
-        android:background="@drawable/button_outline" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_chessboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_book_blur"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-50dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/button_outline" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_chessboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="@id/guideV_chessboard"
+            app:layout_constraintTop_toTopOf="@id/guideH_chessboard"
+            app:layout_constraintWidth_percent="0.39" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_book_history"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-150dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/button_outline" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_chess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.015" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_book_help"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-100dp"
-        android:layout_marginTop="-100dp"
-        android:background="@drawable/button_outline" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_chess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_chessboard_puzzle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="280dp"
-        android:text="ChessBoard"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_chess"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintHeight_percent="0.21"
+            app:layout_constraintStart_toStartOf="@id/guideV_chess"
+            app:layout_constraintTop_toTopOf="@id/guideH_chess"
+            app:layout_constraintWidth_percent="0.125" />
+
+        <!-- Puzzle timeline -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_timeline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_timeline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.058" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_timeline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.24"
+            app:layout_constraintStart_toStartOf="@id/guideV_timeline"
+            app:layout_constraintTop_toTopOf="@id/guideH_timeline"
+            app:layout_constraintWidth_percent="0.42" />
+
+        <!-- Raven -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_raven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.69" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_raven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.09" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_raven"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.53"
+            app:layout_constraintStart_toStartOf="@id/guideV_raven"
+            app:layout_constraintTop_toTopOf="@id/guideH_raven"
+            app:layout_constraintWidth_percent="0.235" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_bookcase"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="@id/guideV_chessboard"
+            app:layout_constraintTop_toTopOf="@id/guideH_timeline"
+            app:layout_constraintWidth_percent="0.15" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sequence_paper"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.13"
+            app:layout_constraintStart_toStartOf="@id/guideV_chess"
+            app:layout_constraintTop_toTopOf="@id/guideH_chess"
+            app:layout_constraintWidth_percent="0.1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_to_puzzle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="200dp"
-        android:layout_marginBottom="170dp"
-        android:text="timeline + Ацкий Код"/>
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_book_babel"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="0dp"-->
+    <!--        android:background="@drawable/button_outline" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_book_askii"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="-100dp"-->
+    <!--        android:background="@drawable/button_outline" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_book_qr"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="-200dp"-->
+    <!--        android:background="@drawable/button_outline" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_book_blur"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="-50dp"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        android:background="@drawable/button_outline" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_book_history"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="-150dp"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        android:background="@drawable/button_outline" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_book_help"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="-100dp"-->
+    <!--        android:layout_marginTop="-100dp"-->
+    <!--        android:background="@drawable/button_outline" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_chessboard_puzzle"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="280dp"-->
+    <!--        android:text="ChessBoard" />-->
 
 
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/btn_to_puzzle1"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginStart="200dp"-->
+    <!--        android:layout_marginBottom="170dp"-->
+    <!--        android:text="timeline + Ацкий Код" />-->
 
 
 </FrameLayout>

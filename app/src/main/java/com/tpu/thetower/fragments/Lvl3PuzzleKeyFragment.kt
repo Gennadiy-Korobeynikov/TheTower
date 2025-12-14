@@ -1,5 +1,6 @@
 package com.tpu.thetower.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,16 +8,13 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.FragmentManager
 import com.tpu.thetower.HintManager
 import com.tpu.thetower.Hintable
@@ -26,7 +24,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
-import kotlin.math.roundToInt
 
 data class KeyPin(
     val initialPosition: Float,
@@ -35,58 +32,114 @@ data class KeyPin(
     val maxPosition: Float
 )
 
-
 class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hintable {
 
     private lateinit var binding: FragmentLvl3PuzzleKeyBinding
 
     private lateinit var keyView: KeyView
-    private lateinit var tvKeyPosition: TextView
-    private lateinit var main: ConstraintLayout
-    private lateinit var ivLock: ImageView
+    private lateinit var btnLockToCopy: Button
     private lateinit var btnCopy: Button
+    private lateinit var btnApply: Button
+
+    private lateinit var ivBg: ImageView
 
     private lateinit var hintManager: HintManager
     private lateinit var saveManager: SaveManager
 
     private lateinit var puzzle: Puzzle
-    private var solution = listOf<Int>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_lvl3_puzzle_key, container, false)
-    }
+    var longPressRunnable: Runnable? = null
+    var isLongPressHandled = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl3PuzzleKeyBinding.bind(view)
 
-        keyView = binding.keyView
-        tvKeyPosition = binding.tvKeyPosition
-        main = binding.main
-        ivLock = binding.ivLock
-        btnCopy = binding.btnCopy
+        bindView()
+        setListeners()
 
         saveManager = SaveManager.getInstance()
-
-        if (LoadManager.getPuzzleStatus(requireActivity(), 3, "vacuum cleaner") == "completed") {
-            ivLock.layoutParams = RelativeLayout.LayoutParams(
-                200,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            )
-            keyView.visibility = View.VISIBLE
-        }
         puzzle = Lvl3PuzzleKey(3, "key")
 
-        keyView.setOnKeyPinsChangedListener { pins ->
-            val positionsText = pins.joinToString(", ") { "${it.currentPosition.roundToInt()}" }
-            solution = pins.map {it.currentPosition.toInt()}
-            tvKeyPosition.text = positionsText
-            if (puzzle.checkSolution(requireActivity(), solution.joinToString(""))) {
-                main.animate()
+        FragmentManager.showGoBackArrow(requireActivity())
+
+
+        if (LoadManager.isPuzzleCompleted(requireActivity(), 3, "lock model")) { // Замок вставлен в комп
+            hintManager = HintManager(
+                listOf("lvl3_puzzle4_hint3"),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
+                3, "key"
+            )
+
+        }
+        else
+            hintManager = HintManager(
+                listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
+                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
+                3, "key"
+            )
+    }
+
+    private fun bindView() {
+        btnLockToCopy = binding.btnLockToCopy
+        btnCopy = binding.btnCopy
+        btnApply = binding.btnApply
+        ivBg = binding.ivBg
+        keyView = binding.keyView
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setListeners() {
+
+        btnCopy.setOnClickListener {
+            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+        }
+
+        btnCopy.setOnClickListener {
+            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+            btnCopy.visibility = View.GONE
+            ivBg.setImageResource(R.drawable.lvl3_lock)
+
+            val snackBar = Snackbar.make(
+                ivBg,
+                getString(R.string.lvl3_copy),
+                Toast.LENGTH_SHORT
+            )
+            snackBar.show()
+        }
+
+        btnLockToCopy.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    isLongPressHandled = false
+                    longPressRunnable = Runnable {
+                        ivBg.setImageResource(R.drawable.lvl3_lock_copy)
+                        btnLockToCopy.visibility = View.GONE
+                        btnCopy.visibility = View.VISIBLE
+                        isLongPressHandled = true
+                    }
+                    view.postDelayed(longPressRunnable, 1000)
+                    true
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    longPressRunnable?.let { view.removeCallbacks(it) }
+                    true
+                }
+
+                MotionEvent.ACTION_CANCEL -> {
+                    longPressRunnable?.let { view.removeCallbacks(it) }
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        btnApply.setOnClickListener {
+            val pinsPositions = keyView.getPinsPositions()
+            if (puzzle.checkSolution(requireActivity(), pinsPositions.joinToString(""))) {
+                ivBg.animate()
                     .alpha(0.2f)
                     .setDuration(2500)
                     .withEndAction {
@@ -96,30 +149,17 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             }
         }
 
-        btnCopy.setOnClickListener {
-            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
-
-        }
-
-        if (LoadManager.isPuzzleCompleted(requireActivity(), 3, "lock model")) // Замок вставлен в комп
-            hintManager = HintManager(
-                listOf("lvl3_puzzle4_hint3"),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
-                3, "key"
-            )
-        else
-            hintManager = HintManager(
-                listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
-                3, "key"
-            )
     }
+
 
     override fun useHint() {
         hintManager.useHint(requireActivity())
     }
-}
 
+
+
+
+}
 // Пользовательский View для отображения и взаимодействия с ключом
 class KeyView @JvmOverloads constructor(
     context: Context,
@@ -127,44 +167,36 @@ class KeyView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private val keyBasePaint = Paint().apply {
-        color = Color.parseColor("#808080") // Серый цвет
-        style = Paint.Style.FILL
-    }
-
     private val pinPaint = Paint().apply {
-        color = Color.parseColor("#404040") // Темно-серый цвет
+        color = Color.parseColor("#996b2f") // Темно-серый цвет
         style = Paint.Style.FILL
-    }
-
-    private val activePinPaint = Paint().apply {
-        color = Color.RED
-        style = Paint.Style.STROKE
-        strokeWidth = 4f
     }
 
     private val borderPinPaint = Paint().apply {
-        color = Color.parseColor("#808080")
+        color = Color.parseColor("#000000")
         style = Paint.Style.STROKE
         strokeWidth = 2f
     }
 
-    private var keyBaseWidth = 40f
-    private var keyBaseHeight = 120f
-    private var keyPinWidth = 20f
+    private var keyBaseWidth = 0f
+    private var keyBaseHeight = 0f
+    private var keyPinHeight = 20f
 
     private val positionStep = 50f
 
     private val pins = mutableListOf(
-        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
-        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
-        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 550f),
-        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f),
-        KeyPin(initialPosition = 0f, currentPosition = 50f, minPosition = 50f, maxPosition = 500f)
+        KeyPin(initialPosition = 50f, currentPosition = 50f, minPosition = 50f, maxPosition = 150f),
+        KeyPin(initialPosition = 50f, currentPosition = 50f, minPosition = 50f, maxPosition = 150f),
+        KeyPin(initialPosition = 50f, currentPosition = 50f, minPosition = 50f, maxPosition = 150f),
+        KeyPin(initialPosition = 50f, currentPosition = 50f, minPosition = 50f, maxPosition = 150f),
+        KeyPin(initialPosition = 50f, currentPosition = 50f, minPosition = 50f, maxPosition = 150f)
     )
 
+    // Возможные позиции для зубчиков
+    private val validPositions = listOf(50f, 100f, 150f)
+
     private var activePin: Int? = null
-    private var lastTouchX = 0f
+    private var lastTouchY = 0f
     private var accumulatedDelta = 0f
 
     private var onKeyPinsChangedListener: ((List<KeyPin>) -> Unit)? = null
@@ -174,70 +206,45 @@ class KeyView @JvmOverloads constructor(
         listener(pins)
     }
 
+    fun getPinsPositions(): List<Int> {
+        return pins.map { it.currentPosition.toInt() }
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
-        keyBaseWidth = w * 0.15f
-        keyBaseHeight = h * 0.7f
-        keyPinWidth = w * 0.1f
+        keyBaseWidth = w * 1f
+        keyBaseHeight = h * 0f
+        keyPinHeight = h * 0.1f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         val keyBaseX = width / 2 - keyBaseWidth / 2
-        val keyBaseY = height / 2 - keyBaseHeight / 2
-
-        canvas.drawRect(
-            keyBaseX,
-            keyBaseY,
-            keyBaseX + keyBaseWidth,
-            keyBaseY + keyBaseHeight,
-            keyBasePaint
-        )
+        val keyBaseY = 0f
 
         pins.forEachIndexed { index, pin ->
-            val pinY = keyBaseY + index * (keyBaseHeight / pins.size)
-            val pinHeight = keyBaseHeight / pins.size
-            val pinXStart = keyBaseX + keyBaseWidth
+            val pinX = keyBaseX + index * (keyBaseWidth / pins.size)
+            val pinWidth = keyBaseWidth / pins.size
+            val pinYStart = keyBaseY + keyBaseHeight
 
             canvas.drawRect(
-                pinXStart,
-                pinY,
-                pinXStart + pin.currentPosition,
-                pinY + pinHeight,
+                pinX,
+                pinYStart,
+                pinX + pinWidth,
+                pinYStart + pin.currentPosition,
                 pinPaint
             )
 
-            val numberOfSteps = (pin.currentPosition / positionStep).toInt()
-            for (i in 1..numberOfSteps) {
-                val lineX = pinXStart + i * positionStep
-                canvas.drawLine(
-                    lineX,
-                    pinY,
-                    lineX,
-                    pinY + pinHeight,
-                    borderPinPaint
-                )
-            }
-
+            // Граница зубца
             canvas.drawRect(
-                pinXStart,
-                pinY,
-                pinXStart + pin.currentPosition,
-                pinY + pinHeight,
+                pinX,
+                pinYStart,
+                pinX + pinWidth,
+                pinYStart + pin.currentPosition,
                 borderPinPaint
             )
-
-            if (activePin == index) {
-                canvas.drawRect(
-                    pinXStart,
-                    pinY,
-                    pinXStart + pin.currentPosition,
-                    pinY + pinHeight,
-                    activePinPaint
-                )
-            }
         }
     }
 
@@ -248,26 +255,26 @@ class KeyView @JvmOverloads constructor(
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 val keyBaseX = width / 2 - keyBaseWidth / 2
-                val keyBaseY = height / 2 - keyBaseHeight / 2
+                val keyBaseY = 0f
 
                 activePin = null
                 accumulatedDelta = 0f
 
                 pins.forEachIndexed { index, _ ->
-                    val pinX = keyBaseX + keyBaseWidth
-                    val pinY = keyBaseY + index * (keyBaseHeight / pins.size)
-                    val pinHeight = keyBaseHeight / pins.size
+                    val pinX = keyBaseX + index * (keyBaseWidth / pins.size)
+                    val pinWidth = keyBaseWidth / pins.size
+                    val pinY = keyBaseY + keyBaseHeight
 
                     val pinRect = RectF(
                         pinX,
                         pinY,
-                        pinX + keyPinWidth * 3,
-                        pinY + pinHeight
+                        pinX + pinWidth,
+                        pinY + pins[index].maxPosition
                     )
 
                     if (pinRect.contains(x, y)) {
                         activePin = index
-                        lastTouchX = x
+                        lastTouchY = y
                         invalidate()
                         return true
                     }
@@ -277,31 +284,30 @@ class KeyView @JvmOverloads constructor(
 
             MotionEvent.ACTION_MOVE -> {
                 activePin?.let { index ->
-                    val deltaX = x - lastTouchX
-                    lastTouchX = x
+                    val deltaY = y - lastTouchY
+                    lastTouchY = y
 
-                    accumulatedDelta += deltaX * 0.5f
+                    accumulatedDelta += deltaY
 
                     if (Math.abs(accumulatedDelta) >= positionStep) {
-                        val steps = (accumulatedDelta / positionStep).toInt()
-                        val stepDelta = steps * positionStep
-
                         val pin = pins[index]
-                        val newPosition = pin.currentPosition + stepDelta
+                        val currentPosIndex = validPositions.indexOf(pin.currentPosition)
 
-                        val roundedPosition =
-                            (newPosition / positionStep).roundToInt() * positionStep
+                        val newIndex = if (accumulatedDelta > 0) {
+                            // Движение вниз - увеличиваем индекс
+                            (currentPosIndex + 1).coerceAtMost(validPositions.size - 1)
+                        } else {
+                            // Движение вверх - уменьшаем индекс
+                            (currentPosIndex - 1).coerceAtLeast(0)
+                        }
 
-                        pins[index] = pin.copy(
-                            currentPosition = roundedPosition.coerceIn(
-                                pin.minPosition,
-                                pin.maxPosition
-                            )
-                        )
+                        if (newIndex != currentPosIndex) {
+                            pins[index] = pin.copy(currentPosition = validPositions[newIndex])
+                            onKeyPinsChangedListener?.invoke(pins)
+                            invalidate()
+                        }
 
-                        accumulatedDelta -= stepDelta
-                        onKeyPinsChangedListener?.invoke(pins)
-                        invalidate()
+                        accumulatedDelta = 0f
                     }
                     return true
                 }
@@ -309,19 +315,21 @@ class KeyView @JvmOverloads constructor(
 
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 if (activePin != null) {
-                    if (Math.abs(accumulatedDelta) > 0) {
-                        activePin?.let { index ->
-                            val pin = pins[index]
-                            if (Math.abs(accumulatedDelta) >= positionStep / 2) {
-                                val direction = if (accumulatedDelta > 0) 1 else -1
-                                val newPosition = pin.currentPosition + direction * positionStep
+                    activePin?.let { index ->
+                        val pin = pins[index]
+                        val currentPosIndex = validPositions.indexOf(pin.currentPosition)
 
-                                pins[index] = pin.copy(
-                                    currentPosition = newPosition.coerceIn(
-                                        pin.minPosition,
-                                        pin.maxPosition
-                                    )
-                                )
+                        if (Math.abs(accumulatedDelta) >= positionStep / 2) {
+                            val newIndex = if (accumulatedDelta > 0) {
+                                // Движение вниз - увеличиваем индекс
+                                (currentPosIndex + 1).coerceAtMost(validPositions.size - 1)
+                            } else {
+                                // Движение вверх - уменьшаем индекс
+                                (currentPosIndex - 1).coerceAtLeast(0)
+                            }
+
+                            if (newIndex != currentPosIndex) {
+                                pins[index] = pin.copy(currentPosition = validPositions[newIndex])
                                 onKeyPinsChangedListener?.invoke(pins)
                                 invalidate()
                             }
@@ -337,14 +345,4 @@ class KeyView @JvmOverloads constructor(
         }
         return super.onTouchEvent(event)
     }
-
-    fun resetPins() {
-        for (i in pins.indices) {
-            pins[i] = pins[i].copy(currentPosition = pins[i].initialPosition)
-        }
-        onKeyPinsChangedListener?.invoke(pins)
-        invalidate()
-    }
-
-
 }
