@@ -2,12 +2,9 @@ package com.tpu.thetower.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.FragmentManager
@@ -16,7 +13,6 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
-import com.tpu.thetower.databinding.FragmentLvl3Binding
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleEditorBinding
 
 
@@ -57,7 +53,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
             3, "lock model")
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "completed") {
-           Paste()
+           paste()
         }
         FragmentManager.showGoBackArrow(requireActivity())
     }
@@ -73,7 +69,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
 
         btnPaste.setOnClickListener {
             if (LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "in_progress") {
-                Paste()
+                paste()
                 saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "completed")
                 hintManager = HintManager(
                     listOf("lvl3_puzzle3_hint6",),
@@ -98,7 +94,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
         }
     }
 
-    private fun Paste() {
+    private fun paste() {
         ivBg.setImageResource(R.drawable.lvl3_model_front)
         btnPaste.visibility = View.GONE
         btnFirstLayer.visibility = View.VISIBLE

@@ -9,8 +9,6 @@ import android.view.View.DragShadowBuilder
 import android.widget.Button
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.DialogManager
 import com.tpu.thetower.FragmentManager
