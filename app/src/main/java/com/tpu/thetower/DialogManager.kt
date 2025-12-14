@@ -336,7 +336,7 @@ class DialogManager {
                                 getString(activity , R.string.lvl2_puzzle1_hint5),
                             ),
                             listOfNotNull(
-                                characters["John_thinking"],
+                                characters["john_thinking"],
                             )
                         )
                         {} ,

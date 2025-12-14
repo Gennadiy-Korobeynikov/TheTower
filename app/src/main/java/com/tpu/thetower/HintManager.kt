@@ -15,8 +15,8 @@ class HintManager(
     companion object {
         private var isNewHintAvaliable = true
         private var timer: CountDownTimer? = null
-        private val totalTimeToRecover = 10_000L  // Пока 10 сек для теста
-        private val updateInterval = 2_000L  // Пока 2 сек
+        private val totalTimeToRecover = 20_000L // Пока 10 сек для теста
+        private val updateInterval =  totalTimeToRecover / 6 // Пока 2 сек
         private var lastPuzzletName  = ""
 
         private fun startHintRecovery(activity: Activity, hintManager: HintManager) {

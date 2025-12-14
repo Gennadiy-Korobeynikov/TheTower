@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.tpu.thetower.FragmentManager
+import com.tpu.thetower.HintManager
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.SaveManager
@@ -60,5 +62,6 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
         }
         requireContext().registerReceiver(bluetoothReceiver, filter)
     }
+
 
 }
