@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LevelAccessManager
@@ -20,6 +20,7 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3Binding
+import com.tpu.thetower.managers.UiVisibilityController
 
 class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, View.OnDragListener,
     Hintable {
@@ -61,7 +62,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
             3, "sleeping pills"
         )
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         ivDraggable.post {
             originalPosition = Pair(ivDraggable.x, ivDraggable.y)
@@ -88,7 +89,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
                 3, "sleeping pills"
             )
             ivBg.setImageResource(R.drawable.lvl3_bg_guard_sleeping)
-            FragmentManager.showGoBackArrow(requireActivity())
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             ivTarget.visibility = View.GONE
             btnToMap.visibility = View.VISIBLE
         }
@@ -131,29 +132,29 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
                 DialogManager.startDialog(requireActivity(), "lvl3_donuts")
                 saveManager.savePuzzleData(requireContext(), 3, "donuts after shaking", status = "in_progress")
             }
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
         }
 
         btnToPuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleButtonsFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleButtonsFragment)
         }
 
         btnToPuzzle3.setOnClickListener {
             if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") != "completed") {
                 DialogManager.startDialog(requireActivity(), "lvl3_computer")
             } else {
-                FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
+                FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleHooverFragment)
             }
         }
 
         btnToMap.setOnClickListener {
             ivMap.visibility = View.VISIBLE
-            FragmentManager.hideGoBackArrow(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
 
         ivMap.setOnClickListener {
             ivMap.visibility = View.GONE
-            FragmentManager.showGoBackArrow(requireActivity())
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
 
         btnKey.setOnClickListener {
@@ -166,12 +167,12 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             if (LoadManager.getPuzzleStatus(requireActivity(), 3, "sleeping pills") != "completed") {
                 DialogManager.startDialog(requireActivity(), "lvl3_computer")
             } else {
-                FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
+                FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
             }
         }
 
         btnToPuzzle4Lock.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleKeyFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleKeyFragment)
         }
 
         btnToAccessCard.setOnClickListener {

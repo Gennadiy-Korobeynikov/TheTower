@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.databinding.FragmentTitleScreenBinding
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.UiVisibilityController
 
 class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
@@ -31,8 +33,11 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         setListeners()
         handleSounds()
 
-        FragmentManager.hideHUD(requireActivity())
-        FragmentManager.hideGoBackArrow(requireActivity())
+        UiVisibilityController.hide(
+            requireActivity(),
+            UiVisibilityController.UiContainer.HUD,
+            UiVisibilityController.UiContainer.GO_BACK_ARROW
+        )
     }
 
     private fun bindView() {
@@ -45,23 +50,19 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         btnStart.setOnClickListener {
             saveManager.resetData(requireContext())
             LoadManager.loadProgress(requireActivity())
-            FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
-            FragmentManager.hideTitleScreen(requireActivity())
-            FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
+            FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
+            FragmentNavigation.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
         }
 
         btnSettings.setOnClickListener {
-           // FragmentManager.hideTitleScreen(requireActivity())
-            FragmentManager.showSettings(requireActivity())
-//            FragmentManager.hideGoBackArrow(requireActivity())
-//            FragmentManager.hideHUD(requireActivity())
-//            FragmentManager.changeBG(this, R.id.action_titleScreenFragment_to_settingsFragment)
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.SETTINGS)
         }
 
         btnResume.setOnClickListener {
             LoadManager.loadProgress(requireActivity())
-            FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
-            FragmentManager.hideTitleScreen(requireActivity())
+            FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
             LoadManager.startSavedLevel(requireActivity())
         }
     }

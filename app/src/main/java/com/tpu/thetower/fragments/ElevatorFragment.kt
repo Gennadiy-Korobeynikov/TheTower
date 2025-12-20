@@ -11,7 +11,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
@@ -19,6 +19,7 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
+import com.tpu.thetower.managers.UiVisibilityController
 
 class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListener,
     View.OnDragListener {
@@ -60,9 +61,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         val receivedData = arguments?.getString("saved_level")
         if (receivedData != null) {
-            FragmentManager.changeBG(this, receivedData.toInt())
+            FragmentNavigation.changeBG(this, receivedData.toInt())
             arguments = Bundle()
         }
+
         soundManager = SoundManager.getInstance()
         saveManager = SaveManager.getInstance()
         musicManager = MusicManager.getInstance()
@@ -119,7 +121,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             clPanel.visibility = View.VISIBLE
             ivPanel.visibility = View.GONE
             ivCardReader.visibility = View.GONE
-            FragmentManager.hideGoBackArrow(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
             unlockLvls(currAccessLevel)
         }
@@ -130,7 +132,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             clPanel.visibility = View.GONE
             ivPanel.visibility = View.VISIBLE
             ivCardReader.visibility = View.VISIBLE
-            FragmentManager.showGoBackArrow(requireActivity())
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
 
         lvlButtons.forEach {
@@ -140,13 +142,13 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
                         DialogManager.startDialog(requireActivity(), "lvl1_elevator")
                     } else {
                         soundManager.release()
-                        FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
-                        FragmentManager.showGoBackArrow(requireActivity())
+                        FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
+                        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                     }
                 } else if (it in openedLvlButtons) {
                     soundManager.release()
-                    FragmentManager.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
-                    FragmentManager.showGoBackArrow(requireActivity())
+                    FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
+                    UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                 }
             }
         }

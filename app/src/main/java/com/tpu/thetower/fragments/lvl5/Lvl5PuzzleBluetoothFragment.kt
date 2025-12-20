@@ -9,10 +9,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ImageView
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.databinding.FragmentLvl5PuzzleBluetoothBinding
 
 class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluetooth) {
@@ -30,7 +30,7 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
         binding = FragmentLvl5PuzzleBluetoothBinding.bind(view)
 
         saveManager = SaveManager.getInstance()
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         bindView()
         setListeners()

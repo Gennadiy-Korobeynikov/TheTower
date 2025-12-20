@@ -15,7 +15,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
@@ -23,6 +23,7 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
 
 data class KeyPin(
@@ -61,7 +62,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         saveManager = SaveManager.getInstance()
         puzzle = Lvl3PuzzleKey(3, "key")
 
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
 
         if (LoadManager.isPuzzleCompleted(requireActivity(), 3, "lock model")) { // Замок вставлен в комп
@@ -143,7 +144,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
                     .alpha(0.2f)
                     .setDuration(2500)
                     .withEndAction {
-                        FragmentManager.goBack(this)
+                        FragmentNavigation.goBack(this)
                     }
                     .start()
             }

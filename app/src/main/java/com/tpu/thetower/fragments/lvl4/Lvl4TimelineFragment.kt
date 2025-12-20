@@ -8,10 +8,10 @@ import android.view.View
 import android.view.View.DragShadowBuilder
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4TimelineBinding
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.puzzles.Lvl4PuzzleTimeline
 
 class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
@@ -165,6 +165,7 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
                                 currentOccupant.x = pos.first
                                 currentOccupant.y = pos.second
                                 currentOccupant.visibility = View.VISIBLE
+                                currentOccupant.requestLayout()
                             }
                             placeViewInZone(draggedView, targetView)
                             zoneOccupants[targetView] = draggedView
@@ -198,8 +199,8 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
                 }
                 updateSolution()
                 if (puzzle.checkSolution(requireActivity(), String(solution))) {
-                    FragmentManager.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
-                    FragmentManager.changeBG(this, R.id.lvl4Fragment)
+                    FragmentNavigation.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
+                    FragmentNavigation.changeBG(this, R.id.lvl4Fragment)
                 }
                 return true
             }

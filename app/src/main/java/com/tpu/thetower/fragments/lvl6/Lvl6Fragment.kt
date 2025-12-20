@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
@@ -37,13 +37,13 @@ class Lvl6Fragment : Fragment(R.layout.fragment_lvl6) {
     }
     private fun setListeners() {
         btnToMainPanel.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl6Fragment_to_lvl6MainPanelFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl6Fragment_to_lvl6MainPanelFragment)
         }
         btnToPanels.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl6Fragment_to_lvl6PanelsFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl6Fragment_to_lvl6PanelsFragment)
         }
         btnToLock.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl6Fragment_to_lvl6LockFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl6Fragment_to_lvl6LockFragment)
         }
     }
 }

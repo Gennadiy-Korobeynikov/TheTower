@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ImageButton
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.R
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentGoBackArrowBinding
 
@@ -23,7 +23,7 @@ class GoBackArrowFragment : Fragment(R.layout.fragment_go_back_arrow) {
 
         btnToElevator.setOnClickListener {
             soundManager.release()
-            FragmentManager.goBack(this)
+            FragmentNavigation.goBack(this)
         }
     }
 

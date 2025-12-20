@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
@@ -16,6 +16,7 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleButtonsBinding
 import com.tpu.thetower.puzzles.Lvl3PuzzleButtons
+import com.tpu.thetower.managers.FragmentNavigation
 
 class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons), Hintable {
 
@@ -87,7 +88,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
                     .alpha(0.2f)
                     .setDuration(2500)
                     .withEndAction {
-                        FragmentManager.goBack(this)
+                        FragmentNavigation.goBack(this)
                     }
                     .start()
             } else {

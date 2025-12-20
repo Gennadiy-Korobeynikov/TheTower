@@ -7,7 +7,7 @@ import android.widget.ImageView
 
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.LoadManager
 
 import com.tpu.thetower.managers.MusicManager
@@ -15,6 +15,7 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl5Binding
+import com.tpu.thetower.managers.FragmentNavigation
 
 
 class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
@@ -64,24 +65,21 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
     private fun setListeners() {
 
         btnFishRack.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5FishRackFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5FishRackFragment)
         }
 
         btnMoose.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleMooseFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleMooseFragment)
         }
 
         btnFish.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment)
         }
 
         btnMoosePaper.setOnClickListener {
             DialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
         }
     }
-
-
-
 
 
     private fun handleSounds() {

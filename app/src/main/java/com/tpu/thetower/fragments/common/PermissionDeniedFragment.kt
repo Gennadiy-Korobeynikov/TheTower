@@ -7,9 +7,9 @@ import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentPermissionDeniedBinding
+import com.tpu.thetower.managers.UiVisibilityController
 
 class PermissionDeniedFragment : Fragment(R.layout.fragment_permission_denied) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class PermissionDeniedFragment : Fragment(R.layout.fragment_permission_denied) {
         }
 
         tvDeny.setOnClickListener {
-            FragmentManager.hidePermissionDeniedFragment(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.PERMISSION_DENIED)
         }
     }
 

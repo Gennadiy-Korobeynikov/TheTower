@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
@@ -32,7 +32,7 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
         bindView()
         setListeners()
 
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         hintManager = HintManager(
             listOf(

@@ -3,12 +3,13 @@ package com.tpu.thetower.fragments.lvl4
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
-import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.ImageUpdateDispatcher
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4BookcaseBinding
+import com.tpu.thetower.managers.LoadManager
 
 class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
 
@@ -30,7 +31,7 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
         bindView()
         setListeners()
 
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
     private fun bindView() {
@@ -76,9 +77,8 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
     }
 
     private fun openBook(book: String) {
-        FragmentManager.changeBG(this, R.id.action_lvl4BookcaseFragment_to_booksFragment)
-        requireActivity().supportFragmentManager
-            .setFragmentResult("bookOpening", bundleOf("book" to book))
+        FragmentNavigation.changeBG(this, R.id.action_lvl4BookcaseFragment_to_booksFragment)
+        ImageUpdateDispatcher.openBook(this, book)
     }
 
 }

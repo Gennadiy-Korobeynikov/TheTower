@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.UiVisibilityController
 
 class Lvl2PetFragment : Fragment(R.layout.fragment_lvl2_pet), Hintable {
 
@@ -16,7 +17,7 @@ class Lvl2PetFragment : Fragment(R.layout.fragment_lvl2_pet), Hintable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         soundManager = SoundManager.getInstance()
         soundManager.init()

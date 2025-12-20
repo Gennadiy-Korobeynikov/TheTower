@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
@@ -16,6 +16,8 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2PuzzleChatBinding
 import com.tpu.thetower.puzzles.Lvl2PuzzleChat
 import com.tpu.thetower.utils.WheelSetupHelper
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.UiVisibilityController
 
 
 class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hintable {
@@ -119,12 +121,12 @@ class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hin
 
     private fun passed() {
         isSolved = true
-        FragmentManager.hideGoBackArrow(requireActivity())
+        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         mainScreen.animate()
             .alpha(0.2f)
             .setDuration(2500)
             .withEndAction {
-                FragmentManager.goBack(this)
+                FragmentNavigation.goBack(this)
             }
             .start()
         // TODO Добавить звук открывающейся двери сейфа

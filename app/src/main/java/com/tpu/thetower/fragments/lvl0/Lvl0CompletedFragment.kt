@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.databinding.FragmentLvl0CompletedBinding
+import com.tpu.thetower.managers.UiVisibilityController
 
 class Lvl0CompletedFragment : Fragment(R.layout.fragment_lvl0_completed) {
 
@@ -29,7 +30,7 @@ class Lvl0CompletedFragment : Fragment(R.layout.fragment_lvl0_completed) {
         bindView()
         setListeners()
 
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
     private fun bindView() {

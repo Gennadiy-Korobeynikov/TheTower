@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5PuzzleMooseBinding
@@ -63,8 +63,8 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose) {
     private fun check() {
         if (solution.length >= 5) {
             if (puzzle.checkSolution(requireActivity(), solution.takeLast(5))) {
-                FragmentManager.changeBG(this, R.id.action_global_elevatorFragment)
-                FragmentManager.changeBG(this, R.id.action_elevatorFragment_to_lvl5Fragment)
+                FragmentNavigation.changeBG(this, R.id.action_global_elevatorFragment)
+                FragmentNavigation.changeBG(this, R.id.action_elevatorFragment_to_lvl5Fragment)
             }
         }
     }

@@ -8,11 +8,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.UiVisibilityController
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_bg) as? NavHostFragment
                 val currentFragment = navHostFragment?.childFragmentManager?.fragments?.lastOrNull()
                 if (currentFragment is Fragment) {
-                    FragmentManager.showMenu(this@MainActivity)
+                    UiVisibilityController.show(this@MainActivity, UiVisibilityController.UiContainer.MENU)
                 }
             }
         })

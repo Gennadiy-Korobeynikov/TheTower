@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
@@ -15,6 +15,8 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2Binding
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.UiVisibilityController
 
 
 class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
@@ -42,7 +44,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         setListeners()
         handleSounds()
 
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         saveManager = SaveManager.getInstance()
 
@@ -75,28 +77,28 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     private fun setListeners() {
         btnToPuzzle0.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2CaesarFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2CaesarFragment)
         }
 
         btnToPuzzle0Lock.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
         }
 
         btnToPuzzle0Completed.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PetFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PetFragment)
             soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
         btnToPuzzle1.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzlePasswordFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzlePasswordFragment)
         }
 
         btnToPuzzle2Lock.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleChatFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleChatFragment)
         }
 
         btnToPuzzle2Completed.setOnClickListener {
-            FragmentManager.hideGoBackArrow(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             ivAccessCard.visibility = View.VISIBLE
             soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
@@ -105,7 +107,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
             ivAccessCard.visibility = View.GONE
             saveManager.saveLevelStatus(requireContext(), 2)
             btnToPuzzle2Completed.visibility = View.GONE
-            FragmentManager.showGoBackArrow(requireActivity())
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             LevelAccessManager.upgradeAccessLvl(this)
             soundManager.playSound(R.raw.sound_of_drawer_closing)
         }

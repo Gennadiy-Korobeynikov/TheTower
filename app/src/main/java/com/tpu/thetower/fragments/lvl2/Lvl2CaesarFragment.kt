@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.R
 
 
@@ -21,7 +22,7 @@ class Lvl2CaesarFragment : Fragment(R.layout.fragment_lvl2_caesar), Hintable {
             "lvl2_puzzle1_hint4" , "lvl2_puzzle1_hint5"),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(),2,"caesar"),
             2,"caesar")
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
     override fun useHint() {

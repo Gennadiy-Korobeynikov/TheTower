@@ -14,8 +14,7 @@ class PermissionManager (
     private val requestPermissionLauncher = caller.registerForActivityResult(
         ActivityResultContracts.RequestPermission()) { isGranted ->
         if (!isGranted)
-        // Пользователь отказал в разрешении
-        FragmentManager.showPermissionDeniedFragment(activity)
+            UiVisibilityController.show(activity, UiVisibilityController.UiContainer.PERMISSION_DENIED)
     }
 
 

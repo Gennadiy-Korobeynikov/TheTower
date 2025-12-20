@@ -23,14 +23,14 @@ class HintManager(
 
             timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
                 override fun onTick(millisUntilFinished: Long) {
-                    FragmentManager.updateHintStateImg(
+                    ImageUpdateDispatcher.updateHintStateImg(
                         activity,
                         ((totalTimeToRecover - millisUntilFinished) / updateInterval).toInt()
                     )
                 }
 
                 override fun onFinish() {
-                    FragmentManager.updateHintStateImg(activity, 0)
+                    ImageUpdateDispatcher.updateHintStateImg(activity, 0)
                     isNewHintAvaliable = true
                     if (hintManager.usedHintsCount < hintManager.hints.count())
                         hintManager.usedHintsCountIncrease(activity)

@@ -5,11 +5,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.databinding.FragmentSettingsBinding
 
 
@@ -33,7 +33,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         bindView()
         setListeners()
         handleSounds()
-
     }
 
     private fun bindView() {
@@ -83,7 +82,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         })
 
         btnBack.setOnClickListener {
-            FragmentManager.hideSettings(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.SETTINGS)
         }
     }
 

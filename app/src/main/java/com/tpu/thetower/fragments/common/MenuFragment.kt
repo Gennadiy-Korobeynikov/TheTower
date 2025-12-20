@@ -5,12 +5,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.databinding.FragmentMenuBinding
 
 
@@ -47,13 +49,13 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     private fun setListeners() {
 
         btnResume.setOnClickListener {
-            FragmentManager.hideMenu(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.MENU)
         }
 
         btnToTitleScreen.setOnClickListener {
-            FragmentManager.hideMenu(requireActivity())
-            FragmentManager.changeBG(this, R.id.action_global_titleScreenFragment)
-            FragmentManager.showTitleScreen(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.MENU)
+            FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.TITLE)
         }
 
         requireActivity().supportFragmentManager

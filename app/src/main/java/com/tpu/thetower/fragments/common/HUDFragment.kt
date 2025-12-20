@@ -7,10 +7,11 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentHudBinding
+import com.tpu.thetower.managers.ImageUpdateDispatcher
+import com.tpu.thetower.managers.UiVisibilityController
 
 class HUDFragment : Fragment(R.layout.fragment_hud) {
 
@@ -41,8 +42,8 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 
     private fun setListeners() {
         btnMenu.setOnClickListener {
-            FragmentManager.showMenu(requireActivity())
-            FragmentManager.updateProgressBar(this)
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.MENU)
+            ImageUpdateDispatcher.updateProgressBar(this)
         }
 
         requireActivity().supportFragmentManager

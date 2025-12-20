@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
-
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl4Binding
-
 
 class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
@@ -42,8 +39,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     private lateinit var btnSequencePaper: Button
 
     private lateinit var ivBg: ImageView
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,31 +77,29 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
     private fun setListeners() {
 
         btnChess.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4PuzzleChessboardFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4PuzzleChessboardFragment)
         }
 
         btnChessboard.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4ChessFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4ChessFragment)
         }
 
         btnTimeline.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4TimelineFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4TimelineFragment)
         }
 
         btnRaven.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4RavenFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4RavenFragment)
         }
 
         btnBookcase.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4BookcaseFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4BookcaseFragment)
         }
 
         btnSequencePaper.setOnClickListener {
-            FragmentManager.changeBG(this, R.id.action_lvl4Fragment_to_lvl4SequencePaperFragment)
+            FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4SequencePaperFragment)
         }
-
     }
-
 
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
@@ -119,7 +112,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 //            )
 //        )
     }
-
 
     override fun onResume() {
         super.onResume()

@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.text.HtmlCompat
-import com.tpu.thetower.managers.FragmentManager
-
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentDialogBinding
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.Dialog
-
 
 class DialogFragment(
     private val dialog: Dialog
@@ -28,8 +26,7 @@ class DialogFragment(
         val ivAvatar = binding.ivAvatar
         val layoutDialog = binding.layoutDialog
 
-        FragmentManager.showDialog(requireActivity())
-
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.DIALOG)
 
         fun updateDialog() {
             // Ещё есть реплики
@@ -44,21 +41,16 @@ class DialogFragment(
                 currentIndex++
                 // Последняя реплика
             } else {
-                FragmentManager.hideDialog(requireActivity())  // Закрываем диалог
+                UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.DIALOG)  // Закрываем диалог
                 dialog.onDialogEnd()  // Вызываем функцию завершения
             }
         }
-
 
         layoutDialog.setOnClickListener {
             updateDialog()
         }
 
-
-
         updateDialog() // Показать первую реплику
-
-
     }
 
 }

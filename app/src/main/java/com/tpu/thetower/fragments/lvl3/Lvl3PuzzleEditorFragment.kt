@@ -7,13 +7,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleEditorBinding
+import com.tpu.thetower.managers.UiVisibilityController
 
 
 class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor), Hintable {
@@ -55,7 +55,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "completed") {
            paste()
         }
-        FragmentManager.showGoBackArrow(requireActivity())
+        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
     private fun bindView() {

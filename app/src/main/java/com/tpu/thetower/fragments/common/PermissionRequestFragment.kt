@@ -4,10 +4,10 @@ import android.Manifest
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import com.tpu.thetower.managers.FragmentManager
 import com.tpu.thetower.managers.PermissionManager
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentPermissionRequestBinding
+import com.tpu.thetower.managers.UiVisibilityController
 
 class PermissionRequestFragment : Fragment(R.layout.fragment_permission_request) {
 
@@ -27,7 +27,7 @@ class PermissionRequestFragment : Fragment(R.layout.fragment_permission_request)
 
         btnOk.setOnClickListener {
             permissionManager.getPermission(Manifest.permission.CAMERA)
-            FragmentManager.hidePermissionRequestFragment(requireActivity())
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.PERMISSION_REQUEST)
         }
 
     }

@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
@@ -14,6 +14,7 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.databinding.FragmentLvl4PuzzleChessboardBinding
 import com.tpu.thetower.puzzles.Lvl4ChessboardPuzzle
+import com.tpu.thetower.managers.FragmentNavigation
 
 
 class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_chessboard), Hintable {
@@ -94,7 +95,7 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
 
 
     private fun passed() {
-        FragmentManager.goBack(this)
+        FragmentNavigation.goBack(this)
     }
 
     override fun useHint() {

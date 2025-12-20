@@ -51,11 +51,12 @@ class LoadManager {
                 // TODO Потом убрать + 1, потому что пропадёт тестовый уровень
                 putString("saved_level", levels[savedLevel].toString())
             }
-            FragmentManager.changeBG(
+            FragmentNavigation.changeBG(
                 getCurrFragment(activity),
                 R.id.action_global_elevatorFragment,
                 bundle
             )
+            UiVisibilityController.show(activity, UiVisibilityController.UiContainer.HUD)
         }
 
         fun getCurrentLevel(activity: Activity): Int {

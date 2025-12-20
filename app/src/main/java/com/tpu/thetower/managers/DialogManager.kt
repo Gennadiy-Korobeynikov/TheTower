@@ -23,7 +23,8 @@ class DialogManager {
             (activity as? AppCompatActivity)?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fcv_dialog, dialogFragment, "DialogFragment")
                 ?.commitNow()
-            FragmentManager.showDialog(activity)
+
+            UiVisibilityController.show(activity, UiVisibilityController.UiContainer.DIALOG)
         }
 
 
@@ -35,7 +36,7 @@ class DialogManager {
                             listOfNotNull( characters["John"],)
                         )
                         // Запрос разрешений после окончания диалога
-                        { FragmentManager.showPermissionRequestFragment(activity) },
+                        { UiVisibilityController.show(activity, UiVisibilityController.UiContainer.PERMISSION_REQUEST) },
 
 
 
@@ -1440,7 +1441,4 @@ class DialogManager {
 
     }
 }
-
-
-
 

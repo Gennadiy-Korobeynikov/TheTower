@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentManager
+
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
@@ -21,6 +21,7 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
 import com.tpu.thetower.puzzles.Direction
 import com.tpu.thetower.puzzles.Lvl3PuzzleHoover
+import com.tpu.thetower.managers.FragmentNavigation
 
 const val ANIM_DURATION = 800L
 const val ANIM_DURATION_UP = 2000L
@@ -257,9 +258,8 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
 
         if (win) {
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
-            FragmentManager.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
-            FragmentManager.changeBG(this, R.id.lvl3Fragment)
-            //win = false
+            FragmentNavigation.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
+            FragmentNavigation.changeBG(this, R.id.lvl3Fragment)
         }
 
         tvDirection.text =
