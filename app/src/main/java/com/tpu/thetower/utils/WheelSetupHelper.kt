@@ -1,11 +1,10 @@
 package com.tpu.thetower.utils
 
 import android.app.Activity
-import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.Puzzle
-import com.tpu.thetower.SoundManager
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.adapters.ImageCodeAdapter
 
 object WheelSetupHelper {

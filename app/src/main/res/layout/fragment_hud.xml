@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".fragments.DialogFragment">
+    tools:context=".fragments.common.DialogFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideV_menu"

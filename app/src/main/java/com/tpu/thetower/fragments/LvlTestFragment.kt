@@ -8,12 +8,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.DialogManager
-import com.tpu.thetower.HintManager
-import com.tpu.thetower.Hintable
-import com.tpu.thetower.LoadManager
 import com.tpu.thetower.R
-import com.tpu.thetower.SaveManager
+import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.databinding.FragmentLvlTestBinding
 
 class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),

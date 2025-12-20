@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    tools:context=".fragments.Lvl2Fragment">
+    tools:context=".fragments.lvl2.Lvl2Fragment">
 
     <ImageView
         android:layout_width="match_parent"

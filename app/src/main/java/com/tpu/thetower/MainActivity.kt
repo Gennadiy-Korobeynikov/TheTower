@@ -1,17 +1,18 @@
 package com.tpu.thetower
 
 import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.DragEvent
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.tpu.thetower.fragments.HUDFragment
-import com.tpu.thetower.fragments.Lvl3Fragment
+import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.MusicManager
+import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SoundManager
 import java.io.File
 
 class MainActivity : AppCompatActivity() {

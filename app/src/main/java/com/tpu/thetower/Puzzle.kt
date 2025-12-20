@@ -1,8 +1,8 @@
 package com.tpu.thetower
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
+import com.tpu.thetower.managers.SaveManager
 
 // Заготовка под класс головоломок
 abstract class Puzzle(val level: Int, val puzzle: String) {

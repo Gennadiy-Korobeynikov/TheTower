@@ -6,7 +6,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.R
 
-class ImageCodeAdapter(private val items: Array<Int>, private val layoutImage: Int) : RecyclerView.Adapter<ImageCodeAdapter.ImageCodeViewHolder>() {
+class ImageCodeAdapter(private val items: Array<Int>, private val layoutImage: Int) :
+    RecyclerView.Adapter<ImageCodeAdapter.ImageCodeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageCodeViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -21,7 +22,8 @@ class ImageCodeAdapter(private val items: Array<Int>, private val layoutImage: I
 
     override fun getItemCount(): Int = Int.MAX_VALUE
 
-    class ImageCodeViewHolder(private val imageView: ImageView) : RecyclerView.ViewHolder(imageView) {
+    class ImageCodeViewHolder(private val imageView: ImageView) :
+        RecyclerView.ViewHolder(imageView) {
         fun bind(value: Int) {
             imageView.setImageResource(value)
         }

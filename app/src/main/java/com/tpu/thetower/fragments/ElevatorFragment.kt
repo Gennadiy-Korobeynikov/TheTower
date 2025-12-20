@@ -10,14 +10,14 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.DialogManager
-import com.tpu.thetower.FragmentManager
-import com.tpu.thetower.LevelAccessManager
-import com.tpu.thetower.LoadManager
-import com.tpu.thetower.MusicManager
+import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.FragmentManager
+import com.tpu.thetower.managers.LevelAccessManager
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.SaveManager
-import com.tpu.thetower.SoundManager
+import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
 
 class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListener,

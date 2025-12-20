@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:clipChildren="false"
     android:clipToPadding="false"
-    tools:context=".fragments.Lvl3PuzzleHooverFragment">
+    tools:context=".fragments.lvl3.Lvl3PuzzleHooverFragment">
 
 
     <androidx.constraintlayout.widget.Guideline
