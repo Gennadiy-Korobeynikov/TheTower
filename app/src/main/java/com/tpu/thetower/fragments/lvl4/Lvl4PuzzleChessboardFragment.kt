@@ -11,7 +11,7 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl4PuzzleChessboardBinding
 import com.tpu.thetower.puzzles.Lvl4ChessboardPuzzle
 import com.tpu.thetower.managers.FragmentNavigation
@@ -22,7 +22,7 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
     private val cellStates = MutableList(64) { false }
 
     private val puzzle: Puzzle = Lvl4ChessboardPuzzle(4, "chess")
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
     private lateinit var hintManager: HintManager
 
     private lateinit var board: GridLayout
@@ -34,7 +34,6 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl4PuzzleChessboardBinding.bind(view)
-        saveManager = SaveManager.getInstance()
         bind()
         board.post {
             val boardPx = board.width //

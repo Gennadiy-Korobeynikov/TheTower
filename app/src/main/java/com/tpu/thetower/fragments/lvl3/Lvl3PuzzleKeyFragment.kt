@@ -21,7 +21,7 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
@@ -45,7 +45,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
     private lateinit var ivBg: ImageView
 
     private lateinit var hintManager: HintManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     private lateinit var puzzle: Puzzle
     var longPressRunnable: Runnable? = null
@@ -59,7 +59,6 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         bindView()
         setListeners()
 
-        saveManager = SaveManager.getInstance()
         puzzle = Lvl3PuzzleKey(3, "key")
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
@@ -93,11 +92,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
     private fun setListeners() {
 
         btnCopy.setOnClickListener {
-            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
-        }
-
-        btnCopy.setOnClickListener {
-            saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "in_progress")
+            saveRepo.savePuzzleData(requireActivity(), 3, "lock model", status = "in_progress")
             btnCopy.visibility = View.GONE
             ivBg.setImageResource(R.drawable.lvl3_lock)
 

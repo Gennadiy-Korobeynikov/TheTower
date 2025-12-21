@@ -12,7 +12,7 @@ import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2Binding
 import com.tpu.thetower.managers.FragmentNavigation
@@ -25,7 +25,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
 
     private lateinit var btnToPuzzle0: Button
     private lateinit var btnToPuzzle0Lock: Button
@@ -36,6 +35,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     private lateinit var ivAccessCard: ImageView
 
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,11 +46,9 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
-        saveManager = SaveManager.getInstance()
-
         if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "locked") {
             DialogManager.startDialog(requireActivity(), "lvl2_start")
-            saveManager.savePuzzleData(requireContext(), 2, "lock", status = "in_progress")
+            saveRepo.savePuzzleData(requireActivity(), 2, "lock", status = "in_progress")
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "completed") {
@@ -105,7 +103,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         ivAccessCard.setOnClickListener {
             ivAccessCard.visibility = View.GONE
-            saveManager.saveLevelStatus(requireContext(), 2)
+            saveRepo.saveLevelStatus(requireActivity(), 2)
             btnToPuzzle2Completed.visibility = View.GONE
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             LevelAccessManager.upgradeAccessLvl(this)
@@ -128,9 +126,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     override fun onResume() {
         super.onResume()
-
-        saveManager = SaveManager.getInstance()
-        saveManager.saveCurrentLevel(requireContext(), 2)
+        saveRepo.saveCurrentLevel(requireActivity(), 2)
     }
 
     override fun useHint() {

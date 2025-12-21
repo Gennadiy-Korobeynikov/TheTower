@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.databinding.FragmentLvl5PuzzleBluetoothBinding
 
@@ -22,14 +22,14 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
     private lateinit var ivBg: ImageView
 
     private lateinit var bluetoothReceiver : BroadcastReceiver
-    private lateinit var saveManager: SaveManager
+
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl5PuzzleBluetoothBinding.bind(view)
 
-        saveManager = SaveManager.getInstance()
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         bindView()
@@ -51,7 +51,7 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
                 val state = intent?.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
                 if (state == BluetoothAdapter.STATE_ON || state == BluetoothAdapter.STATE_OFF) {
                     ivBg.setImageResource(R.drawable.lvl5_fish_bluetooth)
-                    saveManager.savePuzzleData(requireActivity(), 5, "bluetooth", status = "completed")
+                    saveRepo.savePuzzleData(requireActivity(), 5, "bluetooth", status = "completed")
                 }
             }
         }

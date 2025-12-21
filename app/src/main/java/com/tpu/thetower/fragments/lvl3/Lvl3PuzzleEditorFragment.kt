@@ -11,7 +11,7 @@ import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleEditorBinding
 import com.tpu.thetower.managers.UiVisibilityController
 
@@ -26,11 +26,8 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
 
     private lateinit var ivBg: ImageView
 
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
     private lateinit var hintManager: HintManager
-
-    private var keyLayers = mutableListOf<Int>()
-    private var currentIndex = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +36,6 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
 
         bindView()
         setListeners()
-        saveManager = SaveManager.getInstance()
 
         hintManager = HintManager(
             listOf(
@@ -70,7 +66,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
         btnPaste.setOnClickListener {
             if (LoadManager.getPuzzleStatus(requireActivity(), 3, "lock model") == "in_progress") {
                 paste()
-                saveManager.savePuzzleData(requireContext(), 3, "lock model", status = "completed")
+                saveRepo.savePuzzleData(requireActivity(), 3, "lock model", status = "completed")
                 hintManager = HintManager(
                     listOf("lvl3_puzzle3_hint6",),
                     LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "lock model after pasted"),

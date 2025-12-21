@@ -9,7 +9,7 @@ import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl4Binding
 
@@ -19,7 +19,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     private lateinit var btnToBookBabel: Button
     private lateinit var btnToBookAskii: Button
@@ -46,7 +46,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         bindView()
         setListeners()
         handleSounds()
-        saveManager = SaveManager.getInstance()
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 4, "chess") == "completed") {
             btnChess.visibility = View.GONE
@@ -115,9 +114,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
     override fun onResume() {
         super.onResume()
-
-        saveManager = SaveManager.getInstance()
-        saveManager.saveCurrentLevel(requireContext(), 4)
+        saveRepo.saveCurrentLevel(requireActivity(), 4)
     }
 
 }

@@ -16,7 +16,6 @@ import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
 import com.tpu.thetower.managers.UiVisibilityController
@@ -26,7 +25,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
     private lateinit var binding: FragmentElevatorBinding
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
     private lateinit var musicManager: MusicManager
 
     private lateinit var ivBg: ImageView
@@ -66,7 +64,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         }
 
         soundManager = SoundManager.getInstance()
-        saveManager = SaveManager.getInstance()
         musicManager = MusicManager.getInstance()
 
         musicManager.stopMusic()

@@ -8,7 +8,7 @@ import com.tpu.thetower.managers.DialogManager
 
 import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl0CompletedBinding
 import com.tpu.thetower.managers.UiVisibilityController
 
@@ -18,14 +18,12 @@ class Lvl0CompletedFragment : Fragment(R.layout.fragment_lvl0_completed) {
 
     private lateinit var btnAccessCard: Button
 
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl0CompletedBinding.bind(view)
-
-        saveManager = SaveManager.getInstance()
 
         bindView()
         setListeners()
@@ -42,7 +40,7 @@ class Lvl0CompletedFragment : Fragment(R.layout.fragment_lvl0_completed) {
             if (LevelAccessManager.currentAccessLvl == 0) {
                 DialogManager.startDialog(requireActivity(), "lvl0_access_card")
                 LevelAccessManager.upgradeAccessLvl(this)
-                saveManager.saveLevelStatus(requireContext(), 0)
+                saveRepo.saveLevelStatus(requireActivity(), 0)
             }
             DialogManager.startDialog(requireActivity(), "lvl0_access_card_got")
         }

@@ -8,17 +8,18 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.FileSaveManager
 import com.tpu.thetower.databinding.FragmentTitleScreenBinding
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.managers.SaveRepository
 
 class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private lateinit var binding: FragmentTitleScreenBinding
 
     private lateinit var musicManager: MusicManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     private lateinit var btnStart: Button
     private lateinit var btnSettings: Button
@@ -48,8 +49,11 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private fun setListeners() {
         btnStart.setOnClickListener {
-            saveManager.resetData(requireContext())
+            // Сброс — это обязанность FileSaveManager (файловая система)
+            FileSaveManager.getInstance().resetData(requireContext())
+            LoadManager.invalidateCache()
             LoadManager.loadProgress(requireActivity())
+
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
             FragmentNavigation.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
@@ -69,7 +73,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
-        saveManager = SaveManager.getInstance()
     }
 
     override fun onResume() {

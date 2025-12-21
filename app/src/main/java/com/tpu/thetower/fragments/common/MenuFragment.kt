@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.UiVisibilityController
@@ -22,7 +21,6 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
 
     private lateinit var btnToTitleScreen: Button
     private lateinit var btnResume: Button
@@ -75,7 +73,6 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
-        saveManager = SaveManager.getInstance()
     }
 
     override fun onResume() {

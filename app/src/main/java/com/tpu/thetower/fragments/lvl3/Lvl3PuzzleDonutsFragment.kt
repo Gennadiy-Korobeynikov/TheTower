@@ -14,7 +14,7 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleDonutsBinding
 import kotlin.math.pow
@@ -33,7 +33,7 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
 
     private lateinit var binding: FragmentLvl3PuzzleDonutsBinding
 
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
     private lateinit var hintManager: HintManager
     private lateinit var soundManager: SoundManager
     private lateinit var musicManager: MusicManager
@@ -49,7 +49,6 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
         iv0 = binding.iv0
         iv1 = binding.iv1
 
-        saveManager = SaveManager.getInstance()
         handleSounds()
 
         val puzzleStatus = LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts")
@@ -84,7 +83,7 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
-        saveManager.saveCurrentLevel(requireContext(), 3)
+        saveRepo.saveCurrentLevel(requireActivity(), 3)
     }
 
     override fun onSensorChanged(event: SensorEvent) {
@@ -119,12 +118,13 @@ class Lvl3PuzzleDonutsFragment : Fragment(R.layout.fragment_lvl3_puzzle_donuts),
     }
 
     private fun completed() {
-        hintManager = HintManager(listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
+        hintManager = HintManager(
+            listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7",),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(),3,"donuts after shaking"),
             3,"donuts after shaking")
         iv0.visibility = View.GONE
         iv1.visibility = View.VISIBLE
-        saveManager.savePuzzleData(requireContext(), 3, "donuts", status = "completed")
+        saveRepo.savePuzzleData(requireActivity(), 3, "donuts", status = "completed")
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

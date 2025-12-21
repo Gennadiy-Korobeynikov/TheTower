@@ -12,7 +12,7 @@ import com.tpu.thetower.managers.LoadManager
 
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl5Binding
 import com.tpu.thetower.managers.FragmentNavigation
@@ -24,7 +24,7 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     private lateinit var btnFishRack: Button
     private lateinit var btnMoose: Button
@@ -40,7 +40,6 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         bindView()
         setListeners()
         handleSounds()
-        saveManager = SaveManager.getInstance()
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 5, "bluetooth") == "completed") {
             btnMoose.visibility = View.VISIBLE
@@ -97,9 +96,7 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
     override fun onResume() {
         super.onResume()
-
-        saveManager = SaveManager.getInstance()
-        saveManager.saveCurrentLevel(requireContext(), 5)
+        saveRepo.saveCurrentLevel(requireActivity(), 5)
     }
 
 }

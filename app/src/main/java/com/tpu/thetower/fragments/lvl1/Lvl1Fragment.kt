@@ -11,14 +11,14 @@ import com.tpu.thetower.databinding.FragmentLvl1Binding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 
 class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
     private lateinit var binding: FragmentLvl1Binding
 
     private lateinit var musicManager: MusicManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     private lateinit var btnNpcReceptionist: Button
     private lateinit var btnChandelier: Button
@@ -57,7 +57,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
             when (LoadManager.Companion.getCurrentDialog(requireActivity(), 1, 0)) {
                 0 -> {
                     DialogManager.Companion.startDialog(requireActivity(), "lvl1_npc_receptionist")
-                    saveManager.saveLevelStatus(requireContext(), 1)
+                    saveRepo.saveLevelStatus(requireActivity(), 1)
                 }
                 1 -> DialogManager.Companion.startDialog(requireActivity(), "lvl1_npc_receptionist_2")
             }
@@ -85,7 +85,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
                         btnChandelier.visibility = View.GONE
                         btnNpcReceptionist.visibility = View.GONE
                         btnAccessCard.visibility = View.VISIBLE
-                        saveManager.savePuzzleData(requireContext(), 1, "chandelier", status = "completed")
+                        saveRepo.savePuzzleData(requireActivity(), 1, "chandelier", status = "completed")
                     }
                     .start()
             }
@@ -109,8 +109,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
     override fun onResume() {
         super.onResume()
 
-        saveManager = SaveManager.Companion.getInstance()
-        saveManager.saveCurrentLevel(requireContext(), 1)
+        saveRepo.saveCurrentLevel(requireActivity(), 1)
     }
 
 }

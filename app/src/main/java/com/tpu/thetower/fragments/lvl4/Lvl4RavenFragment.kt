@@ -11,13 +11,13 @@ import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl4RavenBinding
 
 class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
 
     private lateinit var binding: FragmentLvl4RavenBinding
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
     private lateinit var hintManager: HintManager
 
     private lateinit var btnRaven: Button
@@ -42,8 +42,6 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
             4, "askiibtn"
         )
 
-        saveManager = SaveManager.getInstance()
-
         if (LoadManager.getPuzzleStatus(requireActivity(), 4, "askiibtn") == "in_progress") {
             ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
         }
@@ -56,15 +54,15 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
 
     private fun setListeners() {
         btnRaven.setOnClickListener {
-            var dialog: String
+            val dialog: String
 
             if (LoadManager.getPuzzleStatus(requireActivity(), 4, "askiibtn") == "locked") {
                 ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
-                saveManager.savePuzzleData(requireContext(), 4, "askiibtn", status = "in_progress")
+                saveRepo.savePuzzleData(requireActivity(), 4, "askiibtn", status = "in_progress")
                 dialog = "lvl4_puzzle1_askii"
             } else {
                 ivBg.setImageResource(R.drawable.lvl4_raven_switch_1)
-                saveManager.savePuzzleData(requireContext(), 4, "askiibtn", status = "locked")
+                saveRepo.savePuzzleData(requireActivity(), 4, "askiibtn", status = "locked")
                 dialog = "lvl4_puzzle1_normal"
             }
             DialogManager.startDialog(requireActivity(), dialog)

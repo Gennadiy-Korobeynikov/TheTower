@@ -17,7 +17,7 @@ import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3Binding
 import com.tpu.thetower.managers.UiVisibilityController
@@ -28,7 +28,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
     private lateinit var hintManager: HintManager
 
     private lateinit var btnToPuzzle0: Button
@@ -55,8 +55,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         handleSounds()
         setListeners()
 
-        saveManager = SaveManager.getInstance()
-
         hintManager = HintManager(
             listOf("lvl3_to_puzzle0_hint1", "lvl3_to_puzzle0_hint2"),
             LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "sleeping pills"),
@@ -70,7 +68,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts") == "locked") {
             DialogManager.startDialog(requireActivity(), "lvl3_npc_security")
-            saveManager.savePuzzleData(requireContext(), 3, "donuts", status = "in_progress")
+            saveRepo.savePuzzleData(requireActivity(), 3, "donuts", status = "in_progress")
         }
 
         if (LoadManager.getPuzzleStatus(requireActivity(), 3, "buttons") == "completed") {
@@ -130,7 +128,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         btnToPuzzle0.setOnClickListener {
             if (LoadManager.getPuzzleStatus(requireActivity(), 3, "donuts after shaking") == "locked") {
                 DialogManager.startDialog(requireActivity(), "lvl3_donuts")
-                saveManager.savePuzzleData(requireContext(), 3, "donuts after shaking", status = "in_progress")
+                saveRepo.savePuzzleData(requireActivity(), 3, "donuts after shaking", status = "in_progress")
             }
             FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
         }
@@ -243,7 +241,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         ivBg.setImageResource(R.drawable.lvl3_bg_guard_sleeping)
         ivTarget.visibility = View.GONE
         btnToMap.visibility = View.VISIBLE
-        saveManager.savePuzzleData(requireContext(), 3, "sleeping pills")
+        saveRepo.savePuzzleData(requireActivity(), 3, "sleeping pills")
         soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
     }
 
@@ -257,8 +255,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
     override fun onResume() {
         super.onResume()
 
-        saveManager = SaveManager.getInstance()
-        saveManager.saveCurrentLevel(requireContext(), 3)
+        saveRepo.saveCurrentLevel(requireActivity(), 3)
     }
 
     override fun onPause() {

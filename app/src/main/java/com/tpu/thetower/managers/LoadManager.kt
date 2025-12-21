@@ -8,12 +8,10 @@ import com.tpu.thetower.R
 
 class LoadManager {
     companion object {
-
-
         public var isASKII = false // TODO Исправить!!!!! длолжно быть через сохранения
 
-        private val saveManager = SaveManager.getInstance()
-        private lateinit var gameData: SaveManager.SaveData
+        private val repo = SaveRepository.getInstance()
+
         private val musicManager = MusicManager.getInstance()
         private val soundManager = SoundManager.getInstance()
 
@@ -28,27 +26,23 @@ class LoadManager {
             R.id.action_elevatorFragment_to_lvl6Fragment
         )
 
-        fun setGameData(activity: Activity) {
-            gameData = saveManager.readData(activity)!!
+        fun refreshCache(activity: Activity) {
+            repo.refreshCache(activity)
+        }
+
+        fun invalidateCache() {
+            repo.invalidateCache()
         }
 
         fun loadProgress(activity: Activity) {
-            setGameData(activity)
-            DialogManager.loadCharacters()
-            DialogManager.loadDialogs(activity)
-
-            LevelAccessManager.currentAccessLvl = gameData.playerInfo.accessLevel
-        }
-
-        private fun getCurrFragment(activity: Activity): Fragment {
-            return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
+            val data = repo.get(activity)
+            LevelAccessManager.currentAccessLvl = data.playerInfo.accessLevel
         }
 
         fun startSavedLevel(activity: Activity) {
-            setGameData(activity)
-            val savedLevel = gameData.playerInfo.currentLevel
+            val data = repo.get(activity)
+            val savedLevel = data.playerInfo.currentLevel
             val bundle = Bundle().apply {
-                // TODO Потом убрать + 1, потому что пропадёт тестовый уровень
                 putString("saved_level", levels[savedLevel].toString())
             }
             FragmentNavigation.changeBG(
@@ -56,84 +50,71 @@ class LoadManager {
                 R.id.action_global_elevatorFragment,
                 bundle
             )
-            UiVisibilityController.show(activity, UiVisibilityController.UiContainer.HUD)
         }
-
-        fun getCurrentLevel(activity: Activity): Int {
-            setGameData(activity)
-            return gameData.playerInfo.currentLevel
-        }
-
 
         fun loadSettings(activity: Activity) {
-            setGameData(activity)
-            // Временно здесь
-            DialogManager.loadCharacters()
-            DialogManager.loadDialogs(activity)
-
-            val savedMusicVolume = gameData.gameSettings.musicVolume ?: 0.5f
-            val savedSoundVolume = gameData.gameSettings.soundVolume ?: 0.5f
-
-            musicManager.setVolume(savedMusicVolume)
-            soundManager.setVolume(savedSoundVolume)
+            val data = repo.get(activity)
+            musicManager.setVolume(data.gameSettings.musicVolume)
+            soundManager.setVolume(data.gameSettings.soundVolume)
         }
 
-//        fun getPuzzleStatus(level: Int, puzzle: Int): String {
-//            return gameData.levels[level].puzzles[puzzle].status
-//        }
+        fun getCurrentLevel(activity: Activity): Int =
+            repo.get(activity).playerInfo.currentLevel
 
         fun getPuzzleUsedHintsCount(activity: Activity, level: Int, puzzle: String): Int {
-            setGameData(activity)
-            return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.hintsUsed ?: 0 //Пока так
+            val data = repo.get(activity)
+            return data.levels.find { it.id == level }
+                ?.puzzles?.find { it.name == puzzle }
+                ?.hintsUsed ?: 0
         }
 
         fun getLevelProgress(activity: Activity, level: Int): Pair<Int, Int> {
-            setGameData(activity)
-            return Pair(gameData.levels.find { it.id == level }?.puzzles?.count { it.status == "completed" }
-                ?: 0, gameData.levels.find { it.id == level }?.puzzles?.size ?: 0)
+            val data = repo.get(activity)
+            val lvl = data.levels.find { it.id == level }
+            return Pair(
+                lvl?.puzzles?.count { it.status == "completed" } ?: 0,
+                lvl?.puzzles?.size ?: 0
+            )
         }
 
-        fun isPuzzleCompleted(activity: Activity, level: Int, puzzle: String) : Boolean {
-            setGameData(activity)
-            return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.status == "completed"
+        fun isPuzzleCompleted(activity: Activity, level: Int, puzzle: String): Boolean {
+            val data = repo.get(activity)
+            return data.levels.find { it.id == level }
+                ?.puzzles?.find { it.name == puzzle }
+                ?.status == "completed"
         }
 
         fun getLevelStatus(activity: Activity, level: Int): Boolean {
-            setGameData(activity)
-            return gameData.levels.find { it.id == level }?.isCompleted ?: false
+            val data = repo.get(activity)
+            return data.levels.find { it.id == level }?.isCompleted ?: false
         }
 
-        fun isLevelCompleted(activity: Activity, level: Int): Boolean {
-            setGameData(activity)
-            val (solvedPuzzles, allPuzzles) = getLevelProgress(activity, level)
-            return solvedPuzzles == allPuzzles
-        }
-
-        fun getBlockProgress(activity: Activity, borders: Pair<Int, Int>): Int {
-            var progressStatus = 0
-
-            for (level: Int in borders.first..borders.second) {
-                if (isLevelCompleted(activity, level)) {
-                    progressStatus += 20
-                }
-            }
-
-            return progressStatus
-        }
-
-        fun getAccessLevel(activity: Activity): Int {
-            setGameData(activity)
-            return gameData.playerInfo.accessLevel
-        }
+        fun getAccessLevel(activity: Activity): Int =
+            repo.get(activity).playerInfo.accessLevel
 
         fun getCurrentDialog(activity: Activity, level: Int, npc: Int): Int {
-            setGameData(activity)
-            return gameData.levels.find { it.id == level }?.npcDialogs?.find { it.id == npc }?.currentDialogIndex ?: 0
+            val data = repo.get(activity)
+            return data.levels.find { it.id == level }
+                ?.npcDialogs?.find { it.id == npc }
+                ?.currentDialogIndex ?: 0
         }
 
         fun getPuzzleStatus(activity: Activity, level: Int, puzzle: String): String {
-            setGameData(activity)
-            return gameData.levels.find { it.id == level }?.puzzles?.find { it.name == puzzle }?.status ?: "locked"
+            val data = repo.get(activity)
+            return data.levels.find { it.id == level }
+                ?.puzzles?.find { it.name == puzzle }
+                ?.status ?: "locked"
         }
+
+        fun isLevelCompleted(activity: Activity, level: Int): Boolean {
+            val data = repo.get(activity)
+            val lvl = data.levels.find { it.id == level } ?: return false
+            return lvl.puzzles.isNotEmpty() && lvl.puzzles.all { it.status == "completed" }
+        }
+
+        private fun getCurrFragment(activity: Activity): Fragment {
+            return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
+        }
+
     }
 }

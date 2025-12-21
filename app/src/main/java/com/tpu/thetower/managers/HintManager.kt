@@ -9,7 +9,7 @@ class HintManager(
     private val level : Int,
     private val puzzle : String,
 ) {
-    private val saveManager = SaveManager.getInstance()
+    private val saveRepo = SaveRepository.getInstance()
     companion object {
         private var isNewHintAvaliable = true
         private var timer: CountDownTimer? = null
@@ -84,7 +84,7 @@ class HintManager(
 
     fun usedHintsCountIncrease(activity: Activity) {
         usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle) + 1
-        saveManager.savePuzzleUsedHintsCount(activity, level, puzzle, usedHintsCount)
+        saveRepo.savePuzzleUsedHintsCount(activity, level, puzzle, usedHintsCount)
     }
 
 }

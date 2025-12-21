@@ -9,14 +9,14 @@ import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvlTestBinding
 
 class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     View.OnTouchListener,
     View.OnDragListener {
 
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
 
     private lateinit var binding: FragmentLvlTestBinding
@@ -162,8 +162,7 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     override fun onResume() {
         super.onResume()
 
-        saveManager = SaveManager.getInstance()
-        saveManager.saveCurrentLevel(requireContext(), -1)
+        saveRepo.saveCurrentLevel(requireActivity(), -1)
     }
 
 

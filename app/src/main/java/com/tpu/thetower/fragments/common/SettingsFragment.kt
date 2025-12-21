@@ -7,7 +7,7 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.databinding.FragmentSettingsBinding
@@ -19,7 +19,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private lateinit var musicManager: MusicManager
     private lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     private lateinit var btnBack: Button
     private lateinit var sbMusic: SeekBar
@@ -43,10 +43,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun setListeners() {
-        saveManager = SaveManager.getInstance()
-        val gameData = saveManager.readData(requireContext())
-        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
-        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
+        val gameData = saveRepo.get(requireActivity())
+        val savedMusicVolume = gameData.gameSettings.musicVolume
+        val savedSoundVolume = gameData.gameSettings.soundVolume
 
         sbMusic.progress = (savedMusicVolume * 100).toInt()
         sbSound.progress = (savedSoundVolume * 100).toInt()
@@ -54,8 +53,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sbMusic.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
-
-                saveManager.saveMusicVolume(requireContext(), volume)
+                saveRepo.saveMusicVolume(requireActivity(), volume)
                 musicManager.setVolume(volume)
             }
 
@@ -69,8 +67,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sbSound.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
-
-                saveManager.saveSoundVolume(requireContext(), volume)
+                saveRepo.saveSoundVolume(requireActivity(), volume)
                 soundManager.setVolume(volume)
             }
 
@@ -89,6 +86,5 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun handleSounds() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
-        saveManager = SaveManager.getInstance()
     }
 }

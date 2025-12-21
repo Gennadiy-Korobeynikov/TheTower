@@ -11,7 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
-import com.tpu.thetower.managers.SaveManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import java.io.File
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var musicManager: MusicManager
     protected lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    private val saveRepo: SaveRepository = SaveRepository.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,19 +28,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         copyJsonFromAssets(this, "save_file.json")
-        LoadManager.setGameData(this)
+        LoadManager.loadProgress(this)
 
         setManagers()
-        saveManager.savePuzzleUsedHintsCount(this,0, "flashlight",0)// TEST
-        saveManager.savePuzzleUsedHintsCount(this,0, "lock",0)// TEST
+        saveRepo.savePuzzleUsedHintsCount(this,0, "flashlight",0)// TEST
+        saveRepo.savePuzzleUsedHintsCount(this,0, "lock",0)// TEST
 
         // Когда появится кнопка сброса прогресса
         //LoadManager.loadProgress()
 
         LoadManager.loadSettings(this)
-
-
-//        deleteJsonFile(this, "save_file.json")
 
         window.decorView.apply {
             systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -65,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     private fun setManagers() {
         musicManager = MusicManager.getInstance()
         soundManager = SoundManager.getInstance()
@@ -74,22 +72,8 @@ class MainActivity : AppCompatActivity() {
                 R.raw.sound_of_guard_snoring
             )
         )
-        saveManager = SaveManager.getInstance()
+        // SaveRepository создаётся лениво; отдельной инициализации не требуется.
     }
-
-//    private fun loadSettings() {
-//
-//
-//        saveManager.saveAccessLevel(this , 0) // Fot TEst
-//
-//
-//        val gameData = saveManager.readData(this)
-//        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
-//        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
-//
-//        musicManager.setVolume(savedMusicVolume)
-//        soundManager.setVolume(savedSoundVolume)
-//    }
 
     fun copyJsonFromAssets(context: Context, fileName: String) {
         val file = File(context.filesDir, fileName)
@@ -102,10 +86,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-//
-//    fun deleteJsonFile(context: Context, fileName: String) {
-//        val file = File(context.filesDir, fileName)
-//            file.delete()
-//    }
-
 }

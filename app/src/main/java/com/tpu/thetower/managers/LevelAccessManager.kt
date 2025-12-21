@@ -6,7 +6,7 @@ import com.tpu.thetower.R
 class LevelAccessManager {
 
     companion object {
-        private val saveManager = SaveManager.getInstance()
+        private val saveRepo = SaveRepository.getInstance()
         private val cardImageIds: List<Int> = listOf(
             R.drawable.access_card_2, // Костыль, не трогать
             R.drawable.access_card_2,
@@ -34,7 +34,7 @@ class LevelAccessManager {
 
             if (currentAccessLvl in 0..< topUnlockedLvlsForModules.size - 1) currentAccessLvl++
             unlockModules(fragment)
-            saveManager.saveAccessLevel(fragment.requireContext(), currentAccessLvl)
+            saveRepo.saveAccessLevel(fragment.requireActivity(), currentAccessLvl)
         }
     }
 }
