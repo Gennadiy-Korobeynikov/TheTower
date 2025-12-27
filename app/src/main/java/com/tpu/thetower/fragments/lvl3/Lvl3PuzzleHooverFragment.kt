@@ -5,129 +5,95 @@ import android.transition.ChangeBounds
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.managers.LoadManager
-import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Direction
 import com.tpu.thetower.puzzles.Lvl3PuzzleHoover
-import com.tpu.thetower.managers.FragmentNavigation
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val ANIM_DURATION = 800L
 const val ANIM_DURATION_UP = 2000L
 
+@AndroidEntryPoint
 class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover), Hintable {
 
-    private lateinit var binding: FragmentLvl3PuzzleHooverBinding
-
-    private lateinit var tvCoordinates : TextView
-    private lateinit var tvDirection: TextView
-    private lateinit var tvRestart: TextView
-    private lateinit var tvWin : TextView
-
-    private lateinit var ivBg : ImageView
-    private lateinit var ivHoover : ImageView
-
-    private lateinit var btnRight: ImageButton
-    private lateinit var btnLeft: ImageButton
-    private lateinit var btnForward: ImageButton
-
-    private lateinit var mainLayout: ConstraintLayout
+    private var _binding: FragmentLvl3PuzzleHooverBinding? = null
+    private val binding get() = _binding!!
 
     private val puzzleHoover = Lvl3PuzzleHoover(3, "vacuum cleaner")
     private lateinit var hintManager: HintManager
-    private lateinit var soundManager: SoundManager
-    private lateinit var musicManager: MusicManager
 
-    private var restart : Boolean = false
-    private var onStartPosition : Boolean = true
-    private var win : Boolean = false
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var soundManager: SoundManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
+
+    private var restart: Boolean = false
+    private var onStartPosition: Boolean = true
+    private var win: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentLvl3PuzzleHooverBinding.bind(view)
 
-        binding = FragmentLvl3PuzzleHooverBinding.bind(view)
-        bindView()
         setListeners()
         test()
         handleSounds()
 
-
-        hintManager = HintManager(
-            listOf(
-                "lvl3_puzzle2_hint1",
-                "lvl3_puzzle2_hint2",
-                "lvl3_puzzle2_hint3",
-                "lvl3_puzzle2_hint4"
-            ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "vacuum cleaner"),
-            3, "vacuum cleaner"
+        hintManager = hintManagerFactory.create(
+            hints = listOf("lvl3_puzzle2_hint1", "lvl3_puzzle2_hint2", "lvl3_puzzle2_hint3", "lvl3_puzzle2_hint4"),
+            level = 3,
+            puzzle = "vacuum cleaner"
         )
-
     }
 
-    private fun bindView() {
-        tvCoordinates = binding.tvCoordinates
-        tvDirection = binding.tvDirection
-        tvRestart = binding.tvRestart
-        tvWin = binding.tvWin
-        btnRight = binding.btnRight
-        btnLeft = binding.btnLeft
-        btnForward = binding.btnForward
-        ivBg = binding.ivMonitorImage
-        ivHoover = binding.ivHoover
-        mainLayout = binding.mainScreen
-    }
-
-
-    private fun rotateHooverAnim(clockwise : Boolean) {
+    private fun rotateHooverAnim(clockwise: Boolean) {
         changeButtonsState(false)
         puzzleHoover.changeDirection(clockwise = clockwise)
         val value = if (clockwise) 90f else -90f
-        ivHoover.animate().rotationBy(value).setDuration(300).withEndAction {
+        binding.ivHoover.animate().rotationBy(value).setDuration(300).withEndAction {
             test()
             changeButtonsState(true)
         }.start()
     }
 
     private fun setListeners() {
-        btnLeft.setOnClickListener {
+        binding.btnLeft.setOnClickListener {
             rotateHooverAnim(false)
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_left)
         }
-        btnRight.setOnClickListener {
+        binding.btnRight.setOnClickListener {
             rotateHooverAnim(true)
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
         }
 
-        btnForward.setOnClickListener {
-            tvRestart.text = ""
-            tvWin.text = ""
+        binding.btnForward.setOnClickListener {
+            binding.tvRestart.text = ""
+            binding.tvWin.text = ""
             changeButtonsState(false)
+
             if (onStartPosition) { //В начале
                 soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
-                moveHooverAnim(puzzleHoover.currDirection)
-            }
-            else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currPositionX == 6 && puzzleHoover.currDirection == Direction.Down )
-            { // Вернулись назад (небольшой костыль, ни на что не влияет, просто тут уже дело времени, которого мало
+                moveHooverAnim(puzzleHoover.currDirection, binding.mainScreen)
+            } else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currPositionX == 6 && puzzleHoover.currDirection == Direction.Down) {
+                // Вернулись назад (небольшой костыль, ни на что не влияет, просто тут уже дело времени, которого мало
                 soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
-                moveHooverToCenter(back = true)
-            }
-            else { // Двигаемся внутри вентиляции
-                btnForward.postDelayed({
+                moveHooverToCenter(binding.mainScreen, back = true)
+            } else { // Двигаемся внутри вентиляции
+                binding.btnForward.postDelayed({
                     restart = !puzzleHoover.moveForward()
                     if (!restart) soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
-                    win = puzzleHoover.checkSolution(requireActivity())
+                    win = puzzleHoover.checkSolution(requireActivity(), saveRepo)
                     test()
                     changeButtonsState(true)
                 }, 1000)
@@ -135,20 +101,18 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         }
     }
 
-    private fun changeButtonsState(state : Boolean) {
+    private fun changeButtonsState(state: Boolean) {
         val alpha = if (state) 1f else 0.5f
-        btnLeft.isEnabled = state
-        btnRight.isEnabled = state
-        btnForward.isEnabled = state
-
-        btnLeft.alpha = alpha
-        btnRight.alpha = alpha
-        btnForward.alpha = alpha
+        binding.btnLeft.isEnabled = state
+        binding.btnRight.isEnabled = state
+        binding.btnForward.isEnabled = state
+        binding.btnLeft.alpha = alpha
+        binding.btnRight.alpha = alpha
+        binding.btnForward.alpha = alpha
     }
 
-    private fun moveHooverAnim(direction: Direction) {
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(mainLayout)
+    private fun moveHooverAnim(direction: Direction, mainLayout: ConstraintLayout) {
+        val constraintSet = ConstraintSet().apply { clone(mainLayout) }
 
         // Сброс всех ограничений для iv_hoover
         constraintSet.clear(R.id.iv_hoover, ConstraintSet.START)
@@ -183,39 +147,36 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             }
         }
 
-        val transition = ChangeBounds()
-        transition.duration = if (direction == Direction.Up) ANIM_DURATION_UP else ANIM_DURATION
-
-        transition.addListener(object : Transition.TransitionListener {
-            override fun onTransitionEnd(transition: Transition?) {
-                transition?.removeListener(this)
-                if (puzzleHoover.currDirection != Direction.Up) {
-                    // Возврат на исходную позицию (центр)
-                    ivHoover.postDelayed({
-                        moveHooverToCenter()
-                    }, 750)
-                } else {
-                    onStartPosition = false
-                    puzzleHoover.moveForward()
-//                    restart = puzzleHoover.isWall()
+        val transition = ChangeBounds().apply {
+            duration = if (direction == Direction.Up) ANIM_DURATION_UP else ANIM_DURATION
+            addListener(object : Transition.TransitionListener {
+                override fun onTransitionEnd(transition: Transition?) {
+                    transition?.removeListener(this)
+                    if (puzzleHoover.currDirection != Direction.Up) {
+                        // Возврат на исходную позицию (центр)
+                        binding.ivHoover.postDelayed({ moveHooverToCenter(mainLayout) }, 750)
+                    } else {
+                        onStartPosition = false
+                        puzzleHoover.moveForward()
+                        //                    restart = puzzleHoover.isWall()
 //                    win = puzzleHoover.checkSolution(requireContext())
-                    test()
-                    changeButtonsState(true)
+                        test()
+                        changeButtonsState(true)
+                    }
                 }
-            }
-            override fun onTransitionStart(transition: Transition?) {}
-            override fun onTransitionCancel(transition: Transition?) {}
-            override fun onTransitionPause(transition: Transition?) {}
-            override fun onTransitionResume(transition: Transition?) {}
-        })
+                override fun onTransitionStart(transition: Transition?) {}
+                override fun onTransitionCancel(transition: Transition?) {}
+                override fun onTransitionPause(transition: Transition?) {}
+                override fun onTransitionResume(transition: Transition?) {}
+            })
+        }
 
         TransitionManager.beginDelayedTransition(mainLayout, transition)
         constraintSet.applyTo(mainLayout)
     }
 
-    private fun moveHooverToCenter(back : Boolean = false) {
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(mainLayout)
+    private fun moveHooverToCenter(mainLayout: ConstraintLayout, back: Boolean = false) {
+        val constraintSet = ConstraintSet().apply { clone(mainLayout) }
         constraintSet.clear(R.id.iv_hoover, ConstraintSet.START)
         constraintSet.clear(R.id.iv_hoover, ConstraintSet.END)
         constraintSet.clear(R.id.iv_hoover, ConstraintSet.TOP)
@@ -226,21 +187,21 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         constraintSet.connect(R.id.iv_hoover, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
         constraintSet.connect(R.id.iv_hoover, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
 
-        val transition = ChangeBounds()
-        transition.duration = if (back) ANIM_DURATION_UP else ANIM_DURATION
-
-        transition.addListener(object : Transition.TransitionListener {
-            override fun onTransitionEnd(transition: Transition?) {
-                transition?.removeListener(this)
-                test()
-                onStartPosition = true
-                changeButtonsState(true)
-            }
-            override fun onTransitionStart(transition: Transition?) {}
-            override fun onTransitionCancel(transition: Transition?) {}
-            override fun onTransitionPause(transition: Transition?) {}
-            override fun onTransitionResume(transition: Transition?) {}
-        })
+        val transition = ChangeBounds().apply {
+            duration = if (back) ANIM_DURATION_UP else ANIM_DURATION
+            addListener(object : Transition.TransitionListener {
+                override fun onTransitionEnd(transition: Transition?) {
+                    transition?.removeListener(this)
+                    test()
+                    onStartPosition = true
+                    changeButtonsState(true)
+                }
+                override fun onTransitionStart(transition: Transition?) {}
+                override fun onTransitionCancel(transition: Transition?) {}
+                override fun onTransitionPause(transition: Transition?) {}
+                override fun onTransitionResume(transition: Transition?) {}
+            })
+        }
 
         TransitionManager.beginDelayedTransition(mainLayout, transition)
         constraintSet.applyTo(mainLayout)
@@ -251,8 +212,8 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         if (restart) {
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_bumping)
             //tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
-            ivHoover.animate().rotation(0f).setDuration(300).start()
-            moveHooverToCenter()
+            binding.ivHoover.animate().rotation(0f).setDuration(300).start()
+            moveHooverToCenter(binding.mainScreen)
             restart = false
         }
 
@@ -262,15 +223,13 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             FragmentNavigation.changeBG(this, R.id.lvl3Fragment)
         }
 
-        tvDirection.text =
-            when (puzzleHoover.currDirection) {
-                Direction.Right -> "Вправо"
-                Direction.Left -> "Влево"
-                Direction.Down -> "Вниз"
-                Direction.Up -> "Вверх"
-            }
-        tvCoordinates.text = "${puzzleHoover.currPositionX} ${puzzleHoover.currPositionY}"
-
+//        binding.tvDirection.text = when (puzzleHoover.currDirection) {
+//            Direction.Right -> "Вправо"
+//            Direction.Left -> "Влево"
+//            Direction.Down -> "Вниз"
+//            Direction.Up -> "Вверх"
+//        }
+//        binding.tvCoordinates.text = "${puzzleHoover.currPositionX} ${puzzleHoover.currPositionY}"
     }
 
     override fun useHint() {
@@ -278,16 +237,19 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     }
 
     private fun handleSounds() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
         soundManager.init()
         soundManager.loadSound(
-            requireContext(), listOf(
+            listOf(
                 R.raw.sound_of_vacuum_cleaner_bumping,
                 R.raw.sound_of_vacuum_cleaner_driving_right,
                 R.raw.sound_of_vacuum_cleaner_driving_left,
                 R.raw.sound_of_vacuum_cleaner_driving_straight
-                )
+            )
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

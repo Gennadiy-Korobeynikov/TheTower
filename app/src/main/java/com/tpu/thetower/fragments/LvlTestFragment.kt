@@ -11,13 +11,15 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvlTestBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     View.OnTouchListener,
     View.OnDragListener {
 
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
-
+    @Inject lateinit var saveRepo: SaveRepository
 
     private lateinit var binding: FragmentLvlTestBinding
     private val originalPositions = mutableMapOf<View, Pair<Float, Float>>()
@@ -162,7 +164,7 @@ class LvlTestFragment : Fragment(R.layout.fragment_lvl_test),
     override fun onResume() {
         super.onResume()
 
-        saveRepo.saveCurrentLevel(requireActivity(), -1)
+        saveRepo.saveCurrentLevel(-1)
     }
 
 

@@ -2,89 +2,73 @@ package com.tpu.thetower.fragments.common
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentSettingsBinding
+import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
-import com.tpu.thetower.databinding.FragmentSettingsBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private lateinit var binding: FragmentSettingsBinding
 
-    private lateinit var musicManager: MusicManager
-    private lateinit var soundManager: SoundManager
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
+    @Inject
+    lateinit var saveRepo: SaveRepository
 
-    private lateinit var btnBack: Button
-    private lateinit var sbMusic: SeekBar
-    private lateinit var sbSound: SeekBar
+    @Inject
+    lateinit var musicManager: MusicManager
+
+    @Inject
+    lateinit var soundManager: SoundManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentSettingsBinding.bind(view)
 
-        bindView()
+        setInitialState()
         setListeners()
-        handleSounds()
     }
 
-    private fun bindView() {
-
-        btnBack = binding.btnBack
-        sbMusic = binding.musicVolumeSeekBar
-        sbSound = binding.soundVolumeSeekBar
+    private fun setInitialState() {
+        val gameData = saveRepo.get()
+        binding.musicVolumeSeekBar.progress = (gameData.gameSettings.musicVolume * 100).toInt()
+        binding.soundVolumeSeekBar.progress = (gameData.gameSettings.soundVolume * 100).toInt()
     }
 
     private fun setListeners() {
-        val gameData = saveRepo.get(requireActivity())
-        val savedMusicVolume = gameData.gameSettings.musicVolume
-        val savedSoundVolume = gameData.gameSettings.soundVolume
-
-        sbMusic.progress = (savedMusicVolume * 100).toInt()
-        sbSound.progress = (savedSoundVolume * 100).toInt()
-
-        sbMusic.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.musicVolumeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
-                saveRepo.saveMusicVolume(requireActivity(), volume)
+                saveRepo.saveMusicVolume(volume)
                 musicManager.setVolume(volume)
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) = Unit
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStopTrackingTouch(seekBar: SeekBar) = Unit
         })
 
-        sbSound.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.soundVolumeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val volume = progress / 100f
-                saveRepo.saveSoundVolume(requireActivity(), volume)
+                saveRepo.saveSoundVolume(volume)
                 soundManager.setVolume(volume)
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) = Unit
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStopTrackingTouch(seekBar: SeekBar) = Unit
         })
 
-        btnBack.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.SETTINGS)
         }
-    }
-
-    private fun handleSounds() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
     }
 }

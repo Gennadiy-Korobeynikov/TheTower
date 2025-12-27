@@ -6,9 +6,6 @@ import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
-import android.widget.Button
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
@@ -19,33 +16,30 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
 import com.tpu.thetower.managers.UiVisibilityController
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListener,
     View.OnDragListener {
 
     private lateinit var binding: FragmentElevatorBinding
-    private lateinit var soundManager: SoundManager
-    private lateinit var musicManager: MusicManager
 
-    private lateinit var ivBg: ImageView
-    private lateinit var ivPanel: ImageView
-    private lateinit var ivBgBlurred: ImageView
-    private lateinit var ivOpenedPanel: ImageView
-    private lateinit var ivCardReader: ImageView
-    private lateinit var clPanel: ConstraintLayout
-    private lateinit var ivDraggable: ImageView
+    @Inject lateinit var soundManager: SoundManager
+    @Inject lateinit var musicManager: MusicManager
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var dialogManager: DialogManager
 
-    private lateinit var btnToLvl0: Button
-    private lateinit var btnToLvl1: Button
-    private lateinit var btnToLvl2: Button
-    private lateinit var btnToLvl3: Button
-    private lateinit var btnToLvl4: Button
-    private lateinit var btnToLvl5: Button
-    private lateinit var btnToLvl6: Button
-
-    private lateinit var lvlButtons: List<Button>
-    private var openedLvlButtons: MutableList<Button> = mutableListOf()
-    private lateinit var lvlActions: List<Int>
+    private val openedLvlButtons: MutableList<View> = mutableListOf()
+    private val lvlActions: List<Int> = listOf(
+        R.id.action_elevatorFragment_to_lvl0Fragment,
+        R.id.action_elevatorFragment_to_lvl1Fragment,
+        R.id.action_elevatorFragment_to_lvl2Fragment,
+        R.id.action_elevatorFragment_to_lvl3Fragment,
+        R.id.action_elevatorFragment_to_lvl4Fragment,
+        R.id.action_elevatorFragment_to_lvl5Fragment,
+        R.id.action_elevatorFragment_to_lvl6Fragment
+    )
 
     private lateinit var originalPosition: Pair<Float, Float>
     private var currAccessLevel: Int = 0
@@ -54,7 +48,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentElevatorBinding.bind(view)
-        bindView()
         setListeners()
 
         val receivedData = arguments?.getString("saved_level")
@@ -63,95 +56,72 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             arguments = Bundle()
         }
 
-        soundManager = SoundManager.getInstance()
-        musicManager = MusicManager.getInstance()
-
         musicManager.stopMusic()
 
-        ivDraggable.post {
-            originalPosition = Pair(ivDraggable.x, ivDraggable.y)
+        binding.ivDraggable.post {
+            originalPosition = Pair(binding.ivDraggable.x, binding.ivDraggable.y)
         }
 
         // TODO WARNING!!! ВНИМАНИЕ!!! ДАЛЬШЕ КОСТЫЛЬ
-        if (LoadManager.getAccessLevel(requireActivity()) != 0) {
-            ivDraggable.visibility = View.VISIBLE
-            ivDraggable.setImageResource(LevelAccessManager.getCardImage())
+        if (loadManager.getAccessLevel() != 0) {
+            binding.ivDraggable.visibility = View.VISIBLE
+            binding.ivDraggable.setImageResource(LevelAccessManager.getCardImage())
         }
         // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
     }
 
-    private fun bindView() {
-        ivBg = binding.ivBg
-        ivPanel = binding.ivPanel
-        ivBgBlurred = binding.ivBgBlurred
-        ivOpenedPanel = binding.ivOpenedPanel
-        ivCardReader = binding.ivCardReader
-        clPanel = binding.clPanel
-        ivDraggable = binding.ivDraggable
-
-        btnToLvl0 = binding.btnElevatorToLvl0
-        btnToLvl1 = binding.btnElevatorToLvl1
-        btnToLvl2 = binding.btnElevatorToLvl2
-        btnToLvl3 = binding.btnElevatorToLvl3
-        btnToLvl4 = binding.btnElevatorToLvl4
-        btnToLvl5 = binding.btnElevatorToLvl5
-        btnToLvl6 = binding.btnElevatorToLvl6
-
-        lvlButtons = listOf(btnToLvl0, btnToLvl1, btnToLvl2, btnToLvl3, btnToLvl4, btnToLvl5, btnToLvl6)
-        lvlActions = listOf(
-            R.id.action_elevatorFragment_to_lvl0Fragment,
-            R.id.action_elevatorFragment_to_lvl1Fragment,
-            R.id.action_elevatorFragment_to_lvl2Fragment,
-            R.id.action_elevatorFragment_to_lvl3Fragment,
-            R.id.action_elevatorFragment_to_lvl4Fragment,
-            R.id.action_elevatorFragment_to_lvl5Fragment,
-            R.id.action_elevatorFragment_to_lvl6Fragment
-
-            )
-    }
-
     private fun setListeners() {
 
-        ivPanel.setOnClickListener {
-            ivBgBlurred.visibility = View.VISIBLE
-            ivOpenedPanel.visibility = View.VISIBLE
-            clPanel.visibility = View.VISIBLE
-            ivPanel.visibility = View.GONE
-            ivCardReader.visibility = View.GONE
+        binding.ivPanel.setOnClickListener {
+            binding.ivBgBlurred.visibility = View.VISIBLE
+            binding.ivOpenedPanel.visibility = View.VISIBLE
+            binding.clPanel.visibility = View.VISIBLE
+            binding.ivPanel.visibility = View.GONE
+            binding.ivCardReader.visibility = View.GONE
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
             unlockLvls(currAccessLevel)
         }
 
-        ivBgBlurred.setOnClickListener {
-            ivBgBlurred.visibility = View.GONE
-            ivOpenedPanel.visibility = View.GONE
-            clPanel.visibility = View.GONE
-            ivPanel.visibility = View.VISIBLE
-            ivCardReader.visibility = View.VISIBLE
+        binding.ivBgBlurred.setOnClickListener {
+            binding.ivBgBlurred.visibility = View.GONE
+            binding.ivOpenedPanel.visibility = View.GONE
+            binding.clPanel.visibility = View.GONE
+            binding.ivPanel.visibility = View.VISIBLE
+            binding.ivCardReader.visibility = View.VISIBLE
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
 
-        lvlButtons.forEach {
-            it.setOnClickListener {
-                if (it == btnToLvl2 && it in openedLvlButtons) {
-                    if (!LoadManager.getLevelStatus(requireActivity(), 1)) {
-                        DialogManager.startDialog(requireActivity(), "lvl1_elevator")
+        val lvlButtons = listOf(
+            binding.btnElevatorToLvl0,
+            binding.btnElevatorToLvl1,
+            binding.btnElevatorToLvl2,
+            binding.btnElevatorToLvl3,
+            binding.btnElevatorToLvl4,
+            binding.btnElevatorToLvl5,
+            binding.btnElevatorToLvl6
+        )
+
+        lvlButtons.forEach { btn ->
+            btn.setOnClickListener {
+                if (btn == binding.btnElevatorToLvl2 && btn in openedLvlButtons) {
+                    if (!loadManager.isLevelCompleted(1)) {
+                        dialogManager.startDialog(requireActivity(), "lvl1_elevator")
                     } else {
                         soundManager.release()
-                        FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
+                        FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(btn)])
                         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                     }
-                } else if (it in openedLvlButtons) {
+                } else if (btn in openedLvlButtons) {
                     soundManager.release()
-                    FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(it)])
+                    FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(btn)])
                     UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                 }
             }
         }
 
-        ivCardReader.setOnDragListener(this@ElevatorFragment)
-        ivDraggable.setOnTouchListener(this@ElevatorFragment)
+        binding.ivCardReader.setOnDragListener(this@ElevatorFragment)
+        binding.ivDraggable.setOnTouchListener(this@ElevatorFragment)
 
 
         //TODO Разобраться в необходимости кода
@@ -164,12 +134,22 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     }
 
     private fun unlockLvls(currAccessLevel: Int) {
+        val lvlButtons = listOf(
+            binding.btnElevatorToLvl0,
+            binding.btnElevatorToLvl1,
+            binding.btnElevatorToLvl2,
+            binding.btnElevatorToLvl3,
+            binding.btnElevatorToLvl4,
+            binding.btnElevatorToLvl5,
+            binding.btnElevatorToLvl6
+        )
+
         val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
         val unlockingLvls = (0..topUnlockingLvl)
-        unlockingLvls.forEach {
-            openedLvlButtons.add(lvlButtons[it])
-            lvlButtons[it].setBackgroundResource(android.R.color.transparent)
-            lvlButtons[it].isClickable = true
+        unlockingLvls.forEach { i ->
+            openedLvlButtons.add(lvlButtons[i])
+            lvlButtons[i].setBackgroundResource(android.R.color.transparent)
+            lvlButtons[i].isClickable = true
         }
     }
 
@@ -196,9 +176,9 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             DragEvent.ACTION_DRAG_EXITED -> return true
 
             DragEvent.ACTION_DROP -> {
-                if (targetView == ivCardReader) {
+                if (targetView == binding.ivCardReader) {
                     returnToOriginalPosition(draggedView)
-                    currAccessLevel = LoadManager.getAccessLevel(requireActivity())
+                    currAccessLevel = loadManager.getAccessLevel()
                 } else {
                     returnToOriginalPosition(draggedView)
                 }

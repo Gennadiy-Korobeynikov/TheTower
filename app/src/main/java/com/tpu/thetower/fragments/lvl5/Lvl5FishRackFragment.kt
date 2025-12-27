@@ -6,7 +6,6 @@ import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
@@ -25,60 +24,32 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
 
     private var solution = charArrayOf('-', '-', '-', '-', '-', '-', '-', '-', '-', '-')
 
-
-
-    private lateinit var ivFish1: ImageView
-    private lateinit var ivFish2: ImageView
-    private lateinit var ivFish3: ImageView
-    private lateinit var ivFish4: ImageView
-    private lateinit var ivFish5: ImageView
-    private lateinit var ivTarget1: ImageView
-    private lateinit var ivTarget2: ImageView
-    private lateinit var ivTarget3: ImageView
-    private lateinit var ivTarget4: ImageView
-    private lateinit var ivTarget5: ImageView
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl5FishRackBinding.bind(view)
 
-        bindView()
         setListeners()
-    }
-
-    private fun bindView() {
-        ivFish1 = binding.ivFish1
-        ivFish2 = binding.ivFish2
-        ivFish3 = binding.ivFish3
-        ivFish4 = binding.ivFish4
-        ivFish5 = binding.ivFish5
-        ivTarget1 = binding.ivTarget1
-        ivTarget2 = binding.ivTarget2
-        ivTarget3 = binding.ivTarget3
-        ivTarget4 = binding.ivTarget4
-        ivTarget5 = binding.ivTarget5
     }
 
     private fun setListeners() {
         val draggables = listOf(
-            ivFish1,
-            ivFish2,
-            ivFish3,
-            ivFish4,
-            ivFish5
+            binding.ivFish1,
+            binding.ivFish2,
+            binding.ivFish3,
+            binding.ivFish4,
+            binding.ivFish5
         )
         draggables.forEach { it.setOnTouchListener(this@Lvl5FishRackFragment) }
 
         val targets = listOf(
-            ivTarget1,
-            ivTarget2,
-            ivTarget3,
-            ivTarget4,
-            ivTarget5
+            binding.ivTarget1,
+            binding.ivTarget2,
+            binding.ivTarget3,
+            binding.ivTarget4,
+            binding.ivTarget5
         )
-        targets.forEachIndexed {index, it ->
+        targets.forEachIndexed { index, it ->
             it.setOnDragListener(this@Lvl5FishRackFragment)
             zoneOccupants[it] = targets[index]
         }
@@ -89,6 +60,7 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
             }
         }
     }
+
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
         return if (event?.action == MotionEvent.ACTION_DOWN) {
             view?.visibility = View.INVISIBLE
@@ -184,11 +156,11 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
 
     private fun updateSolution() {
         val targets = listOf(
-            ivTarget1,
-            ivTarget2,
-            ivTarget3,
-            ivTarget4,
-            ivTarget5
+            binding.ivTarget1,
+            binding.ivTarget2,
+            binding.ivTarget3,
+            binding.ivTarget4,
+            binding.ivTarget5
         )
         targets.forEachIndexed { index, target ->
             val draggable = zoneOccupants[target]

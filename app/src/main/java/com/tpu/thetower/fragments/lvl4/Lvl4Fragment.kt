@@ -2,8 +2,6 @@ package com.tpu.thetower.fragments.lvl4
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
@@ -12,97 +10,71 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl4Binding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
-    private lateinit var binding: FragmentLvl4Binding
+    private var _binding: FragmentLvl4Binding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var musicManager: MusicManager
-    private lateinit var soundManager: SoundManager
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
-
-    private lateinit var btnToBookBabel: Button
-    private lateinit var btnToBookAskii: Button
-    private lateinit var btnToBookQr: Button
-    private lateinit var btnToBookBlur: Button
-    private lateinit var btnToBookHistory: Button
-    private lateinit var btnToBookHelp: Button
-
-    private lateinit var btnToChessboardPuzzle: Button
-    private lateinit var btnToTimeLinePuzzle1: Button
-
-    private lateinit var btnChess: Button
-    private lateinit var btnChessboard: Button
-    private lateinit var btnTimeline: Button
-    private lateinit var btnRaven: Button
-    private lateinit var btnBookcase: Button
-    private lateinit var btnSequencePaper: Button
-
-    private lateinit var ivBg: ImageView
+    @Inject lateinit var musicManager: MusicManager
+    @Inject lateinit var soundManager: SoundManager
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentLvl4Binding.bind(view)
-        bindView()
+        _binding = FragmentLvl4Binding.bind(view)
+
         setListeners()
         handleSounds()
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 4, "chess") == "completed") {
-            btnChess.visibility = View.GONE
-            btnChessboard.visibility = View.GONE
-            ivBg.setImageResource(R.drawable.lvl4_bg_chess_completed)
-            btnTimeline.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(4, "chess") == "completed") {
+            binding.btnChess.visibility = View.GONE
+            binding.btnChessboard.visibility = View.GONE
+            binding.ivBg.setImageResource(R.drawable.lvl4_bg_chess_completed)
+            binding.btnTimeline.visibility = View.VISIBLE
         }
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 4, "timeline") == "completed") {
-            btnTimeline.visibility = View.GONE
-            ivBg.setImageResource(R.drawable.lvl4_bg_timeline_completed)
-            btnRaven.visibility = View.VISIBLE
-            btnSequencePaper.visibility = View.VISIBLE
-            btnBookcase.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(4, "timeline") == "completed") {
+            binding.btnTimeline.visibility = View.GONE
+            binding.ivBg.setImageResource(R.drawable.lvl4_bg_timeline_completed)
+            binding.btnRaven.visibility = View.VISIBLE
+            binding.btnSequencePaper.visibility = View.VISIBLE
+            binding.btnBookcase.visibility = View.VISIBLE
         }
-    }
-
-    private fun bindView() {
-        btnChess = binding.btnChess
-        btnChessboard = binding.btnChessboard
-        btnTimeline = binding.btnTimeline
-        btnRaven = binding.btnRaven
-        btnBookcase = binding.btnBookcase
-        btnSequencePaper = binding.btnSequencePaper
-        ivBg = binding.ivBg
     }
 
     private fun setListeners() {
 
-        btnChess.setOnClickListener {
+        binding.btnChess.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4PuzzleChessboardFragment)
         }
 
-        btnChessboard.setOnClickListener {
+        binding.btnChessboard.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4ChessFragment)
         }
 
-        btnTimeline.setOnClickListener {
+        binding.btnTimeline.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4TimelineFragment)
         }
 
-        btnRaven.setOnClickListener {
+        binding.btnRaven.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4RavenFragment)
         }
 
-        btnBookcase.setOnClickListener {
+        binding.btnBookcase.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4BookcaseFragment)
         }
 
-        btnSequencePaper.setOnClickListener {
+        binding.btnSequencePaper.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4SequencePaperFragment)
         }
     }
 
     private fun handleSounds() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
         soundManager.init()
 //        soundManager.loadSound(
 //            requireContext(), listOf(
@@ -114,7 +86,11 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
     override fun onResume() {
         super.onResume()
-        saveRepo.saveCurrentLevel(requireActivity(), 4)
+        saveRepo.saveCurrentLevel(4)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

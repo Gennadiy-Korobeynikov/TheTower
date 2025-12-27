@@ -3,26 +3,18 @@ package com.tpu.thetower.managers
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class SoundManager private constructor() {
+@Singleton
+class SoundManager @Inject constructor(
+    @ApplicationContext private val appContext: Context
+) {
 
     private var soundPool: SoundPool? = null
     private val soundMap = mutableMapOf<Int, Int>()
     private var volume: Float = 0.5f
-//    private val executor = Executors.newSingleThreadExecutor()
-//    private val mainHandler = Handler(Looper.getMainLooper())
-
-    companion object {
-        private var instance: SoundManager? = null
-
-        @Synchronized
-        fun getInstance(): SoundManager {
-            if (instance == null) {
-                instance = SoundManager()
-            }
-            return instance!!
-        }
-    }
 
     fun init(maxStreamsNumber: Int = 5) {
         val audioAttributes = AudioAttributes.Builder()
@@ -34,13 +26,11 @@ class SoundManager private constructor() {
             .setMaxStreams(maxStreamsNumber) // Количество одновременно проигрываемых звуков
             .setAudioAttributes(audioAttributes)
             .build()
-
-        
     }
 
-    fun loadSound(context: Context, soundResIds: List<Int>){
+    fun loadSound(soundResIds: List<Int>){
         soundResIds.forEach{
-            val soundId = soundPool?.load(context, it, 10) ?: -1
+            val soundId = soundPool?.load(appContext, it, 10) ?: -1
             if (soundId != -1) {
                 soundMap[it] = soundId
             }

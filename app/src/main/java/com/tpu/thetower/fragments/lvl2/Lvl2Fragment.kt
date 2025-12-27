@@ -2,122 +2,102 @@ package com.tpu.thetower.fragments.lvl2
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.DialogManager
-
 import com.tpu.thetower.Hintable
+import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentLvl2Binding
+import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
-import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl2Binding
-import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.UiVisibilityController
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     private lateinit var binding: FragmentLvl2Binding
 
-    private lateinit var musicManager: MusicManager
-    private lateinit var soundManager: SoundManager
-
-    private lateinit var btnToPuzzle0: Button
-    private lateinit var btnToPuzzle0Lock: Button
-    private lateinit var btnToPuzzle0Completed: Button
-    private lateinit var btnToPuzzle1: Button
-    private lateinit var btnToPuzzle2Lock: Button
-    private lateinit var btnToPuzzle2Completed: Button
-
-    private lateinit var ivAccessCard: ImageView
-
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
+    @Inject lateinit var musicManager: MusicManager
+    @Inject lateinit var soundManager: SoundManager
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var dialogManager: DialogManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl2Binding.bind(view)
-        bindView()
+
         setListeners()
         handleSounds()
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "locked") {
-            DialogManager.startDialog(requireActivity(), "lvl2_start")
-            saveRepo.savePuzzleData(requireActivity(), 2, "lock", status = "in_progress")
+        if (loadManager.getPuzzleStatus(2, "lock") == "locked") {
+            dialogManager.startDialog(requireActivity(), "lvl2_start")
+            saveRepo.savePuzzleData(2, "lock", status = "in_progress")
         }
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "lock") == "completed") {
-            btnToPuzzle0Lock.visibility = View.GONE
-            btnToPuzzle0Completed.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(2, "lock") == "completed") {
+            binding.btnToPuzzle0Lock.visibility = View.GONE
+            binding.btnToPuzzle0Completed.visibility = View.VISIBLE
         }
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 2, "chat") == "completed") {
-            btnToPuzzle2Lock.visibility = View.GONE
-            if (!LoadManager.getLevelStatus(requireActivity(), 2))
-                btnToPuzzle2Completed.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(2, "chat") == "completed") {
+            binding.btnToPuzzle2Lock.visibility = View.GONE
+            if (!loadManager.isLevelCompleted(2)) {
+                binding.btnToPuzzle2Completed.visibility = View.VISIBLE
+            }
         }
-    }
-
-    private fun bindView() {
-        btnToPuzzle0 = binding.btnToPuzzle0
-        btnToPuzzle0Lock = binding.btnToPuzzle0Lock
-        btnToPuzzle0Completed = binding.btnToPuzzle0Completed
-        btnToPuzzle1 = binding.btnToPuzzle1
-        btnToPuzzle2Lock = binding.btnToPuzzle2Lock
-        btnToPuzzle2Completed = binding.btnToPuzzle2Completed
-        ivAccessCard = binding.ivAccessCard
     }
 
     private fun setListeners() {
-        btnToPuzzle0.setOnClickListener {
+        binding.btnToPuzzle0.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2CaesarFragment)
         }
 
-        btnToPuzzle0Lock.setOnClickListener {
+        binding.btnToPuzzle0Lock.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleLockFragment)
         }
 
-        btnToPuzzle0Completed.setOnClickListener {
+        binding.btnToPuzzle0Completed.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PetFragment)
             soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
-        btnToPuzzle1.setOnClickListener {
+        binding.btnToPuzzle1.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzlePasswordFragment)
         }
 
-        btnToPuzzle2Lock.setOnClickListener {
+        binding.btnToPuzzle2Lock.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PuzzleChatFragment)
         }
 
-        btnToPuzzle2Completed.setOnClickListener {
+        binding.btnToPuzzle2Completed.setOnClickListener {
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-            ivAccessCard.visibility = View.VISIBLE
+            binding.ivAccessCard.visibility = View.VISIBLE
             soundManager.playSound(R.raw.sound_of_drawer_opening)
         }
 
-        ivAccessCard.setOnClickListener {
-            ivAccessCard.visibility = View.GONE
-            saveRepo.saveLevelStatus(requireActivity(), 2)
-            btnToPuzzle2Completed.visibility = View.GONE
+        binding.ivAccessCard.setOnClickListener {
+            binding.ivAccessCard.visibility = View.GONE
+            saveRepo.saveLevelStatus(2)
+            binding.btnToPuzzle2Completed.visibility = View.GONE
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-            LevelAccessManager.upgradeAccessLvl(this)
+            LevelAccessManager.upgradeAccessLvl(this, saveRepo)
             soundManager.playSound(R.raw.sound_of_drawer_closing)
         }
-
     }
 
     private fun handleSounds() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
+        // musicManager/soundManager уже внедрены через DI
         soundManager.init()
         soundManager.loadSound(
-            requireContext(), listOf(
+            listOf(
                 R.raw.sound_of_drawer_opening,
                 R.raw.sound_of_drawer_closing
             )
@@ -126,14 +106,15 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     override fun onResume() {
         super.onResume()
-        saveRepo.saveCurrentLevel(requireActivity(), 2)
+        saveRepo.saveCurrentLevel(2)
     }
 
     override fun useHint() {
-        if (LoadManager.isLevelCompleted(requireActivity(), 2)) {
-            DialogManager.startDialog(requireActivity(), "no_hints")
-        } else
-            DialogManager.startDialog(requireActivity(), "hint_is_not_here")
+        if (loadManager.isLevelCompleted(2)) {
+            dialogManager.startDialog(requireActivity(), "no_hints")
+        } else {
+            dialogManager.startDialog(requireActivity(), "hint_is_not_here")
+        }
     }
 
 }

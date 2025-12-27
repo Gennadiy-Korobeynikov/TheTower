@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
@@ -16,11 +18,20 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import java.io.File
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var musicManager: MusicManager
-    protected lateinit var soundManager: SoundManager
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
+    @Inject
+    lateinit var musicManager: MusicManager
+
+    @Inject
+    lateinit var soundManager: SoundManager
+
+    @Inject
+    lateinit var saveRepo: SaveRepository
+
+    @Inject
+    lateinit var loadManager: LoadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,16 +39,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         copyJsonFromAssets(this, "save_file.json")
-        LoadManager.loadProgress(this)
+        loadManager.loadProgress()
 
         setManagers()
-        saveRepo.savePuzzleUsedHintsCount(this,0, "flashlight",0)// TEST
-        saveRepo.savePuzzleUsedHintsCount(this,0, "lock",0)// TEST
+        saveRepo.savePuzzleUsedHintsCount(0, "flashlight", 0) // TEST
+        saveRepo.savePuzzleUsedHintsCount(0, "lock", 0) // TEST
 
-        // Когда появится кнопка сброса прогресса
-        //LoadManager.loadProgress()
-
-        LoadManager.loadSettings(this)
+        loadManager.loadSettings()
 
         window.decorView.apply {
             systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -48,7 +56,6 @@ class MainActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         }
 
-
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_bg) as? NavHostFragment
@@ -58,21 +65,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
 
-
-
     private fun setManagers() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
         soundManager.init()
         soundManager.loadSound(
-            this, listOf(
+            listOf(
                 R.raw.sound_of_guard_snoring
             )
         )
-        // SaveRepository создаётся лениво; отдельной инициализации не требуется.
     }
 
     fun copyJsonFromAssets(context: Context, fileName: String) {

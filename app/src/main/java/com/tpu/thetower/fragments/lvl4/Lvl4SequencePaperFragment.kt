@@ -3,7 +3,6 @@ package com.tpu.thetower.fragments.lvl4
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.ImageView
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.R
@@ -11,29 +10,27 @@ import com.tpu.thetower.databinding.FragmentLvl4SequencePaperBinding
 
 class Lvl4SequencePaperFragment : Fragment(R.layout.fragment_lvl4_sequence_paper) {
 
-    private lateinit var binding: FragmentLvl4SequencePaperBinding
-
-    private lateinit var ivBg: ImageView
+    private var _binding: FragmentLvl4SequencePaperBinding? = null
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl4SequencePaperBinding.bind(view)
+        _binding = FragmentLvl4SequencePaperBinding.bind(view)
 
-        bindView()
         setListeners()
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
-    private fun bindView() {
-        ivBg = binding.ivBg
-    }
-
     private fun setListeners() {
-        ivBg.setOnClickListener {
+        binding.ivBg.setOnClickListener {
             FragmentNavigation.goBack(this)
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

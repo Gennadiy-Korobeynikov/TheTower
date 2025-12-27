@@ -175,7 +175,7 @@
     </fragment>
     <fragment
         android:id="@+id/booksFragment"
-        android:name="com.tpu.thetower.fragments.lvl4.BooksFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4BooksFragment"
         android:label="fragment_books"
         tools:layout="@layout/fragment_books" />
     <fragment

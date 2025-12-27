@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
@@ -17,35 +19,34 @@ import com.tpu.thetower.puzzles.Lvl4ChessboardPuzzle
 import com.tpu.thetower.managers.FragmentNavigation
 
 
+@AndroidEntryPoint
 class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_chessboard), Hintable {
     private lateinit var binding: FragmentLvl4PuzzleChessboardBinding
     private val cellStates = MutableList(64) { false }
 
     private val puzzle: Puzzle = Lvl4ChessboardPuzzle(4, "chess")
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
+
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
+
     private lateinit var hintManager: HintManager
-
-    private lateinit var board: GridLayout
-
-    private fun bind() {
-        board = binding.gridBoard
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl4PuzzleChessboardBinding.bind(view)
-        bind()
-        board.post {
-            val boardPx = board.width //
+
+        binding.gridBoard.post {
+            val boardPx = binding.gridBoard.width //
             setupBoard(boardPx)
         }
 
-        hintManager = HintManager(
-            listOf(
+        hintManager = hintManagerFactory.create(
+            hints = listOf(
                 "lvl4_chess_hint1","lvl4_chess_hint2", "lvl4_chess_hint3" ,"lvl4_chess_hint4",
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "chess"),
-            4, "chess"
+            level = 4,
+            puzzle = "chess"
         )
     }
 
@@ -57,13 +58,14 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
         val solutionString = cellStates
             .mapIndexedNotNull { idx, sel -> if (sel) idx.toString() else null }
             .joinToString(";")
-        if (puzzle.checkSolution(requireActivity(), solutionString)) {
+        if (puzzle.checkSolution(requireActivity(), saveRepo, solutionString)) {
             passed()
         }
     }
 
     private fun setupBoard(boardPx: Int) {
         val cellSize = boardPx / 8 - 16
+        val board: GridLayout = binding.gridBoard
         board.rowCount = 8
         board.columnCount = 8
 
@@ -89,9 +91,6 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
         }
 
     }
-
-
-
 
     private fun passed() {
         FragmentNavigation.goBack(this)

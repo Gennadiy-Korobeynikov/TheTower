@@ -12,13 +12,19 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4TimelineBinding
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.puzzles.Lvl4PuzzleTimeline
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
     View.OnTouchListener,
     View.OnDragListener {
 
-    private lateinit var binding: FragmentLvl4TimelineBinding
+    private var _binding: FragmentLvl4TimelineBinding? = null
+    private val binding get() = _binding!!
+
     private val originalPositions = mutableMapOf<View, Pair<Float, Float>>()
     private val zoneOccupants = mutableMapOf<View, View?>()
 
@@ -26,89 +32,49 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
 
     private var solution = charArrayOf('-', '-', '-', '-', '-', '-', '-', '-', '-', '-')
 
+    private val draggables by lazy(LazyThreadSafetyMode.NONE) {
+        listOf(
+            binding.ivDraggable1,
+            binding.ivDraggable2,
+            binding.ivDraggable3,
+            binding.ivDraggable4,
+            binding.ivDraggable5,
+            binding.ivDraggable6,
+            binding.ivDraggable7,
+            binding.ivDraggable8,
+            binding.ivDraggable9,
+            binding.ivDraggable10
+        )
+    }
 
-    private lateinit var ivDraggable1: ImageView
-    private lateinit var ivDraggable2: ImageView
-    private lateinit var ivDraggable3: ImageView
-    private lateinit var ivDraggable4: ImageView
-    private lateinit var ivDraggable5: ImageView
-    private lateinit var ivDraggable6: ImageView
-    private lateinit var ivDraggable7: ImageView
-    private lateinit var ivDraggable8: ImageView
-    private lateinit var ivDraggable9: ImageView
-    private lateinit var ivDraggable10: ImageView
-    private lateinit var ivTarget1: ImageView
-    private lateinit var ivTarget2: ImageView
-    private lateinit var ivTarget3: ImageView
-    private lateinit var ivTarget4: ImageView
-    private lateinit var ivTarget5: ImageView
-    private lateinit var ivTarget6: ImageView
-    private lateinit var ivTarget7: ImageView
-    private lateinit var ivTarget8: ImageView
-    private lateinit var ivTarget9: ImageView
-    private lateinit var ivTarget10: ImageView
+    private val targets by lazy(LazyThreadSafetyMode.NONE) {
+        listOf(
+            binding.ivTarget1,
+            binding.ivTarget2,
+            binding.ivTarget3,
+            binding.ivTarget4,
+            binding.ivTarget5,
+            binding.ivTarget6,
+            binding.ivTarget7,
+            binding.ivTarget8,
+            binding.ivTarget9,
+            binding.ivTarget10
+        )
+    }
 
+    @Inject lateinit var saveRepo: SaveRepository
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl4TimelineBinding.bind(view)
+        _binding = FragmentLvl4TimelineBinding.bind(view)
 
-        bindView()
         setListeners()
-
-    }
-
-    private fun bindView() {
-        ivDraggable1 = binding.ivDraggable1
-        ivDraggable2 = binding.ivDraggable2
-        ivDraggable3 = binding.ivDraggable3
-        ivDraggable4 = binding.ivDraggable4
-        ivDraggable5 = binding.ivDraggable5
-        ivDraggable6 = binding.ivDraggable6
-        ivDraggable7 = binding.ivDraggable7
-        ivDraggable8 = binding.ivDraggable8
-        ivDraggable9 = binding.ivDraggable9
-        ivDraggable10 = binding.ivDraggable10
-        ivTarget1 = binding.ivTarget1
-        ivTarget2 = binding.ivTarget2
-        ivTarget3 = binding.ivTarget3
-        ivTarget4 = binding.ivTarget4
-        ivTarget5 = binding.ivTarget5
-        ivTarget6 = binding.ivTarget6
-        ivTarget7 = binding.ivTarget7
-        ivTarget8 = binding.ivTarget8
-        ivTarget9 = binding.ivTarget9
-        ivTarget10 = binding.ivTarget10
     }
 
     private fun setListeners() {
-        val draggables = listOf(
-            ivDraggable1,
-            ivDraggable2,
-            ivDraggable3,
-            ivDraggable4,
-            ivDraggable5,
-            ivDraggable6,
-            ivDraggable7,
-            ivDraggable8,
-            ivDraggable9,
-            ivDraggable10
-        )
         draggables.forEach { it.setOnTouchListener(this@Lvl4TimelineFragment) }
 
-        val targets = listOf(
-            ivTarget1,
-            ivTarget2,
-            ivTarget3,
-            ivTarget4,
-            ivTarget5,
-            ivTarget6,
-            ivTarget7,
-            ivTarget8,
-            ivTarget9,
-            ivTarget10
-        )
         targets.forEach {
             it.setOnDragListener(this@Lvl4TimelineFragment)
             zoneOccupants[it] = null
@@ -119,7 +85,6 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
                 originalPositions[draggable] = Pair(draggable.x, draggable.y)
             }
         }
-
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
@@ -198,7 +163,7 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
                     }
                 }
                 updateSolution()
-                if (puzzle.checkSolution(requireActivity(), String(solution))) {
+                if (puzzle.checkSolution(requireActivity(), saveRepo, String(solution))) {
                     FragmentNavigation.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
                     FragmentNavigation.changeBG(this, R.id.lvl4Fragment)
                 }
@@ -217,33 +182,29 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
     }
 
     private fun updateSolution() {
-        val targets = listOf(
-            ivTarget1,
-            ivTarget2,
-            ivTarget3,
-            ivTarget4,
-            ivTarget5,
-            ivTarget6,
-            ivTarget7,
-            ivTarget8,
-            ivTarget9,
-            ivTarget10
-        )
         targets.forEachIndexed { index, target ->
             val draggable = zoneOccupants[target]
-            solution[index] = when (draggable?.id) {
-                R.id.iv_draggable1 -> '1'
-                R.id.iv_draggable2 -> '2'
-                R.id.iv_draggable3 -> '3'
-                R.id.iv_draggable4 -> '4'
-                R.id.iv_draggable5 -> '5'
-                R.id.iv_draggable6 -> '6'
-                R.id.iv_draggable7 -> '7'
-                R.id.iv_draggable8 -> '8'
-                R.id.iv_draggable9 -> '9'
-                R.id.iv_draggable10 -> '0'
+            solution[index] = when (draggable) {
+                draggables.getOrNull(0) -> '1'
+                draggables.getOrNull(1) -> '2'
+                draggables.getOrNull(2) -> '3'
+                draggables.getOrNull(3) -> '4'
+                draggables.getOrNull(4) -> '5'
+                draggables.getOrNull(5) -> '6'
+                draggables.getOrNull(6) -> '7'
+                draggables.getOrNull(7) -> '8'
+                draggables.getOrNull(8) -> '9'
+                draggables.getOrNull(9) -> '0'
                 else -> '-'
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Важно: lazy-списки держат ссылки на binding.*; чистим состояние, затем обнуляем binding
+        originalPositions.clear()
+        zoneOccupants.clear()
+        _binding = null
     }
 }

@@ -2,8 +2,6 @@ package com.tpu.thetower.fragments.lvl4
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.UiVisibilityController
@@ -13,59 +11,58 @@ import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl4RavenBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
 
-    private lateinit var binding: FragmentLvl4RavenBinding
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
+    private var _binding: FragmentLvl4RavenBinding? = null
+    private val binding get() = _binding!!
+
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var dialogManager: DialogManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
+
     private lateinit var hintManager: HintManager
-
-    private lateinit var btnRaven: Button
-
-    private lateinit var ivBg: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl4RavenBinding.bind(view)
+        _binding = FragmentLvl4RavenBinding.bind(view)
 
-        bindView()
         setListeners()
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
-        hintManager = HintManager(
-            listOf(
+        hintManager = hintManagerFactory.create(
+            hints = listOf(
                 "lvl4_askiiBtn_hint1", "lvl4_askiiBtn_hint2"
             ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "askiibtn"),
-            4, "askiibtn"
+            level = 4,
+            puzzle = "askiibtn"
         )
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 4, "askiibtn") == "in_progress") {
-            ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
+        if (loadManager.getPuzzleStatus(4, "askiibtn") == "in_progress") {
+            binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
         }
     }
 
-    private fun bindView() {
-        btnRaven = binding.btnRaven
-        ivBg = binding.ivBg
-    }
-
     private fun setListeners() {
-        btnRaven.setOnClickListener {
+        binding.btnRaven.setOnClickListener {
             val dialog: String
 
-            if (LoadManager.getPuzzleStatus(requireActivity(), 4, "askiibtn") == "locked") {
-                ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
-                saveRepo.savePuzzleData(requireActivity(), 4, "askiibtn", status = "in_progress")
+            if (loadManager.getPuzzleStatus(4, "askiibtn") == "locked") {
+                binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
+                saveRepo.savePuzzleData(4, "askiibtn", status = "in_progress")
                 dialog = "lvl4_puzzle1_askii"
             } else {
-                ivBg.setImageResource(R.drawable.lvl4_raven_switch_1)
-                saveRepo.savePuzzleData(requireActivity(), 4, "askiibtn", status = "locked")
+                binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_1)
+                saveRepo.savePuzzleData(4, "askiibtn", status = "locked")
                 dialog = "lvl4_puzzle1_normal"
             }
-            DialogManager.startDialog(requireActivity(), dialog)
+            dialogManager.startDialog(requireActivity(), dialog)
         }
     }
 
@@ -73,4 +70,8 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
         hintManager.useHint(requireActivity())
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

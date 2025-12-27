@@ -2,22 +2,26 @@ package com.tpu.thetower.managers
 
 import android.app.Activity
 import android.os.CountDownTimer
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
-class HintManager(
-    private val hints: List<String>,
-    private var usedHintsCount : Int,
-    private val level : Int,
-    private val puzzle : String,
+class HintManager @AssistedInject constructor(
+    @Assisted private val hints: List<String>,
+    @Assisted private val level: Int,
+    @Assisted private val puzzle: String,
+    private val saveRepo: SaveRepository,
+    private val loadManager: LoadManager,
+    private val dialogManager: DialogManager
 ) {
-    private val saveRepo = SaveRepository.getInstance()
     companion object {
         private var isNewHintAvaliable = true
         private var timer: CountDownTimer? = null
         private val totalTimeToRecover = 20_000L // Пока 10 сек для теста
-        private val updateInterval =  totalTimeToRecover / 6 // Пока 2 сек
-        private var lastPuzzleName  = ""
+        private val updateInterval = totalTimeToRecover / 6 // Пока 2 сек
+        private var lastPuzzleName = ""
 
-        private fun startHintRecovery(activity: Activity, hintManager: HintManager) {
+        private fun startHintRecovery(activity: Activity, hintManager: HintManager, usedHintsCount: Int) {
             timer?.cancel()
             isNewHintAvaliable = false
 
@@ -32,9 +36,8 @@ class HintManager(
                 override fun onFinish() {
                     ImageUpdateDispatcher.updateHintStateImg(activity, 0)
                     isNewHintAvaliable = true
-                    if (hintManager.usedHintsCount < hintManager.hints.count())
+                    if (usedHintsCount < hintManager.hints.count())
                         hintManager.usedHintsCountIncrease(activity)
-
                 }
             }.start()
         }
@@ -47,44 +50,49 @@ class HintManager(
         }
     }
 
-
     fun useHint(activity: Activity) {
-        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle)
+        val usedHintsCount = loadManager.getPuzzleUsedHintsCount(level, puzzle)
 
         // Если в предыдущий раз подсказка была вызвана на этом фрагменте или это не первая подсказка
         if (lastPuzzleName == puzzle || usedHintsCount>0) {
 
             // Последняя подсказка - только показываем
             if (usedHintsCount == hints.count()) {
-                DialogManager.startDialog(activity, hints[usedHintsCount - 1])
+                dialogManager.startDialog(activity, hints[usedHintsCount - 1])
                 return
             }
 
             // Показываем текущую подсказку, если она новая или ещё не восстановилась старая на этом же фрагменте
             if (lastPuzzleName == puzzle || isNewHintAvaliable)
-                DialogManager.startDialog(activity, hints[usedHintsCount])
+                dialogManager.startDialog(activity, hints[usedHintsCount])
 
             // Показываем предыдущую подсказку
             else
-                DialogManager.startDialog(activity, hints[usedHintsCount-1])
+                dialogManager.startDialog(activity, hints[usedHintsCount - 1])
 
             if (isNewHintAvaliable) {
-                startHintRecovery(activity, this)
+                startHintRecovery(activity, this, usedHintsCount)
                 lastPuzzleName = puzzle
             }
-
-        }
-        else if (isNewHintAvaliable) {
-            DialogManager.startDialog(activity, hints[usedHintsCount])
-            startHintRecovery(activity, this)
+        } else if (isNewHintAvaliable) {
+            dialogManager.startDialog(activity, hints[usedHintsCount])
+            startHintRecovery(activity, this, usedHintsCount)
             lastPuzzleName = puzzle
         }
         // else звук или ещё что-то, типа "подсказка не готова" TODO
     }
 
     fun usedHintsCountIncrease(activity: Activity) {
-        usedHintsCount = LoadManager.getPuzzleUsedHintsCount(activity, level, puzzle) + 1
-        saveRepo.savePuzzleUsedHintsCount(activity, level, puzzle, usedHintsCount)
+        val usedHintsCount = loadManager.getPuzzleUsedHintsCount( level, puzzle) + 1
+        saveRepo.savePuzzleUsedHintsCount(level, puzzle, usedHintsCount)
     }
 
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            hints: List<String>,
+            level: Int,
+            puzzle: String
+        ): HintManager
+    }
 }

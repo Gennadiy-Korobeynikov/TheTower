@@ -10,8 +10,6 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +23,8 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 data class KeyPin(
     val initialPosition: Float,
@@ -33,19 +33,16 @@ data class KeyPin(
     val maxPosition: Float
 )
 
+@AndroidEntryPoint
 class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hintable {
 
     private lateinit var binding: FragmentLvl3PuzzleKeyBinding
 
-    private lateinit var keyView: KeyView
-    private lateinit var btnLockToCopy: Button
-    private lateinit var btnCopy: Button
-    private lateinit var btnApply: Button
-
-    private lateinit var ivBg: ImageView
-
     private lateinit var hintManager: HintManager
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
+
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
 
     private lateinit var puzzle: Puzzle
     var longPressRunnable: Runnable? = null
@@ -56,7 +53,6 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
 
         binding = FragmentLvl3PuzzleKeyBinding.bind(view)
 
-        bindView()
         setListeners()
 
         puzzle = Lvl3PuzzleKey(3, "key")
@@ -64,54 +60,47 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
 
-        if (LoadManager.isPuzzleCompleted(requireActivity(), 3, "lock model")) { // Замок вставлен в комп
-            hintManager = HintManager(
-                listOf("lvl3_puzzle4_hint3"),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
-                3, "key"
+        if (loadManager.getPuzzleStatus(3, "lock model") == "completed") { // Замок вставлен в комп
+            hintManager = hintManagerFactory.create(
+                hints = listOf("lvl3_puzzle4_hint3"),
+                level = 3,
+                puzzle = "key"
             )
 
         }
-        else
-            hintManager = HintManager(
-                listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 3, "key"),
-                3, "key"
+        else {
+            hintManager = hintManagerFactory.create(
+                hints = listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
+                level = 3,
+                puzzle = "key"
             )
-    }
-
-    private fun bindView() {
-        btnLockToCopy = binding.btnLockToCopy
-        btnCopy = binding.btnCopy
-        btnApply = binding.btnApply
-        ivBg = binding.ivBg
-        keyView = binding.keyView
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
 
-        btnCopy.setOnClickListener {
-            saveRepo.savePuzzleData(requireActivity(), 3, "lock model", status = "in_progress")
-            btnCopy.visibility = View.GONE
-            ivBg.setImageResource(R.drawable.lvl3_lock)
+        binding.btnCopy.setOnClickListener {
+            saveRepo.savePuzzleData(3, "lock model", status = "in_progress")
+            binding.btnCopy.visibility = View.GONE
+            binding.ivBg.setImageResource(R.drawable.lvl3_lock)
 
             val snackBar = Snackbar.make(
-                ivBg,
+                binding.ivBg,
                 getString(R.string.lvl3_copy),
                 Toast.LENGTH_SHORT
             )
             snackBar.show()
         }
 
-        btnLockToCopy.setOnTouchListener { view, motionEvent ->
+        binding.btnLockToCopy.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     isLongPressHandled = false
                     longPressRunnable = Runnable {
-                        ivBg.setImageResource(R.drawable.lvl3_lock_copy)
-                        btnLockToCopy.visibility = View.GONE
-                        btnCopy.visibility = View.VISIBLE
+                        binding.ivBg.setImageResource(R.drawable.lvl3_lock_copy)
+                        binding.btnLockToCopy.visibility = View.GONE
+                        binding.btnCopy.visibility = View.VISIBLE
                         isLongPressHandled = true
                     }
                     view.postDelayed(longPressRunnable, 1000)
@@ -132,10 +121,10 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             }
         }
 
-        btnApply.setOnClickListener {
-            val pinsPositions = keyView.getPinsPositions()
-            if (puzzle.checkSolution(requireActivity(), pinsPositions.joinToString(""))) {
-                ivBg.animate()
+        binding.btnApply.setOnClickListener {
+            val pinsPositions = binding.keyView.getPinsPositions()
+            if (puzzle.checkSolution(requireActivity(), saveRepo, pinsPositions.joinToString(""))) {
+                binding.ivBg.animate()
                     .alpha(0.2f)
                     .setDuration(2500)
                     .withEndAction {

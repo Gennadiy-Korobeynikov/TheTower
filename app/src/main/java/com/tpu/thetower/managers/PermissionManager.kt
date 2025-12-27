@@ -10,14 +10,11 @@ class PermissionManager (
     caller: ActivityResultCaller,
     private val activity: Activity
 ) {
-
     private val requestPermissionLauncher = caller.registerForActivityResult(
         ActivityResultContracts.RequestPermission()) { isGranted ->
         if (!isGranted)
             UiVisibilityController.show(activity, UiVisibilityController.UiContainer.PERMISSION_DENIED)
     }
-
-
 
     fun getPermission(permission : String) {
         if (!isPermissionGranted(permission))

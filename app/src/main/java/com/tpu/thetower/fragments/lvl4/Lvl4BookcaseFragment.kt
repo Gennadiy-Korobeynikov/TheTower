@@ -2,7 +2,6 @@ package com.tpu.thetower.fragments.lvl4
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.ImageUpdateDispatcher
@@ -10,68 +9,52 @@ import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4BookcaseBinding
 import com.tpu.thetower.managers.LoadManager
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
 
-    private lateinit var binding: FragmentLvl4BookcaseBinding
+    private var _binding: FragmentLvl4BookcaseBinding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var btnBookHelp: Button
-    private lateinit var btnBookBlur: Button
-    private lateinit var btnBookAskii: Button
-    private lateinit var btnBookQr: Button
-    private lateinit var btnBookHistory: Button
-    private lateinit var btnBookBabel: Button
-
+    @Inject lateinit var loadManager: LoadManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl4BookcaseBinding.bind(view)
+        _binding = FragmentLvl4BookcaseBinding.bind(view)
 
-        bindView()
         setListeners()
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
-    private fun bindView() {
-        btnBookHelp = binding.btnBookHelp
-        btnBookBlur = binding.btnBookBlur
-        btnBookAskii = binding.btnBookAskii
-        btnBookQr = binding.btnBookQr
-        btnBookHistory = binding.btnBookHistory
-        btnBookBabel = binding.btnBookBabel
-    }
-
     private fun setListeners() {
 
-        btnBookHelp.setOnClickListener {
+        binding.btnBookHelp.setOnClickListener {
             openBook("help")
         }
 
-        btnBookBlur.setOnClickListener {
+        binding.btnBookBlur.setOnClickListener {
             openBook("blur")
         }
 
-        btnBookAskii.setOnClickListener {
-            val book: String = if (LoadManager.getPuzzleStatus(
-                    requireActivity(),
-                    4,
-                    "askiibtn"
-                ) == "locked"
-            ) "askii_a" else "askii_b"
+        binding.btnBookAskii.setOnClickListener {
+            val book: String = if (loadManager.getPuzzleStatus(4, "askiibtn") == "locked")
+                "askii_a" else "askii_b"
             openBook(book)
         }
 
-        btnBookQr.setOnClickListener {
+        binding.btnBookQr.setOnClickListener {
             openBook("qr")
         }
 
-        btnBookHistory.setOnClickListener {
+        binding.btnBookHistory.setOnClickListener {
             openBook("history")
         }
 
-        btnBookBabel.setOnClickListener {
+        binding.btnBookBabel.setOnClickListener {
             openBook("babel")
         }
     }
@@ -81,4 +64,8 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
         ImageUpdateDispatcher.openBook(this, book)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

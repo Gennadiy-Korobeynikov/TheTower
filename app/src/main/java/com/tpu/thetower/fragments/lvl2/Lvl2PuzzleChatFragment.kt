@@ -2,14 +2,11 @@ package com.tpu.thetower.fragments.lvl2
 
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
@@ -18,83 +15,68 @@ import com.tpu.thetower.puzzles.Lvl2PuzzleChat
 import com.tpu.thetower.utils.WheelSetupHelper
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.UiVisibilityController
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+//TODO CHECK (Chat?)
+@AndroidEntryPoint
 class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hintable {
 
     private lateinit var binding: FragmentLvl2PuzzleChatBinding
 
-    private lateinit var rv1: RecyclerView
-    private lateinit var rv2: RecyclerView
-    private lateinit var rv3: RecyclerView
-    private lateinit var rv4: RecyclerView
-    private lateinit var rv5: RecyclerView
-    private val rvList = mutableListOf<RecyclerView>()
-
-    private lateinit var mainScreen: FrameLayout
-
-    private lateinit var puzzle: Puzzle
+    private val puzzle: Puzzle = Lvl2PuzzleChat(2, "chat")
     private lateinit var hintManager: HintManager
-    private lateinit var soundManager: SoundManager
 
-    private var solution = "11111".toCharArray()
+    @Inject lateinit var soundManager: SoundManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
 
+    private val solution = "11111".toCharArray()
     private var isSolved = false
 
-    private val images =
-        arrayOf(
-            R.drawable.lvl2_puzzle0_letter_b,
-            R.drawable.lvl2_puzzle0_letter_d,
-            R.drawable.lvl2_puzzle0_letter_g,
-            R.drawable.lvl2_puzzle0_letter_i,
-            R.drawable.lvl2_puzzle0_letter_k,
-            R.drawable.lvl2_puzzle0_letter_m,
-            R.drawable.lvl2_puzzle0_letter_n,
-            R.drawable.lvl2_puzzle0_letter_o,
-            R.drawable.lvl2_puzzle0_letter_x,
-            R.drawable.lvl2_puzzle0_letter_y
-        )
+    private val images = arrayOf(
+        R.drawable.lvl2_puzzle0_letter_b,
+        R.drawable.lvl2_puzzle0_letter_d,
+        R.drawable.lvl2_puzzle0_letter_g,
+        R.drawable.lvl2_puzzle0_letter_i,
+        R.drawable.lvl2_puzzle0_letter_k,
+        R.drawable.lvl2_puzzle0_letter_m,
+        R.drawable.lvl2_puzzle0_letter_n,
+        R.drawable.lvl2_puzzle0_letter_o,
+        R.drawable.lvl2_puzzle0_letter_x,
+        R.drawable.lvl2_puzzle0_letter_y
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl2PuzzleChatBinding.bind(view)
-        bindView()
-        soundManager = SoundManager.getInstance()
+
         soundManager.init()
         soundManager.loadSound(
-            requireContext(), listOf(
+            listOf(
                 R.raw.sound_of_the_lock_opening,
                 R.raw.sound_of_segments_rotating_on_the_safe_lock
             )
         )
 
-        rvList.addAll(listOf(rv1, rv2, rv3, rv4, rv5))
-
-        hintManager = HintManager(
-            listOf(
-                "lvl2_puzzle0_hint",
-            ),
-            LoadManager.getPuzzleUsedHintsCount(requireActivity(), 2, "lock"),
-            2, "lock"
+        hintManager = hintManagerFactory.create(
+            hints = listOf("lvl2_puzzle0_hint"),
+            level = 2,
+            puzzle = "lock"
         )
-        puzzle = Lvl2PuzzleChat(2, "chat")
+
         setupWheels(images)
     }
 
-    private fun bindView() {
-        rv1 = binding.rvImage1
-        rv2 = binding.rvImage2
-        rv3 = binding.rvImage3
-        rv4 = binding.rvImage4
-        rv5 = binding.rvImage5
-        mainScreen = binding.mainScreen
-    }
-
     private fun setupWheels(data: Array<Int>) {
-        rvList.forEachIndexed { index, rv ->
-            setupWheel(rv, data, index)
-        }
+        val rvList = listOf(
+            binding.rvImage1,
+            binding.rvImage2,
+            binding.rvImage3,
+            binding.rvImage4,
+            binding.rvImage5
+        )
+        rvList.forEachIndexed { index, rv -> setupWheel(rv, data, index) }
     }
 
     private fun setupWheel(rv: RecyclerView, data: Array<Int>, rvIndex: Int) {
@@ -122,12 +104,10 @@ class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hin
     private fun passed() {
         isSolved = true
         UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-        mainScreen.animate()
+        binding.mainScreen.animate()
             .alpha(0.2f)
             .setDuration(2500)
-            .withEndAction {
-                FragmentNavigation.goBack(this)
-            }
+            .withEndAction { FragmentNavigation.goBack(this) }
             .start()
         // TODO Добавить звук открывающейся двери сейфа
     }

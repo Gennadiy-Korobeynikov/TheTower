@@ -2,33 +2,27 @@ package com.tpu.thetower.managers
 
 import android.content.Context
 import android.media.MediaPlayer
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MusicManager private constructor()  {
+@Singleton
+class MusicManager @Inject constructor(
+    @ApplicationContext private val appContext: Context
+) {
 
     private var mediaPlayer: MediaPlayer? = null
     private var currentMusic: Int = -1
     private var volume: Float = 0.5f
 
-    companion object {
-        private var instance: MusicManager? = null
-
-        @Synchronized
-        fun getInstance(): MusicManager {
-            if (instance == null) {
-                instance = MusicManager()
-            }
-            return instance!!
-        }
-    }
-
-    fun playMusic(context: Context, music: Int, restart: Boolean = false) {
+    fun playMusic(music: Int, restart: Boolean = false) {
         if (currentMusic == music && mediaPlayer != null && mediaPlayer!!.isPlaying && !restart) {
             return
         }
 
         stopMusic()
 
-        mediaPlayer = MediaPlayer.create(context.applicationContext, music).apply {
+        mediaPlayer = MediaPlayer.create(appContext, music).apply {
             isLooping = true
             setVolume(volume, volume)
             setOnPreparedListener { start() }

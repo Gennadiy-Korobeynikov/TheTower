@@ -5,16 +5,21 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class BooksFragment : Fragment(R.layout.fragment_books) {
+@AndroidEntryPoint
+class Lvl4BooksFragment : Fragment(R.layout.fragment_books) {
 
     // lateinit var binding : FragmentBookBinding
 
-    private lateinit var  bookPages : Map<String, List<Int>>
-    private lateinit var  bookTexts : Map<String, List<Pair<String, String>>>
-    private lateinit var  bookHints : Map<String, HintManager?>
-    private lateinit var  bookHasLink : Map<String, Boolean>
+    private lateinit var bookPages: Map<String, List<Int>>
+    private lateinit var bookTexts: Map<String, List<Pair<String, String>>>
+    private lateinit var bookHints: Map<String, HintManager?>
+    private lateinit var bookHasLink: Map<String, Boolean>
+
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,44 +102,37 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
 
 
         bookHints = mapOf(
-            "babel" to HintManager(
-                listOf(
+            "babel" to hintManagerFactory.create(
+                hints = listOf(
                     "lvl4_book_babel_hint1","lvl4_book_babel_hint2",
                     "lvl4_book_babel_hint3" ,"lvl4_book_babel_hint4", "lvl4_book_babel_hint5"
                 ),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "book_babel"),
-                4, "book_babel"
+                level = 4,
+                puzzle = "book_babel"
             ),
             "askii_a" to null,
-            "askii_b" to HintManager(
-                listOf(
-                    "lvl4_book_askii_hint1"
-                ),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "book_askii"),
-                4, "book_askii"
-
+            "askii_b" to hintManagerFactory.create(
+                hints = listOf("lvl4_book_askii_hint1"),
+                level = 4,
+                puzzle = "book_askii"
             ),
-            "qr" to HintManager(
-                listOf(
-                    "lvl4_book_qr_hint1", "lvl4_book_qr_hint2", "lvl4_book_qr_hint3","lvl4_book_qr_hint4"
-                ),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "book_qr"),
-                4, "book_qr"
+            "qr" to hintManagerFactory.create(
+                hints = listOf("lvl4_book_qr_hint1", "lvl4_book_qr_hint2", "lvl4_book_qr_hint3","lvl4_book_qr_hint4"),
+                level = 4,
+                puzzle = "book_qr"
             ),
-            "blur" to HintManager(
-                listOf(
-                    "lvl4_book_blur_hint1", "lvl4_book_blur_hint2", "lvl4_book_blur_hint3"
-                ),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "book_blur"),
-                4, "book_blur"
+            "blur" to hintManagerFactory.create(
+                hints = listOf("lvl4_book_blur_hint1", "lvl4_book_blur_hint2", "lvl4_book_blur_hint3"),
+                level = 4,
+                puzzle = "book_blur"
             ),
-            "history" to HintManager(
-                listOf(
+            "history" to hintManagerFactory.create(
+                hints = listOf(
                     "lvl4_book_history_hint1", "lvl4_book_history_hint2", "lvl4_book_history_hint3",
                     "lvl4_book_history_hint4","lvl4_book_history_hint5", "lvl4_book_history_hint6"
                 ),
-                LoadManager.getPuzzleUsedHintsCount(requireActivity(), 4, "book_history"),
-                4, "book_history"
+                level = 4,
+                puzzle = "book_history"
             ),
             "help" to null
         )
@@ -149,9 +147,12 @@ class BooksFragment : Fragment(R.layout.fragment_books) {
 
     private fun openBook(book : String) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fcv_book, BookFragment(bookPages[book]!!, bookTexts[book]!!, bookHasLink[book]!!, bookHints[book]), "BookFragment")
+            .replace(
+                R.id.fcv_book,
+                Lvl4BookFragment(bookPages[book]!!, bookTexts[book]!!, bookHasLink[book]!!, bookHints[book]),
+                "BookFragment"
+            )
             .commit()
     }
-
 
 }

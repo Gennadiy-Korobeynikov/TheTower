@@ -2,88 +2,68 @@ package com.tpu.thetower.fragments.lvl5
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.DialogManager
-
-import com.tpu.thetower.managers.LoadManager
-
-import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentLvl5Binding
+import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl5Binding
-import com.tpu.thetower.managers.FragmentNavigation
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
     private lateinit var binding: FragmentLvl5Binding
 
-    private lateinit var musicManager: MusicManager
-    private lateinit var soundManager: SoundManager
-    private val saveRepo: SaveRepository = SaveRepository.getInstance()
-
-    private lateinit var btnFishRack: Button
-    private lateinit var btnMoose: Button
-    private lateinit var btnFish: Button
-    private lateinit var btnMap: Button
-    private lateinit var btnMoosePaper: Button
-
-    private lateinit var ivBg: ImageView
+    @Inject lateinit var musicManager: MusicManager
+    @Inject lateinit var soundManager: SoundManager
+    @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var dialogManager: DialogManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLvl5Binding.bind(view)
-        bindView()
+
         setListeners()
         handleSounds()
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 5, "bluetooth") == "completed") {
-            btnMoose.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(5, "bluetooth") == "completed") {
+            binding.btnMoose.visibility = View.VISIBLE
         }
 
-        if (LoadManager.getPuzzleStatus(requireActivity(), 5, "moose") == "completed") {
-            btnFishRack.visibility = View.VISIBLE
-            btnMoose.visibility = View.GONE
-            ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
-            btnMoosePaper.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(5, "moose") == "completed") {
+            binding.btnFishRack.visibility = View.VISIBLE
+            binding.btnMoose.visibility = View.GONE
+            binding.ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
+            binding.btnMoosePaper.visibility = View.VISIBLE
         }
-    }
-
-    private fun bindView() {
-        btnFishRack = binding.btnFishRack
-        btnMoose = binding.btnMoose
-        btnFish = binding.btnFish
-        btnMap = binding.btnMap
-        ivBg = binding.ivBg
     }
 
     private fun setListeners() {
 
-        btnFishRack.setOnClickListener {
+        binding.btnFishRack.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5FishRackFragment)
         }
 
-        btnMoose.setOnClickListener {
+        binding.btnMoose.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleMooseFragment)
         }
 
-        btnFish.setOnClickListener {
+        binding.btnFish.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment)
         }
 
-        btnMoosePaper.setOnClickListener {
-            DialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
+        binding.btnMoosePaper.setOnClickListener {
+            dialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
         }
     }
 
-
     private fun handleSounds() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
         soundManager.init()
 //        soundManager.loadSound(
 //            requireContext(), listOf(
@@ -93,10 +73,13 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 //        )
     }
 
-
     override fun onResume() {
         super.onResume()
-        saveRepo.saveCurrentLevel(requireActivity(), 5)
+        saveRepo.saveCurrentLevel(5)
     }
 
+    override fun onPause() {
+        super.onPause()
+        soundManager.release()
+    }
 }

@@ -1,91 +1,84 @@
 package com.tpu.thetower.managers
 
-import android.app.Activity
 import android.content.Context
 import com.google.gson.Gson
 import com.tpu.thetower.models.SaveData
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FileSaveManager private constructor() {
-
+@Singleton
+class FileSaveManager @Inject constructor(
+    @ApplicationContext private val appContext: Context
+) {
     private val gson = Gson()
     private val ioLock = Any()
 
-    companion object {
-        private var instance: FileSaveManager? = null
+    private companion object {
         private const val SAVE_FILE_NAME = "save_file.json"
-
-        @Synchronized
-        fun getInstance(): FileSaveManager {
-            if (instance == null) instance = FileSaveManager()
-            return instance!!
-        }
     }
 
-    private fun getSaveFile(context: Context) =
-        File(context.filesDir, SAVE_FILE_NAME)
+    private fun getSaveFile() = File(appContext.filesDir, SAVE_FILE_NAME)
 
-    fun readData(context: Context): SaveData? =
-        synchronized(ioLock) { readDataLocked(context) }
+    fun readData(): SaveData? = synchronized(ioLock) { readDataLocked() }
 
-    fun ensureSaveExists(context: Context) =
-        synchronized(ioLock) { ensureSaveExistsLocked(context) }
+    fun ensureSaveExists() = synchronized(ioLock) { ensureSaveExistsLocked() }
 
-    fun saveData(context: Context, saveData: SaveData) =
-        synchronized(ioLock) { saveDataLocked(context, saveData) }
+    fun saveData(saveData: SaveData) = synchronized(ioLock) { saveDataLocked(saveData) }
 
-    fun update(context: Context, transform: (SaveData) -> SaveData): SaveData? {
+    fun update(transform: (SaveData) -> SaveData): SaveData? {
         synchronized(ioLock) {
-            val current = readDataLocked(context) ?: return null
+            val current = readDataLocked() ?: return null
             val updated = transform(current)
-            saveDataLocked(context, updated)
+            saveDataLocked(updated)
             return updated
         }
     }
 
-    fun resetData(context: Context) {
+    fun resetData() {
         synchronized(ioLock) {
-            val previous = readDataLocked(context) ?: return
+            val previous = readDataLocked() ?: return
 
-            val file = getSaveFile(context)
+            val file = getSaveFile()
             if (file.exists()) file.delete()
 
-            ensureSaveExistsLocked(context)
+            ensureSaveExistsLocked()
 
-            val currentData = readDataLocked(context)
+            val currentData = readDataLocked()
             val updatedData = currentData?.copy(gameSettings = previous.gameSettings)
-            if (updatedData != null) saveDataLocked(context, updatedData)
+            if (updatedData != null) saveDataLocked(updatedData)
         }
     }
 
-    fun saveMusicVolume(context: Context, volume: Float) {
-        update(context) { gameData ->
+    fun saveMusicVolume(volume: Float) {
+        update { gameData ->
             gameData.copy(gameSettings = gameData.gameSettings.copy(musicVolume = volume))
         }
     }
 
-    fun saveSoundVolume(context: Context, volume: Float) {
-        update(context) { gameData ->
+    fun saveSoundVolume(volume: Float) {
+        update { gameData ->
             gameData.copy(gameSettings = gameData.gameSettings.copy(soundVolume = volume))
         }
     }
 
-    fun saveCurrentLevel(context: Context, level: Int) {
-        update(context) { gameData ->
+    fun saveCurrentLevel(level: Int) {
+        update { gameData ->
             gameData.copy(playerInfo = gameData.playerInfo.copy(currentLevel = level))
         }
     }
 
-    fun saveAccessLevel(context: Context, currAccessLevel: Int) {
-        update(context) { gameData ->
+    fun saveAccessLevel(currAccessLevel: Int) {
+        update { gameData ->
             gameData.copy(playerInfo = gameData.playerInfo.copy(accessLevel = currAccessLevel))
         }
     }
 
-    fun savePuzzleUsedHintsCount(context: Context, level: Int, puzzle: String, hintUsed: Int) {
-        update(context) { gameData ->
+    fun savePuzzleUsedHintsCount(level: Int, puzzle: String, hintUsed: Int) {
+        update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
                 ?.puzzles?.find { it.name == puzzle }
@@ -94,8 +87,8 @@ class FileSaveManager private constructor() {
         }
     }
 
-    fun saveLevelStatus(context: Context, level: Int) {
-        update(context) { gameData ->
+    fun saveLevelStatus(level: Int) {
+        update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
                 ?.isCompleted = true
@@ -103,8 +96,8 @@ class FileSaveManager private constructor() {
         }
     }
 
-    fun saveCurrentDialog(activity: Activity, level: Int, npc: Int, dialogIndex: Int) {
-        update(activity) { gameData ->
+    fun saveCurrentDialog(level: Int, npc: Int, dialogIndex: Int) {
+        update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
                 ?.npcDialogs?.find { it.id == npc }
@@ -113,18 +106,18 @@ class FileSaveManager private constructor() {
         }
     }
 
-    private fun ensureSaveExistsLocked(context: Context) {
-        val file = getSaveFile(context)
+    private fun ensureSaveExistsLocked() {
+        val file = getSaveFile()
         if (file.exists()) return
 
-        context.assets.open(SAVE_FILE_NAME).use { input ->
+        appContext.assets.open(SAVE_FILE_NAME).use { input ->
             file.outputStream().use { output -> input.copyTo(output) }
         }
     }
 
-    private fun readDataLocked(context: Context): SaveData? {
-        ensureSaveExistsLocked(context)
-        val file = getSaveFile(context)
+    private fun readDataLocked(): SaveData? {
+        ensureSaveExistsLocked()
+        val file = getSaveFile()
         if (!file.exists()) return null
 
         FileReader(file).use { reader ->
@@ -132,9 +125,9 @@ class FileSaveManager private constructor() {
         }
     }
 
-    private fun saveDataLocked(context: Context, saveData: SaveData) {
-        val file = getSaveFile(context)
-        val tmp = File(context.filesDir, "$SAVE_FILE_NAME.tmp")
+    private fun saveDataLocked(saveData: SaveData) {
+        val file = getSaveFile()
+        val tmp = File(appContext.filesDir, "$SAVE_FILE_NAME.tmp")
 
         FileWriter(tmp).use { writer -> gson.toJson(saveData, writer) }
 

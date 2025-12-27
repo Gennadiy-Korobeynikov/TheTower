@@ -8,15 +8,17 @@ import com.tpu.thetower.R
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentGoBackArrowBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class GoBackArrowFragment : Fragment(R.layout.fragment_go_back_arrow) {
 
-    private lateinit var soundManager: SoundManager
+    @Inject
+    lateinit var soundManager: SoundManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        soundManager = SoundManager.getInstance()
 
         val binding = FragmentGoBackArrowBinding.bind(view)
         val btnToElevator: ImageButton = binding.btnGoBack

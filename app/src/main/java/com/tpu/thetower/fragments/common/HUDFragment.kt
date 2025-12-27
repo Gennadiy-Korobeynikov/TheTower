@@ -2,8 +2,6 @@ package com.tpu.thetower.fragments.common
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.tpu.thetower.managers.DialogManager
@@ -12,23 +10,21 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentHudBinding
 import com.tpu.thetower.managers.ImageUpdateDispatcher
 import com.tpu.thetower.managers.UiVisibilityController
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HUDFragment : Fragment(R.layout.fragment_hud) {
 
     private lateinit var binding: FragmentHudBinding
 
-    private lateinit var ivHint: ImageView
-    private lateinit var ivAccessCard: ImageView
-
-    private lateinit var btnMenu: Button
-    private lateinit var btnHint: Button
+    @Inject lateinit var dialogManager: DialogManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentHudBinding.bind(view)
 
-        bindView()
         setListeners()
 //        val tvTestHint: TextView = binding.tvTestHintRecovery
 //        val ivDraggable: ImageView = binding.ivDraggable
@@ -41,7 +37,7 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
     }
 
     private fun setListeners() {
-        btnMenu.setOnClickListener {
+        binding.btnMenu.setOnClickListener {
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.MENU)
             ImageUpdateDispatcher.updateProgressBar(this)
         }
@@ -49,10 +45,10 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
         requireActivity().supportFragmentManager
             .setFragmentResultListener("accessCardUpgrading", viewLifecycleOwner) { _, bundle ->
                 val accessCardImgId = bundle.getInt("accessCardImgId")
-                if (accessCardImgId == 0) ivAccessCard.visibility = View.GONE
+                if (accessCardImgId == 0) binding.ivAccessCard.visibility = View.GONE
                 else {
-                    ivAccessCard.setImageResource(accessCardImgId)
-                    ivAccessCard.visibility = View.VISIBLE
+                    binding.ivAccessCard.setImageResource(accessCardImgId)
+                    binding.ivAccessCard.visibility = View.VISIBLE
                 }
             }
 
@@ -69,35 +65,29 @@ class HUDFragment : Fragment(R.layout.fragment_hud) {
 //            }
 
 
-        btnHint.setOnClickListener {
+        binding.btnHint.setOnClickListener {
             val navHostFragment =
                 requireActivity().supportFragmentManager.findFragmentById(R.id.fcv_bg)
             val currMainFragment =
                 (navHostFragment as? NavHostFragment)?.childFragmentManager?.fragments?.lastOrNull() as? Hintable
-            currMainFragment?.useHint()
-            if (currMainFragment == null)
-                DialogManager.startDialog(requireActivity(), "no_hints")
-        }
 
+            currMainFragment?.useHint()
+            if (currMainFragment == null) {
+                dialogManager.startDialog(requireActivity(), "no_hints")
+            }
+        }
 
         requireActivity().supportFragmentManager
             .setFragmentResultListener("hintImgUpdating", viewLifecycleOwner) { _, bundle ->
                 val step = bundle.getInt("step")
                 when (step) {
-                    1 -> ivHint.setImageResource(R.drawable.hint0)
-                    2 -> ivHint.setImageResource(R.drawable.hint1)
-                    3 -> ivHint.setImageResource(R.drawable.hint2)
-                    4 -> ivHint.setImageResource(R.drawable.hint3)
-                    5, 0 -> ivHint.setImageResource(R.drawable.hint4_full)
+                    1 -> binding.ivHint.setImageResource(R.drawable.hint0)
+                    2 -> binding.ivHint.setImageResource(R.drawable.hint1)
+                    3 -> binding.ivHint.setImageResource(R.drawable.hint2)
+                    4 -> binding.ivHint.setImageResource(R.drawable.hint3)
+                    5, 0 -> binding.ivHint.setImageResource(R.drawable.hint4_full)
                 }
             }
-
-    }
-
-    private fun bindView() {
-        ivHint = binding.ivHint
-        btnHint = binding.btnHint
-        btnMenu = binding.btnMenu
     }
 
 }
