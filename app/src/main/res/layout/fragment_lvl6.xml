@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    tools:context=".fragments.Lvl6Fragment">
+    tools:context=".fragments.lvl6.Lvl6Fragment">
 
     <ImageView
         android:layout_width="match_parent"

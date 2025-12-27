@@ -1,8 +1,8 @@
 package com.tpu.thetower.puzzles
 
 import android.app.Activity
-import android.content.Context
 import com.tpu.thetower.Puzzle
+import com.tpu.thetower.managers.SaveRepository
 
 
 
@@ -84,13 +84,13 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
 //        return false
 //    }
 
-    override fun checkSolution(activity: Activity, solution: String): Boolean {
-        if (currPositionX == winPositionX && currPositionY == winPositionY) {
-             // Пока не работает
-            super.complete(activity)
-            return true
+    override fun checkSolution(activity: Activity, saveRepo: SaveRepository, solution: String): Boolean {
+        return if (currPositionX == winPositionX && currPositionY == winPositionY) {
+            complete(saveRepo)
+            true
+        } else {
+            false
         }
-        return false
     }
 
 

@@ -6,7 +6,7 @@
     android:background="#FFFFFF"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragments.TitleScreenFragment">
+    tools:context=".fragments.common.TitleScreenFragment">
 
     <ImageView
         android:layout_width="match_parent"

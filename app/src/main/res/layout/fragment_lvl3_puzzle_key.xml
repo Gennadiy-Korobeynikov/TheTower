@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    tools:context=".fragments.Lvl3PuzzleKeyFragment">
+    tools:context=".fragments.lvl3.Lvl3PuzzleKeyFragment">
 
     <ImageView
         android:id="@+id/iv_bg"
@@ -96,7 +96,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.547" />
 
-        <com.tpu.thetower.fragments.KeyView
+        <com.tpu.thetower.fragments.lvl3.KeyView
             android:id="@+id/key_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -174,7 +174,7 @@
     <!--            android:layout_height="wrap_content"-->
     <!--            android:src="@drawable/lvl3_puzzle4_key_lock" />-->
 
-    <!--        <com.tpu.thetower.fragments.KeyView-->
+    <!--        <com.tpu.thetower.fragments.lvl3.KeyView-->
     <!--            android:id="@+id/keyView"-->
     <!--            android:layout_width="match_parent"-->
     <!--            android:layout_height="match_parent"-->

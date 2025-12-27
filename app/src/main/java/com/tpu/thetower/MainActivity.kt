@@ -1,24 +1,37 @@
 package com.tpu.thetower
 
 import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.DragEvent
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.tpu.thetower.fragments.HUDFragment
-import com.tpu.thetower.fragments.Lvl3Fragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.MusicManager
+import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.UiVisibilityController
 import java.io.File
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var musicManager: MusicManager
-    protected lateinit var soundManager: SoundManager
-    private lateinit var saveManager: SaveManager
+    @Inject
+    lateinit var musicManager: MusicManager
+
+    @Inject
+    lateinit var soundManager: SoundManager
+
+    @Inject
+    lateinit var saveRepo: SaveRepository
+
+    @Inject
+    lateinit var loadManager: LoadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,19 +39,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         copyJsonFromAssets(this, "save_file.json")
-        LoadManager.setGameData(this)
+        loadManager.loadProgress()
 
         setManagers()
-        saveManager.savePuzzleUsedHintsCount(this,0, "flashlight",0)// TEST
-        saveManager.savePuzzleUsedHintsCount(this,0, "lock",0)// TEST
+        saveRepo.savePuzzleUsedHintsCount(0, "flashlight", 0) // TEST
+        saveRepo.savePuzzleUsedHintsCount(0, "lock", 0) // TEST
 
-        // Когда появится кнопка сброса прогресса
-        //LoadManager.loadProgress()
-
-        LoadManager.loadSettings(this)
-
-
-//        deleteJsonFile(this, "save_file.json")
+        loadManager.loadSettings()
 
         window.decorView.apply {
             systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -49,45 +56,25 @@ class MainActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         }
 
-
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_bg) as? NavHostFragment
                 val currentFragment = navHostFragment?.childFragmentManager?.fragments?.lastOrNull()
                 if (currentFragment is Fragment) {
-                    FragmentManager.showMenu(this@MainActivity)
+                    UiVisibilityController.show(this@MainActivity, UiVisibilityController.UiContainer.MENU)
                 }
             }
         })
-
     }
 
-
     private fun setManagers() {
-        musicManager = MusicManager.getInstance()
-        soundManager = SoundManager.getInstance()
         soundManager.init()
         soundManager.loadSound(
-            this, listOf(
+            listOf(
                 R.raw.sound_of_guard_snoring
             )
         )
-        saveManager = SaveManager.getInstance()
     }
-
-//    private fun loadSettings() {
-//
-//
-//        saveManager.saveAccessLevel(this , 0) // Fot TEst
-//
-//
-//        val gameData = saveManager.readData(this)
-//        val savedMusicVolume = gameData?.gameSettings?.musicVolume ?: 0.5f
-//        val savedSoundVolume = gameData?.gameSettings?.soundVolume ?: 0.5f
-//
-//        musicManager.setVolume(savedMusicVolume)
-//        soundManager.setVolume(savedSoundVolume)
-//    }
 
     fun copyJsonFromAssets(context: Context, fileName: String) {
         val file = File(context.filesDir, fileName)
@@ -100,10 +87,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-//
-//    fun deleteJsonFile(context: Context, fileName: String) {
-//        val file = File(context.filesDir, fileName)
-//            file.delete()
-//    }
-
 }

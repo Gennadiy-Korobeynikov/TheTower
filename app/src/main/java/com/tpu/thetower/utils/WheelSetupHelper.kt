@@ -1,14 +1,31 @@
 package com.tpu.thetower.utils
 
 import android.app.Activity
-import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.Puzzle
-import com.tpu.thetower.SoundManager
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.adapters.ImageCodeAdapter
+import com.tpu.thetower.managers.SaveRepository
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 
 object WheelSetupHelper {
+
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface WheelEntryPoint {
+        fun saveRepository(): SaveRepository
+    }
+
+    private fun saveRepo(activity: Activity): SaveRepository {
+        return EntryPointAccessors.fromApplication(
+            activity.applicationContext,
+            WheelEntryPoint::class.java
+        ).saveRepository()
+    }
 
     interface WheelSolvedListener {
         fun onPuzzleSolved()
@@ -52,7 +69,7 @@ object WheelSetupHelper {
                         val digit = position % data.size
                         solution[rvIndex] = digit.digitToChar()
 
-                        val isCorrectSolution = puzzle.checkSolution(activity, String(solution))
+                        val isCorrectSolution = puzzle.checkSolution(activity, saveRepo(activity), String(solution))
 
                         if (isCorrectSolution && !isSolvedRef()) {
                             onSolvedListener.onPuzzleSolved()

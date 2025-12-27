@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".fragments.DialogFragment">
+    tools:context=".fragments.common.DialogFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideV_menu"
@@ -61,5 +61,19 @@
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.08" />
+
+
+<!--    app:layout_constraintHeight_percent="0.16"?-->
+<!--    app:layout_constraintWidth_percent="0.08" />-->
+    <ImageView
+        android:id="@+id/iv_access_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/card"
+        app:layout_constraintEnd_toStartOf="@id/btn_hint"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintWidth_percent="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

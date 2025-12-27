@@ -1,0 +1,38 @@
+package com.tpu.thetower.managers
+
+import androidx.fragment.app.Fragment
+import com.tpu.thetower.R
+
+class LevelAccessManager {
+
+    companion object {
+        private val cardImageIds: List<Int> = listOf(
+            R.drawable.access_card_2, // Костыль, не трогать
+            R.drawable.access_card_2,
+            R.drawable.access_card_3,
+            R.drawable.access_card_4,
+            R.drawable.access_card_5,
+            R.drawable.access_card_6
+        )
+
+        var currentAccessLvl = 0
+        val topUnlockedLvlsForModules: List<Int> = listOf(0, 2, 3, 4, 5, 6)
+
+        fun getCardImage(): Int {
+            return cardImageIds[currentAccessLvl]
+        }
+
+        //TODO Разобраться в необходимости кода
+        fun unlockModules(fragment: Fragment) {
+//            FragmentManager.changeAccessCardImg(fragment, getCardImage())
+//            FragmentManager.changeUnlockedModules(fragment, currentAccessLvl)
+        }
+
+        fun upgradeAccessLvl(fragment: Fragment, saveRepo: SaveRepository) {
+
+            if (currentAccessLvl in 0..<topUnlockedLvlsForModules.size - 1) currentAccessLvl++
+            unlockModules(fragment)
+            saveRepo.saveAccessLevel(currentAccessLvl)
+        }
+    }
+}

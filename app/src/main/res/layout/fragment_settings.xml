@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragments.SettingsFragment">
+    tools:context=".fragments.common.SettingsFragment">
 
     <ImageView
         android:layout_width="match_parent"

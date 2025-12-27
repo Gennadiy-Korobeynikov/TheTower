@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    tools:context=".fragments.Lvl3Fragment">
+    tools:context=".fragments.lvl3.Lvl3Fragment">
 
     <ImageView
         android:id="@+id/iv_bg"

@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    tools:context=".fragments.Lvl6LockFragment">
+    tools:context=".fragments.lvl6.Lvl6LockFragment">
 
     <ImageView
         android:layout_width="match_parent"
