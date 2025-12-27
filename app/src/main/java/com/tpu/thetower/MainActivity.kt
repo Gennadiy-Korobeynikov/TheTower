@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.tpu.thetower.managers.AppPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val prefs = AppPreferences(this)
+        //TEST: режим разработчика (макс. уровень доступа, кнопка пропуска пазлов)
+        prefs.isDevMode = true
 
         copyJsonFromAssets(this, "save_file.json")
         loadManager.loadProgress()

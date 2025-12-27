@@ -8,6 +8,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
@@ -211,7 +212,6 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private fun test() {
         if (restart) {
             soundManager.playSound(R.raw.sound_of_vacuum_cleaner_bumping)
-            //tvRestart.text = "*Звук стука об стенку*\nВозврат на исходное положение"
             binding.ivHoover.animate().rotation(0f).setDuration(300).start()
             moveHooverToCenter(binding.mainScreen)
             restart = false
@@ -222,14 +222,6 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             FragmentNavigation.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
             FragmentNavigation.changeBG(this, R.id.lvl3Fragment)
         }
-
-//        binding.tvDirection.text = when (puzzleHoover.currDirection) {
-//            Direction.Right -> "Вправо"
-//            Direction.Left -> "Влево"
-//            Direction.Down -> "Вниз"
-//            Direction.Up -> "Вверх"
-//        }
-//        binding.tvCoordinates.text = "${puzzleHoover.currPositionX} ${puzzleHoover.currPositionY}"
     }
 
     override fun useHint() {
@@ -246,6 +238,12 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                 R.raw.sound_of_vacuum_cleaner_driving_straight
             )
         )
+    }
+
+    override fun skipPuzzle() {
+        puzzleHoover.complete(saveRepo)
+        win = true
+        test()
     }
 
     override fun onDestroyView() {

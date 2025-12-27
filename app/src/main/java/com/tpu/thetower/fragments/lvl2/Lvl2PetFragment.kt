@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl2
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
@@ -32,6 +33,10 @@ class Lvl2PetFragment : Fragment(R.layout.fragment_lvl2_pet), Hintable {
 
     override fun useHint() {
         dialogManager.startDialog(requireActivity(), "hint_is_not_here")
+    }
+
+    override fun skipPuzzle() {
+        Snackbar.make(requireView(), "Ответ - Gerberd (пароль от компа) ", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onPause() {

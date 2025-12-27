@@ -5,51 +5,53 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl2PuzzleChatBinding
-import com.tpu.thetower.puzzles.Lvl2PuzzleChat
+import com.tpu.thetower.databinding.FragmentLvl2PuzzleLockBinding
+import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.puzzles.Lvl2PuzzleLock
 import com.tpu.thetower.utils.WheelSetupHelper
-import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.UiVisibilityController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-//TODO CHECK (Chat?)
 @AndroidEntryPoint
-class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hintable {
+class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock), Hintable {
 
-    private lateinit var binding: FragmentLvl2PuzzleChatBinding
+    private lateinit var binding: FragmentLvl2PuzzleLockBinding
 
-    private val puzzle: Puzzle = Lvl2PuzzleChat(2, "chat")
+    private val puzzle: Puzzle = Lvl2PuzzleLock(2, "lock")
     private lateinit var hintManager: HintManager
 
     @Inject lateinit var soundManager: SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var saveRepo: SaveRepository
+
 
     private val solution = "11111".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
-        R.drawable.lvl2_puzzle0_letter_b,
+        R.drawable.lvl2_puzzle0_letter_c,
         R.drawable.lvl2_puzzle0_letter_d,
-        R.drawable.lvl2_puzzle0_letter_g,
+        R.drawable.lvl2_puzzle0_letter_h,
         R.drawable.lvl2_puzzle0_letter_i,
-        R.drawable.lvl2_puzzle0_letter_k,
+        R.drawable.lvl2_puzzle0_letter_l,
         R.drawable.lvl2_puzzle0_letter_m,
         R.drawable.lvl2_puzzle0_letter_n,
         R.drawable.lvl2_puzzle0_letter_o,
-        R.drawable.lvl2_puzzle0_letter_x,
-        R.drawable.lvl2_puzzle0_letter_y
+        R.drawable.lvl2_puzzle0_letter_u,
+        R.drawable.lvl2_puzzle0_letter_v
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2PuzzleChatBinding.bind(view)
+        binding = FragmentLvl2PuzzleLockBinding.bind(view)
 
         soundManager.init()
         soundManager.loadSound(
@@ -114,5 +116,10 @@ class Lvl2PuzzleChatFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hin
 
     override fun useHint() {
         hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        passed()
     }
 }

@@ -156,6 +156,10 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
         hintManager.useHint(requireActivity())
     }
 
+    override fun skipPuzzle() {
+        passed()
+    }
+
     override fun onPause() {
         super.onPause()
         soundManager.release() //todo Когда использовать?

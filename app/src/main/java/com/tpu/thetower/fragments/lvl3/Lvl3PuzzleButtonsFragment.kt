@@ -91,6 +91,16 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        soundManager.playSound(R.raw.sound_of_the_lock_opening)
+        binding.mainScreen.animate()
+            .alpha(0.2f)
+            .setDuration(2500)
+            .withEndAction { FragmentNavigation.goBack(this) }
+            .start()
+    }
+
     private fun handleSounds() {
         soundManager.init()
         soundManager.loadSound(

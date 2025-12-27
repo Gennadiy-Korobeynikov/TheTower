@@ -99,4 +99,9 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
     override fun useHint() {
         hintManager.useHint(requireActivity())
     }
+
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        passed()
+    }
 }

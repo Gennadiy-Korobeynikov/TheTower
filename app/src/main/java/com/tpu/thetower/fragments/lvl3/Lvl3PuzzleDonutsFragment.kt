@@ -136,6 +136,10 @@ class Lvl3PuzzleDonutsFragment :
         soundManager.loadSound(listOf(R.raw.sound_of_donuts_shaking))
     }
 
+    override fun skipPuzzle() {
+        completed()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

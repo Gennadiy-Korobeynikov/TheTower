@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl3Binding
@@ -234,6 +235,10 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
         else
             hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
+        Snackbar.make(requireView(), "?Пончики; Шкаф; Кофе: ?Пылесос; Замок", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl2
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
@@ -45,6 +46,10 @@ class Lvl2CaesarFragment : Fragment(R.layout.fragment_lvl2_caesar), Hintable {
         } else {
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
         }
+    }
+
+    override fun skipPuzzle() {
+        Snackbar.make(requireView(), "Ответ - mvodi (в левый замок)", Snackbar.LENGTH_SHORT).show()
     }
 
 }

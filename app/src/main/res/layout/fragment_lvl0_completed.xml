@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:backgroundTint="#00000000"
-    tools:context=".fragments.lvl0.Lvl0CompletedFragment">
+    tools:context=".fragments.lvl0.Lvl0OpenedVaultFragment">
 
     <ImageView
         android:layout_width="match_parent"
