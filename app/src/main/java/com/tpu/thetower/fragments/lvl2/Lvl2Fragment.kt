@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl2
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl2Binding
@@ -115,6 +116,10 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         } else {
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
         }
+    }
+
+    override fun skipPuzzle() {
+        Snackbar.make(requireView(), "Левый замок; Комп; Правый замок; ", Snackbar.LENGTH_SHORT).show()
     }
 
 }

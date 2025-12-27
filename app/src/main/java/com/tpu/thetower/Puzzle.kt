@@ -7,7 +7,6 @@ import com.tpu.thetower.managers.SaveRepository
 abstract class Puzzle(val level: Int, val puzzleName: String) {
 
     var isSolved: Boolean = false
-    var usedHintsCount: Int = 0
 
     abstract fun checkSolution(
         activity: Activity,
@@ -15,7 +14,7 @@ abstract class Puzzle(val level: Int, val puzzleName: String) {
         solution: String = ""
     ): Boolean
 
-    protected fun complete(saveRepo: SaveRepository) {
+    fun complete(saveRepo: SaveRepository) {
         isSolved = true
         saveRepo.savePuzzleData(level, puzzleName, status = "completed")
         Log.i("Puzzle", "$puzzleName completed")

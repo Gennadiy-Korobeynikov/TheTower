@@ -253,17 +253,17 @@
     </fragment>
     <fragment
         android:id="@+id/lvl2PuzzleChatFragment"
-        android:name="com.tpu.thetower.fragments.lvl2.Lvl2PuzzleChatFragment"
+        android:name="com.tpu.thetower.fragments.lvl2.Lvl2PuzzleRightLockFragment"
         android:label="fragment_lvl2_puzzle_chat"
         tools:layout="@layout/fragment_lvl2_puzzle_chat" />
     <fragment
         android:id="@+id/lvl2PuzzleLockFragment"
-        android:name="com.tpu.thetower.fragments.lvl2.Lvl2PuzzleLockFragment"
+        android:name="com.tpu.thetower.fragments.lvl2.Lvl2PuzzleLeftLockFragment"
         android:label="fragment_lvl2_puzzle_lock"
         tools:layout="@layout/fragment_lvl2_puzzle_lock" />
     <fragment
         android:id="@+id/lvl0CompletedFragment"
-        android:name="com.tpu.thetower.fragments.lvl0.Lvl0CompletedFragment"
+        android:name="com.tpu.thetower.fragments.lvl0.Lvl0OpenedVaultFragment"
         android:label="fragment_lvl0_completed"
         tools:layout="@layout/fragment_lvl0_completed" />
     <fragment

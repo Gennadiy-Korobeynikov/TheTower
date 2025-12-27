@@ -141,6 +141,16 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         hintManager.useHint(requireActivity())
     }
 
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        binding.ivBg.animate()
+            .alpha(0.2f)
+            .setDuration(2500)
+            .withEndAction {
+                FragmentNavigation.goBack(this)
+            }
+            .start()
+    }
 
 
 

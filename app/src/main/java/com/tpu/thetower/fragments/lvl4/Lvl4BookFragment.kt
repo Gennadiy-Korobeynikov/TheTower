@@ -7,11 +7,12 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.HintManager
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentBookBinding
+import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.HintManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -135,6 +136,10 @@ class Lvl4BookFragment(
         } else {
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
         }
+    }
+
+    override fun skipPuzzle() {
+        Snackbar.make(requireView(), "Книги можно не смотреть", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

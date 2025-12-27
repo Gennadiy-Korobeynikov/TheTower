@@ -6,12 +6,13 @@ import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4TimelineBinding
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.puzzles.Lvl4PuzzleTimeline
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
     View.OnTouchListener,
-    View.OnDragListener {
+    View.OnDragListener,
+    Hintable{
 
     private var _binding: FragmentLvl4TimelineBinding? = null
     private val binding get() = _binding!!
@@ -62,12 +64,22 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
         )
     }
 
+    private lateinit var hintManager: HintManager
     @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentLvl4TimelineBinding.bind(view)
+
+        hintManager = hintManagerFactory.create(
+            hints = listOf(
+                "lvl4_timeline_hint1", "lvl4_timeline_hint2"
+            ),
+            level = 4,
+            puzzle = "timeline"
+        )
 
         setListeners()
     }
@@ -200,6 +212,16 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
         }
     }
 
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        FragmentNavigation.changeBG(this, R.id.elevatorFragment)
+        FragmentNavigation.changeBG(this, R.id.lvl4Fragment)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         // Важно: lazy-списки держат ссылки на binding.*; чистим состояние, затем обнуляем binding
@@ -207,4 +229,5 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
         zoneOccupants.clear()
         _binding = null
     }
+
 }

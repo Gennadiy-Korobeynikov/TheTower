@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl4
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.managers.HintManager
@@ -68,6 +69,10 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
 
     override fun useHint() {
         hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
+        Snackbar.make(requireView(), "Не нужно для прохождения", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

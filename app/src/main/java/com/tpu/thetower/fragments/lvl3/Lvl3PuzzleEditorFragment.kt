@@ -81,6 +81,10 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
         hintManager.useHint(requireActivity())
     }
 
+    override fun skipPuzzle() {
+        paste()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

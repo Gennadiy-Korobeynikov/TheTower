@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0Binding
@@ -149,7 +150,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         ivDarkness.setOnClickListener {
             dialogManager.startDialog(requireActivity(), "lvl0_dark")
             //            // Тестирование !!!
-            flashlightManager.toggleFlashlight(true)
+//            flashlightManager.toggleFlashlight(true)
         }
 
         btnLightOn.setOnClickListener {
@@ -237,5 +238,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
                 dialogManager.startDialog(requireActivity(), "lvl0_to_puzzle1_hint")
             }
         }
+    }
+
+    override fun skipPuzzle() {
+        handleFlashlightStateChanged(true)
     }
 }

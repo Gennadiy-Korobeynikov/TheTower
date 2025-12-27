@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.managers.AppPreferences
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LevelAccessManager
@@ -42,12 +43,18 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     )
 
     private lateinit var originalPosition: Pair<Float, Float>
+
+    private lateinit var prefs: AppPreferences
+
     private var currAccessLevel: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentElevatorBinding.bind(view)
+        prefs = AppPreferences(requireContext())
+        currAccessLevel = if (prefs.isDevMode) 5 else 0
+
         setListeners()
 
         val receivedData = arguments?.getString("saved_level")
@@ -105,7 +112,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         lvlButtons.forEach { btn ->
             btn.setOnClickListener {
                 if (btn == binding.btnElevatorToLvl2 && btn in openedLvlButtons) {
-                    if (!loadManager.isLevelCompleted(1)) {
+                    if (!prefs.isDevMode && !loadManager.isLevelCompleted(1)) {
                         dialogManager.startDialog(requireActivity(), "lvl1_elevator")
                     } else {
                         soundManager.release()

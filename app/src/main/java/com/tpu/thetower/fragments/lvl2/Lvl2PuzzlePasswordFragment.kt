@@ -197,4 +197,9 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
         }
     }
+
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        completed()
+    }
 }

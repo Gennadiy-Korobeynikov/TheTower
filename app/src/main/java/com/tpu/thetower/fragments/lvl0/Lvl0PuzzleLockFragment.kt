@@ -13,6 +13,7 @@ import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.puzzles.Lvl0PuzzleLock
@@ -32,6 +33,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager: DialogManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var saveRepo : SaveRepository
 
     private var solution = "1111".toCharArray()
     private var isSolved = false
@@ -158,5 +160,10 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
 
     override fun useHint() {
         hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
+        puzzle.complete(saveRepo)
+        passed()
     }
 }

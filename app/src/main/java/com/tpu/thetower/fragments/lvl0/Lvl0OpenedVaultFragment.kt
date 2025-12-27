@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Lvl0CompletedFragment : Fragment(R.layout.fragment_lvl0_completed) {
+class Lvl0OpenedVaultFragment : Fragment(R.layout.fragment_lvl0_completed) {
 
     private var _binding: FragmentLvl0CompletedBinding? = null
     private val binding get() = _binding!!
