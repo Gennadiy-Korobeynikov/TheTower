@@ -153,7 +153,6 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
             .setDuration(2500)
             .withEndAction {
                 FragmentNavigation.goBack(this)
-                dialogManager.startDialog(requireActivity(), "lvl0_puzzle1_solved")
             }
             .start()
     }

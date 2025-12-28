@@ -1,6 +1,5 @@
 package com.tpu.thetower
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -12,12 +11,12 @@ import com.tpu.thetower.managers.AppPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+import com.tpu.thetower.managers.FileSaveManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
-import java.io.File
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var loadManager: LoadManager
 
+    @Inject
+    lateinit var fileSaveManager: FileSaveManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,14 +45,16 @@ class MainActivity : AppCompatActivity() {
         //TEST: режим разработчика (макс. уровень доступа, кнопка пропуска пазлов)
         prefs.isDevMode = true
 
-        copyJsonFromAssets(this, "save_file.json")
+        // Гарантируем наличие сейва и читаем актуальные значения
+        fileSaveManager.ensureSaveExists()
+        loadManager.invalidateCache()
         loadManager.loadProgress()
 
         setManagers()
-        saveRepo.savePuzzleUsedHintsCount(0, "flashlight", 0) // TEST
-        saveRepo.savePuzzleUsedHintsCount(0, "lock", 0) // TEST
-
         loadManager.loadSettings()
+
+        // Централизованно управляем видимостью HUD (и дополнительно прячем оверлеи при необходимости)
+        setupUiVisibilityByDestination()
 
         window.decorView.apply {
             systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -72,6 +76,29 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+    private fun setupUiVisibilityByDestination() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_bg) as? NavHostFragment
+            ?: return
+        val navController = navHostFragment.navController
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.titleScreenFragment,
+                R.id.settingsFragment -> {
+                    UiVisibilityController.hide(this, UiVisibilityController.UiContainer.HUD,
+                        UiVisibilityController.UiContainer.GO_BACK_ARROW)
+                }
+
+                else -> {
+                    // По умолчанию для игровых экранов HUD виден.
+                    UiVisibilityController.show(this, UiVisibilityController.UiContainer.HUD,
+                        UiVisibilityController.UiContainer.GO_BACK_ARROW)
+                }
+            }
+        }
+    }
+
     private fun setManagers() {
         soundManager.init()
         soundManager.loadSound(
@@ -79,17 +106,5 @@ class MainActivity : AppCompatActivity() {
                 R.raw.sound_of_guard_snoring
             )
         )
-    }
-
-    fun copyJsonFromAssets(context: Context, fileName: String) {
-        val file = File(context.filesDir, fileName)
-
-        if (!file.exists()) { // Копируем, только если файла нет
-            context.assets.open(fileName).use { inputStream ->
-                file.outputStream().use { outputStream ->
-                    inputStream.copyTo(outputStream)
-                }
-            }
-        }
     }
 }

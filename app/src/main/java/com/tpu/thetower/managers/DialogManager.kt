@@ -34,9 +34,10 @@ class DialogManager @Inject constructor(
         "lvl0_start" to DialogSpec(
             lines = listOf(R.string.lvl0_start),
             speakers = listOf("John"),
-            onFinished = { act ->
-                UiVisibilityController.show(act, UiVisibilityController.UiContainer.PERMISSION_REQUEST)
-            }
+            // окно разрешений
+//            onFinished = { act ->
+//                UiVisibilityController.show(act, UiVisibilityController.UiContainer.PERMISSION_REQUEST)
+//            }
         ),
 
         "lvl0_dark" to DialogSpec(
@@ -146,7 +147,7 @@ class DialogManager @Inject constructor(
                 "receptionist",
                 "John_thinking",
             ),
-            onFinished = { act -> nextDialog(act, 1, 0) }
+            onFinished = { nextDialog(1,0) }
         ),
 
 
@@ -785,18 +786,25 @@ class DialogManager @Inject constructor(
 
     )
 
-    fun startDialog(activity: Activity, dialogKey: String) {
-        val spec = dialogSpecs[dialogKey] ?: return
+    internal fun buildDialog(activity: Activity, dialogKey: String): Dialog {
+        val spec = dialogSpecs[dialogKey]
+            ?: error("Unknown dialogKey: $dialogKey")
 
-        if (spec.lines.size != spec.speakers.size) return
-        if (spec.speakers.any { it !in characters }) return
+        require(spec.lines.size == spec.speakers.size)
+            { "DialogSpec lines and speakers must have same size for key=$dialogKey" }
+        require(spec.speakers.all { it in characters })
+            { "DialogSpec has unknown speaker key for dialogKey=$dialogKey" }
 
-        val dialog = Dialog(
+        return Dialog(
             spec.lines.map(activity::getString),
             spec.speakers.map { key -> characters.getValue(key) }
-        ) { spec.onFinished(activity) }
+        ).apply {
+            onDialogEnd = { spec.onFinished(activity) }
+        }
+    }
 
-        val dialogFragment = DialogFragment(dialog)
+    fun startDialog(activity: Activity, dialogKey: String) {
+        val dialogFragment = DialogFragment.newInstance(dialogKey)
         (activity as? AppCompatActivity)?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.fcv_dialog, dialogFragment, "DialogFragment")
             ?.commitNow()
@@ -804,7 +812,7 @@ class DialogManager @Inject constructor(
         UiVisibilityController.show(activity, UiVisibilityController.UiContainer.DIALOG)
     }
 
-    fun nextDialog(activity: Activity, level: Int, npc: Int) {
+    private fun nextDialog(level: Int, npc: Int) {
         var currentDialog = loadManager.getCurrentDialog(level, npc)
         currentDialog++
         saveRepo.saveCurrentDialog(level, npc, currentDialog)
