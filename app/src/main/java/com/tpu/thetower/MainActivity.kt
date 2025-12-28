@@ -17,6 +17,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.SoundEffect
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,15 +46,8 @@ class MainActivity : AppCompatActivity() {
         //TEST: режим разработчика (макс. уровень доступа, кнопка пропуска пазлов)
         prefs.isDevMode = true
 
-        // Гарантируем наличие сейва и читаем актуальные значения
-        fileSaveManager.ensureSaveExists()
-        loadManager.invalidateCache()
-        loadManager.loadProgress()
-
         setManagers()
-        loadManager.loadSettings()
 
-        // Централизованно управляем видимостью HUD (и дополнительно прячем оверлеи при необходимости)
         setupUiVisibilityByDestination()
 
         window.decorView.apply {
@@ -100,11 +94,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setManagers() {
+        fileSaveManager.ensureSaveExists()
+
+        loadManager.invalidateCache()
+        loadManager.loadProgress()
+        loadManager.loadSettings()
+
         soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_guard_snoring
-            )
+        soundManager.loadSounds(
+            SoundEffect.entries
         )
+    }
+
+    override fun onStart() {
+        super.onStart()
+        musicManager.resumeMusic()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        musicManager.pauseMusic()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        musicManager.stopMusic()
+        soundManager.release()
     }
 }

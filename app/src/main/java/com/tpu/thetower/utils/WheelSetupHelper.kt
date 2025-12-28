@@ -41,7 +41,7 @@ object WheelSetupHelper {
         activity: Activity,
         puzzle: Puzzle,
         soundManager: SoundManager?,
-        rotationSoundResId: Int?,
+        soundEffect: SoundEffect?,
         isSolvedRef: () -> Boolean,
         onSolvedListener: WheelSolvedListener,
     ) {
@@ -63,8 +63,8 @@ object WheelSetupHelper {
                     val position = layoutManager.getPosition(centerView)
                     if (position != RecyclerView.NO_POSITION && position != lastPosition) {
                         lastPosition = position
-                        if (rotationSoundResId != null) {
-                            soundManager?.playSound(rotationSoundResId)
+                        if (soundEffect != null) {
+                            soundManager?.playSound(soundEffect)
                         }
                         val digit = position % data.size
                         solution[rvIndex] = digit.digitToChar()

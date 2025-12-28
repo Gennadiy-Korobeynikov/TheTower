@@ -30,7 +30,6 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         binding = FragmentLvl5Binding.bind(view)
 
         setListeners()
-        handleSounds()
 
         if (loadManager.getPuzzleStatus(5, "bluetooth") == "completed") {
             binding.btnMoose.visibility = View.VISIBLE
@@ -63,23 +62,8 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         }
     }
 
-    private fun handleSounds() {
-        soundManager.init()
-//        soundManager.loadSound(
-//            requireContext(), listOf(
-//                R.raw.sound_of_a_flashlight,
-//                R.raw.sound_of_an_elevator_door_opening
-//            )
-//        )
-    }
-
     override fun onResume() {
         super.onResume()
         saveRepo.saveCurrentLevel(5)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        soundManager.release()
     }
 }

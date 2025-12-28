@@ -15,6 +15,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,7 +35,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         binding = FragmentLvl2Binding.bind(view)
 
         setListeners()
-        handleSounds()
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
@@ -67,7 +67,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         binding.btnToPuzzle0Completed.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl2Fragment_to_lvl2PetFragment)
-            soundManager.playSound(R.raw.sound_of_drawer_opening)
+            soundManager.playSound(SoundEffect.DRAWER_OPENING)
         }
 
         binding.btnToPuzzle1.setOnClickListener {
@@ -81,7 +81,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         binding.btnToPuzzle2Completed.setOnClickListener {
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             binding.ivAccessCard.visibility = View.VISIBLE
-            soundManager.playSound(R.raw.sound_of_drawer_opening)
+            soundManager.playSound(SoundEffect.DRAWER_OPENING)
         }
 
         binding.ivAccessCard.setOnClickListener {
@@ -90,19 +90,8 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
             binding.btnToPuzzle2Completed.visibility = View.GONE
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             LevelAccessManager.upgradeAccessLvl(this, saveRepo)
-            soundManager.playSound(R.raw.sound_of_drawer_closing)
+            soundManager.playSound(SoundEffect.DRAWER_CLOSING)
         }
-    }
-
-    private fun handleSounds() {
-        // musicManager/soundManager уже внедрены через DI
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_drawer_opening,
-                R.raw.sound_of_drawer_closing
-            )
-        )
     }
 
     override fun onResume() {

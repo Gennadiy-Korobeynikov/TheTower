@@ -15,6 +15,7 @@ import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.pow
@@ -48,7 +49,6 @@ class Lvl3PuzzleDonutsFragment :
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLvl3PuzzleDonutsBinding.bind(view)
 
-        handleSounds()
 
         when (loadManager.getPuzzleStatus(3, "donuts")) {
             "in_progress" -> {
@@ -105,7 +105,7 @@ class Lvl3PuzzleDonutsFragment :
 
         val speed = sqrt((x - lastX).pow(2) + (y - lastY).pow(2) + (z - lastZ).pow(2)) / diffTime * 10000
         if (speed > shakeThreshold) {
-            soundManager.playSound(R.raw.sound_of_donuts_shaking)
+            soundManager.playSound(SoundEffect.DONUTS_SHAKING)
             completed()
         }
 
@@ -131,10 +131,6 @@ class Lvl3PuzzleDonutsFragment :
         hintManager.useHint(requireActivity())
     }
 
-    private fun handleSounds() {
-        soundManager.init(maxStreamsNumber = 1)
-        soundManager.loadSound(listOf(R.raw.sound_of_donuts_shaking))
-    }
 
     override fun skipPuzzle() {
         completed()

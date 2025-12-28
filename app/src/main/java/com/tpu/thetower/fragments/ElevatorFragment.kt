@@ -115,12 +115,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
                     if (!prefs.isDevMode && !loadManager.isLevelCompleted(1)) {
                         dialogManager.startDialog(requireActivity(), "lvl1_elevator")
                     } else {
-                        soundManager.release()
                         FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(btn)])
                         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                     }
                 } else if (btn in openedLvlButtons) {
-                    soundManager.release()
                     FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(btn)])
                     UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                 }

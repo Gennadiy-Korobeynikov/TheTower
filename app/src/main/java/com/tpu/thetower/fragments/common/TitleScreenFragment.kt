@@ -30,6 +30,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         binding = FragmentTitleScreenBinding.bind(view)
 
         setListeners()
+        musicManager.playMusic(R.raw.soundtrack_1)
     }
 
     private fun setListeners() {
@@ -57,9 +58,9 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        musicManager.playMusic(R.raw.soundtrack_1)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        musicManager.playMusic(R.raw.soundtrack_1)
+//    }
 
 }

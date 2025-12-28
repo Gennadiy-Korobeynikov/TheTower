@@ -10,12 +10,13 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl6LockBinding
 import com.tpu.thetower.puzzles.Lvl6PuzzleLock
 import com.tpu.thetower.utils.WheelSetupHelper
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -81,14 +82,6 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLvl6LockBinding.bind(view)
 
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_chain_release,
-                R.raw.sound_of_segments_rotating_on_the_safe_lock
-            )
-        )
-
         hintManager = hintManagerFactory.create(
             hints = listOf(
                 "lvl6_lock_hint1",
@@ -129,11 +122,11 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
-            rotationSoundResId = R.raw.sound_of_segments_rotating_on_the_safe_lock,
+            soundEffect = SoundEffect.SEGMENTS_ROTATING,
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(R.raw.sound_of_chain_release)
+                    soundManager.playSound(SoundEffect.CHAIN_RELEASE)
                     passed()
                 }
             }
@@ -158,11 +151,6 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
 
     override fun skipPuzzle() {
         passed()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        soundManager.release() //todo Когда использовать?
     }
 
     override fun onDestroyView() {

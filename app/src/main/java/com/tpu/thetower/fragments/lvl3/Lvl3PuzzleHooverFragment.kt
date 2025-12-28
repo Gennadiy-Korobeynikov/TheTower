@@ -8,7 +8,6 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleHooverBinding
@@ -19,6 +18,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Direction
 import com.tpu.thetower.puzzles.Lvl3PuzzleHoover
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -49,7 +49,6 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
 
         setListeners()
         test()
-        handleSounds()
 
         hintManager = hintManagerFactory.create(
             hints = listOf("lvl3_puzzle2_hint1", "lvl3_puzzle2_hint2", "lvl3_puzzle2_hint3", "lvl3_puzzle2_hint4"),
@@ -71,11 +70,11 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     private fun setListeners() {
         binding.btnLeft.setOnClickListener {
             rotateHooverAnim(false)
-            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_left)
+            soundManager.playSound(SoundEffect.VACUUM_DRIVING_LEFT)
         }
         binding.btnRight.setOnClickListener {
             rotateHooverAnim(true)
-            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
+            soundManager.playSound(SoundEffect.VACUUM_DRIVING_RIGHT)
         }
 
         binding.btnForward.setOnClickListener {
@@ -84,16 +83,16 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             changeButtonsState(false)
 
             if (onStartPosition) { //В начале
-                soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
+                soundManager.playSound(SoundEffect.VACUUM_DRIVING_STRAIGHT)
                 moveHooverAnim(puzzleHoover.currDirection, binding.mainScreen)
             } else if (puzzleHoover.currPositionY == 12 && puzzleHoover.currPositionX == 6 && puzzleHoover.currDirection == Direction.Down) {
                 // Вернулись назад (небольшой костыль, ни на что не влияет, просто тут уже дело времени, которого мало
-                soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
+                soundManager.playSound(SoundEffect.VACUUM_DRIVING_STRAIGHT)
                 moveHooverToCenter(binding.mainScreen, back = true)
             } else { // Двигаемся внутри вентиляции
                 binding.btnForward.postDelayed({
                     restart = !puzzleHoover.moveForward()
-                    if (!restart) soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_straight)
+                    if (!restart) soundManager.playSound(SoundEffect.VACUUM_DRIVING_STRAIGHT)
                     win = puzzleHoover.checkSolution(requireActivity(), saveRepo)
                     test()
                     changeButtonsState(true)
@@ -211,14 +210,14 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
 // Временно для тестирования
     private fun test() {
         if (restart) {
-            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_bumping)
+            soundManager.playSound(SoundEffect.VACUUM_BUMPING)
             binding.ivHoover.animate().rotation(0f).setDuration(300).start()
             moveHooverToCenter(binding.mainScreen)
             restart = false
         }
 
         if (win) {
-            soundManager.playSound(R.raw.sound_of_vacuum_cleaner_driving_right)
+            soundManager.playSound(SoundEffect.VACUUM_DRIVING_RIGHT)
             FragmentNavigation.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
             FragmentNavigation.changeBG(this, R.id.lvl3Fragment)
         }
@@ -228,17 +227,6 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         hintManager.useHint(requireActivity())
     }
 
-    private fun handleSounds() {
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_vacuum_cleaner_bumping,
-                R.raw.sound_of_vacuum_cleaner_driving_right,
-                R.raw.sound_of_vacuum_cleaner_driving_left,
-                R.raw.sound_of_vacuum_cleaner_driving_straight
-            )
-        )
-    }
 
     override fun skipPuzzle() {
         puzzleHoover.complete(saveRepo)

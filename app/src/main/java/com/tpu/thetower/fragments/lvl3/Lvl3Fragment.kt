@@ -20,6 +20,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -43,7 +44,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLvl3Binding.bind(view)
 
-        handleSounds()
         setListeners()
 
         hintManager = hintManagerFactory.create(
@@ -162,11 +162,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         binding.ivDraggable.setOnTouchListener(this@Lvl3Fragment)
     }
 
-    private fun handleSounds() {
-        soundManager.init()
-        soundManager.loadSound(listOf(R.raw.sound_of_guard_snoring))
-    }
-
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
         return if (event?.action == MotionEvent.ACTION_DOWN) {
             view?.visibility = View.INVISIBLE
@@ -211,7 +206,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         binding.ivTarget.visibility = View.GONE
         binding.btnToMap.visibility = View.VISIBLE
         saveRepo.savePuzzleData(3, "sleeping pills")
-        soundManager.playSound(R.raw.sound_of_guard_snoring, repeat = -1)
+        soundManager.playSound(SoundEffect.GUARD_SNORING, repeat = -1)
     }
 
     private fun returnToOriginalPosition(view: View) {
@@ -225,10 +220,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
         saveRepo.saveCurrentLevel(3)
     }
 
-    override fun onPause() {
-        super.onPause()
-        soundManager.release()
-    }
 
     override fun useHint() {
         if (loadManager.getPuzzleStatus(3, "sleeping pills") == "completed")

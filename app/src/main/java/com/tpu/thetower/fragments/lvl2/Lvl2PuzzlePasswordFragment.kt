@@ -16,6 +16,7 @@ import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.databinding.FragmentLvl2PuzzlePasswordBinding
 import com.tpu.thetower.puzzles.Lvl2PuzzlePassword
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     private lateinit var binding: FragmentLvl2PuzzlePasswordBinding
 
     private val pinCells = mutableListOf<android.widget.TextView>()
-    private lateinit var keyboardSounds: List<Int>
+    private lateinit var keyboardSounds: List<SoundEffect>
     private var currentSoundIndex = 0
     private lateinit var puzzle: Puzzle
 
@@ -50,13 +51,11 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         setListeners()
 
         keyboardSounds = listOf(
-            R.raw.sound_of_keyboard_button_press_1,
-            R.raw.sound_of_keyboard_button_press_2,
-            R.raw.sound_of_keyboard_button_press_3,
-            R.raw.sound_of_keyboard_button_press_4
+            SoundEffect.KEYBOARD_BUTTON_PRESS_1,
+            SoundEffect.KEYBOARD_BUTTON_PRESS_2,
+            SoundEffect.KEYBOARD_BUTTON_PRESS_3,
+            SoundEffect.KEYBOARD_BUTTON_PRESS_4
         )
-
-        handleSounds()
 
         pinCells.addAll(
             listOf(
@@ -180,10 +179,6 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         clChatJames.visibility = View.VISIBLE
     }
 
-    private fun handleSounds() {
-        soundManager.init(maxStreamsNumber = 2)
-        soundManager.loadSound(keyboardSounds)
-    }
 
     override fun onPause() {
         super.onPause()

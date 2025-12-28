@@ -19,6 +19,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -61,7 +62,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         initManagers()
         setupInitialState()
         setListeners()
-        handleSounds()
     }
 
     private fun initManagers() {
@@ -123,7 +123,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         btnToElevator.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_global_elevatorFragment)
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-            soundManager.playSound(R.raw.sound_of_an_elevator_door_opening)
+            soundManager.playSound(SoundEffect.ELEVATOR_DOOR)
         }
 
         btnToPuzzle1Lock.setOnClickListener {
@@ -135,7 +135,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             ivPuzzle1.visibility = View.VISIBLE
             ivClick.visibility = View.VISIBLE
             dialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
-            soundManager.playSound(R.raw.sound_of_drawer_opening)
+            soundManager.playSound(SoundEffect.DRAWER_OPENING)
         }
 
         btnLvlCompleted.setOnClickListener {
@@ -145,7 +145,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         ivClick.setOnClickListener {
             ivPuzzle1.visibility = View.GONE
             ivClick.visibility = View.GONE
-            soundManager.playSound(R.raw.sound_of_drawer_closing)
+            soundManager.playSound(SoundEffect.DRAWER_CLOSING)
         }
 
         ivDarkness.setOnClickListener {
@@ -160,7 +160,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             flashlightManager?.stopMonitoring()
             saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.COMPLETED.value)
             enableButtons()
-            soundManager.playSound(R.raw.sound_of_light_switch)
+            soundManager.playSound(SoundEffect.LIGHT_SWITCH)
         }
 
         flashlightManager = FlashlightManager(requireContext()) { isFlashlightOn ->
@@ -174,13 +174,13 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         val currentStatus = loadManager.getPuzzleStatus(0, "flashlight")
 
         if (isFlashlightOn && currentStatus == PuzzleStatus.LOCKED.value) {
-            soundManager.playSound(R.raw.sound_of_a_flashlight)
+            soundManager.playSound(SoundEffect.FLASHLIGHT)
             dialogManager.startDialog(requireActivity(), "lvl0_flashlight_on")
             saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.IN_PROGRESS.value)
             ivDarkness.visibility = View.GONE
 
         } else if (!isFlashlightOn && currentStatus == PuzzleStatus.IN_PROGRESS.value) {
-            soundManager.playSound(R.raw.sound_of_a_flashlight)
+            soundManager.playSound(SoundEffect.FLASHLIGHT)
             ivDarkness.visibility = View.VISIBLE
             saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.LOCKED.value)
         }
@@ -196,33 +196,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
                 dialogManager.startDialog(requireActivity(), "lvl0_start")
             }
             .start()
-    }
-
-    private fun handleSounds() {
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_a_flashlight,
-                R.raw.sound_of_an_elevator_door_opening,
-                R.raw.sound_of_drawer_opening,
-                R.raw.sound_of_drawer_closing,
-                R.raw.sound_of_light_switch
-            )
-        )
-    }
-
-    override fun onDestroyView() {
-        flashlightManager?.toggleFlashlight(false)
-        flashlightManager?.stopMonitoring()
-        flashlightManager = null
-        super.onDestroyView()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        musicManager.playMusic(R.raw.soundtrack_2)
-        saveRepo.saveCurrentLevel(0)
     }
 
     override fun useHint() {
@@ -241,5 +214,19 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
     override fun skipPuzzle() {
         handleFlashlightStateChanged(true)
+    }
+
+    override fun onDestroyView() {
+        flashlightManager?.toggleFlashlight(false)
+        flashlightManager?.stopMonitoring()
+        flashlightManager = null
+        super.onDestroyView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_2)
+        saveRepo.saveCurrentLevel(0)
     }
 }
