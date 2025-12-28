@@ -18,12 +18,6 @@ object UiVisibilityController {
         PERMISSION_REQUEST(R.id.fcv_permission_request)
     }
 
-    private val containersWithoutHudAndBackArrow = listOf(
-        UiContainer.TITLE,
-        UiContainer.MENU,
-        UiContainer.SETTINGS,
-    )
-
     private fun Activity.setContainerVisible(container: UiContainer, visible: Boolean) {
         val view = findViewById<FragmentContainerView>(container.id)
         view?.visibility = if (visible) View.VISIBLE else View.GONE
@@ -31,21 +25,13 @@ object UiVisibilityController {
 
     fun show(
         activity: Activity,
-        vararg containers: UiContainer
+        vararg containers: UiContainer,
     ) {
         containers.forEach { activity.setContainerVisible(it, true) }
-        if (containers.any { it in containersWithoutHudAndBackArrow }) {
-            activity.setContainerVisible(UiContainer.HUD, false)
-            activity.setContainerVisible(UiContainer.GO_BACK_ARROW, false)
-        }
     }
 
     fun hide(activity: Activity, vararg containers: UiContainer) {
         containers.forEach { activity.setContainerVisible(it, false) }
-        if (containers.any { it in containersWithoutHudAndBackArrow }) {
-            activity.setContainerVisible(UiContainer.HUD, true)
-            activity.setContainerVisible(UiContainer.GO_BACK_ARROW, true)
-        }
     }
 }
 

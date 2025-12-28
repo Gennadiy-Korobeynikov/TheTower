@@ -22,7 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.common.HUDFragment"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:elevation="0dp"
+        android:translationZ="0dp"/>
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -36,7 +38,6 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_dialog"
-        android:name="com.tpu.thetower.fragments.common.GoBackArrowFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -79,8 +80,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.common.TitleScreenFragment"
-        android:clickable="true"/>
-
+        android:clickable="true"
+        android:visibility="gone"
+        android:elevation="8dp"
+        android:translationZ="0dp"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_settings"
@@ -88,6 +91,8 @@
         android:layout_height="match_parent"
         android:name="com.tpu.thetower.fragments.common.SettingsFragment"
         android:visibility="gone"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:elevation="9dp"
+        android:translationZ="0dp"/>
 
 </FrameLayout>

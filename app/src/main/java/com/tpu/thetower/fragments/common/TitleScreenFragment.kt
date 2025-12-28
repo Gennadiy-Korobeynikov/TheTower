@@ -30,12 +30,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         binding = FragmentTitleScreenBinding.bind(view)
 
         setListeners()
-
-        UiVisibilityController.hide(
-            requireActivity(),
-            UiVisibilityController.UiContainer.HUD,
-            UiVisibilityController.UiContainer.GO_BACK_ARROW
-        )
     }
 
     private fun setListeners() {
@@ -47,6 +41,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
 
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
+
             FragmentNavigation.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
         }
 

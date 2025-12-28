@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0Binding
@@ -28,7 +27,9 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
     private lateinit var binding: FragmentLvl0Binding
 
-    private lateinit var flashlightManager: FlashlightManager
+    // Был lateinit -> при пересоздании фрагмент может уйти в onDestroy/onDestroyView,
+    // не успев инициализировать поле.
+    private var flashlightManager: FlashlightManager? = null
 
     @Inject lateinit var musicManager: MusicManager
     @Inject lateinit var soundManager: SoundManager
@@ -149,16 +150,14 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
         ivDarkness.setOnClickListener {
             dialogManager.startDialog(requireActivity(), "lvl0_dark")
-            //            // Тестирование !!!
-//            flashlightManager.toggleFlashlight(true)
         }
 
         btnLightOn.setOnClickListener {
             ivDarknessFlashlight.visibility = View.GONE
             btnLightOn.visibility = View.GONE
             dialogManager.startDialog(requireActivity(), "lvl0_light_on")
-            flashlightManager.toggleFlashlight(false)
-            flashlightManager.stopMonitoring()
+            flashlightManager?.toggleFlashlight(false)
+            flashlightManager?.stopMonitoring()
             saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.COMPLETED.value)
             enableButtons()
             soundManager.playSound(R.raw.sound_of_light_switch)
@@ -193,7 +192,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             .setDuration(3000)
             .withEndAction {
                 ivBlack.visibility = View.GONE
-                flashlightManager.startMonitoring()
+                flashlightManager?.startMonitoring()
                 dialogManager.startDialog(requireActivity(), "lvl0_start")
             }
             .start()
@@ -212,11 +211,11 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        flashlightManager.toggleFlashlight(false)
-        flashlightManager.stopMonitoring()
-        saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.LOCKED.value)
+    override fun onDestroyView() {
+        flashlightManager?.toggleFlashlight(false)
+        flashlightManager?.stopMonitoring()
+        flashlightManager = null
+        super.onDestroyView()
     }
 
     override fun onResume() {
