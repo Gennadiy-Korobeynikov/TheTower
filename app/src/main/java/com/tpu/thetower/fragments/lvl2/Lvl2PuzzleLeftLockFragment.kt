@@ -16,6 +16,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.puzzles.Lvl2PuzzleLock
 import com.tpu.thetower.utils.WheelSetupHelper
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -53,14 +54,6 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
 
         binding = FragmentLvl2PuzzleLockBinding.bind(view)
 
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_the_lock_opening,
-                R.raw.sound_of_segments_rotating_on_the_safe_lock
-            )
-        )
-
         hintManager = hintManagerFactory.create(
             hints = listOf("lvl2_puzzle0_hint"),
             level = 2,
@@ -92,11 +85,11 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
-            rotationSoundResId = R.raw.sound_of_segments_rotating_on_the_safe_lock,
+            soundEffect = SoundEffect.SEGMENTS_ROTATING,
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(R.raw.sound_of_the_lock_opening)
+                    soundManager.playSound(SoundEffect.LOCK_OPENING)
                     passed()
                 }
             }
@@ -111,7 +104,7 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
             .setDuration(2500)
             .withEndAction { FragmentNavigation.goBack(this) }
             .start()
-        // TODO Добавить звук открывающейся двери сейфа
+        soundManager.playSound(SoundEffect.DRAWER_OPENING)
     }
 
     override fun useHint() {

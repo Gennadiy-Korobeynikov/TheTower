@@ -29,7 +29,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         _binding = FragmentLvl4Binding.bind(view)
 
         setListeners()
-        handleSounds()
 
         if (loadManager.getPuzzleStatus(4, "chess") == "completed") {
             binding.btnChess.visibility = View.GONE
@@ -74,15 +73,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
         }
     }
 
-    private fun handleSounds() {
-        soundManager.init()
-//        soundManager.loadSound(
-//            requireContext(), listOf(
-//                R.raw.sound_of_a_flashlight,
-//                R.raw.sound_of_an_elevator_door_opening
-//            )
-//        )
-    }
 
     override fun onResume() {
         super.onResume()

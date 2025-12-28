@@ -12,7 +12,7 @@ class MusicManager @Inject constructor(
 ) {
 
     private var mediaPlayer: MediaPlayer? = null
-    private var currentMusic: Int = -1
+    private var currentMusic: Int? = null
     private var volume: Float = 0.5f
 
     fun playMusic(music: Int, restart: Boolean = false) {
@@ -25,32 +25,27 @@ class MusicManager @Inject constructor(
         mediaPlayer = MediaPlayer.create(appContext, music).apply {
             isLooping = true
             setVolume(volume, volume)
-            setOnPreparedListener { start() }
+            setOnErrorListener { _, _, _ ->
+                stop()
+                true
+            }
+            start()
         }
         currentMusic = music
     }
 
     fun stopMusic() {
-        if (mediaPlayer != null) {
-            if (mediaPlayer!!.isPlaying) {
-                mediaPlayer!!.stop()
-            }
-            mediaPlayer!!.release()
-            mediaPlayer = null
-            currentMusic = -1
-        }
+        mediaPlayer?.release()
+        mediaPlayer = null
+        currentMusic = null
     }
 
     fun pauseMusic() {
-        if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
-            mediaPlayer!!.pause()
-        }
+        mediaPlayer?.takeIf { it.isPlaying }?.pause()
     }
 
     fun resumeMusic() {
-        if (mediaPlayer != null && !mediaPlayer!!.isPlaying) {
-            mediaPlayer!!.start()
-        }
+        mediaPlayer?.takeIf { !it.isPlaying }?.start()
     }
 
     fun setVolume(volume: Float) {
@@ -58,8 +53,5 @@ class MusicManager @Inject constructor(
         mediaPlayer?.setVolume(this.volume, this.volume)
     }
 
-    fun getCurrentMusic(): Int {
-        return currentMusic
-    }
-
+    fun getCurrentMusic(): Int? = currentMusic
 }

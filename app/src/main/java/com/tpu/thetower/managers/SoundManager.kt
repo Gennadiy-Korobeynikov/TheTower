@@ -3,6 +3,7 @@ package com.tpu.thetower.managers
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,7 +14,7 @@ class SoundManager @Inject constructor(
 ) {
 
     private var soundPool: SoundPool? = null
-    private val soundMap = mutableMapOf<Int, Int>()
+    private val soundMap = mutableMapOf<SoundEffect, Int>()
     private var volume: Float = 0.5f
 
     fun init(maxStreamsNumber: Int = 5) {
@@ -28,33 +29,22 @@ class SoundManager @Inject constructor(
             .build()
     }
 
-    fun loadSound(soundResIds: List<Int>){
-        soundResIds.forEach{
-            val soundId = soundPool?.load(appContext, it, 10) ?: -1
-            if (soundId != -1) {
-                soundMap[it] = soundId
-            }
+    fun loadSounds(effects: List<SoundEffect>) {
+        effects.forEach { effect ->
+            if (soundMap.containsKey(effect)) return@forEach
+
+            val soundId = soundPool?.load(appContext, effect.resId, 1)
+                ?: return@forEach
+            soundMap[effect] = soundId
         }
     }
 
-    fun playSound(soundResId: Int, repeat: Int = 0) {
-        val soundId = soundMap[soundResId] ?: return
-        soundPool?.play(soundId, volume, volume, 1, repeat, 1.0f)
+    fun playSound(effect: SoundEffect, repeat: Int = 0) {
+        val soundId = soundMap[effect] ?: return
+        soundPool?.play(soundId, volume, volume,
+            1, repeat, 1f)
     }
 
-//    fun playSoundWithDelay(soundResId: Int, delayMillis: Long) {
-//        executor.execute {
-//            try {
-//                Thread.sleep(delayMillis)
-//                // Вызов проигрывания звука должен происходить в основном потоке
-//                mainHandler.post {
-//                    playSound(soundResId)
-//                }
-//            } catch (e: InterruptedException) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
 
     fun setVolume(volume: Float) {
         this.volume = volume.coerceIn(0f, 1f)

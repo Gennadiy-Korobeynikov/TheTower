@@ -13,6 +13,7 @@ import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.puzzles.Lvl3PuzzleButtons
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -46,7 +47,6 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
             puzzle = "buttons"
         )
 
-        handleSounds()
         setListeners()
     }
 
@@ -56,7 +56,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
         buttons.forEach { button ->
             button.setOnClickListener { v ->
                 val clicked = v as android.widget.Button
-                soundManager.playSound(R.raw.sound_of_button_press)
+                soundManager.playSound(SoundEffect.BUTTON_PRESS)
                 solution += clicked.text
                 clicked.isClickable = false
                 clicked.setBackgroundResource(R.drawable.lvl3_puzzle1_button_on)
@@ -69,7 +69,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
         if (solution.length != 6) return
 
         if (puzzle.checkSolution(requireActivity(), saveRepo, solution)) {
-            soundManager.playSound(R.raw.sound_of_the_lock_opening)
+            soundManager.playSound(SoundEffect.LOCK_OPENING)
             binding.mainScreen.animate()
                 .alpha(0.2f)
                 .setDuration(2500)
@@ -93,7 +93,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
 
     override fun skipPuzzle() {
         puzzle.complete(saveRepo)
-        soundManager.playSound(R.raw.sound_of_the_lock_opening)
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
         binding.mainScreen.animate()
             .alpha(0.2f)
             .setDuration(2500)
@@ -101,15 +101,6 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
             .start()
     }
 
-    private fun handleSounds() {
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_button_press,
-                R.raw.sound_of_the_lock_opening
-            )
-        )
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

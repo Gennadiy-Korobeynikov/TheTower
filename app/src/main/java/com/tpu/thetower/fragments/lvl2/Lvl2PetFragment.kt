@@ -9,6 +9,7 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,13 +23,6 @@ class Lvl2PetFragment : Fragment(R.layout.fragment_lvl2_pet), Hintable {
         super.onViewCreated(view, savedInstanceState)
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-
-        soundManager.init()
-        soundManager.loadSound(
-            listOf(
-                R.raw.sound_of_drawer_closing
-            )
-        )
     }
 
     override fun useHint() {
@@ -41,7 +35,7 @@ class Lvl2PetFragment : Fragment(R.layout.fragment_lvl2_pet), Hintable {
 
     override fun onPause() {
         super.onPause()
-        soundManager.playSound(R.raw.sound_of_drawer_closing)
+        soundManager.playSound(SoundEffect.DRAWER_CLOSING)
     }
 
 }

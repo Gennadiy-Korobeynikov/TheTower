@@ -24,7 +24,6 @@ class GoBackArrowFragment : Fragment(R.layout.fragment_go_back_arrow) {
         val btnToElevator: ImageButton = binding.btnGoBack
 
         btnToElevator.setOnClickListener {
-            soundManager.release()
             FragmentNavigation.goBack(this)
         }
     }
