@@ -37,11 +37,6 @@ class LoadManager @Inject constructor(
         repo.invalidateCache()
     }
 
-    fun loadProgress() {
-        val data = repo.get()
-        LevelAccessManager.currentAccessLvl = data.playerInfo.accessLevel
-    }
-
     fun loadSettings() {
         val data = repo.get()
         musicManager.setVolume(data.gameSettings.musicVolume)
@@ -63,6 +58,9 @@ class LoadManager @Inject constructor(
 
     fun getAccessLevel(): Int =
         repo.get().playerInfo.accessLevel
+
+    fun getCurrentAccessCardNumber(): Int =
+        repo.get().playerInfo.accessCardNumber
 
     fun getCurrentDialog(level: Int, npc: Int): Int {
         val data = repo.get()

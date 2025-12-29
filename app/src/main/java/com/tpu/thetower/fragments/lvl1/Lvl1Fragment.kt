@@ -44,7 +44,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
             when (loadManager.getCurrentDialog(1, 0)) {
                 0 -> {
                     dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist")
-                    saveRepo.saveLevelStatus(1)
+                    saveRepo.saveLevelCompletedStatus(1)
                 }
                 1 -> dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist_2")
             }

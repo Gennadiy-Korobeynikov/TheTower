@@ -86,10 +86,10 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         binding.ivAccessCard.setOnClickListener {
             binding.ivAccessCard.visibility = View.GONE
-            saveRepo.saveLevelStatus(2)
+            saveRepo.saveLevelCompletedStatus(2)
             binding.btnToPuzzle2Completed.visibility = View.GONE
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-            LevelAccessManager.upgradeAccessLvl(this, saveRepo)
+            LevelAccessManager.changeAccessCardNumber(saveRepo, 3)
             soundManager.playSound(SoundEffect.DRAWER_CLOSING)
         }
     }

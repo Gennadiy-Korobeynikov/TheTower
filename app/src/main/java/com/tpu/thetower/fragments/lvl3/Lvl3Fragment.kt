@@ -150,7 +150,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnTouchListener, Vie
 
         binding.btnToAccessCard.setOnClickListener {
             binding.ivAccessCard.visibility = View.VISIBLE
-            LevelAccessManager.upgradeAccessLvl(this, saveRepo)
+            LevelAccessManager.changeAccessCardNumber(saveRepo, 4)
         }
 
         binding.ivAccessCard.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.tpu.thetower.fragments.lvl0
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -33,13 +34,9 @@ class Lvl0OpenedVaultFragment : Fragment(R.layout.fragment_lvl0_completed) {
 
     private fun setListeners() {
         binding.btnAccessCard.setOnClickListener {
-            if (LevelAccessManager.currentAccessLvl == 0) {
-                dialogManager.startDialog(requireActivity(), "lvl0_access_card")
-                LevelAccessManager.upgradeAccessLvl(this, saveRepo)
-                saveRepo.saveLevelStatus(0)
-            } else {
-                dialogManager.startDialog(requireActivity(), "lvl0_access_card_got")
-            }
+            dialogManager.startDialog(requireActivity(), "lvl0_access_card_got")
+            LevelAccessManager.changeAccessCardNumber(saveRepo, 2)
+            saveRepo.saveLevelCompletedStatus(0)
         }
     }
 

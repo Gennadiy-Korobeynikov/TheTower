@@ -3,7 +3,8 @@
     "uid": "",
     "totalPlayTime": 0,
     "accessLevel": 0,
-    "currentLevel": 0
+    "currentLevel": 0,
+    "currentAccessCardNumber" : 0
   },
   "levels": [
     {

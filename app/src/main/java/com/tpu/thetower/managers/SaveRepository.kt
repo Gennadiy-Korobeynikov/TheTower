@@ -56,6 +56,12 @@ class SaveRepository @Inject constructor(
         })
     }
 
+    fun saveAccessCardNumber(currCardLvl: Int) {
+        updateCache(fileSaveManager.update {
+            it.copy(playerInfo = it.playerInfo.copy(accessCardNumber = currCardLvl))
+        })
+    }
+
     fun savePuzzleUsedHintsCount(level: Int, puzzle: String, hintUsed: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
@@ -66,7 +72,7 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun saveLevelStatus(level: Int) {
+    fun saveLevelCompletedStatus(level: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }?.isCompleted = true

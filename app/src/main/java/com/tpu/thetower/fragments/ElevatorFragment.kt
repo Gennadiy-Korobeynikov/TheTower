@@ -16,6 +16,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentElevatorBinding
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.UiVisibilityController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,6 +31,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
     @Inject lateinit var musicManager: MusicManager
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager: DialogManager
+    @Inject lateinit var saveRepo: SaveRepository
 
     private val openedLvlButtons: MutableList<View> = mutableListOf()
     private val lvlActions: List<Int> = listOf(
@@ -53,7 +55,8 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         binding = FragmentElevatorBinding.bind(view)
         prefs = AppPreferences(requireContext())
-        currAccessLevel = if (prefs.isDevMode) 5 else 0
+        currAccessLevel = if (prefs.isMaxAccessLvl) 5
+            else loadManager.getAccessLevel()
 
         setListeners()
 
@@ -70,9 +73,11 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         }
 
         // TODO WARNING!!! ВНИМАНИЕ!!! ДАЛЬШЕ КОСТЫЛЬ
-        if (loadManager.getAccessLevel() != 0) {
+        if (loadManager.getCurrentAccessCardNumber() != 0) {
             binding.ivDraggable.visibility = View.VISIBLE
-            binding.ivDraggable.setImageResource(LevelAccessManager.getCardImage())
+            binding.ivDraggable.setImageResource(
+                LevelAccessManager.getCardImage(loadManager.getCurrentAccessCardNumber())
+            )
         }
         // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
     }
@@ -112,7 +117,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
         lvlButtons.forEach { btn ->
             btn.setOnClickListener {
                 if (btn == binding.btnElevatorToLvl2 && btn in openedLvlButtons) {
-                    if (!prefs.isDevMode && !loadManager.isLevelCompleted(1)) {
+                    if (!prefs.isMaxAccessLvl && !loadManager.isLevelCompleted(1)) {
                         dialogManager.startDialog(requireActivity(), "lvl1_elevator")
                     } else {
                         FragmentNavigation.changeBG(this, lvlActions[lvlButtons.indexOf(btn)])
@@ -127,15 +132,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
 
         binding.ivCardReader.setOnDragListener(this@ElevatorFragment)
         binding.ivDraggable.setOnTouchListener(this@ElevatorFragment)
-
-
-        //TODO Разобраться в необходимости кода
-
-//        requireActivity().supportFragmentManager
-//            .setFragmentResultListener("moduleUnlocking", viewLifecycleOwner) { _, bundle ->
-//                val currAccessLevel = bundle.getInt("currAccessLevel")
-//                unlockLvls(currAccessLevel)
-//            }
     }
 
     private fun unlockLvls(currAccessLevel: Int) {
@@ -149,8 +145,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             binding.btnElevatorToLvl6
         )
 
-        val topUnlockingLvl = LevelAccessManager.topUnlockedLvlsForModules[currAccessLevel]
-        val unlockingLvls = (0..topUnlockingLvl)
+        val unlockingLvls = (0..currAccessLevel)
         unlockingLvls.forEach { i ->
             openedLvlButtons.add(lvlButtons[i])
             lvlButtons[i].setBackgroundResource(android.R.color.transparent)
@@ -183,7 +178,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnTouchListe
             DragEvent.ACTION_DROP -> {
                 if (targetView == binding.ivCardReader) {
                     returnToOriginalPosition(draggedView)
-                    currAccessLevel = loadManager.getAccessLevel()
+                    currAccessLevel = LevelAccessManager.updateAccessLvl(
+                        saveRepo,
+                        loadManager.getCurrentAccessCardNumber())
+                    LevelAccessManager.updateAccessLvl(saveRepo, currAccessLevel)
                 } else {
                     returnToOriginalPosition(draggedView)
                 }

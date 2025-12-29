@@ -38,7 +38,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
             // Сброс сейва
             fileSaveManager.resetData()
             loadManager.invalidateCache()
-            loadManager.loadProgress()
 
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
@@ -51,7 +50,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         }
 
         binding.btnResume.setOnClickListener {
-            loadManager.loadProgress()
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
             loadManager.startSavedLevel(requireActivity())

@@ -7,7 +7,6 @@ class LevelAccessManager {
 
     companion object {
         private val cardImageIds: List<Int> = listOf(
-            R.drawable.access_card_2, // Костыль, не трогать
             R.drawable.access_card_2,
             R.drawable.access_card_3,
             R.drawable.access_card_4,
@@ -15,24 +14,17 @@ class LevelAccessManager {
             R.drawable.access_card_6
         )
 
-        var currentAccessLvl = 0
-        val topUnlockedLvlsForModules: List<Int> = listOf(0, 2, 3, 4, 5, 6)
-
-        fun getCardImage(): Int {
-            return cardImageIds[currentAccessLvl]
+        fun getCardImage(cardNumber : Int): Int {
+            return cardImageIds[cardNumber-2] // карты начинаются со 2 уровня
         }
 
-        //TODO Разобраться в необходимости кода
-        fun unlockModules(fragment: Fragment) {
-//            FragmentManager.changeAccessCardImg(fragment, getCardImage())
-//            FragmentManager.changeUnlockedModules(fragment, currentAccessLvl)
+        fun changeAccessCardNumber(saveRepo: SaveRepository, newCardNumber: Int) {
+            saveRepo.saveAccessCardNumber(newCardNumber)
         }
 
-        fun upgradeAccessLvl(fragment: Fragment, saveRepo: SaveRepository) {
-
-            if (currentAccessLvl in 0..<topUnlockedLvlsForModules.size - 1) currentAccessLvl++
-            unlockModules(fragment)
-            saveRepo.saveAccessLevel(currentAccessLvl)
+        fun updateAccessLvl(saveRepo: SaveRepository, newAccessLvl: Int) : Int {
+            saveRepo.saveAccessLevel(newAccessLvl)
+            return newAccessLvl
         }
     }
 }
