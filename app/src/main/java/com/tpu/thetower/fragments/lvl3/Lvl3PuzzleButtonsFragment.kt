@@ -15,6 +15,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.puzzles.Lvl3PuzzleButtons
+import com.tpu.thetower.utils.CommonAnimationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -69,12 +70,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
         if (solution.length != 6) return
 
         if (puzzle.checkSolution(requireActivity(), saveRepo, solution)) {
-            soundManager.playSound(SoundEffect.LOCK_OPENING)
-            binding.mainScreen.animate()
-                .alpha(0.2f)
-                .setDuration(2500)
-                .withEndAction { FragmentNavigation.goBack(this) }
-                .start()
+            passed()
         } else {
             solution = ""
             buttons.forEach { b ->
@@ -91,14 +87,19 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
     }
 
+    private fun passed() {
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
+
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
+    }
+
     override fun skipPuzzle() {
         puzzle.complete(saveRepo)
-        soundManager.playSound(SoundEffect.LOCK_OPENING)
-        binding.mainScreen.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction { FragmentNavigation.goBack(this) }
-            .start()
+        passed()
     }
 
 

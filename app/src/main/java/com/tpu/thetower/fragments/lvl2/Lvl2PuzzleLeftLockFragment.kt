@@ -16,6 +16,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.puzzles.Lvl2PuzzleLock
 import com.tpu.thetower.utils.WheelSetupHelper
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -89,7 +90,6 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(SoundEffect.LOCK_OPENING)
                     passed()
                 }
             }
@@ -98,13 +98,13 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
 
     private fun passed() {
         isSolved = true
-        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-        binding.mainScreen.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction { FragmentNavigation.goBack(this) }
-            .start()
-        soundManager.playSound(SoundEffect.DRAWER_OPENING)
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
+
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
     }
 
     override fun useHint() {

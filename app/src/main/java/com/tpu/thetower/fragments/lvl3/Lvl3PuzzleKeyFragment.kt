@@ -23,6 +23,8 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
+import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -124,16 +126,20 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         binding.btnApply.setOnClickListener {
             val pinsPositions = binding.keyView.getPinsPositions()
             if (puzzle.checkSolution(requireActivity(), saveRepo, pinsPositions.joinToString(""))) {
-                binding.ivBg.animate()
-                    .alpha(0.2f)
-                    .setDuration(2500)
-                    .withEndAction {
-                        FragmentNavigation.goBack(this)
-                    }
-                    .start()
+                passed()
             }
         }
 
+    }
+
+    private fun passed() {
+        //soundManager.playSound(SoundEffect.LOCK_OPENING)
+
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
     }
 
 
@@ -143,13 +149,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
 
     override fun skipPuzzle() {
         puzzle.complete(saveRepo)
-        binding.ivBg.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction {
-                FragmentNavigation.goBack(this)
-            }
-            .start()
+        passed()
     }
 
 

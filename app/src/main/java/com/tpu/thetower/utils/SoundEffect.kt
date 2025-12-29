@@ -7,6 +7,7 @@ enum class SoundEffect(@RawRes val resId: Int) {
     FLASHLIGHT(R.raw.sound_of_a_flashlight),
     ELEVATOR_DOOR(R.raw.sound_of_an_elevator_door_opening),
     BUTTON_PRESS(R.raw.sound_of_button_press),
+    ACCESS_CARD_INSERT(R.raw.sound_of_access_card_insert),
     CHAIN_RELEASE(R.raw.sound_of_chain_release),
     DONUTS_SHAKING(R.raw.sound_of_donuts_shaking),
     DRAWER_CLOSING(R.raw.sound_of_drawer_closing),

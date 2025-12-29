@@ -17,6 +17,8 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl4PuzzleChessboardBinding
 import com.tpu.thetower.puzzles.Lvl4ChessboardPuzzle
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.SoundEffect
 
 
 @AndroidEntryPoint
@@ -93,7 +95,13 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
     }
 
     private fun passed() {
-        FragmentNavigation.goBack(this)
+        //soundManager.playSound(SoundEffect.LOCK_OPENING)
+
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
     }
 
     override fun useHint() {
