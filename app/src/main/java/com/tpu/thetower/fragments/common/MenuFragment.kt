@@ -31,7 +31,6 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         binding = FragmentMenuBinding.bind(view)
 
         setListeners()
-        // handleSounds() удалён: менеджеры приходят через DI
     }
 
     private fun setListeners() {
@@ -42,6 +41,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         binding.btnToTitleScreen.setOnClickListener {
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.MENU)
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
+            musicManager.playMusic(R.raw.soundtrack_1)
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.TITLE)
         }
 

@@ -30,7 +30,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         binding = FragmentTitleScreenBinding.bind(view)
 
         setListeners()
-        musicManager.playMusic(R.raw.soundtrack_1)
     }
 
     private fun setListeners() {

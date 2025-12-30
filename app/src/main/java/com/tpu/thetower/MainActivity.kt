@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Запускаем музыку только при первом старте приложения, а не при пересоздании Activity.
+        if (savedInstanceState == null) {
+            musicManager.playMusic(R.raw.soundtrack_1)
+        }
+
         val prefs = AppPreferences(this)
         //TEST: режим разработчика (макс. уровень доступа, кнопка пропуска пазлов)
         prefs.isDevMode = true
