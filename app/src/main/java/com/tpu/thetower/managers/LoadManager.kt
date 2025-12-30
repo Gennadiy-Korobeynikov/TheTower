@@ -72,6 +72,11 @@ class LoadManager @Inject constructor(
     fun getCurrentLevel(): Int =
         repo.get().playerInfo.currentLevel
 
+    fun getCurrentLevelFragmentId(): Int {
+        val currentLevel = getCurrentLevel()
+        return levels[currentLevel]
+    }
+
     fun getLevelProgress(level: Int): Pair<Int, Int> {
         val data = repo.get()
         val lvl = data.levels.find { it.id == level }

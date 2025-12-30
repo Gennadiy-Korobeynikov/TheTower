@@ -130,6 +130,8 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
 
                 FragmentNavigation.changeBG(this, lvlActions[index])
                 UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+                soundManager.playSound(SoundEffect.ELEVATOR_DOOR)
+                soundManager.playSound(SoundEffect.STEPS)
             }
         }
 
