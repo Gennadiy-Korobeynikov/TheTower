@@ -15,6 +15,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,17 +39,17 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
-        if (loadManager.getPuzzleStatus(2, "lock") == "locked") {
+        if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.LOCKED.value) {
             dialogManager.startDialog(requireActivity(), "lvl2_start")
-            saveRepo.savePuzzleData(2, "lock", status = "in_progress")
+            saveRepo.savePuzzleData(2, "lock", status = PuzzleStatus.IN_PROGRESS.value)
         }
 
-        if (loadManager.getPuzzleStatus(2, "lock") == "completed") {
+        if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.COMPLETED.value) {
             binding.btnToPuzzle0Lock.visibility = View.GONE
             binding.btnToPuzzle0Completed.visibility = View.VISIBLE
         }
 
-        if (loadManager.getPuzzleStatus(2, "chat") == "completed") {
+        if (loadManager.getPuzzleStatus(2, "chat") == PuzzleStatus.COMPLETED.value) {
             binding.btnToPuzzle2Lock.visibility = View.GONE
             if (!loadManager.isLevelCompleted(2)) {
                 binding.btnToPuzzle2Completed.visibility = View.VISIBLE

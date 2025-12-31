@@ -8,14 +8,14 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleButtonsBinding
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.utils.SoundEffect
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl3PuzzleButtons
 import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -81,7 +81,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
     }
 
     override fun useHint() {
-        if (loadManager.getPuzzleStatus(3, "donuts") == "completed") // После тряски пончиков
+        if (loadManager.getPuzzleStatus(3, "donuts") == PuzzleStatus.COMPLETED.value) // После тряски пончиков
             hintManager.useHint(requireActivity())
         else
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")

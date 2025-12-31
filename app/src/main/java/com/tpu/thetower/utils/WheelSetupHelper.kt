@@ -4,9 +4,9 @@ import android.app.Activity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.Puzzle
-import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.adapters.ImageCodeAdapter
 import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -37,7 +37,7 @@ object WheelSetupHelper {
         layoutImage: Int,
         orientation: Int,
         rvIndex: Int,
-        solution: CharArray,
+        currentSolution: CharArray,
         activity: Activity,
         puzzle: Puzzle,
         soundManager: SoundManager?,
@@ -54,35 +54,53 @@ object WheelSetupHelper {
         val snapHelper = LimitedSpeedLinearSnapHelper()
         snapHelper.attachToRecyclerView(rv)
 
+        val initialDigit = Character.getNumericValue(currentSolution[rvIndex])
+        val startPosition =
+            Int.MAX_VALUE / 2 +
+                    initialDigit -
+                    (Int.MAX_VALUE / 2) % data.size
+
+        rv.post {
+            layoutManager.scrollToPositionWithOffset(startPosition, 0)
+            currentSolution[rvIndex] = initialDigit.digitToChar()
+        }
+
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             private var lastPosition = -1
+
             override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(rv, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val centerView = snapHelper.findSnapView(layoutManager) ?: return
-                    val position = layoutManager.getPosition(centerView)
-                    if (position != RecyclerView.NO_POSITION && position != lastPosition) {
+
+                    val centerView =
+                        snapHelper.findSnapView(layoutManager) ?: return
+
+                    val position =
+                        layoutManager.getPosition(centerView)
+
+                    if (position != RecyclerView.NO_POSITION &&
+                        position != lastPosition
+                    ) {
                         lastPosition = position
-                        if (soundEffect != null) {
-                            soundManager?.playSound(soundEffect)
+
+                        soundEffect?.let {
+                            soundManager?.playSound(it)
                         }
+
                         val digit = position % data.size
-                        solution[rvIndex] = digit.digitToChar()
+                        currentSolution[rvIndex] = digit.digitToChar()
 
-                        val isCorrectSolution = puzzle.checkSolution(activity, saveRepo(activity), String(solution))
+                        val isCorrect = puzzle.checkSolution(
+                            activity,
+                            saveRepo(activity),
+                            String(currentSolution)
+                        )
 
-                        if (isCorrectSolution && !isSolvedRef()) {
+                        if (isCorrect && !isSolvedRef()) {
                             onSolvedListener.onPuzzleSolved()
                         }
                     }
                 }
             }
         })
-
-        rv.post {
-            val targetDigit = Character.getNumericValue(solution[rvIndex])
-            val startPosition = Int.MAX_VALUE / 2 + targetDigit - (Int.MAX_VALUE / 2) % data.size
-            layoutManager.scrollToPosition(startPosition)
-        }
     }
 }

@@ -35,7 +35,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var saveRepo : SaveRepository
 
-    private var solution = "1111".toCharArray()
+    private var currSolution = "0000".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
@@ -121,7 +121,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
             layoutImage = R.layout.item_image,
             orientation = LinearLayoutManager.HORIZONTAL,
             rvIndex = rvIndex,
-            solution = solution,
+            currentSolution = currSolution,
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,

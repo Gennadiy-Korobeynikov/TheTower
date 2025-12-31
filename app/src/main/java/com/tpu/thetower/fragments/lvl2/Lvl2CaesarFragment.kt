@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.tpu.thetower.Hintable
+import com.tpu.thetower.R
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.HintManager
-import com.tpu.thetower.Hintable
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.UiVisibilityController
-import com.tpu.thetower.R
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -41,7 +42,7 @@ class Lvl2CaesarFragment : Fragment(R.layout.fragment_lvl2_caesar), Hintable {
     }
 
     override fun useHint() {
-        if (loadManager.getPuzzleStatus(2, "lock") == "in_progress") {
+        if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.IN_PROGRESS.value) {
             hintManager.useHint(requireActivity())
         } else {
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")

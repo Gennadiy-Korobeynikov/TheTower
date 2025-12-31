@@ -3,7 +3,6 @@ package com.tpu.thetower.fragments
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.os.Bundle
-import android.util.Log.v
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
@@ -68,7 +67,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
 
         binding = FragmentElevatorBinding.bind(view)
         prefs = AppPreferences(requireContext())
-        currAccessLevel = if (prefs.isMaxAccessLvl) 5 else loadManager.getAccessLevel()
+        currAccessLevel = if (prefs.isMaxAccessLvl) 6 else loadManager.getAccessLevel()
 
         setListeners()
 

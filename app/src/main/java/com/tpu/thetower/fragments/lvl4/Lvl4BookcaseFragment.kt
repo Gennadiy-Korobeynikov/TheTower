@@ -3,12 +3,13 @@ package com.tpu.thetower.fragments.lvl4
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.ImageUpdateDispatcher
-import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4BookcaseBinding
+import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.ImageUpdateDispatcher
 import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -41,7 +42,7 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
         }
 
         binding.btnBookAskii.setOnClickListener {
-            val book: String = if (loadManager.getPuzzleStatus(4, "askiibtn") == "locked")
+            val book: String = if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.LOCKED.value)
                 "askii_a" else "askii_b"
             openBook(book)
         }

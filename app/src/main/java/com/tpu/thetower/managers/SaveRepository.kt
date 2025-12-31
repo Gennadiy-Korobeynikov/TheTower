@@ -1,5 +1,6 @@
 package com.tpu.thetower.managers
 
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.models.SaveData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -90,7 +91,7 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun savePuzzleData(level: Int, puzzle: String, status: String = "completed") {
+    fun savePuzzleData(level: Int, puzzle: String, status: String = PuzzleStatus.COMPLETED.value) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }

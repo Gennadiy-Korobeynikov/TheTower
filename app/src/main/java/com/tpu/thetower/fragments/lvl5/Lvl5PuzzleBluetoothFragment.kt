@@ -6,13 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import com.tpu.thetower.managers.LoadManager
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentLvl5PuzzleBluetoothBinding
+import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.UiVisibilityController
-import com.tpu.thetower.databinding.FragmentLvl5PuzzleBluetoothBinding
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -36,7 +37,7 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
 
         setListeners()
 
-        if (loadManager.getPuzzleStatus(5, "bluetooth") == "completed") {
+        if (loadManager.getPuzzleStatus(5, "bluetooth") == PuzzleStatus.COMPLETED.value) {
             binding.ivBg.setImageResource(R.drawable.lvl5_fish_bluetooth)
         }
     }
@@ -48,7 +49,7 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
                 val state = intent?.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
                 if (state == BluetoothAdapter.STATE_ON || state == BluetoothAdapter.STATE_OFF) {
                     binding.ivBg.setImageResource(R.drawable.lvl5_fish_bluetooth)
-                    saveRepo.savePuzzleData(5, "bluetooth", status = "completed")
+                    saveRepo.savePuzzleData(5, "bluetooth", status = PuzzleStatus.COMPLETED.value)
                 }
             }
         }

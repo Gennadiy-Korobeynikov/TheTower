@@ -13,18 +13,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
+import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
 import com.tpu.thetower.utils.CommonAnimationHelper
-import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -62,7 +61,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
 
-        if (loadManager.getPuzzleStatus(3, "lock model") == "completed") { // Замок вставлен в комп
+        if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.COMPLETED.value) { // Замок вставлен в комп
             hintManager = hintManagerFactory.create(
                 hints = listOf("lvl3_puzzle4_hint3"),
                 level = 3,
@@ -83,7 +82,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
     private fun setListeners() {
 
         binding.btnCopy.setOnClickListener {
-            saveRepo.savePuzzleData(3, "lock model", status = "in_progress")
+            saveRepo.savePuzzleData(3, "lock model", status = PuzzleStatus.IN_PROGRESS.value)
             binding.btnCopy.visibility = View.GONE
             binding.ivBg.setImageResource(R.drawable.lvl3_lock)
 
