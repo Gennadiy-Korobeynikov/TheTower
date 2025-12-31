@@ -10,6 +10,7 @@ import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,7 +32,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
         setListeners()
 
-        if (loadManager.getPuzzleStatus(1, "chandelier") == "completed") {
+        if (loadManager.getPuzzleStatus(1, "chandelier") == PuzzleStatus.COMPLETED.value) {
             binding.ivBg.setImageResource(R.drawable.lvl1_after_clicks)
             binding.btnChandelier.visibility = View.GONE
             binding.btnNpcReceptionist.visibility = View.GONE
@@ -41,10 +42,10 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
     private fun setListeners() {
         binding.btnNpcReceptionist.setOnClickListener {
-            when (loadManager.getCurrentDialog(1, 0)) {
+            when (loadManager.getCurrentDialog(1, "receptionist")) {
                 0 -> {
                     dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist")
-                    saveRepo.saveLevelStatus(1)
+                    saveRepo.saveLevelCompletedStatus(1)
                 }
                 1 -> dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist_2")
             }
@@ -68,7 +69,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
                         binding.btnChandelier.visibility = View.GONE
                         binding.btnNpcReceptionist.visibility = View.GONE
                         binding.btnAccessCard.visibility = View.VISIBLE
-                        saveRepo.savePuzzleData(1, "chandelier", status = "completed")
+                        saveRepo.savePuzzleData(1, "chandelier", status = PuzzleStatus.COMPLETED.value)
                     }
                     .start()
             }

@@ -27,8 +27,6 @@ class FileSaveManager @Inject constructor(
 
     fun ensureSaveExists() = synchronized(ioLock) { ensureSaveExistsLocked() }
 
-    fun saveData(saveData: SaveData) = synchronized(ioLock) { saveDataLocked(saveData) }
-
     fun update(transform: (SaveData) -> SaveData): SaveData? {
         synchronized(ioLock) {
             val current = readDataLocked() ?: return null
@@ -53,58 +51,6 @@ class FileSaveManager @Inject constructor(
         }
     }
 
-    fun saveMusicVolume(volume: Float) {
-        update { gameData ->
-            gameData.copy(gameSettings = gameData.gameSettings.copy(musicVolume = volume))
-        }
-    }
-
-    fun saveSoundVolume(volume: Float) {
-        update { gameData ->
-            gameData.copy(gameSettings = gameData.gameSettings.copy(soundVolume = volume))
-        }
-    }
-
-    fun saveCurrentLevel(level: Int) {
-        update { gameData ->
-            gameData.copy(playerInfo = gameData.playerInfo.copy(currentLevel = level))
-        }
-    }
-
-    fun saveAccessLevel(currAccessLevel: Int) {
-        update { gameData ->
-            gameData.copy(playerInfo = gameData.playerInfo.copy(accessLevel = currAccessLevel))
-        }
-    }
-
-    fun savePuzzleUsedHintsCount(level: Int, puzzle: String, hintUsed: Int) {
-        update { gameData ->
-            val updated = gameData.copy()
-            updated.levels.find { it.id == level }
-                ?.puzzles?.find { it.name == puzzle }
-                ?.hintsUsed = hintUsed
-            updated
-        }
-    }
-
-    fun saveLevelStatus(level: Int) {
-        update { gameData ->
-            val updated = gameData.copy()
-            updated.levels.find { it.id == level }
-                ?.isCompleted = true
-            updated
-        }
-    }
-
-    fun saveCurrentDialog(level: Int, npc: Int, dialogIndex: Int) {
-        update { gameData ->
-            val updated = gameData.copy()
-            updated.levels.find { it.id == level }
-                ?.npcDialogs?.find { it.id == npc }
-                ?.currentDialogIndex = dialogIndex
-            updated
-        }
-    }
 
     private fun ensureSaveExistsLocked() {
         val file = getSaveFile()

@@ -28,8 +28,6 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
 
     private lateinit var binding: FragmentLvl0Binding
 
-    // Был lateinit -> при пересоздании фрагмент может уйти в onDestroy/onDestroyView,
-    // не успев инициализировать поле.
     private var flashlightManager: FlashlightManager? = null
 
     @Inject lateinit var musicManager: MusicManager
@@ -134,7 +132,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         btnToPuzzle1.setOnClickListener {
             ivPuzzle1.visibility = View.VISIBLE
             ivClick.visibility = View.VISIBLE
-            dialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
+            if (loadManager.getCurrentDialog(0, "shapes_paper") == 0)
+                dialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
             soundManager.playSound(SoundEffect.DRAWER_OPENING)
         }
 

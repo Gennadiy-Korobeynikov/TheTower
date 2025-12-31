@@ -1,5 +1,6 @@
 package com.tpu.thetower.managers
 
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.models.SaveData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -56,6 +57,12 @@ class SaveRepository @Inject constructor(
         })
     }
 
+    fun saveAccessCardNumber(currCardLvl: Int) {
+        updateCache(fileSaveManager.update {
+            it.copy(playerInfo = it.playerInfo.copy(accessCardNumber = currCardLvl))
+        })
+    }
+
     fun savePuzzleUsedHintsCount(level: Int, puzzle: String, hintUsed: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
@@ -66,7 +73,7 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun saveLevelStatus(level: Int) {
+    fun saveLevelCompletedStatus(level: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }?.isCompleted = true
@@ -74,17 +81,17 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun saveCurrentDialog(level: Int, npc: Int, dialogIndex: Int) {
+    fun saveCurrentDialog(level: Int, key: String, dialogIndex: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
-                ?.npcDialogs?.find { it.id == npc }
+                ?.dialogs?.find { it.dialogKey == key }
                 ?.currentDialogIndex = dialogIndex
             updated
         })
     }
 
-    fun savePuzzleData(level: Int, puzzle: String, status: String = "completed") {
+    fun savePuzzleData(level: Int, puzzle: String, status: String = PuzzleStatus.COMPLETED.value) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }

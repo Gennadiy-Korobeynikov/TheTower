@@ -5,18 +5,17 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.databinding.FragmentLvl2PuzzleLockBinding
+import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Lvl2PuzzleLock
-import com.tpu.thetower.utils.WheelSetupHelper
-import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
+import com.tpu.thetower.utils.WheelSetupHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -33,7 +32,7 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
     @Inject lateinit var saveRepo: SaveRepository
 
 
-    private val solution = "11111".toCharArray()
+    private val currSolution = "00000".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
@@ -81,7 +80,7 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
             layoutImage = R.layout.letter_image,
             orientation = LinearLayoutManager.VERTICAL,
             rvIndex = rvIndex,
-            solution = solution,
+            currentSolution = currSolution,
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
@@ -89,7 +88,6 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(SoundEffect.LOCK_OPENING)
                     passed()
                 }
             }
@@ -98,13 +96,13 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
 
     private fun passed() {
         isSolved = true
-        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-        binding.mainScreen.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction { FragmentNavigation.goBack(this) }
-            .start()
-        soundManager.playSound(SoundEffect.DRAWER_OPENING)
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
+
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
     }
 
     override fun useHint() {

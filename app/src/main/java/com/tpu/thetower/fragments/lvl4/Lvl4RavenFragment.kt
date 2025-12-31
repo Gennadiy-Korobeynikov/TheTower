@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.UiVisibilityController
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl4RavenBinding
+import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,7 +46,7 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
             puzzle = "askiibtn"
         )
 
-        if (loadManager.getPuzzleStatus(4, "askiibtn") == "in_progress") {
+        if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.IN_PROGRESS.value) {
             binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
         }
     }
@@ -54,13 +55,13 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
         binding.btnRaven.setOnClickListener {
             val dialog: String
 
-            if (loadManager.getPuzzleStatus(4, "askiibtn") == "locked") {
+            if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.LOCKED.value) {
                 binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
-                saveRepo.savePuzzleData(4, "askiibtn", status = "in_progress")
+                saveRepo.savePuzzleData(4, "askiibtn", status = PuzzleStatus.IN_PROGRESS.value)
                 dialog = "lvl4_puzzle1_askii"
             } else {
                 binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_1)
-                saveRepo.savePuzzleData(4, "askiibtn", status = "locked")
+                saveRepo.savePuzzleData(4, "askiibtn", status = PuzzleStatus.LOCKED.value)
                 dialog = "lvl4_puzzle1_normal"
             }
             dialogManager.startDialog(requireActivity(), dialog)

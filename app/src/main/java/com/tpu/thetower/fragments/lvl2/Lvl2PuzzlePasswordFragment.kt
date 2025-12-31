@@ -7,18 +7,19 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentLvl2PuzzlePasswordBinding
+import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.utils.SoundEffect
-import com.tpu.thetower.databinding.FragmentLvl2PuzzlePasswordBinding
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl2PuzzlePassword
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -70,7 +71,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         )
 
         when (loadManager.getPuzzleStatus(2, "password")) {
-            "locked" -> {
+            PuzzleStatus.LOCKED.value -> {
                 showKeyboard()
                 hintManager = hintManagerFactory.create(
                     hints = listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3"),
@@ -79,7 +80,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                 )
             }
 
-            "completed" -> {
+            PuzzleStatus.COMPLETED.value -> {
                 hintManager = hintManagerFactory.create(
                     hints = listOf(
                         "lvl2_puzzle3_hint1",
@@ -186,7 +187,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
     }
 
     override fun useHint() {
-        if (loadManager.getPuzzleStatus(2, "lock") == "completed") {
+        if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.COMPLETED.value) {
             hintManager.useHint(requireActivity())
         } else {
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")

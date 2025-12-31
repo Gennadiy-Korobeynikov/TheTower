@@ -12,6 +12,7 @@ import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,7 +46,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
             puzzle = "lock model"
         )
 
-        if (loadManager.getPuzzleStatus(3, "lock model") == "completed") {
+        if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.COMPLETED.value) {
             paste()
         }
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
@@ -53,9 +54,9 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
 
     private fun setListeners() {
         binding.btnPaste.setOnClickListener {
-            if (loadManager.getPuzzleStatus(3, "lock model") == "in_progress") {
+            if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.IN_PROGRESS.value) {
                 paste()
-                saveRepo.savePuzzleData(3, "lock model", status = "completed")
+                saveRepo.savePuzzleData(3, "lock model", status = PuzzleStatus.COMPLETED.value)
                 hintManager = hintManagerFactory.create(
                     hints = listOf("lvl3_puzzle3_hint6"),
                     level = 3,

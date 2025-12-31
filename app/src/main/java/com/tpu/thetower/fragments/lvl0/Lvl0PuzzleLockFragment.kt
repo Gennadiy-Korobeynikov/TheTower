@@ -10,13 +10,12 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0PuzzleLockBinding
 import com.tpu.thetower.managers.DialogManager
-import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.puzzles.Lvl0PuzzleLock
+import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.utils.WheelSetupHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +35,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var saveRepo : SaveRepository
 
-    private var solution = "1111".toCharArray()
+    private var currSolution = "0000".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
@@ -122,7 +121,7 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
             layoutImage = R.layout.item_image,
             orientation = LinearLayoutManager.HORIZONTAL,
             rvIndex = rvIndex,
-            solution = solution,
+            currentSolution = currSolution,
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
@@ -130,7 +129,6 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(SoundEffect.LOCK_OPENING)
                     passed()
                 }
             }
@@ -139,15 +137,13 @@ class Lvl0PuzzleLockFragment : Fragment(R.layout.fragment_lvl0_puzzle_lock), Hin
 
     private fun passed() {
         isSolved = true
-        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
 
-        binding.mainScreen.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction {
-                FragmentNavigation.goBack(this)
-            }
-            .start()
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
     }
 
     override fun useHint() {

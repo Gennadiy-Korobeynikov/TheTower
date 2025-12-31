@@ -3,13 +3,14 @@ package com.tpu.thetower.fragments.lvl4
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentLvl4Binding
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
-import com.tpu.thetower.R
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl4Binding
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -30,14 +31,14 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4) {
 
         setListeners()
 
-        if (loadManager.getPuzzleStatus(4, "chess") == "completed") {
+        if (loadManager.getPuzzleStatus(4, "chess") == PuzzleStatus.COMPLETED.value) {
             binding.btnChess.visibility = View.GONE
             binding.btnChessboard.visibility = View.GONE
             binding.ivBg.setImageResource(R.drawable.lvl4_bg_chess_completed)
             binding.btnTimeline.visibility = View.VISIBLE
         }
 
-        if (loadManager.getPuzzleStatus(4, "timeline") == "completed") {
+        if (loadManager.getPuzzleStatus(4, "timeline") == PuzzleStatus.COMPLETED.value) {
             binding.btnTimeline.visibility = View.GONE
             binding.ivBg.setImageResource(R.drawable.lvl4_bg_timeline_completed)
             binding.btnRaven.visibility = View.VISIBLE

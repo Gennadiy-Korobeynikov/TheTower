@@ -5,18 +5,18 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl6LockBinding
-import com.tpu.thetower.puzzles.Lvl6PuzzleLock
-import com.tpu.thetower.utils.WheelSetupHelper
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.puzzles.Lvl6PuzzleLock
 import com.tpu.thetower.utils.SoundEffect
+import com.tpu.thetower.utils.WheelSetupHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
 
-    private var solution = "00000".toCharArray()
+    private var currSolution = "00000".toCharArray()
 
     private var isSolved = false
 
@@ -118,7 +118,7 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
             layoutImage = R.layout.item_lvl6_image,
             orientation = LinearLayoutManager.HORIZONTAL,
             rvIndex = rvIndex,
-            solution = solution,
+            currentSolution = currSolution,
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,

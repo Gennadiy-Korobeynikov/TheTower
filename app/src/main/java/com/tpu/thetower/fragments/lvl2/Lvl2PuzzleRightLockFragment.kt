@@ -5,25 +5,24 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SoundManager
-import com.tpu.thetower.databinding.FragmentLvl2PuzzleChatBinding
-import com.tpu.thetower.puzzles.Lvl2PuzzleChat
-import com.tpu.thetower.utils.WheelSetupHelper
-import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.databinding.FragmentLvl2PuzzleRightLockBinding
+import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.SaveRepository
-import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.puzzles.Lvl2PuzzleChat
+import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
+import com.tpu.thetower.utils.WheelSetupHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hintable {
+class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_right_lock), Hintable {
 
-    private lateinit var binding: FragmentLvl2PuzzleChatBinding
+    private lateinit var binding: FragmentLvl2PuzzleRightLockBinding
 
     private val puzzle: Puzzle = Lvl2PuzzleChat(2, "chat")
     private lateinit var hintManager: HintManager
@@ -32,7 +31,7 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var saveRepo: SaveRepository
 
-    private val solution = "11111".toCharArray()
+    private val currSolution = "00000".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
@@ -51,7 +50,7 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2PuzzleChatBinding.bind(view)
+        binding = FragmentLvl2PuzzleRightLockBinding.bind(view)
 
         hintManager = hintManagerFactory.create(
             hints = listOf("lvl2_puzzle0_hint"),
@@ -80,7 +79,7 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
             layoutImage = R.layout.letter_image,
             orientation = LinearLayoutManager.VERTICAL,
             rvIndex = rvIndex,
-            solution = solution,
+            currentSolution = currSolution,
             activity = requireActivity(),
             puzzle = puzzle,
             soundManager = soundManager,
@@ -88,7 +87,6 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(SoundEffect.LOCK_OPENING)
                     passed()
                 }
             }
@@ -97,13 +95,13 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
 
     private fun passed() {
         isSolved = true
-        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-        binding.mainScreen.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction { FragmentNavigation.goBack(this) }
-            .start()
-        // TODO Добавить звук открывающейся двери сейфа
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
+
+        CommonAnimationHelper.animatePuzzleCompletion(
+            fragment = this,
+            mainScreen = binding.mainScreen,
+            fragmentRoot = binding.root
+        )
     }
 
     override fun useHint() {

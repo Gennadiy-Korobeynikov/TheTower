@@ -15,6 +15,7 @@ import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -51,7 +52,7 @@ class Lvl3PuzzleDonutsFragment :
 
 
         when (loadManager.getPuzzleStatus(3, "donuts")) {
-            "in_progress" -> {
+            PuzzleStatus.IN_PROGRESS.value -> {
                 hintManager = hintManagerFactory.create(
                     hints = listOf(
                         "lvl3_puzzle0_hint1",
@@ -63,7 +64,7 @@ class Lvl3PuzzleDonutsFragment :
                     puzzle = "donuts"
                 )
             }
-            "completed" -> {
+            PuzzleStatus.COMPLETED.value -> {
                 hintManager = hintManagerFactory.create(
                     hints = listOf("lvl3_puzzle0_hint5", "lvl3_puzzle0_hint6", "lvl3_puzzle0_hint7"),
                     level = 3,
@@ -122,7 +123,7 @@ class Lvl3PuzzleDonutsFragment :
         )
         binding.iv0.visibility = View.GONE
         binding.iv1.visibility = View.VISIBLE
-        saveRepo.savePuzzleData(3, "donuts", status = "completed")
+        saveRepo.savePuzzleData(3, "donuts", status = PuzzleStatus.COMPLETED.value)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit

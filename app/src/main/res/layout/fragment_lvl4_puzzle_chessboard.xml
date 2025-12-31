@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:id="@+id/main_screen"
     tools:context=".fragments.lvl4.Lvl4PuzzleChessboardFragment">
 
     <ImageView

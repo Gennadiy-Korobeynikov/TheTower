@@ -11,6 +11,7 @@ import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,11 +32,11 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
         setListeners()
 
-        if (loadManager.getPuzzleStatus(5, "bluetooth") == "completed") {
+        if (loadManager.getPuzzleStatus(5, "bluetooth") == PuzzleStatus.COMPLETED.value) {
             binding.btnMoose.visibility = View.VISIBLE
         }
 
-        if (loadManager.getPuzzleStatus(5, "moose") == "completed") {
+        if (loadManager.getPuzzleStatus(5, "moose") == PuzzleStatus.COMPLETED.value) {
             binding.btnFishRack.visibility = View.VISIBLE
             binding.btnMoose.visibility = View.GONE
             binding.ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
