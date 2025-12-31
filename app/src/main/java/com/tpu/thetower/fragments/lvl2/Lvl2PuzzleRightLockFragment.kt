@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.databinding.FragmentLvl2PuzzleChatBinding
+import com.tpu.thetower.databinding.FragmentLvl2PuzzleRightLockBinding
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
@@ -20,9 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat), Hintable {
+class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_right_lock), Hintable {
 
-    private lateinit var binding: FragmentLvl2PuzzleChatBinding
+    private lateinit var binding: FragmentLvl2PuzzleRightLockBinding
 
     private val puzzle: Puzzle = Lvl2PuzzleChat(2, "chat")
     private lateinit var hintManager: HintManager
@@ -31,7 +31,7 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var saveRepo: SaveRepository
 
-    private val currSolution = "12423".toCharArray()
+    private val currSolution = "00000".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
@@ -50,7 +50,7 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_chat)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLvl2PuzzleChatBinding.bind(view)
+        binding = FragmentLvl2PuzzleRightLockBinding.bind(view)
 
         hintManager = hintManagerFactory.create(
             hints = listOf("lvl2_puzzle0_hint"),

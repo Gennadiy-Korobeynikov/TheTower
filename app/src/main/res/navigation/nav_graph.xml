@@ -255,7 +255,7 @@
         android:id="@+id/lvl2PuzzleChatFragment"
         android:name="com.tpu.thetower.fragments.lvl2.Lvl2PuzzleRightLockFragment"
         android:label="fragment_lvl2_puzzle_chat"
-        tools:layout="@layout/fragment_lvl2_puzzle_chat" />
+        tools:layout="@layout/fragment_lvl2_puzzle_right_lock" />
     <fragment
         android:id="@+id/lvl2PuzzleLockFragment"
         android:name="com.tpu.thetower.fragments.lvl2.Lvl2PuzzleLeftLockFragment"

@@ -32,7 +32,7 @@ class Lvl2PuzzleLeftLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_lock),
     @Inject lateinit var saveRepo: SaveRepository
 
 
-    private val currSolution = "03514".toCharArray()
+    private val currSolution = "00000".toCharArray()
     private var isSolved = false
 
     private val images = arrayOf(
