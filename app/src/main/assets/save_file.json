@@ -29,7 +29,12 @@
           "hintsUsed": 0
         }
       ],
-      "npcDialogs": []
+      "dialogs": [
+        {
+          "dialogKey": "shapes_paper",
+          "currentDialogIndex": 0
+        }
+      ]
     },
     {
       "id": 1,
@@ -45,9 +50,9 @@
           "hintsUsed": 0
         }
       ],
-      "npcDialogs": [
+      "dialogs": [
         {
-          "npcId": 0,
+          "dialogKey": "receptionist",
           "currentDialogIndex": 0
         }
       ]
@@ -90,12 +95,7 @@
           "hintsUsed": 0
         }
       ],
-      "npcDialogs": [
-        {
-          "npcId": 0,
-          "currentDialogIndex": 0
-        }
-      ]
+      "dialogs": []
     },
     {
       "id": 3,
@@ -166,7 +166,7 @@
           "timeSpent": 0,
           "hintsUsed": 0
         }],
-      "npcDialogs": []
+      "dialogs": []
       },
         {
           "id": 4,
@@ -246,12 +246,7 @@
               "hintsUsed": 0
             }
           ],
-          "npcDialogs": [
-            {
-              "id": 0,
-              "currentDialogIndex": 0
-            }
-          ]
+          "dialogs": []
         },
     {
       "id": 5,
@@ -291,11 +286,7 @@
           "hintsUsed": 0
         }
       ],
-      "npcDialogs": [
-        {
-          "id": 0,
-          "currentDialogIndex": 0
-        }
+      "dialogs": [
       ]
     }
       ],

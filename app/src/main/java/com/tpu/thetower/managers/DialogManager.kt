@@ -91,7 +91,8 @@ class DialogManager @Inject constructor(
         ,
         "lvl0_puzzle1" to DialogSpec(
             lines = listOf(R.string.lvl0_puzzle1),
-            speakers = listOf("John_thinking")
+            speakers = listOf("John_thinking"),
+            onFinished = { nextDialog(0, "shapes_paper") }
         )
         ,
         "lvl0_access_card" to DialogSpec(
@@ -147,7 +148,7 @@ class DialogManager @Inject constructor(
                 "receptionist",
                 "John_thinking",
             ),
-            onFinished = { nextDialog(1,0) }
+            onFinished = { nextDialog(1,"receptionist") }
         ),
 
 
@@ -812,9 +813,9 @@ class DialogManager @Inject constructor(
         UiVisibilityController.show(activity, UiVisibilityController.UiContainer.DIALOG)
     }
 
-    private fun nextDialog(level: Int, npc: Int) {
-        var currentDialog = loadManager.getCurrentDialog(level, npc)
+    private fun nextDialog(level: Int, key: String) {
+        var currentDialog = loadManager.getCurrentDialog(level, key)
         currentDialog++
-        saveRepo.saveCurrentDialog(level, npc, currentDialog)
+        saveRepo.saveCurrentDialog(level, key, currentDialog)
     }
 }

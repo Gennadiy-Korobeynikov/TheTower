@@ -81,11 +81,11 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun saveCurrentDialog(level: Int, npc: Int, dialogIndex: Int) {
+    fun saveCurrentDialog(level: Int, key: String, dialogIndex: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
-                ?.npcDialogs?.find { it.id == npc }
+                ?.dialogs?.find { it.dialogKey == key }
                 ?.currentDialogIndex = dialogIndex
             updated
         })

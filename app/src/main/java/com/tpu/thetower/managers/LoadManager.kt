@@ -62,10 +62,10 @@ class LoadManager @Inject constructor(
     fun getCurrentAccessCardNumber(): Int =
         repo.get().playerInfo.accessCardNumber
 
-    fun getCurrentDialog(level: Int, npc: Int): Int {
+    fun getCurrentDialog(level: Int, key: String): Int {
         val data = repo.get()
         return data.levels.find { it.id == level }
-            ?.npcDialogs?.find { it.id == npc }
+            ?.dialogs?.find { it.dialogKey == key }
             ?.currentDialogIndex ?: 0
     }
 

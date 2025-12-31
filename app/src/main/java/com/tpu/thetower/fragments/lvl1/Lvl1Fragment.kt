@@ -42,7 +42,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
     private fun setListeners() {
         binding.btnNpcReceptionist.setOnClickListener {
-            when (loadManager.getCurrentDialog(1, 0)) {
+            when (loadManager.getCurrentDialog(1, "receptionist")) {
                 0 -> {
                     dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist")
                     saveRepo.saveLevelCompletedStatus(1)
