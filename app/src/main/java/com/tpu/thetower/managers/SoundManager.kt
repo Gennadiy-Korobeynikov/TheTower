@@ -17,6 +17,9 @@ class SoundManager @Inject constructor(
     private val soundMap = mutableMapOf<SoundEffect, Int>()
     private var volume: Float = 0.5f
 
+    // Текущие (активные) проигрывания по эффектам
+    private val activeStreamsByEffect = mutableMapOf<SoundEffect, MutableSet<Int>>()
+
     fun init(maxStreamsNumber: Int = 5) {
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
@@ -41,18 +44,33 @@ class SoundManager @Inject constructor(
 
     fun playSound(effect: SoundEffect, repeat: Int = 0) {
         val soundId = soundMap[effect] ?: return
-        soundPool?.play(soundId, volume, volume,
-            1, repeat, 1f)
+        val streamId = soundPool?.play(soundId, volume, volume, 1, repeat, 1f) ?: return
+        if (streamId != 0) {
+            activeStreamsByEffect.getOrPut(effect) { mutableSetOf() }.add(streamId)
+        }
     }
 
+    fun stopSound(effect: SoundEffect) {
+        val pool = soundPool ?: return
+        val streams = activeStreamsByEffect.remove(effect) ?: return
+        streams.forEach { pool.stop(it) }
+    }
+
+    fun stopAllSounds() {
+        val pool = soundPool ?: return
+        activeStreamsByEffect.values.flatten().forEach { pool.stop(it) }
+        activeStreamsByEffect.clear()
+    }
 
     fun setVolume(volume: Float) {
         this.volume = volume.coerceIn(0f, 1f)
     }
 
     fun release() {
+        stopAllSounds()
         soundPool?.release()
         soundPool = null
         soundMap.clear()
+        activeStreamsByEffect.clear()
     }
 }

@@ -304,8 +304,10 @@
     <string name="lvl2_puzzle1_hint5">TODO</string>
     <string name="lvl6_lock_hint1">TODO</string>
     <string name="lvl5_moose_paper">TODO</string>
-
-
+    <string name="lvl3_npc_security_final_lock">TODO</string>
+    <string name="lvl3_need_key">TODO</string>
+    <string name="lvl3_need_to_use_key">TODO</string>
+    <string name="lvl0_click_switch">TODO</string>
 
 
 </resources>

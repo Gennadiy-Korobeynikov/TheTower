@@ -200,15 +200,16 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     override fun useHint() {
         val flashlightStatus = loadManager.getPuzzleStatus(0, "flashlight")
 
-        if (flashlightStatus == PuzzleStatus.IN_PROGRESS.value) {
+        if (flashlightStatus == PuzzleStatus.LOCKED.value) {
             hintManager.useHint(requireActivity())
-        } else {
-            if (loadManager.isLevelCompleted(0)) {
-                dialogManager.startDialog(requireActivity(), "no_hints")
-            } else {
-                dialogManager.startDialog(requireActivity(), "lvl0_to_puzzle1_hint")
-            }
+            return
         }
+        if (flashlightStatus == PuzzleStatus.IN_PROGRESS.value) {
+            dialogManager.startDialog(requireActivity(), "lvl0_click_switch")
+            return
+        }
+        val dialogKey = if (loadManager.isLevelCompleted(0)) "no_hints" else "lvl0_to_puzzle1_hint"
+        dialogManager.startDialog(requireActivity(), dialogKey)
     }
 
     override fun skipPuzzle() {

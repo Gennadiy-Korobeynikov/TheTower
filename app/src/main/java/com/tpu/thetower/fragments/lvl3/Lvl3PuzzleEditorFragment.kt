@@ -57,11 +57,6 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
             if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.IN_PROGRESS.value) {
                 paste()
                 saveRepo.savePuzzleData(3, "lock model", status = PuzzleStatus.COMPLETED.value)
-                hintManager = hintManagerFactory.create(
-                    hints = listOf("lvl3_puzzle3_hint6"),
-                    level = 3,
-                    puzzle = "lock model after pasted"
-                )
             } else {
                 Snackbar.make(binding.ivBg, getString(R.string.lvl3_paste), Toast.LENGTH_SHORT).show()
             }
@@ -76,6 +71,11 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
         binding.btnPaste.visibility = View.GONE
         binding.btnFirstLayer.visibility = View.VISIBLE
         binding.btnSecondLayer.visibility = View.VISIBLE
+        hintManager = hintManagerFactory.create(
+            hints = listOf("lvl3_puzzle3_hint6"),
+            level = 3,
+            puzzle = "lock model after pasted"
+        )
     }
 
     override fun useHint() {

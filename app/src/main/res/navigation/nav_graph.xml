@@ -54,9 +54,6 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_elevatorFragment_to_lvlTestFragment"
-            app:destination="@id/lvlTestFragment" />
-        <action
             android:id="@+id/action_elevatorFragment_to_lvl2Fragment"
             app:destination="@id/lvl2Fragment"
             app:enterAnim="@android:anim/fade_in"
@@ -110,11 +107,6 @@
         android:name="com.tpu.thetower.fragments.common.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-    <fragment
-        android:id="@+id/lvlTestFragment"
-        android:name="com.tpu.thetower.fragments.LvlTestFragment"
-        android:label="fragment_lvl_test"
-        tools:layout="@layout/fragment_lvl_test" />
     <fragment
         android:id="@+id/lvl3PuzzleHooverFragment"
         android:name="com.tpu.thetower.fragments.lvl3.Lvl3PuzzleHooverFragment"

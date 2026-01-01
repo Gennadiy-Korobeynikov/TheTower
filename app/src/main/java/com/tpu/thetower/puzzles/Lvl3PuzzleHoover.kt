@@ -76,13 +76,6 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
         }
     }
 
-//    private  fun isWall() : Boolean{
-//        if (!isCorrectCell[currPositionY][currPositionX]) {
-//            setInitValues()
-//            return true
-//        }
-//        return false
-//    }
 
     override fun checkSolution(activity: Activity, saveRepo: SaveRepository, solution: String): Boolean {
         return if (currPositionX == winPositionX && currPositionY == winPositionY) {
@@ -95,7 +88,6 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
 
 
 }
-
 
 sealed class Direction(val dx: Int, val dy: Int) {
     data object Left : Direction(1, 0)

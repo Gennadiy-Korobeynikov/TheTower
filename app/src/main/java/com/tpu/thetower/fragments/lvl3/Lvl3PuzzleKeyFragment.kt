@@ -20,10 +20,12 @@ import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl3PuzzleKey
 import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -44,6 +46,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
     @Inject lateinit var saveRepo: SaveRepository
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var soundManager : SoundManager
 
     private lateinit var puzzle: Puzzle
     var longPressRunnable: Runnable? = null
@@ -61,17 +64,16 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
 
-        if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.COMPLETED.value) { // Замок вставлен в комп
-            hintManager = hintManagerFactory.create(
-                hints = listOf("lvl3_puzzle4_hint3"),
+        hintManager = if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.COMPLETED.value) {
+            // Замок вставлен в комп
+            hintManagerFactory.create(
+                hints = listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
                 level = 3,
                 puzzle = "key"
             )
-
-        }
-        else {
-            hintManager = hintManagerFactory.create(
-                hints = listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
+        } else {
+            hintManagerFactory.create(
+                hints = listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2"),
                 level = 3,
                 puzzle = "key"
             )
@@ -94,6 +96,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             snackBar.show()
         }
 
+        // Копирование замка
         binding.btnLockToCopy.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -104,7 +107,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
                         binding.btnCopy.visibility = View.VISIBLE
                         isLongPressHandled = true
                     }
-                    view.postDelayed(longPressRunnable, 1000)
+                    view.postDelayed(longPressRunnable, 700)
                     true
                 }
 
@@ -127,12 +130,15 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             if (puzzle.checkSolution(requireActivity(), saveRepo, pinsPositions.joinToString(""))) {
                 passed()
             }
+            else { //todo диалог "не подшло" и анимация
+                soundManager.playSound(SoundEffect.WRONG_KEY)
+            }
         }
 
     }
 
     private fun passed() {
-        //soundManager.playSound(SoundEffect.LOCK_OPENING)
+        soundManager.playSound(SoundEffect.LOCK_OPENING)
 
         CommonAnimationHelper.animatePuzzleCompletion(
             fragment = this,

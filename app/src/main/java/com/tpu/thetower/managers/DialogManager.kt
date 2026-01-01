@@ -18,7 +18,6 @@ class DialogManager @Inject constructor(
     private val characters: Map<String, Character> = mapOf(
         "John" to Character("Джон", R.drawable.john_default),
         "John_thinking" to Character("Джон", R.drawable.john_thinking),
-        "John_default" to Character("Джон", R.drawable.john_default),
         "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist),
         "security" to Character("Охранник", R.drawable.npc_avatar_security)
     )
@@ -59,6 +58,12 @@ class DialogManager @Inject constructor(
             lines = listOf(R.string.no_hints),
             speakers = listOf("John_thinking")
         ),
+        "lvl0_click_switch" to DialogSpec(
+            lines = listOf(R.string.lvl0_click_switch),
+            speakers = listOf("John")
+        )
+        ,
+
         "lvl0_puzzle0_hint1" to DialogSpec(
             lines = listOf(R.string.lvl0_puzzle0_hint1),
             speakers = listOf("John_thinking")
@@ -284,6 +289,11 @@ class DialogManager @Inject constructor(
         )
         ,
 
+        "lvl3_npc_security_final_lock" to DialogSpec(
+            lines = listOf(R.string.lvl3_npc_security_final_lock),
+            speakers = listOf("security")
+        )
+        ,
 
         "lvl3_computer" to DialogSpec(
             lines = listOf(R.string.lvl3_computer),
@@ -295,6 +305,18 @@ class DialogManager @Inject constructor(
         "lvl3_donuts" to DialogSpec(
             lines = listOf(R.string.lvl3_donuts),
             speakers = listOf("security")
+        )
+        ,
+
+        "lvl3_need_key" to DialogSpec(
+            lines = listOf(R.string.lvl3_need_key),
+            speakers = listOf("John")
+        )
+        ,
+
+        "lvl3_need_to_use_key" to DialogSpec(
+            lines = listOf(R.string.lvl3_need_to_use_key),
+            speakers = listOf("John_thinking")
         )
         ,
 

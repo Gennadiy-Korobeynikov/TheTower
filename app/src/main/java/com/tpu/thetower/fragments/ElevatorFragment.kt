@@ -79,13 +79,13 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
 
         musicManager.stopMusic()
 
-        binding.ivDraggable.post {
-            originalPosition = Pair(binding.ivDraggable.x, binding.ivDraggable.y)
+        binding.ivAccessCardDraggable.post {
+            originalPosition = Pair(binding.ivAccessCardDraggable.x, binding.ivAccessCardDraggable.y)
         }
 
         if (loadManager.getCurrentAccessCardNumber() != 0) {
-            binding.ivDraggable.visibility = View.VISIBLE
-            binding.ivDraggable.setImageResource(
+            binding.ivAccessCardDraggable.visibility = View.VISIBLE
+            binding.ivAccessCardDraggable.setImageResource(
                 LevelAccessManager.getCardImage(loadManager.getCurrentAccessCardNumber())
             )
         }
@@ -135,7 +135,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         }
 
 
-        binding.ivDraggable.setOnTouchListener { v, event ->
+        binding.ivAccessCardDraggable.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     v.animate()
@@ -171,7 +171,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
             }
         }
 
-        binding.ivDraggable.setOnLongClickListener { view ->
+        binding.ivAccessCardDraggable.setOnLongClickListener { view ->
 
             if (loadManager.getCurrentAccessCardNumber() == 0) {
                 return@setOnLongClickListener false
