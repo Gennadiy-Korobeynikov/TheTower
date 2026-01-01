@@ -15,17 +15,18 @@ class HintManager @AssistedInject constructor(
     private val dialogManager: DialogManager
 ) {
     companion object {
-        private var isNewHintAvaliable = true
+        private var isNewHintAvailable = true
         private var timer: CountDownTimer? = null
-        private val totalTimeToRecover = 20_000L // Пока 10 сек для теста
-        private val updateInterval = totalTimeToRecover / 6 // Пока 2 сек
         private var lastPuzzleName = ""
 
         private fun startHintRecovery(activity: Activity, hintManager: HintManager, usedHintsCount: Int) {
             timer?.cancel()
-            isNewHintAvaliable = false
+            isNewHintAvailable = false
 
-            timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
+            val totalTimeToRecover =  if (AppPreferences(activity).isDevMode) 1_000L else 20_000L
+            val updateInterval = totalTimeToRecover / 6
+
+                timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
                 override fun onTick(millisUntilFinished: Long) {
                     ImageUpdateDispatcher.updateHintStateImg(
                         activity,
@@ -35,7 +36,7 @@ class HintManager @AssistedInject constructor(
 
                 override fun onFinish() {
                     ImageUpdateDispatcher.updateHintStateImg(activity, 0)
-                    isNewHintAvaliable = true
+                    isNewHintAvailable = true
                     if (usedHintsCount < hintManager.hints.count())
                         hintManager.usedHintsCountIncrease(activity)
                 }
@@ -46,7 +47,7 @@ class HintManager @AssistedInject constructor(
         // Для пропуска ожидания с помощью потенциальной рекламы
         fun cancelRecovery() {
             timer?.cancel()
-            isNewHintAvaliable = true
+            isNewHintAvailable = true
         }
     }
 
@@ -63,18 +64,18 @@ class HintManager @AssistedInject constructor(
             }
 
             // Показываем текущую подсказку, если она новая или ещё не восстановилась старая на этом же фрагменте
-            if (lastPuzzleName == puzzle || isNewHintAvaliable)
+            if (lastPuzzleName == puzzle || isNewHintAvailable)
                 dialogManager.startDialog(activity, hints[usedHintsCount])
 
             // Показываем предыдущую подсказку
             else
                 dialogManager.startDialog(activity, hints[usedHintsCount - 1])
 
-            if (isNewHintAvaliable) {
+            if (isNewHintAvailable) {
                 startHintRecovery(activity, this, usedHintsCount)
                 lastPuzzleName = puzzle
             }
-        } else if (isNewHintAvaliable) {
+        } else if (isNewHintAvailable) {
             dialogManager.startDialog(activity, hints[usedHintsCount])
             startHintRecovery(activity, this, usedHintsCount)
             lastPuzzleName = puzzle

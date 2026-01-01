@@ -31,6 +31,7 @@ enum class SoundEffect(@RawRes val resId: Int) {
     VACUUM_DRIVING_LEFT(R.raw.sound_of_vacuum_cleaner_driving_left),
     VACUUM_DRIVING_RIGHT(R.raw.sound_of_vacuum_cleaner_driving_right),
     VACUUM_DRIVING_STRAIGHT(R.raw.sound_of_vacuum_cleaner_driving_straight),
+    WRONG_KEY(R.raw.sound_of_wrong_key),
 
     // 6 Lvl
     CHAIN_RELEASE(R.raw.sound_of_chain_release),
