@@ -3,14 +3,14 @@ package com.tpu.thetower.fragments.common
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.R
+import com.tpu.thetower.databinding.FragmentTitleScreenBinding
+import com.tpu.thetower.managers.FileSaveManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
-import com.tpu.thetower.R
-import com.tpu.thetower.managers.FileSaveManager
-import com.tpu.thetower.databinding.FragmentTitleScreenBinding
-import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.UiVisibilityController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,9 +38,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
             fileSaveManager.resetData()
             loadManager.invalidateCache()
 
-            FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
-
             FragmentNavigation.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
         }
 

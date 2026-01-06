@@ -1,11 +1,14 @@
 package com.tpu.thetower.models
 
+import com.google.gson.JsonObject
+
 data class LevelData(
     val id: Int,
     val name: String,
     var isCompleted: Boolean,
     val puzzles: List<PuzzleData>,
-    val dialogs: List<DialogData>
+    val dialogs: List<DialogData>,
+    var extraState: JsonObject? = null
 )
 
 data class PuzzleData(
@@ -21,4 +24,3 @@ data class DialogData(
     val dialogKey: String,
     var currentDialogIndex: Int
 )
-

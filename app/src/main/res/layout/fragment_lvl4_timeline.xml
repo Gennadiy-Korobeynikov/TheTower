@@ -2,12 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     tools:context=".fragments.lvl4.Lvl4TimelineFragment">
 
     <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
@@ -32,24 +34,15 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.79" />
 
-        <ImageView
-            android:id="@+id/iv_draggable1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/lvl4_timeline_1"
-            app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toStartOf="@id/guideV_draggable"
-            app:layout_constraintTop_toTopOf="@id/guideH_draggable"
-            app:layout_constraintWidth_percent="0.08" />
+        <!-- DRAGGABLES: порядок слева направо = 5,3,9,4,7,6,8,2,10,1; id соответствует номеру -->
 
         <ImageView
-            android:id="@+id/iv_draggable2"
+            android:id="@+id/iv_draggable5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/lvl4_timeline_2"
+            android:src="@drawable/lvl4_timeline_5"
             app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable1"
+            app:layout_constraintStart_toStartOf="@id/guideV_draggable"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
             app:layout_constraintWidth_percent="0.08" />
 
@@ -60,7 +53,18 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/lvl4_timeline_3"
             app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable2"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable5"
+            app:layout_constraintTop_toTopOf="@id/guideH_draggable"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_draggable9"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/lvl4_timeline_9"
+            app:layout_constraintHeight_percent="0.10"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable3"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
             app:layout_constraintWidth_percent="0.08" />
 
@@ -71,16 +75,16 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/lvl4_timeline_4"
             app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable3"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable9"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
             app:layout_constraintWidth_percent="0.08" />
 
         <ImageView
-            android:id="@+id/iv_draggable5"
+            android:id="@+id/iv_draggable7"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/lvl4_timeline_5"
+            android:src="@drawable/lvl4_timeline_7"
             app:layout_constraintHeight_percent="0.10"
             app:layout_constraintStart_toEndOf="@id/iv_draggable4"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
@@ -93,18 +97,7 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/lvl4_timeline_6"
             app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable5"
-            app:layout_constraintTop_toTopOf="@id/guideH_draggable"
-            app:layout_constraintWidth_percent="0.08" />
-
-        <ImageView
-            android:id="@+id/iv_draggable7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/lvl4_timeline_7"
-            app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable6"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable7"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
             app:layout_constraintWidth_percent="0.08" />
 
@@ -115,16 +108,16 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/lvl4_timeline_8"
             app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable7"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable6"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
             app:layout_constraintWidth_percent="0.08" />
 
         <ImageView
-            android:id="@+id/iv_draggable9"
+            android:id="@+id/iv_draggable2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/lvl4_timeline_9"
+            android:src="@drawable/lvl4_timeline_2"
             app:layout_constraintHeight_percent="0.10"
             app:layout_constraintStart_toEndOf="@id/iv_draggable8"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
@@ -137,7 +130,18 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/lvl4_timeline_10"
             app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintStart_toEndOf="@id/iv_draggable9"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable2"
+            app:layout_constraintTop_toTopOf="@id/guideH_draggable"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/iv_draggable1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/lvl4_timeline_1"
+            app:layout_constraintHeight_percent="0.10"
+            app:layout_constraintStart_toEndOf="@id/iv_draggable10"
             app:layout_constraintTop_toTopOf="@id/guideH_draggable"
             app:layout_constraintWidth_percent="0.08" />
 
@@ -161,7 +165,7 @@
             android:id="@+id/iv_target1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target1"
             app:layout_constraintTop_toTopOf="@id/guideH_target1"
@@ -185,7 +189,7 @@
             android:id="@+id/iv_target2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target2"
             app:layout_constraintTop_toTopOf="@id/guideH_target2"
@@ -209,7 +213,7 @@
             android:id="@+id/iv_target3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target3"
             app:layout_constraintTop_toTopOf="@id/guideH_target3"
@@ -233,7 +237,7 @@
             android:id="@+id/iv_target4"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target4"
             app:layout_constraintTop_toTopOf="@id/guideH_target4"
@@ -257,7 +261,7 @@
             android:id="@+id/iv_target5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target5"
             app:layout_constraintTop_toTopOf="@id/guideH_target5"
@@ -281,7 +285,7 @@
             android:id="@+id/iv_target6"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target6"
             app:layout_constraintTop_toTopOf="@id/guideH_target6"
@@ -305,7 +309,7 @@
             android:id="@+id/iv_target7"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target7"
             app:layout_constraintTop_toTopOf="@id/guideH_target7"
@@ -329,7 +333,7 @@
             android:id="@+id/iv_target8"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target8"
             app:layout_constraintTop_toTopOf="@id/guideH_target8"
@@ -353,7 +357,7 @@
             android:id="@+id/iv_target9"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target9"
             app:layout_constraintTop_toTopOf="@id/guideH_target9"
@@ -364,7 +368,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.81" />
+            app:layout_constraintGuide_percent="0.825" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_target10"
@@ -377,7 +381,7 @@
             android:id="@+id/iv_target10"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_outline"
+            android:src="@drawable/bright_outline"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_target10"
             app:layout_constraintTop_toTopOf="@id/guideH_target10"

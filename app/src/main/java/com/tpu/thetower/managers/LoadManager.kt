@@ -3,6 +3,8 @@ package com.tpu.thetower.managers
 import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
 import com.tpu.thetower.MainActivity
 import com.tpu.thetower.R
 import com.tpu.thetower.models.PuzzleStatus
@@ -16,8 +18,6 @@ class LoadManager @Inject constructor(
     private val soundManager: SoundManager
 ) {
     companion object {
-        var isASKII = false // TODO Исправить!!!!! длолжно быть через сохранения
-
         private val levels = listOf(
             R.id.action_elevatorFragment_to_lvl0Fragment,
             R.id.action_elevatorFragment_to_lvl1Fragment,
@@ -105,6 +105,25 @@ class LoadManager @Inject constructor(
             ?.puzzles?.find { it.name == puzzle }
             ?.status ?: PuzzleStatus.LOCKED.value
     }
+
+    fun getLevelExtraState(level: Int, key: String): JsonElement? {
+        val data = repo.get()
+        return data.levels.find { it.id == level }
+            ?.extraState
+            ?.get(key)
+    }
+
+    fun getLevelExtraStateString(level: Int, key: String, default: String? = null): String? =
+        (getLevelExtraState(level, key) as? JsonPrimitive)?.asString ?: default
+
+    fun getLevelExtraStateInt(level: Int, key: String, default: Int = 0): Int =
+        (getLevelExtraState(level, key) as? JsonPrimitive)?.asInt ?: default
+
+    fun getLevelExtraStateBoolean(level: Int, key: String, default: Boolean = false): Boolean =
+        (getLevelExtraState(level, key) as? JsonPrimitive)?.asBoolean ?: default
+
+    fun getLevelExtraStateFloat(level: Int, key: String, default: Float = 0f): Float =
+        (getLevelExtraState(level, key) as? JsonPrimitive)?.asFloat ?: default
 
     private fun getCurrFragment(activity: Activity): Fragment {
         return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!

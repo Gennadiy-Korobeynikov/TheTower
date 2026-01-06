@@ -194,11 +194,13 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         binding.btnToAccessCard.setOnClickListener {
             binding.ivAccessCard.visibility = View.VISIBLE
             LevelAccessManager.changeAccessCardNumber(saveRepo, 4)
+            saveRepo.saveLevelCompletedStatus(3)
         }
 
         binding.ivAccessCard.setOnClickListener {
             binding.ivAccessCard.visibility = View.GONE
             binding.btnToPuzzleFinalLock.visibility = View.GONE
+            binding.btnToAccessCard.visibility = View.GONE
         }
 
         binding.ivCoffeeTarget.setOnDragListener(this@Lvl3Fragment)
@@ -332,7 +334,6 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleKeyFragment)
         binding.ivKeyDraggable.visibility = View.GONE
         binding.vFinalLockTarget.visibility = View.GONE
-        //binding.btnToAccessCard.visibility = View.VISIBLE
 
         saveRepo.savePuzzleData(3, "key", PuzzleStatus.IN_PROGRESS.value)
         draggedView.visibility = View.GONE

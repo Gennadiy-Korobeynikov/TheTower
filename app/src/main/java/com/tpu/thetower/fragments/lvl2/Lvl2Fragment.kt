@@ -37,7 +37,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         setListeners()
 
-        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+        //UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.LOCKED.value) {
             dialogManager.startDialog(requireActivity(), "lvl2_start")

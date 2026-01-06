@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4BookcaseBinding
 import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.ImageUpdateDispatcher
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
@@ -20,6 +19,7 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
     private val binding get() = _binding!!
 
     @Inject lateinit var loadManager: LoadManager
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,8 +61,15 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
     }
 
     private fun openBook(book: String) {
-        FragmentNavigation.changeBG(this, R.id.action_lvl4BookcaseFragment_to_booksFragment)
-        ImageUpdateDispatcher.openBook(this, book)
+        val args = Bundle().apply {
+            putString(Lvl4BookFragment.ARG_BOOK_KEY, book)
+        }
+
+        FragmentNavigation.changeBG(
+            this,
+            R.id.action_lvl4BookcaseFragment_to_lvl4BookFragment,
+            args
+        )
     }
 
     override fun onDestroyView() {
