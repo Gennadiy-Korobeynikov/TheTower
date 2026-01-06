@@ -166,11 +166,6 @@
             app:destination="@id/lvl4BookcaseFragment" />
     </fragment>
     <fragment
-        android:id="@+id/booksFragment"
-        android:name="com.tpu.thetower.fragments.lvl4.Lvl4BooksFragment"
-        android:label="fragment_books"
-        tools:layout="@layout/fragment_books" />
-    <fragment
         android:id="@+id/lvl3Fragment"
         android:name="com.tpu.thetower.fragments.lvl3.Lvl3Fragment"
         android:label="fragment_lvl3"
@@ -283,8 +278,8 @@
         android:label="fragment_lvl4_bookcase"
         tools:layout="@layout/fragment_lvl4_bookcase" >
         <action
-            android:id="@+id/action_lvl4BookcaseFragment_to_booksFragment"
-            app:destination="@id/booksFragment" />
+            android:id="@+id/action_lvl4BookcaseFragment_to_lvl4BookFragment"
+            app:destination="@id/lvl4BookFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl4SequencePaperFragment"
@@ -345,5 +340,10 @@
         android:id="@+id/lvl5PuzzleMooseFragment"
         android:name="com.tpu.thetower.fragments.lvl5.Lvl5PuzzleMooseFragment"
         android:label="Lvl5PuzzleMooseFragment" />
+    <fragment
+        android:id="@+id/lvl4BookFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" />
 
 </navigation>

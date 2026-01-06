@@ -59,7 +59,7 @@
             app:layout_constraintGuide_percent="0.13" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_chess"
+            android:id="@+id/btn_wall_mechanism"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
@@ -88,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintHeight_percent="0.24"
             app:layout_constraintStart_toStartOf="@id/guideV_timeline"
             app:layout_constraintTop_toTopOf="@id/guideH_timeline"
@@ -125,7 +125,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="@id/guideV_chessboard"
             app:layout_constraintTop_toTopOf="@id/guideH_timeline"

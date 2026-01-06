@@ -15,9 +15,4 @@ object ImageUpdateDispatcher {
         fragment.requireActivity().supportFragmentManager
             .setFragmentResult("updateProgressBar", bundleOf())
     }
-
-    fun openBook(fragment: Fragment, book: String) {
-        fragment.requireActivity().supportFragmentManager
-            .setFragmentResult("bookOpening", bundleOf("book" to book))
-    }
 }

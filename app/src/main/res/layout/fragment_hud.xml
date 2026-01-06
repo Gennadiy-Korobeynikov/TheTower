@@ -66,7 +66,6 @@
         android:id="@+id/iv_access_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/card"
         app:layout_constraintEnd_toStartOf="@id/btn_hint"
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintTop_toTopOf="parent"

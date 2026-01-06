@@ -1,5 +1,10 @@
 package com.tpu.thetower.managers
 
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+import com.google.gson.JsonNull
+import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.models.SaveData
 import javax.inject.Inject
@@ -11,6 +16,8 @@ class SaveRepository @Inject constructor(
 ) {
     @Volatile
     private var cache: SaveData? = null
+
+    private val gson = Gson()
 
     fun invalidateCache() {
         cache = null
@@ -99,5 +106,32 @@ class SaveRepository @Inject constructor(
                 ?.status = status
             updated
         })
+    }
+
+    /**
+     * Универсальное сохранение произвольного состояния уровня.
+     * value поддерживает: String/Number/Boolean/Char, JsonElement, Map/List, любой POJO (через Gson).
+     * null => ключ будет записан как JsonNull.
+     */
+    fun saveLevelExtraState(level: Int, key: String, value: Any?) {
+        updateCache(fileSaveManager.update { gameData ->
+            val updated = gameData.copy()
+            val lvl = updated.levels.find { it.id == level } ?: return@update updated
+
+            val state: JsonObject = (lvl.extraState ?: JsonObject()).also { lvl.extraState = it }
+            state.add(key, value.toJsonElement(gson))
+
+            updated
+        })
+    }
+
+    private fun Any?.toJsonElement(gson: Gson): JsonElement = when (this) {
+        null -> JsonNull.INSTANCE
+        is JsonElement -> this
+        is String -> JsonPrimitive(this)
+        is Number -> JsonPrimitive(this)
+        is Boolean -> JsonPrimitive(this)
+        is Char -> JsonPrimitive(this)
+        else -> gson.toJsonTree(this)
     }
 }

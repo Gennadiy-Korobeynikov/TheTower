@@ -51,27 +51,32 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
             }
         }
 
-        binding.btnChandelier.setOnClickListener {
-            clickCount++
-            if (clickCount == 1) {
-                val timer = object : CountDownTimer(5000, 1000) {
-                    override fun onTick(millisUntilFinished: Long) = Unit
-                    override fun onFinish() { clickCount = 0 }
-                }
-                timer.start()
-            } else if (clickCount == 5) {
-                binding.ivBg.animate()
-                    .alpha(0f)
-                    .setDuration(1500)
-                    .withEndAction {
-                        binding.ivBg.setImageResource(R.drawable.lvl1_after_clicks)
-                        binding.ivBg.alpha = 1f
-                        binding.btnChandelier.visibility = View.GONE
-                        binding.btnNpcReceptionist.visibility = View.GONE
-                        binding.btnAccessCard.visibility = View.VISIBLE
-                        saveRepo.savePuzzleData(1, "chandelier", status = PuzzleStatus.COMPLETED.value)
+        if (loadManager.isLevelCompleted(3)) {
+            binding.btnChandelier.setOnClickListener {
+                clickCount++
+                if (clickCount == 1) {
+                    val timer = object : CountDownTimer(5000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) = Unit
+                        override fun onFinish() {
+                            clickCount = 0
+                        }
                     }
-                    .start()
+                    timer.start()
+                } else if (clickCount == 5) {
+                    binding.ivBg.animate()
+                        .alpha(0f)
+                        .setDuration(1500)
+                        .withEndAction {
+                            saveRepo.savePuzzleData(1, "chandelier", status = PuzzleStatus.COMPLETED.value)
+                            saveRepo.saveLevelCompletedStatus(4)
+                            binding.ivBg.setImageResource(R.drawable.lvl1_after_clicks)
+                            binding.ivBg.alpha = 1f
+                            binding.btnChandelier.visibility = View.GONE
+                            binding.btnNpcReceptionist.visibility = View.GONE
+                            binding.btnAccessCard.visibility = View.VISIBLE
+                        }
+                        .start()
+                }
             }
         }
 
@@ -84,6 +89,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
             binding.btnAccessCard.visibility = View.GONE
         }
     }
+
 
     override fun onResume() {
         super.onResume()

@@ -13,16 +13,12 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentBookBinding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Lvl4BookFragment(
-    private val pages: List<Int>,
-    private val texts: List<Pair<String, String>>,
-    private val hasLink: Boolean,
-    private val hintManager: HintManager?
-) : Fragment(R.layout.fragment_book), Hintable {
+class Lvl4BookFragment : Fragment(R.layout.fragment_book), Hintable {
 
     private var _binding: FragmentBookBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +27,144 @@ class Lvl4BookFragment(
     private var pageCount: Int = 0
 
     @Inject lateinit var dialogManager: DialogManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var loadManager: LoadManager
+
+    private lateinit var bookKey: String
+
+    private lateinit var pages: List<Int>
+    private lateinit var texts: List<Pair<String, String>>
+    private var hasLink: Boolean = false
+    private var hints: HintManager? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val args = requireArguments()
+        bookKey = args.getString(ARG_BOOK_KEY)
+            ?: error("Lvl4BookFragment requires bookKey argument. Use Lvl4BookFragment.newInstance(bookKey).")
+
+        // Сбор данных по ключу (без конструктора), чтобы переживать пересоздание активности
+        buildBookContent(bookKey)
+    }
+
+    private fun buildBookContent(key: String) {
+        val bookHasLink = mapOf(
+            "babel" to true,
+            "askii_a" to false,
+            "askii_b" to false,
+            "qr" to false,
+            "blur" to false,
+            "history" to false,
+            "help" to true
+        )
+
+        val bookPages = mapOf(
+            "babel" to listOf(
+                R.drawable.lvl4_book_blue,
+                R.drawable.lvl4_book_babel1,
+                R.drawable.lvl4_book_babel2,
+            ),
+            "askii_a" to listOf(
+                R.drawable.lvl4_book_orange,
+            ),
+            "askii_b" to listOf(
+                R.drawable.lvl4_book_orange,
+            ),
+            "qr" to listOf(
+                R.drawable.lvl4_book_red,
+                R.drawable.lvl4_qr3,
+                R.drawable.lvl4_qr1,
+                R.drawable.lvl4_qr2,
+            ),
+            "blur" to listOf(
+                R.drawable.lvl4_book_blue,
+                R.drawable.lvl4_book_blur1,
+                R.drawable.lvl4_book_blur2,
+            ),
+            "history" to listOf(
+                R.drawable.lvl4_book_purple,
+            ),
+            "help" to listOf(
+                R.drawable.lvl4_book_green,
+                R.drawable.lvl4_book_blank,
+                R.drawable.lvl4_book_help1,
+            ),
+        )
+
+        val bookTexts = mapOf(
+            "babel" to listOf(
+                Pair(getString(R.string.lvl4_book_babel_title), ""),
+                Pair(getString(R.string.lvl4_book_babel_text1), ""),
+            ),
+            "askii_a" to listOf(
+                Pair(getString(R.string.lvl4_book_askii_title), ""),
+                Pair(getString(R.string.lvl4_book_askii_text1_a), getString(R.string.lvl4_book_askii_text2_a)),
+            ),
+            "askii_b" to listOf(
+                Pair(getString(R.string.lvl4_book_askii_title), ""),
+                Pair(getString(R.string.lvl4_book_askii_text1_b), getString(R.string.lvl4_book_askii_text2_b)),
+            ),
+            "qr" to listOf(
+                Pair(getString(R.string.lvl4_book_qr_title), ""),
+                Pair("", getString(R.string.lvl4_book_qr_text1)),
+            ),
+            "blur" to listOf(
+                Pair(getString(R.string.lvl4_book_blur_title), ""),
+            ),
+            "history" to listOf(
+                Pair(getString(R.string.lvl4_book_history_title), ""),
+                Pair(getString(R.string.lvl4_book_history_text1), getString(R.string.lvl4_book_history_text2)),
+                Pair(getString(R.string.lvl4_book_history_text3), ""),
+            ),
+            "help" to listOf(
+                Pair(getString(R.string.lvl4_book_help_title), ""),
+                Pair(getString(R.string.lvl4_book_help_text1), getString(R.string.lvl4_book_help_text2)),
+                Pair(getString(R.string.lvl4_book_help_text3), ""),
+            ),
+        )
+
+        val bookHints = mapOf(
+            "babel" to hintManagerFactory.create(
+                hints = listOf(
+                    "lvl4_book_babel_hint1", "lvl4_book_babel_hint2",
+                    "lvl4_book_babel_hint3", "lvl4_book_babel_hint4", "lvl4_book_babel_hint5"
+                ),
+                level = 4,
+                puzzle = "book_babel"
+            ),
+            "askii_a" to null,
+            "askii_b" to hintManagerFactory.create(
+                hints = listOf("lvl4_book_askii_hint1"),
+                level = 4,
+                puzzle = "book_askii"
+            ),
+            "qr" to hintManagerFactory.create(
+                hints = listOf("lvl4_book_qr_hint1", "lvl4_book_qr_hint2", "lvl4_book_qr_hint3", "lvl4_book_qr_hint4"),
+                level = 4,
+                puzzle = "book_qr"
+            ),
+            "blur" to hintManagerFactory.create(
+                hints = listOf("lvl4_book_blur_hint1", "lvl4_book_blur_hint2", "lvl4_book_blur_hint3"),
+                level = 4,
+                puzzle = "book_blur"
+            ),
+            "history" to hintManagerFactory.create(
+                hints = listOf(
+                    "lvl4_book_history_hint1", "lvl4_book_history_hint2", "lvl4_book_history_hint3",
+                    "lvl4_book_history_hint4", "lvl4_book_history_hint5", "lvl4_book_history_hint6"
+                ),
+                level = 4,
+                puzzle = "book_history"
+            ),
+            "help" to null
+        )
+
+        hasLink = bookHasLink[key] ?: false
+        pages = bookPages[key] ?: error("Unknown book key=$key")
+        texts = bookTexts[key] ?: error("Unknown book key=$key")
+        hints = bookHints[key]
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -131,8 +265,8 @@ class Lvl4BookFragment(
     }
 
     override fun useHint() {
-        if (hintManager != null) {
-            hintManager.useHint(requireActivity())
+        if (hints != null) {
+            hints!!.useHint(requireActivity())
         } else {
             dialogManager.startDialog(requireActivity(), "hint_is_not_here")
         }
@@ -145,5 +279,17 @@ class Lvl4BookFragment(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val ARG_BOOK_KEY = "book_key"
+
+        fun newInstance(bookKey: String): Lvl4BookFragment {
+            return Lvl4BookFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_BOOK_KEY, bookKey)
+                }
+            }
+        }
     }
 }
