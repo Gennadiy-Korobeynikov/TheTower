@@ -7,7 +7,7 @@ import com.tpu.thetower.managers.SaveRepository
 class Lvl0PuzzleLock(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     private val answer = "4830"
 
-    override fun checkSolution(activity: Activity, saveRepo: SaveRepository, solution: String): Boolean {
+    override fun checkSolution(activity: Activity?, saveRepo: SaveRepository, solution: String): Boolean {
         return if (solution == answer) {
             complete(saveRepo)
             true

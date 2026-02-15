@@ -88,7 +88,7 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun saveCurrentDialog(level: Int, key: String, dialogIndex: Int) {
+    fun saveCurrentDialogIndex(level: Int, key: String, dialogIndex: Int) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
@@ -98,7 +98,7 @@ class SaveRepository @Inject constructor(
         })
     }
 
-    fun savePuzzleData(level: Int, puzzle: String, status: String = PuzzleStatus.COMPLETED.value) {
+    fun savePuzzleStatus(level: Int, puzzle: String, status: String = PuzzleStatus.COMPLETED.value) {
         updateCache(fileSaveManager.update { gameData ->
             val updated = gameData.copy()
             updated.levels.find { it.id == level }
@@ -106,6 +106,10 @@ class SaveRepository @Inject constructor(
                 ?.status = status
             updated
         })
+    }
+
+    fun resetFileData() {
+        fileSaveManager.resetData()
     }
 
     /**

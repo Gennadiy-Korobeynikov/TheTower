@@ -18,7 +18,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
-    private lateinit var binding: FragmentLvl5Binding
+    private var _binding: FragmentLvl5Binding? = null
+    private val binding get() = _binding!!
 
     @Inject lateinit var musicManager: MusicManager
     @Inject lateinit var soundManager: SoundManager
@@ -28,19 +29,26 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentLvl5Binding.bind(view)
+        _binding = FragmentLvl5Binding.bind(view)
 
         setListeners()
 
-        if (loadManager.getPuzzleStatus(5, "bluetooth") == PuzzleStatus.COMPLETED.value) {
-            binding.btnMoose.visibility = View.VISIBLE
-        }
-
         if (loadManager.getPuzzleStatus(5, "moose") == PuzzleStatus.COMPLETED.value) {
-            binding.btnFishRack.visibility = View.VISIBLE
             binding.btnMoose.visibility = View.GONE
             binding.ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
             binding.btnMoosePaper.visibility = View.VISIBLE
+            binding.btnFish.visibility = View.GONE
+        }
+
+        if (loadManager.getPuzzleStatus(5, "fish rack") == PuzzleStatus.COMPLETED.value) {
+            binding.btnFishRack.visibility = View.GONE
+            if (loadManager.getCurrentDialogIndex(5, "lvl5_fisher_rack_completed") < 1) {
+                dialogManager.startDialog(requireActivity(), "lvl5_fisher_rack_completed")
+            }
+        }
+
+        if (loadManager.getPuzzleStatus(5, "chest") == PuzzleStatus.COMPLETED.value) {
+            binding.btnChest.visibility = View.GONE
         }
     }
 
@@ -61,10 +69,23 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         binding.btnMoosePaper.setOnClickListener {
             dialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
         }
+
+        binding.btnMap.setOnClickListener {
+            FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5MapFragment)
+        }
+
+        binding.btnChest.setOnClickListener {
+            FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleChestFragment)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         saveRepo.saveCurrentLevel(5)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

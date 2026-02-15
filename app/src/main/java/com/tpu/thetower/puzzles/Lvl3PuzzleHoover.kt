@@ -77,7 +77,7 @@ class Lvl3PuzzleHoover(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     }
 
 
-    override fun checkSolution(activity: Activity, saveRepo: SaveRepository, solution: String): Boolean {
+    override fun checkSolution(activity: Activity?, saveRepo: SaveRepository, solution: String): Boolean {
         return if (currPositionX == winPositionX && currPositionY == winPositionY) {
             complete(saveRepo)
             true

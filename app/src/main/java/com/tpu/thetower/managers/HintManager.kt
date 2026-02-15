@@ -2,6 +2,7 @@ package com.tpu.thetower.managers
 
 import android.app.Activity
 import android.os.CountDownTimer
+import com.tpu.thetower.AppPreferences
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -19,7 +20,7 @@ class HintManager @AssistedInject constructor(
         private var timer: CountDownTimer? = null
         private var lastPuzzleName = ""
 
-        private fun startHintRecovery(activity: Activity, hintManager: HintManager, usedHintsCount: Int) {
+        private fun startHintRecovery(activity: Activity, hintManager: HintManager) {
             timer?.cancel()
             isNewHintAvailable = false
 
@@ -37,8 +38,7 @@ class HintManager @AssistedInject constructor(
                 override fun onFinish() {
                     ImageUpdateDispatcher.updateHintStateImg(activity, 0)
                     isNewHintAvailable = true
-                    if (usedHintsCount < hintManager.hints.count())
-                        hintManager.usedHintsCountIncrease(activity)
+                    hintManager.usedHintsCountIncrease()
                 }
             }.start()
         }
@@ -72,20 +72,22 @@ class HintManager @AssistedInject constructor(
                 dialogManager.startDialog(activity, hints[usedHintsCount - 1])
 
             if (isNewHintAvailable) {
-                startHintRecovery(activity, this, usedHintsCount)
+                startHintRecovery(activity, this)
                 lastPuzzleName = puzzle
             }
         } else if (isNewHintAvailable) {
             dialogManager.startDialog(activity, hints[usedHintsCount])
-            startHintRecovery(activity, this, usedHintsCount)
+            startHintRecovery(activity, this)
             lastPuzzleName = puzzle
         }
         // else звук или ещё что-то, типа "подсказка не готова" TODO
     }
 
-    fun usedHintsCountIncrease(activity: Activity) {
-        val usedHintsCount = loadManager.getPuzzleUsedHintsCount( level, puzzle) + 1
-        saveRepo.savePuzzleUsedHintsCount(level, puzzle, usedHintsCount)
+    private fun usedHintsCountIncrease() {
+        val usedHintsCount = loadManager.getPuzzleUsedHintsCount(level, puzzle)
+        if (usedHintsCount < hints.count()) {
+            saveRepo.savePuzzleUsedHintsCount(level, puzzle, usedHintsCount + 1)
+        }
     }
 
     @AssistedFactory

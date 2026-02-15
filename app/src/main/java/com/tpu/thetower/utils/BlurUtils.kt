@@ -34,7 +34,6 @@ object BlurUtils {
             .capture(iv)
             .get()
 
-        Log.d(TAG, "blurBitmap(Blurry): radius=${r.toInt().coerceIn(1, 25)} size=${source.width}x${source.height}")
         return out
     }
 

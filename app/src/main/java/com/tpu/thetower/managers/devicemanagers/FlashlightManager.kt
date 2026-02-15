@@ -1,4 +1,4 @@
-package com.tpu.thetower.devicemanagers
+package com.tpu.thetower.managers.devicemanagers
 
 import android.content.Context
 import android.hardware.camera2.CameraAccessException

@@ -1,4 +1,4 @@
-package com.tpu.thetower.utils
+package com.tpu.thetower.utils.wheellocks
 
 import androidx.recyclerview.widget.LinearSnapHelper
 import kotlin.math.abs

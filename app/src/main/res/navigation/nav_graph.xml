@@ -237,6 +237,12 @@
         <action
             android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleMooseFragment"
             app:destination="@id/lvl5PuzzleMooseFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5MapFragment"
+            app:destination="@id/lvl5MapFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleChestFragment"
+            app:destination="@id/lvl5PuzzleChestFragment" />
     </fragment>
     <fragment
         android:id="@+id/lvl2PuzzleChatFragment"
@@ -345,5 +351,14 @@
         android:name="com.tpu.thetower.fragments.lvl4.Lvl4BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" />
+    <fragment
+        android:id="@+id/lvl5MapFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5MapFragment"
+        android:label="fragment_lvl5_map"
+        tools:layout="@layout/fragment_lvl5_map" />
+    <fragment
+        android:id="@+id/lvl5PuzzleChestFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5PuzzleChestFragment"
+        android:label="Lvl5PuzzleChestFragment" />
 
 </navigation>

@@ -19,7 +19,7 @@ class DialogManager @Inject constructor(
         "John" to Character("Джон", R.drawable.john_default),
         "John_thinking" to Character("Джон", R.drawable.john_thinking),
         "receptionist" to Character("Администратор", R.drawable.npc_avatar_receptionist),
-        "security" to Character("Охранник", R.drawable.npc_avatar_security)
+        "security" to Character("Охранник Пит", R.drawable.npc_avatar_security)
     )
 
     private data class DialogSpec(
@@ -34,9 +34,9 @@ class DialogManager @Inject constructor(
             lines = listOf(R.string.lvl0_start),
             speakers = listOf("John"),
             // окно разрешений
-//            onFinished = { act ->
-//                UiVisibilityController.show(act, UiVisibilityController.UiContainer.PERMISSION_REQUEST)
-//            }
+            onFinished = { act ->
+                UiVisibilityController.show(act, UiVisibilityController.UiContainer.PERMISSION_REQUEST)
+            }
         ),
 
         "lvl0_dark" to DialogSpec(
@@ -270,6 +270,11 @@ class DialogManager @Inject constructor(
 
 
 // Lvl 3 ---------------------------------------
+
+        "lvl3_ventilation" to DialogSpec(
+            lines = listOf(R.string.lvl3_ventilation),
+            speakers = listOf("John_thinking")
+        ),
 
         "lvl3_npc_security" to DialogSpec(
             lines = listOf(
@@ -721,19 +726,26 @@ class DialogManager @Inject constructor(
         ,
 
 
-        "lvl5_fish_hint1" to DialogSpec(
+        "lvl5_fish_rack_hint1" to DialogSpec(
             lines = listOf(R.string.lvl5_fish_hint1_1, R.string.lvl5_fish_hint1_2),
             speakers = listOf("John_thinking", "John_thinking")
         )
         ,
-        "lvl5_fish_hint2" to DialogSpec(
+        "lvl5_fish_rack_hint2" to DialogSpec(
             lines = listOf(R.string.lvl5_fish_hint2),
             speakers = listOf("John_thinking")
         )
         ,
-        "lvl5_fish_hint3" to DialogSpec(
+        "lvl5_fish_rack_hint3" to DialogSpec(
             lines = listOf(R.string.lvl5_fish_hint3_1, R.string.lvl5_fish_hint3_2),
             speakers = listOf("John_thinking", "John_thinking")
+        )
+        ,
+
+        "lvl5_fisher_rack_completed" to DialogSpec(
+            lines = listOf(R.string.lvl5_fisher_rack_completed_1, R.string.lvl5_fisher_rack_completed_2),
+            speakers = listOf("John_thinking", "John_thinking"),
+            onFinished = { nextDialog(5, "lvl5_fisher_rack_completed") }
         )
         ,
 
@@ -836,8 +848,8 @@ class DialogManager @Inject constructor(
     }
 
     private fun nextDialog(level: Int, key: String) {
-        var currentDialog = loadManager.getCurrentDialog(level, key)
+        var currentDialog = loadManager.getCurrentDialogIndex(level, key)
         currentDialog++
-        saveRepo.saveCurrentDialog(level, key, currentDialog)
+        saveRepo.saveCurrentDialogIndex(level, key, currentDialog)
     }
 }

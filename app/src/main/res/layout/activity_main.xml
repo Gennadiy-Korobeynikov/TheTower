@@ -36,7 +36,7 @@
             <!-- HUD -->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fcv_hud"
-                android:name="com.tpu.thetower.fragments.common.HUDFragment"
+                android:name="com.tpu.thetower.fragments.common.TopbarUiFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />

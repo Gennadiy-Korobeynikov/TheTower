@@ -308,6 +308,9 @@
     <string name="lvl3_need_key">TODO</string>
     <string name="lvl3_need_to_use_key">TODO</string>
     <string name="lvl0_click_switch">TODO</string>
+    <string name="lvl3_ventilation">TODO</string>
+    <string name="lvl5_fisher_rack_completed_1">TODO</string>
+    <string name="lvl5_fisher_rack_completed_2">TODO</string>
 
 
 </resources>

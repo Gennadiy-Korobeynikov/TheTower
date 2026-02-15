@@ -10,14 +10,14 @@ abstract class Puzzle(val level: Int, val puzzleName: String) {
     var isSolved: Boolean = false
 
     abstract fun checkSolution(
-        activity: Activity,
+        activity: Activity? = null,
         saveRepo: SaveRepository,
         solution: String = ""
     ): Boolean
 
     fun complete(saveRepo: SaveRepository) {
         isSolved = true
-        saveRepo.savePuzzleData(level, puzzleName, status = PuzzleStatus.COMPLETED.value)
+        saveRepo.savePuzzleStatus(level, puzzleName, status = PuzzleStatus.COMPLETED.value)
         Log.i("Puzzle", "$puzzleName completed")
     }
 }

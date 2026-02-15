@@ -3,7 +3,6 @@ package com.tpu.thetower.fragments.lvl4
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.os.Bundle
-import android.util.Log
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
@@ -78,7 +77,6 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
         const val CLIP_LABEL_TIMELINE = "TIMELINE_ITEM"
         private const val KEY_LVL4_SNAPSHOT = "lvl4_snapshot"
         private const val KEY_LVL4_BLUR = "lvl4_blur"
-        private const val TAG = "Lvl4TimelineFragment"
     }
 
     private lateinit var hintManager: HintManager
@@ -109,7 +107,6 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
             context = requireContext()
         )
 
-        Log.d(TAG, "set blurred bg: snapshot=${levelSnapshot.width}x${levelSnapshot.height} blur=${blur.width}x${blur.height}")
         binding.ivBg.setImageBitmap(blur)
 
         setListeners()
@@ -234,7 +231,6 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
                 zoneOccupants[targetZone] = draggedView
             }
         } else {
-            // Empty zone
             previousZone?.let { zoneOccupants[it] = null }
             placeViewInZone(draggedView, targetZone)
             zoneOccupants[targetZone] = draggedView
