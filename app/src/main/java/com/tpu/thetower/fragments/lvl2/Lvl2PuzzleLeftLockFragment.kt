@@ -15,7 +15,7 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Lvl2PuzzleLock
 import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
-import com.tpu.thetower.utils.WheelSetupHelper
+import com.tpu.thetower.utils.wheellocks.WheelSetupHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

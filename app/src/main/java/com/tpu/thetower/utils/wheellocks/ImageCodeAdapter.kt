@@ -1,10 +1,9 @@
-package com.tpu.thetower.adapters
+package com.tpu.thetower.utils.wheellocks
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.tpu.thetower.R
 
 class ImageCodeAdapter(private val items: Array<Int>, private val layoutImage: Int) :
     RecyclerView.Adapter<ImageCodeAdapter.ImageCodeViewHolder>() {

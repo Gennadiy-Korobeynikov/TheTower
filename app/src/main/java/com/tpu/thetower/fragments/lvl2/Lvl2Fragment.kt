@@ -41,7 +41,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
         if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.LOCKED.value) {
             dialogManager.startDialog(requireActivity(), "lvl2_start")
-            saveRepo.savePuzzleData(2, "lock", status = PuzzleStatus.IN_PROGRESS.value)
+            saveRepo.savePuzzleStatus(2, "lock", status = PuzzleStatus.IN_PROGRESS.value)
         }
 
         if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.COMPLETED.value) {

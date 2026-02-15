@@ -12,7 +12,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5PuzzleBluetoothBinding
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
-import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -32,36 +31,62 @@ class Lvl5PuzzleBluetoothFragment : Fragment(R.layout.fragment_lvl5_puzzle_bluet
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLvl5PuzzleBluetoothBinding.bind(view)
-
-        UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-
-        setListeners()
-
-        if (loadManager.getPuzzleStatus(5, "bluetooth") == PuzzleStatus.COMPLETED.value) {
-            binding.ivBg.setImageResource(R.drawable.lvl5_fish_bluetooth)
-        }
     }
 
-    private fun setListeners() {
-        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+    override fun onStart() {
+        super.onStart()
+        registerBluetoothReceiverIfNeeded()
+        updateUiForBluetoothState(BluetoothAdapter.getDefaultAdapter()?.state ?: BluetoothAdapter.ERROR)
+    }
+
+
+    private fun ensureReceiverCreated() {
+        if (this::bluetoothReceiver.isInitialized) return
+
         bluetoothReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val state = intent?.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
-                if (state == BluetoothAdapter.STATE_ON || state == BluetoothAdapter.STATE_OFF) {
-                    binding.ivBg.setImageResource(R.drawable.lvl5_fish_bluetooth)
-                    saveRepo.savePuzzleData(5, "bluetooth", status = PuzzleStatus.COMPLETED.value)
+                    ?: BluetoothAdapter.ERROR
+
+                updateUiForBluetoothState(state)
+
+                if (state == BluetoothAdapter.STATE_ON) {
+                    saveRepo.savePuzzleStatus(5, "bluetooth", status = PuzzleStatus.COMPLETED.value)
                 }
             }
         }
+    }
+
+    private fun registerBluetoothReceiverIfNeeded() {
+        if (receiverRegistered) return
+        ensureReceiverCreated()
+        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
         requireContext().registerReceiver(bluetoothReceiver, filter)
         receiverRegistered = true
     }
 
-    override fun onDestroyView() {
-        if (receiverRegistered) {
-            runCatching { requireContext().unregisterReceiver(bluetoothReceiver) }
-            receiverRegistered = false
+    private fun unregisterBluetoothReceiverIfNeeded() {
+        if (!receiverRegistered) return
+        runCatching { requireContext().unregisterReceiver(bluetoothReceiver) }
+        receiverRegistered = false
+    }
+
+    private fun updateUiForBluetoothState(state: Int) {
+        when (state) {
+            BluetoothAdapter.STATE_ON -> binding.ivBg.setImageResource(R.drawable.lvl5_fish_bluetooth)
+            BluetoothAdapter.STATE_OFF -> binding.ivBg.setImageResource(R.drawable.lvl5_fish_no_bluetooth)
+            else -> Unit
         }
+    }
+
+    override fun onStop() {
+        unregisterBluetoothReceiverIfNeeded()
+        super.onStop()
+    }
+
+    override fun onDestroyView() {
+        // на всякий: если onStop не вызвался
+        unregisterBluetoothReceiverIfNeeded()
         super.onDestroyView()
     }
 }

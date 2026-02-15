@@ -7,7 +7,7 @@ import com.tpu.thetower.managers.SaveRepository
 class Lvl3PuzzleButtons(level: Int, puzzle: String) : Puzzle(level, puzzle) {
     private val answer = "165243"
 
-    override fun checkSolution(activity: Activity, saveRepo: SaveRepository, solution: String): Boolean {
+    override fun checkSolution(activity: Activity?, saveRepo: SaveRepository, solution: String): Boolean {
         return if (solution == answer) {
             complete(saveRepo)
             true

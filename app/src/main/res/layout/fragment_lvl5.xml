@@ -66,7 +66,7 @@
             app:layout_constraintStart_toStartOf="@id/guideV_map"
             app:layout_constraintTop_toTopOf="@id/guideH_map"
             app:layout_constraintWidth_percent="0.135" 
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_fish_rack"
@@ -91,7 +91,7 @@
             app:layout_constraintStart_toStartOf="@id/guideV_fish_rack"
             app:layout_constraintTop_toTopOf="@id/guideH_fish_rack"
             app:layout_constraintWidth_percent="0.32"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_moose"
@@ -115,7 +115,7 @@
             app:layout_constraintHeight_percent="0.33"
             app:layout_constraintStart_toStartOf="@id/guideV_moose"
             app:layout_constraintTop_toTopOf="@id/guideH_moose"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintWidth_percent="0.165" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -142,6 +142,31 @@
             app:layout_constraintTop_toTopOf="@id/guideH_moose_paper"
             android:visibility="gone"
             app:layout_constraintWidth_percent="0.07" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_chest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.450" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_chest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.650" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_chest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_outline"
+            app:layout_constraintStart_toStartOf="@id/guideV_chest"
+            app:layout_constraintTop_toTopOf="@id/guideH_chest"
+            android:visibility="visible"
+            app:layout_constraintWidth_percent="0.23"
+            app:layout_constraintHeight_percent="0.25"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

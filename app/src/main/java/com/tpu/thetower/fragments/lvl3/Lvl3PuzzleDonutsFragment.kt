@@ -123,7 +123,7 @@ class Lvl3PuzzleDonutsFragment :
         )
         binding.iv0.visibility = View.GONE
         binding.iv1.visibility = View.VISIBLE
-        saveRepo.savePuzzleData(3, "donuts", status = PuzzleStatus.COMPLETED.value)
+        saveRepo.savePuzzleStatus(3, "donuts", status = PuzzleStatus.COMPLETED.value)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit

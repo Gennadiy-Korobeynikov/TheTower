@@ -47,7 +47,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
 
         binding = FragmentLvl2PuzzlePasswordBinding.bind(view)
 
-        puzzle = Lvl2PuzzlePassword(2, "password", dialogManager)
+        puzzle = Lvl2PuzzlePassword(2, "password")
 
         setListeners()
 
@@ -127,6 +127,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                 }
 
                 if (puzzle.checkSolution(requireActivity(), saveRepo, input)) {
+                    dialogManager.startDialog(requireActivity(), "lvl2_computer_lore")
                     completed()
                     hideKeyboard()
                 }

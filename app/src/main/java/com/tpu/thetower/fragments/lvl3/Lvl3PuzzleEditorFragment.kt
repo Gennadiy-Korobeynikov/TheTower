@@ -56,7 +56,7 @@ class Lvl3PuzzleEditorFragment : Fragment(R.layout.fragment_lvl3_puzzle_editor),
         binding.btnPaste.setOnClickListener {
             if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.IN_PROGRESS.value) {
                 paste()
-                saveRepo.savePuzzleData(3, "lock model", status = PuzzleStatus.COMPLETED.value)
+                saveRepo.savePuzzleStatus(3, "lock model", status = PuzzleStatus.COMPLETED.value)
             } else {
                 Snackbar.make(binding.ivBg, getString(R.string.lvl3_paste), Toast.LENGTH_SHORT).show()
             }

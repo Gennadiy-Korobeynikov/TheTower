@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.tpu.thetower.managers.AppPreferences
+import com.tpu.thetower.AppPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

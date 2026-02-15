@@ -4,36 +4,33 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.AppPreferences
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
-import com.tpu.thetower.databinding.FragmentHudBinding
-import com.tpu.thetower.managers.AppPreferences
-import com.tpu.thetower.managers.ImageUpdateDispatcher
+import com.tpu.thetower.databinding.FragmentTopbarUiBinding
+import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.UiVisibilityController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HUDFragment : Fragment(R.layout.fragment_hud) {
+class TopbarUiFragment : Fragment(R.layout.fragment_topbar_ui) {
 
-    private lateinit var binding: FragmentHudBinding
+    private lateinit var binding: FragmentTopbarUiBinding
 
     @Inject lateinit var dialogManager: DialogManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentHudBinding.bind(view)
+        binding = FragmentTopbarUiBinding.bind(view)
 
         setListeners()
-
     }
 
     private fun setListeners() {
         binding.btnMenu.setOnClickListener {
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.MENU)
-            ImageUpdateDispatcher.updateProgressBar(this)
         }
 
         requireActivity().supportFragmentManager

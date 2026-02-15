@@ -1,12 +1,12 @@
-package com.tpu.thetower.utils
+package com.tpu.thetower.utils.wheellocks
 
 import android.app.Activity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.Puzzle
-import com.tpu.thetower.adapters.ImageCodeAdapter
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors

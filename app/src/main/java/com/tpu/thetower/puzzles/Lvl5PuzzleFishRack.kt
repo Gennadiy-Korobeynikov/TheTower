@@ -5,9 +5,9 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.managers.SaveRepository
 
 class Lvl5PuzzleFishRack(level: Int, puzzle: String) : Puzzle(level, puzzle) {
-    private val answer = "1234567890"
+    private val answer = "54132"
 
-    override fun checkSolution(activity: Activity, saveRepo: SaveRepository, solution: String): Boolean {
+    override fun checkSolution(activity: Activity?, saveRepo: SaveRepository, solution: String): Boolean {
         return if (solution == answer) {
             complete(saveRepo)
             true

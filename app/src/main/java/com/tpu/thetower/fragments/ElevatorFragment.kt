@@ -8,9 +8,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.AppPreferences
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentElevatorBinding
-import com.tpu.thetower.managers.AppPreferences
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LevelAccessManager
@@ -103,7 +103,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
             binding.ivCardReader.visibility = View.GONE
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
-            unlockLvls(currAccessLevel)
+            unlockLvls()
         }
 
         binding.ivBgBlurred.setOnClickListener {
@@ -192,8 +192,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         binding.ivCardReader.setOnDragListener(this@ElevatorFragment)
     }
 
-    private fun unlockLvls(currAccessLevel: Int) {
-
+    private fun unlockLvls() {
         val unlockingLvls = (0..currAccessLevel)
         unlockingLvls.forEach { i ->
             openedLvlButtons.add(lvlButtons[i])

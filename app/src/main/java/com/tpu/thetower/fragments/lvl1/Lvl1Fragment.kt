@@ -42,7 +42,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
     private fun setListeners() {
         binding.btnNpcReceptionist.setOnClickListener {
-            when (loadManager.getCurrentDialog(1, "receptionist")) {
+            when (loadManager.getCurrentDialogIndex(1, "receptionist")) {
                 0 -> {
                     dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist")
                     saveRepo.saveLevelCompletedStatus(1)
@@ -67,7 +67,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
                         .alpha(0f)
                         .setDuration(1500)
                         .withEndAction {
-                            saveRepo.savePuzzleData(1, "chandelier", status = PuzzleStatus.COMPLETED.value)
+                            saveRepo.savePuzzleStatus(1, "chandelier", status = PuzzleStatus.COMPLETED.value)
                             saveRepo.saveLevelCompletedStatus(4)
                             binding.ivBg.setImageResource(R.drawable.lvl1_after_clicks)
                             binding.ivBg.alpha = 1f

@@ -77,7 +77,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         // Первый диалог
         if (donutsStatus == PuzzleStatus.LOCKED.value) {
             dialogManager.startDialog(requireActivity(), "lvl3_npc_security")
-            saveRepo.savePuzzleData(3, "donuts", status = PuzzleStatus.IN_PROGRESS.value)
+            saveRepo.savePuzzleStatus(3, "donuts", status = PuzzleStatus.IN_PROGRESS.value)
         }
 
         // Шкаф со снатворным открыт
@@ -108,6 +108,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
             binding.ivBg.setImageResource(R.drawable.lvl3_bg_hoover_no_key)
             binding.btnToPuzzleHoover.visibility = View.GONE
             binding.btnToMap.visibility = View.GONE
+            binding.btnToVentilation.visibility = View.GONE
 
             // Ключ ещё не дропнут
             if (keyStatus == PuzzleStatus.LOCKED.value) {
@@ -140,7 +141,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         binding.btnToPuzzleDonuts.setOnClickListener {
             if (loadManager.getPuzzleStatus(3, "donuts after shaking") == PuzzleStatus.LOCKED.value) {
                 dialogManager.startDialog(requireActivity(), "lvl3_donuts")
-                saveRepo.savePuzzleData(3, "donuts after shaking", status = PuzzleStatus.IN_PROGRESS.value)
+                saveRepo.savePuzzleStatus(3, "donuts after shaking", status = PuzzleStatus.IN_PROGRESS.value)
             }
             FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleDonutsFragment)
         }
@@ -173,6 +174,9 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
             } else {
                 FragmentNavigation.changeBG(this, R.id.action_lvl3Fragment_to_lvl3PuzzleEditorFragment)
             }
+        }
+        binding.btnToVentilation.setOnClickListener {
+            dialogManager.startDialog(requireActivity(), "lvl3_ventilation")
         }
 
         binding.btnToPuzzleFinalLock.setOnClickListener {
@@ -320,7 +324,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         binding.ivBg.setImageResource(R.drawable.lvl3_bg_guard_sleeping)
         binding.ivCoffeeTarget.visibility = View.GONE
         binding.btnToMap.visibility = View.VISIBLE
-        saveRepo.savePuzzleData(3, "sleeping pills")
+        saveRepo.savePuzzleStatus(3, "sleeping pills")
         soundManager.playSound(SoundEffect.GUARD_SNORING, repeat = -1)
 
         draggedView.visibility = View.GONE
@@ -335,7 +339,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         binding.ivKeyDraggable.visibility = View.GONE
         binding.vFinalLockTarget.visibility = View.GONE
 
-        saveRepo.savePuzzleData(3, "key", PuzzleStatus.IN_PROGRESS.value)
+        saveRepo.savePuzzleStatus(3, "key", PuzzleStatus.IN_PROGRESS.value)
         draggedView.visibility = View.GONE
     }
 

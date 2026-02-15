@@ -3,11 +3,11 @@ package com.tpu.thetower.fragments.lvl0
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.tpu.thetower.AppPreferences
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0Binding
-import com.tpu.thetower.devicemanagers.FlashlightManager
-import com.tpu.thetower.managers.AppPreferences
+import com.tpu.thetower.managers.devicemanagers.FlashlightManager
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
@@ -106,7 +106,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         binding.btnToPuzzle1.setOnClickListener {
             binding.ivPuzzle1.visibility = View.VISIBLE
             binding.ivClick.visibility = View.VISIBLE
-            if (loadManager.getCurrentDialog(0, "shapes_paper") == 0)
+            if (loadManager.getCurrentDialogIndex(0, "shapes_paper") == 0)
                 dialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
             soundManager.playSound(SoundEffect.DRAWER_OPENING)
         }
@@ -131,7 +131,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             dialogManager.startDialog(requireActivity(), "lvl0_light_on")
             flashlightManager?.toggleFlashlight(false)
             flashlightManager?.stopMonitoring()
-            saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.COMPLETED.value)
+            saveRepo.savePuzzleStatus(0, "flashlight", status = PuzzleStatus.COMPLETED.value)
             enableButtons()
             soundManager.playSound(SoundEffect.LIGHT_SWITCH)
         }
@@ -149,13 +149,13 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         if (isFlashlightOn && currentStatus == PuzzleStatus.LOCKED.value) {
             soundManager.playSound(SoundEffect.FLASHLIGHT)
             dialogManager.startDialog(requireActivity(), "lvl0_flashlight_on")
-            saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.IN_PROGRESS.value)
+            saveRepo.savePuzzleStatus(0, "flashlight", status = PuzzleStatus.IN_PROGRESS.value)
             binding.ivDarkness.visibility = View.GONE
 
         } else if (!isFlashlightOn && currentStatus == PuzzleStatus.IN_PROGRESS.value) {
             soundManager.playSound(SoundEffect.FLASHLIGHT)
             binding.ivDarkness.visibility = View.VISIBLE
-            saveRepo.savePuzzleData(0, "flashlight", status = PuzzleStatus.LOCKED.value)
+            saveRepo.savePuzzleStatus(0, "flashlight", status = PuzzleStatus.LOCKED.value)
         }
     }
 

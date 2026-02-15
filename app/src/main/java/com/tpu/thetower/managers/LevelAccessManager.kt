@@ -1,6 +1,5 @@
 package com.tpu.thetower.managers
 
-import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 
 class LevelAccessManager {

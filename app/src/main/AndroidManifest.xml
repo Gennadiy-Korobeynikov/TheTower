@@ -6,6 +6,7 @@
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".TheTowerApp"
@@ -18,6 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheTower"
         tools:targetApi="31">
+
+        <receiver
+            android:name=".managers.devicemanagers.ChestCodeReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.tpu.thetower.action.CHEST_CODE" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"
