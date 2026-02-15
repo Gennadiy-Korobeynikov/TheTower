@@ -7,10 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.tpu.thetower.AppPreferences
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-
 import com.tpu.thetower.managers.FileSaveManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
@@ -18,6 +14,8 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.utils.SoundEffect
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -86,13 +84,13 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.titleScreenFragment,
                 R.id.settingsFragment -> {
-                    UiVisibilityController.hide(this, UiVisibilityController.UiContainer.HUD,
+                    UiVisibilityController.hide(this, UiVisibilityController.UiContainer.TOPBAR_UI,
                         UiVisibilityController.UiContainer.GO_BACK_ARROW)
                 }
 
                 else -> {
                     // По умолчанию для игровых экранов HUD виден.
-                    UiVisibilityController.show(this, UiVisibilityController.UiContainer.HUD,
+                    UiVisibilityController.show(this, UiVisibilityController.UiContainer.TOPBAR_UI,
                         UiVisibilityController.UiContainer.GO_BACK_ARROW)
                 }
             }

@@ -87,6 +87,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
         binding.ivAccessCard.setOnClickListener {
             binding.ivAccessCard.visibility = View.GONE
             binding.btnAccessCard.visibility = View.GONE
+            loadManager.changeAccessCardNumber(5)
         }
     }
 

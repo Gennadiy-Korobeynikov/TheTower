@@ -15,7 +15,6 @@ import com.tpu.thetower.databinding.FragmentLvl3Binding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
-import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
@@ -197,7 +196,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
 
         binding.btnToAccessCard.setOnClickListener {
             binding.ivAccessCard.visibility = View.VISIBLE
-            LevelAccessManager.changeAccessCardNumber(saveRepo, 4)
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+            loadManager.changeAccessCardNumber(4)
             saveRepo.saveLevelCompletedStatus(3)
         }
 
@@ -205,6 +205,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
             binding.ivAccessCard.visibility = View.GONE
             binding.btnToPuzzleFinalLock.visibility = View.GONE
             binding.btnToAccessCard.visibility = View.GONE
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
 
         binding.ivCoffeeTarget.setOnDragListener(this@Lvl3Fragment)

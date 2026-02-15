@@ -13,7 +13,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentElevatorBinding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
@@ -86,7 +85,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         if (loadManager.getCurrentAccessCardNumber() != 0) {
             binding.ivAccessCardDraggable.visibility = View.VISIBLE
             binding.ivAccessCardDraggable.setImageResource(
-                LevelAccessManager.getCardImage(loadManager.getCurrentAccessCardNumber())
+                loadManager.getCardImage(loadManager.getCurrentAccessCardNumber())
             )
         }
         // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
@@ -251,13 +250,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
     }
 
     private fun onCardInserted(cardNumber: Int, cardView: View) {
-
-        currAccessLevel = LevelAccessManager.updateAccessLvl(
-            saveRepo,
-            cardNumber
-        )
-
-        LevelAccessManager.updateAccessLvl(saveRepo, currAccessLevel)
+        currAccessLevel = loadManager.updateAccessLvl(cardNumber)
         soundManager.playSound(SoundEffect.ACCESS_CARD_INSERT)
         cardView.visibility = View.VISIBLE
     }

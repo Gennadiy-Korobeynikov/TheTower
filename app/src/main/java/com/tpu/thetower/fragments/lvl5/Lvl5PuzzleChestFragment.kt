@@ -18,8 +18,10 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5ChestBinding
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.PermissionManager
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.managers.devicemanagers.ChestCodeReceiver
 import com.tpu.thetower.managers.devicemanagers.ChestManager
 import com.tpu.thetower.utils.SoundEffect
@@ -35,6 +37,7 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
 
     private lateinit var hintManager: HintManager
 
+    @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
 
@@ -71,15 +74,18 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
             chestManager.chestState.collect { isOpen ->
                 if (isOpen) {
                     // todo: change bg
-                    binding.ivCard.visibility = View.VISIBLE
+                    binding.ivAccessCard.visibility = View.VISIBLE
+                    UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                     soundManager.playSound(SoundEffect.ACCESS_CARD_INSERT) // todo change sound effect
                     notificationManager.cancel(NOTIFICATION_ID)
                 }
             }
         }
 
-        binding.ivCard.setOnClickListener {
+        binding.ivAccessCard.setOnClickListener {
             FragmentNavigation.goBack(this)
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+            loadManager.changeAccessCardNumber(6)
         }
     }
 

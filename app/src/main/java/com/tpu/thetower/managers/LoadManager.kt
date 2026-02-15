@@ -27,6 +27,14 @@ class LoadManager @Inject constructor(
             R.id.action_elevatorFragment_to_lvl5Fragment,
             R.id.action_elevatorFragment_to_lvl6Fragment
         )
+
+        private val cardImageIds: List<Int> = listOf(
+            R.drawable.access_card_2,
+            R.drawable.access_card_3,
+            R.drawable.access_card_4,
+            R.drawable.access_card_5,
+            R.drawable.access_card_6
+        )
     }
 
     fun refreshCache() {
@@ -125,7 +133,22 @@ class LoadManager @Inject constructor(
     fun getLevelExtraStateFloat(level: Int, key: String, default: Float = 0f): Float =
         (getLevelExtraState(level, key) as? JsonPrimitive)?.asFloat ?: default
 
+    fun getCardImage(cardNumber : Int): Int {
+        return cardImageIds[cardNumber-2] // карты начинаются со 2 уровня
+    }
+
+    fun changeAccessCardNumber(newCardNumber: Int) {
+        repo.saveAccessCardNumber(newCardNumber)
+    }
+
+    fun updateAccessLvl(newAccessLvl: Int) : Int {
+        repo.saveAccessLevel(newAccessLvl)
+        return newAccessLvl
+    }
+
     private fun getCurrFragment(activity: Activity): Fragment {
         return (activity as MainActivity).supportFragmentManager.findFragmentById(R.id.fcv_bg)!!
     }
+
+
 }

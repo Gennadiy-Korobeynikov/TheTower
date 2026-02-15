@@ -9,7 +9,6 @@ import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl2Binding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
-import com.tpu.thetower.managers.LevelAccessManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
@@ -36,8 +35,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         binding = FragmentLvl2Binding.bind(view)
 
         setListeners()
-
-        //UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
         if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.LOCKED.value) {
             dialogManager.startDialog(requireActivity(), "lvl2_start")
@@ -90,7 +87,7 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
             saveRepo.saveLevelCompletedStatus(2)
             binding.btnToPuzzle2Completed.visibility = View.GONE
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-            LevelAccessManager.changeAccessCardNumber(saveRepo, 3)
+            loadManager.changeAccessCardNumber(3)
             soundManager.playSound(SoundEffect.DRAWER_CLOSING)
         }
     }
