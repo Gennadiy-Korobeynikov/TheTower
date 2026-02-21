@@ -118,14 +118,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
             btn.setOnClickListener {
                 if (btn !in openedLvlButtons) return@setOnClickListener
 
-                if (btn == binding.btnElevatorToLvl2 &&
-                    !prefs.isMaxAccessLvl &&
-                    !loadManager.isLevelCompleted(1)
-                ) {
-                    dialogManager.startDialog(requireActivity(), "lvl1_elevator")
-                    return@setOnClickListener
-                }
-
                 FragmentNavigation.changeBG(this, lvlActions[index])
                 UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
                 soundManager.playSound(SoundEffect.ELEVATOR_DOOR)

@@ -35,7 +35,7 @@ class Lvl0OpenedVaultFragment : Fragment(R.layout.fragment_lvl0_completed) {
     private fun setListeners() {
         binding.btnAccessCard.setOnClickListener {
             dialogManager.startDialog(requireActivity(), "lvl0_access_card_got")
-            loadManager.changeAccessCardNumber(2)
+            loadManager.changeAccessCardNumber(1)
             saveRepo.saveLevelCompletedStatus(0)
         }
     }

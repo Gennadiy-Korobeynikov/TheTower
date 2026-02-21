@@ -29,6 +29,7 @@ class LoadManager @Inject constructor(
         )
 
         private val cardImageIds: List<Int> = listOf(
+            R.drawable.access_card_1,
             R.drawable.access_card_2,
             R.drawable.access_card_3,
             R.drawable.access_card_4,
@@ -134,7 +135,7 @@ class LoadManager @Inject constructor(
         (getLevelExtraState(level, key) as? JsonPrimitive)?.asFloat ?: default
 
     fun getCardImage(cardNumber : Int): Int {
-        return cardImageIds[cardNumber-2] // карты начинаются со 2 уровня
+        return cardImageIds[cardNumber-1] //
     }
 
     fun changeAccessCardNumber(newCardNumber: Int) {

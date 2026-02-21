@@ -7,7 +7,6 @@ import com.tpu.thetower.AppPreferences
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0Binding
-import com.tpu.thetower.managers.devicemanagers.FlashlightManager
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
@@ -16,6 +15,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.managers.devicemanagers.FlashlightManager
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,7 +88,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
     private fun enableButtons() {
         binding.btnToElevator.visibility = View.VISIBLE
         binding.btnToPuzzle1.visibility = View.VISIBLE
-        binding.btnToPuzzle1Lock.visibility = View.VISIBLE
+        if (loadManager.getPuzzleStatus(0, "lock") != PuzzleStatus.COMPLETED.value)
+            binding.btnToPuzzle1Lock.visibility = View.VISIBLE
     }
 
     private fun setListeners() {
