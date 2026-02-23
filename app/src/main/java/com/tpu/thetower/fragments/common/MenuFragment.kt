@@ -23,7 +23,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     @Inject
     lateinit var musicManager: MusicManager
     @Inject
-    lateinit var soundManager: SoundManager // оставлено, если используется в будущем
+    lateinit var soundManager: SoundManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,13 +44,6 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             musicManager.playMusic(R.raw.soundtrack_1)
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.TITLE)
         }
-
-        requireActivity().supportFragmentManager
-            .setFragmentResultListener("updateProgressBar", viewLifecycleOwner) { _, _ ->
-                val (solvedPuzzles, allPuzzles) = loadManager.getLevelProgress(loadManager.getCurrentLevel())
-                binding.progressBar.progress =
-                    if (allPuzzles != 0) solvedPuzzles * 100 / allPuzzles else 0
-            }
     }
 
     override fun onResume() {

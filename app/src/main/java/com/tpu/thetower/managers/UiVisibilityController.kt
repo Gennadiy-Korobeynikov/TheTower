@@ -11,7 +11,7 @@ object UiVisibilityController {
         TITLE(R.id.fcv_title_screen),
         MENU(R.id.fcv_menu),
         SETTINGS(R.id.fcv_settings),
-        HUD(R.id.fcv_hud),
+        TOPBAR_UI(R.id.fcv_topbar_ui),
         GO_BACK_ARROW(R.id.fcv_go_back_arrow),
         DIALOG(R.id.fcv_dialog),
         PERMISSION_DENIED(R.id.fcv_permission_denied),

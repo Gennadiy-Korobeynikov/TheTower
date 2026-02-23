@@ -153,7 +153,10 @@ class DialogManager @Inject constructor(
                 "receptionist",
                 "John_thinking",
             ),
-            onFinished = { nextDialog(1,"receptionist") }
+            onFinished = {
+                nextDialog(1,"receptionist")
+                loadManager.changeAccessCardNumber(2)
+            }
         ),
 
 

@@ -2,6 +2,8 @@ package com.tpu.thetower.managers
 
 import android.app.Activity
 import android.os.CountDownTimer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import com.tpu.thetower.AppPreferences
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -29,20 +31,22 @@ class HintManager @AssistedInject constructor(
 
                 timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
                 override fun onTick(millisUntilFinished: Long) {
-                    ImageUpdateDispatcher.updateHintStateImg(
-                        activity,
-                        ((totalTimeToRecover - millisUntilFinished) / updateInterval).toInt()
-                    )
+                    val step = ((totalTimeToRecover - millisUntilFinished) / updateInterval).toInt()
+
+                    (activity as? AppCompatActivity)?.supportFragmentManager
+                        ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))
                 }
 
                 override fun onFinish() {
-                    ImageUpdateDispatcher.updateHintStateImg(activity, 0)
+
+                    (activity as? AppCompatActivity)?.supportFragmentManager
+                        ?.setFragmentResult("hintImgUpdating", bundleOf("step" to 0))
+
                     isNewHintAvailable = true
                     hintManager.usedHintsCountIncrease()
                 }
             }.start()
         }
-
 
         // Для пропуска ожидания с помощью потенциальной рекламы
         fun cancelRecovery() {
@@ -52,6 +56,7 @@ class HintManager @AssistedInject constructor(
     }
 
     fun useHint(activity: Activity) {
+
         val usedHintsCount = loadManager.getPuzzleUsedHintsCount(level, puzzle)
 
         // Если в предыдущий раз подсказка была вызвана на этом фрагменте или это не первая подсказка
