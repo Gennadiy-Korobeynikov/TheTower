@@ -86,15 +86,6 @@ class LoadManager @Inject constructor(
         return levels[currentLevel]
     }
 
-    fun getLevelProgress(level: Int): Pair<Int, Int> {
-        val data = repo.get()
-        val lvl = data.levels.find { it.id == level }
-        return Pair(
-            lvl?.puzzles?.count { it.status == PuzzleStatus.COMPLETED.value } ?: 0,
-            lvl?.puzzles?.size ?: 0
-        )
-    }
-
     fun isLevelCompleted(level: Int): Boolean {
         val data = repo.get()
         return data.levels.find { it.id == level }
