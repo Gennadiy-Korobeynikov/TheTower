@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
+            app:layout_constraintGuide_percent="0.40" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_chandelier"
@@ -46,14 +46,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.06" />
+            app:layout_constraintGuide_percent="0.01" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_npc_receptionist"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            app:layout_constraintHeight_percent="0.19"
+            app:layout_constraintHeight_percent="0.25"
             app:layout_constraintStart_toStartOf="@id/guideV_receptionist"
             app:layout_constraintTop_toTopOf="@id/guideH_receptionist"
             app:layout_constraintWidth_percent="0.08" />
