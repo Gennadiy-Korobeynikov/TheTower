@@ -54,7 +54,14 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
 
         if (loadManager.getPuzzleStatus(4, "timeline") == PuzzleStatus.COMPLETED.value) {
             binding.btnTimeline.visibility = View.GONE
-            binding.ivBg.setImageResource(R.drawable.lvl4_bg_timeline_completed)
+            binding.ivRavenHead.setImageResource(
+                if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.LOCKED.value)
+                    R.drawable.lvl4_raven_on
+                else
+                    R.drawable.lvl4_raven_off
+            )
+
+            binding.ivRavenHead.visibility = View.VISIBLE
             binding.btnRaven.visibility = View.VISIBLE
         }
 

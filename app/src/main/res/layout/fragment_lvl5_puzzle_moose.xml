@@ -24,7 +24,7 @@
             android:id="@+id/iv_moose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/lvl5_puzzle1_base"
+            android:src="@drawable/lvl5_moose_base"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

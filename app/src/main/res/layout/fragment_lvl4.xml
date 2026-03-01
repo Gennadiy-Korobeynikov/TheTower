@@ -120,6 +120,32 @@
             app:layout_constraintTop_toTopOf="@id/guideH_raven"
             app:layout_constraintWidth_percent="0.235" />
 
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_raven_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.087" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_raven_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6509" />
+
+        <ImageView
+            android:id="@+id/iv_raven_head"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/lvl4_raven_on"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/guideV_raven_head"
+            app:layout_constraintTop_toTopOf="@id/guideH_raven_head"
+            app:layout_constraintWidth_percent="0.165"
+            app:layout_constraintHeight_percent="0.146    "/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_bookcase"
             android:layout_width="0dp"

@@ -47,7 +47,7 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
         )
 
         if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.IN_PROGRESS.value) {
-            binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
+            binding.ivBg.setImageResource(R.drawable.lvl4_raven_off)
         }
     }
 
@@ -56,11 +56,11 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
             val dialog: String
 
             if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.LOCKED.value) {
-                binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_2)
+                binding.ivRaven.setImageResource(R.drawable.lvl4_raven_off)
                 saveRepo.savePuzzleStatus(4, "askiibtn", status = PuzzleStatus.IN_PROGRESS.value)
                 dialog = "lvl4_puzzle1_askii"
             } else {
-                binding.ivBg.setImageResource(R.drawable.lvl4_raven_switch_1)
+                binding.ivRaven.setImageResource(R.drawable.lvl4_raven_on)
                 saveRepo.savePuzzleStatus(4, "askiibtn", status = PuzzleStatus.LOCKED.value)
                 dialog = "lvl4_puzzle1_normal"
             }

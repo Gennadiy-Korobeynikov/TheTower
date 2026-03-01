@@ -54,7 +54,7 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
                 .setDuration(500)
                 .withEndAction {
                     if (isAdded && view != null) {
-                        moose.setImageResource(R.drawable.lvl5_puzzle1_base)
+                        moose.setImageResource(R.drawable.lvl5_moose_base)
                     }
                 }
 
@@ -63,11 +63,11 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
         }
 
         binding.btnLeft.setOnClickListener {
-            playAndAppend(bit = '0', drawableOnClick = R.drawable.lvl5_puzzle1_left)
+            playAndAppend(bit = '0', drawableOnClick = R.drawable.lvl5_moose_left)
         }
 
         binding.btnRight.setOnClickListener {
-            playAndAppend(bit = '1', drawableOnClick = R.drawable.lvl5_puzzle1_right)
+            playAndAppend(bit = '1', drawableOnClick = R.drawable.lvl5_moose_right)
         }
     }
 
