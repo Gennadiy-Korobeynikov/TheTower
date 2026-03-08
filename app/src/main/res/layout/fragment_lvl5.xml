@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl5_bg_after_moose" />
+        android:src="@drawable/lvl5_bg" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,25 +73,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.66" />
+            app:layout_constraintGuide_percent="0.667" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_fish_rack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.14" />
+            app:layout_constraintGuide_percent="0.29" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_fish_rack"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintHeight_percent="0.47"
             app:layout_constraintStart_toStartOf="@id/guideV_fish_rack"
             app:layout_constraintTop_toTopOf="@id/guideH_fish_rack"
             app:layout_constraintWidth_percent="0.32"
             android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/iv_fish_rack"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/guideV_fish_rack"
+            app:layout_constraintTop_toTopOf="@id/guideH_fish_rack"
+            app:layout_constraintHeight_percent="0.44"
+            app:layout_constraintWidth_percent="0.32"
+            android:src="@drawable/lvl5_fishes" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_moose"

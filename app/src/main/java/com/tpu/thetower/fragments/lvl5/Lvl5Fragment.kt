@@ -42,6 +42,7 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
         if (loadManager.getPuzzleStatus(5, "fish rack") == PuzzleStatus.COMPLETED.value) {
             binding.btnFishRack.visibility = View.GONE
+            binding.ivFishRack.setImageResource(R.drawable.lvl5_fishes_solved)
             if (loadManager.getCurrentDialogIndex(5, "lvl5_fisher_rack_completed") < 1) {
                 dialogManager.startDialog(requireActivity(), "lvl5_fisher_rack_completed")
             }

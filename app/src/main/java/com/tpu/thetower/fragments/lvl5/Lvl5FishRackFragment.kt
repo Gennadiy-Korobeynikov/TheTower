@@ -118,7 +118,6 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
             draggable.setOnTouchListener { v, event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        // аналогично Lvl4TimelineFragment: не предполагаем, что translationY==0
                         downTranslationY[v] = v.translationY
                         v.animate()
                             .translationY(downTranslationY[v]!! - 20f)
