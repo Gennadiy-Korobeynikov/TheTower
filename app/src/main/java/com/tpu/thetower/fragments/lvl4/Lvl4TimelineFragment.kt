@@ -75,8 +75,6 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
 
     private companion object {
         const val CLIP_LABEL_TIMELINE = "TIMELINE_ITEM"
-        private const val KEY_LVL4_SNAPSHOT = "lvl4_snapshot"
-        private const val KEY_LVL4_BLUR = "lvl4_blur"
     }
 
     private lateinit var hintManager: HintManager
@@ -96,12 +94,12 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
             puzzle = "timeline"
         )
 
-        val levelSnapshot = blurVM.getBlur(KEY_LVL4_SNAPSHOT)
+        val levelSnapshot = blurVM.getBlur(Lvl4Fragment.KEY_LVL4_SNAPSHOT)
             ?: error("Snapshot must be set before opening puzzle")
 
         val blur = getOrCreateBlur(
             blurVM = blurVM,
-            blurKey = KEY_LVL4_BLUR,
+            blurKey = Lvl4Fragment.KEY_LVL4_BLUR,
             sourceBitmap = levelSnapshot,
             radius = 220f,
             context = requireContext()
