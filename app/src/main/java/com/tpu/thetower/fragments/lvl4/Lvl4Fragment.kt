@@ -32,7 +32,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager : DialogManager
 
-    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_graph)
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
     companion object {
         const val KEY_LVL4_SNAPSHOT = "lvl4_snapshot"
@@ -114,8 +114,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        blurVM.clearBlur(KEY_LVL4_SNAPSHOT) //todo пока тут
-        blurVM.clearBlur(KEY_LVL4_BLUR)
     }
 
     override fun useHint() {

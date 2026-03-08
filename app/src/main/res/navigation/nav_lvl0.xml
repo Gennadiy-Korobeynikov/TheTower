@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_lvl0"
+    app:startDestination="@id/lvl0Fragment">
+
+    <fragment
+        android:id="@+id/lvl0Fragment"
+        android:name="com.tpu.thetower.fragments.lvl0.Lvl0Fragment"
+        android:label="fragment_lvl0"
+        tools:layout="@layout/fragment_lvl0">
+        <action
+            android:id="@+id/action_lvl0Fragment_to_lvl0PuzzleLockFragment"
+            app:destination="@id/lvl0PuzzleLockFragment" />
+        <action
+            android:id="@+id/action_lvl0Fragment_to_lvl0CompletedFragment"
+            app:destination="@id/lvl0CompletedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lvl0PuzzleLockFragment"
+        android:name="com.tpu.thetower.fragments.lvl0.Lvl0PuzzleLockFragment"
+        android:label="fragment_lvl0_puzzle_lock"
+        tools:layout="@layout/fragment_lvl0_puzzle_lock" />
+
+    <fragment
+        android:id="@+id/lvl0CompletedFragment"
+        android:name="com.tpu.thetower.fragments.lvl0.Lvl0OpenedVaultFragment"
+        android:label="fragment_lvl0_completed"
+        tools:layout="@layout/fragment_lvl0_completed" />
+</navigation>
+

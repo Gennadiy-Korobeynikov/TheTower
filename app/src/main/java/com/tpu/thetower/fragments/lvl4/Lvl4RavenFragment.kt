@@ -30,7 +30,7 @@ class Lvl4RavenFragment : Fragment(R.layout.fragment_lvl4_raven), Hintable {
     @Inject lateinit var dialogManager: DialogManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
 
-    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_graph)
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
     private lateinit var hintManager: HintManager
 

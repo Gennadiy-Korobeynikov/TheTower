@@ -16,7 +16,7 @@ class Lvl4SequencePaperFragment : Fragment(R.layout.fragment_lvl4_sequence_paper
     private var _binding: FragmentLvl4SequencePaperBinding? = null
     private val binding get() = _binding!!
 
-    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_graph)
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

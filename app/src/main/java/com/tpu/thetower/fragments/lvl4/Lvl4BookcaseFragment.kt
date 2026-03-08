@@ -23,7 +23,7 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
 
     @Inject lateinit var loadManager: LoadManager
 
-    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_graph)
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

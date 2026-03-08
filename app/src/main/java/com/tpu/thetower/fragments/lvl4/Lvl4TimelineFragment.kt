@@ -30,7 +30,7 @@ class Lvl4TimelineFragment : Fragment(R.layout.fragment_lvl4_timeline),
 
     @Inject lateinit var soundManager : SoundManager
 
-    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_graph)
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
     private var _binding: FragmentLvl4TimelineBinding? = null
     private val binding get() = _binding!!

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_lvl4"
+    app:startDestination="@id/lvl4Fragment">
+
+    <fragment
+        android:id="@+id/lvl4Fragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4Fragment"
+        android:label="fragment_lvl4"
+        tools:layout="@layout/fragment_lvl4">
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4PuzzleChessboardFragment"
+            app:destination="@id/lvl4PuzzleChessboardFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4ChessFragment"
+            app:destination="@id/lvl4ChessFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4TimelineFragment"
+            app:destination="@id/lvl4TimelineFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4RavenFragment"
+            app:destination="@id/lvl4RavenFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4SequencePaperFragment"
+            app:destination="@id/lvl4SequencePaperFragment" />
+        <action
+            android:id="@+id/action_lvl4Fragment_to_lvl4BookcaseFragment"
+            app:destination="@id/lvl4BookcaseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lvl4PuzzleChessboardFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4PuzzleChessboardFragment"
+        android:label="fragment_lvl4_puzzle_chessboard"
+        tools:layout="@layout/fragment_lvl4_puzzle_chessboard" />
+
+    <fragment
+        android:id="@+id/lvl4ChessFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4ChessFragment"
+        android:label="fragment_lvl4_chess"
+        tools:layout="@layout/fragment_lvl4_chess" />
+
+    <fragment
+        android:id="@+id/lvl4TimelineFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4TimelineFragment"
+        android:label="fragment_lvl4_timeline"
+        tools:layout="@layout/fragment_lvl4_timeline" />
+
+    <fragment
+        android:id="@+id/lvl4RavenFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4RavenFragment"
+        android:label="Lvl4RavenFragment" />
+
+    <fragment
+        android:id="@+id/lvl4SequencePaperFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4SequencePaperFragment"
+        android:label="fragment_lvl4_sequence_paper"
+        tools:layout="@layout/fragment_lvl4_sequence_paper" />
+
+    <fragment
+        android:id="@+id/lvl4BookcaseFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4BookcaseFragment"
+        android:label="fragment_lvl4_bookcase"
+        tools:layout="@layout/fragment_lvl4_bookcase">
+        <action
+            android:id="@+id/action_lvl4BookcaseFragment_to_lvl4BookFragment"
+            app:destination="@id/lvl4BookFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lvl4BookFragment"
+        android:name="com.tpu.thetower.fragments.lvl4.Lvl4BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" />
+
+</navigation>
+

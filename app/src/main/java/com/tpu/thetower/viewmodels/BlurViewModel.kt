@@ -17,8 +17,11 @@ class BlurViewModel : ViewModel() {
         _blurCache.remove(key)
     }
 
-    fun clearAll() {
+
+    override fun onCleared() {
+        // ViewModel живёт в scope nav graph, поэтому сюда попадём при уничтожении графа.
+        // Освобождаем ссылки на Bitmap, чтобы избежать утечек памяти.
         _blurCache.clear()
+        super.onCleared()
     }
 }
-
