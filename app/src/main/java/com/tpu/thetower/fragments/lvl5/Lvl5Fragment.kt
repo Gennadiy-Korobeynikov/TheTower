@@ -35,7 +35,7 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
         if (loadManager.getPuzzleStatus(5, "moose") == PuzzleStatus.COMPLETED.value) {
             binding.btnMoose.visibility = View.GONE
-            binding.ivBg.setImageResource(R.drawable.lvl5_bg_after_moose)
+            binding.ivMooseWithPaper.visibility = View.VISIBLE
             binding.btnMoosePaper.visibility = View.VISIBLE
             binding.btnFish.visibility = View.GONE
         }
