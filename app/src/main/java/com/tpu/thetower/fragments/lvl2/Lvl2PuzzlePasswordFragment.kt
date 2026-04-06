@@ -109,19 +109,31 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
         btnToJames.setOnClickListener {
             clChatAmanda.visibility = View.GONE
             clChatJames.visibility = View.VISIBLE
-            ivDialog.setImageResource(R.drawable.lvl2_puzzle1_chat1)
+            btnOpenFile.visibility = View.GONE
+            ivDialog.setImageResource(R.drawable.lvl2_chat1)
         }
+
         btnToAmanda.setOnClickListener {
             clChatAmanda.visibility = View.VISIBLE
             clChatJames.visibility = View.GONE
-            ivDialog.setImageResource(R.drawable.lvl2_puzzle1_chat2)
+            btnOpenFile.visibility = View.VISIBLE
+            ivDialog.setImageResource(R.drawable.lvl2_chat2)
         }
+
+        btnOpenFile.setOnClickListener {
+            clFile.visibility = View.VISIBLE
+        }
+
+        btnToCloseFile.setOnClickListener {
+            clFile.visibility = View.GONE
+        }
+
         pinContainer.setOnClickListener { showKeyboard() }
 
         hiddenInput.requestFocus()
         hiddenInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val input = s?.toString() ?: ""
+                val input = s?.toString()?.lowercase() ?: ""
                 pinCells.forEachIndexed { index, textView ->
                     textView.text = if (index < input.length) input[index].toString() else ""
                 }

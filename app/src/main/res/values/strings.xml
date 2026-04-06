@@ -221,7 +221,6 @@
     <string name="lvl2_puzzle1_chat2_3">TODO</string>
     <string name="lvl2_puzzle1_chat2_4">TODO</string>
     <string name="lvl2_puzzle1_chat_amanda">TODO</string>
-    <string name="lvl2_puzzle1_chat2_5">TODO</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="lvl4_chess_hint1">TODO</string>
@@ -311,6 +310,7 @@
     <string name="lvl3_ventilation">TODO</string>
     <string name="lvl5_fisher_rack_completed_1">TODO</string>
     <string name="lvl5_fisher_rack_completed_2">TODO</string>
+    <string name="lvl2_puzzle1_chat_file">TODO</string>
 
 
 </resources>
