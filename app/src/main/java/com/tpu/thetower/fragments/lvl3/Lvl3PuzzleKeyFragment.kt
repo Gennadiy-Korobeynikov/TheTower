@@ -23,7 +23,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
-import com.tpu.thetower.puzzles.Lv5PuzzleChest
+import com.tpu.thetower.puzzles.Lvl3PuzzleKey
 import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,7 +59,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
 
         setListeners()
 
-        puzzle = Lv5PuzzleChest(3, "key")
+        puzzle = Lvl3PuzzleKey(3, "key")
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
 
