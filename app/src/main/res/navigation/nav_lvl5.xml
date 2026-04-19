@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_lvl5"
+    app:startDestination="@id/lvl5Fragment">
+
+    <fragment
+        android:id="@+id/lvl5Fragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5Fragment"
+        android:label="fragment_lvl5"
+        tools:layout="@layout/fragment_lvl5">
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5FishRackFragment"
+            app:destination="@id/lvl5FishRackFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleBluetoothFragment"
+            app:destination="@id/lvl5PuzzleBluetoothFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleMooseFragment"
+            app:destination="@id/lvl5PuzzleMooseFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5MapFragment"
+            app:destination="@id/lvl5MapFragment" />
+        <action
+            android:id="@+id/action_lvl5Fragment_to_lvl5PuzzleChestFragment"
+            app:destination="@id/lvl5PuzzleChestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lvl5FishRackFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5FishRackFragment"
+        android:label="Lvl5FishRackFragment" />
+
+    <fragment
+        android:id="@+id/lvl5PuzzleBluetoothFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5PuzzleBluetoothFragment"
+        android:label="Lvl5PuzzleBluetoothFragment" />
+
+    <fragment
+        android:id="@+id/lvl5PuzzleMooseFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5PuzzleMooseFragment"
+        android:label="Lvl5PuzzleMooseFragment" />
+
+    <fragment
+        android:id="@+id/lvl5MapFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5MapFragment"
+        android:label="fragment_lvl5_map"
+        tools:layout="@layout/fragment_lvl5_map" />
+
+    <fragment
+        android:id="@+id/lvl5PuzzleChestFragment"
+        android:name="com.tpu.thetower.fragments.lvl5.Lvl5PuzzleChestFragment"
+        android:label="Lvl5PuzzleChestFragment" />
+
+</navigation>
+

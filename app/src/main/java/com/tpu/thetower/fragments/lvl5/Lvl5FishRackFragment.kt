@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import androidx.fragment.app.Fragment
+import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
@@ -18,6 +19,8 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Lvl5PuzzleFishRack
 import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.getOrCreateBlur
+import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +30,8 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
 
     private var _binding: FragmentLvl5FishRackBinding? = null
     private val binding get() = _binding!!
+
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
 
     private val lastValidPositions = mutableMapOf<View, PointF>()
 
@@ -82,6 +87,19 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
             level = 5,
             puzzle = "fish rack"
         )
+
+        val levelSnapshot = blurVM.getBlur(Lvl5Fragment.KEY_LVL5_SNAPSHOT)
+            ?: error("Snapshot must be set before opening puzzle")
+
+        val blur = getOrCreateBlur(
+            blurVM = blurVM,
+            blurKey = Lvl5Fragment.KEY_LVL5_BLUR,
+            sourceBitmap = levelSnapshot,
+            radius = 220f,
+            context = requireContext()
+        )
+
+        binding.ivBg.setImageBitmap(blur)
 
         setListeners()
 

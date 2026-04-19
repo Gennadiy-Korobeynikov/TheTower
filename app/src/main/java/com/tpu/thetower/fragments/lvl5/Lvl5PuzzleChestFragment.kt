@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5ChestBinding
@@ -25,6 +26,8 @@ import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.managers.devicemanagers.ChestCodeReceiver
 import com.tpu.thetower.managers.devicemanagers.ChestManager
 import com.tpu.thetower.utils.SoundEffect
+import com.tpu.thetower.utils.getOrCreateBlur
+import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,6 +45,8 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
     @Inject lateinit var hintManagerFactory: HintManager.Factory
 
     @Inject lateinit var chestManager: ChestManager
+
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
 
     companion object {
         private const val NOTIFICATION_ID = 1001
@@ -66,6 +71,19 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
         maybeShowChestNotification()
 
         setListeners()
+
+        val levelSnapshot = blurVM.getBlur(Lvl5Fragment.KEY_LVL5_SNAPSHOT)
+            ?: error("Snapshot must be set before opening puzzle")
+
+        val blur = getOrCreateBlur(
+            blurVM = blurVM,
+            blurKey = Lvl5Fragment.KEY_LVL5_BLUR,
+            sourceBitmap = levelSnapshot,
+            radius = 220f,
+            context = requireContext()
+        )
+
+        binding.ivBg.setImageBitmap(blur)
     }
 
     fun setListeners() {

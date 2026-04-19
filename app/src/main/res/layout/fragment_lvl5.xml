@@ -19,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_fish"
             android:layout_width="wrap_content"
@@ -108,69 +110,73 @@
             android:id="@+id/iv_moose_with_paper"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="@id/guideV_moose"
+            app:layout_constraintTop_toTopOf="@id/guideH_moose"
+            app:layout_constraintHeight_percent="0.36"
             app:layout_constraintWidth_percent="0.3"
             android:src="@drawable/lvl5_moose_with_paper"
-            android:visibility="gone"/>
+            android:alpha="0.7"
+            android:scaleType="fitStart"
+            android:visibility="gone"
+            app:layout_constrainedWidth="true"
+            app:layout_constrainedHeight="true" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_moose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.04" />
+            app:layout_constraintGuide_percent="0.03" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_moose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.06" />
+            app:layout_constraintGuide_percent="0.04" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_moose"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintHeight_percent="0.35"
             app:layout_constraintStart_toStartOf="@id/guideV_moose"
             app:layout_constraintTop_toTopOf="@id/guideH_moose"
             android:visibility="visible"
-            app:layout_constraintWidth_percent="0.165" />
+            app:layout_constraintWidth_percent="0.17" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_moose_paper"
+            android:id="@+id/guideV_moose_paper_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.09" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_moose_paper"
+            android:id="@+id/guideH_moose_paper_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.12" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_moose_paper"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_outline"
-            app:layout_constraintHeight_percent="0.11"
-            app:layout_constraintStart_toStartOf="@id/guideV_moose_paper"
-            app:layout_constraintTop_toTopOf="@id/guideH_moose_paper"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/guideV_moose_paper_btn"
+            app:layout_constraintTop_toTopOf="@id/guideH_moose_paper_btn"
             android:visibility="gone"
-            app:layout_constraintWidth_percent="0.07" />
+            app:layout_constraintWidth_percent="0.09" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_chest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.450" />
+            app:layout_constraintGuide_percent="0.45" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_chest"
@@ -192,6 +198,56 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--        MoosePaper-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_moose_paper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_moose_paper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.38" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_moose_paper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.17" />
+
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/iv_moose_paper"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintWidth_percent="1"
+            android:src="@drawable/lvl5_moose_paper"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/tv_moose_paper"
+            android:text="@string/lvl5_moose_paper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorLink="@color/black"
+            android:fontFamily="@font/pixel"
+            android:textSize="15sp"
+            app:layout_constraintWidth_percent="0.39"
+            app:layout_constraintStart_toStartOf="@id/guideV_moose_paper"
+            app:layout_constraintTop_toTopOf="@id/guideH_moose_paper"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </FrameLayout>

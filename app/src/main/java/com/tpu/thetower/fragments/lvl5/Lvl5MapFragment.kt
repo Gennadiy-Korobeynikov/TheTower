@@ -3,11 +3,14 @@ package com.tpu.thetower.fragments.lvl5
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5MapBinding
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.utils.getOrCreateBlur
+import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -17,10 +20,12 @@ class Lvl5MapFragment : Fragment(R.layout.fragment_lvl5_map), Hintable {
     private var _binding: FragmentLvl5MapBinding? = null
     private val binding get() = _binding!!
 
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
 
     private lateinit var hintManager: HintManager
 
-//    @Inject lateinit var saveRepo : SaveRepository
+
+    //    @Inject lateinit var saveRepo : SaveRepository
 //    @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
 
@@ -28,6 +33,19 @@ class Lvl5MapFragment : Fragment(R.layout.fragment_lvl5_map), Hintable {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentLvl5MapBinding.bind(view)
+
+        val levelSnapshot = blurVM.getBlur(Lvl5Fragment.KEY_LVL5_SNAPSHOT)
+            ?: error("Snapshot must be set before opening puzzle")
+
+        val blur = getOrCreateBlur(
+            blurVM = blurVM,
+            blurKey = Lvl5Fragment.KEY_LVL5_BLUR,
+            sourceBitmap = levelSnapshot,
+            radius = 220f,
+            context = requireContext()
+        )
+
+        binding.ivBg.setImageBitmap(blur)
 
         setListeners()
     }
@@ -37,7 +55,6 @@ class Lvl5MapFragment : Fragment(R.layout.fragment_lvl5_map), Hintable {
             FragmentNavigation.goBack(this)
         }
     }
-
 
 
     override fun useHint() {

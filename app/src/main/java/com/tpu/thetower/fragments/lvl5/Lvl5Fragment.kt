@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl5
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5Binding
 import com.tpu.thetower.managers.DialogManager
@@ -11,7 +12,11 @@ import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
+import com.tpu.thetower.utils.BlurUtils
+import com.tpu.thetower.utils.getOrCreateBlur
+import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,6 +31,13 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
     @Inject lateinit var saveRepo: SaveRepository
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager: DialogManager
+
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
+
+    companion object {
+        const val KEY_LVL5_SNAPSHOT = "lvl5_snapshot"
+        const val KEY_LVL5_BLUR = "lvl5_blur"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,6 +63,18 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         if (loadManager.getPuzzleStatus(5, "chest") == PuzzleStatus.COMPLETED.value) {
             binding.btnChest.visibility = View.GONE
         }
+
+        binding.root.post {
+            if (!isAdded) return@post
+
+            if (blurVM.getBlur(KEY_LVL5_SNAPSHOT) == null) {
+                val snapshot = BlurUtils.captureSnapshot(binding.root)
+                blurVM.setBlur(KEY_LVL5_SNAPSHOT, snapshot)
+            }
+
+            val snapshot = blurVM.getBlur(KEY_LVL5_SNAPSHOT) ?: return@post
+            getOrCreateBlur(blurVM, blurKey = KEY_LVL5_BLUR, sourceBitmap = snapshot, radius = 220f, context = requireContext())
+        }
     }
 
     private fun setListeners() {
@@ -68,7 +92,12 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         }
 
         binding.btnMoosePaper.setOnClickListener {
-            dialogManager.startDialog(requireActivity(), "lvl5_moose_paper")
+            binding.clMoosePaper.visibility = View.VISIBLE
+            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+        }
+
+        binding.clMoosePaper.setOnClickListener {
+            binding.clMoosePaper.visibility = View.GONE
         }
 
         binding.btnMap.setOnClickListener {

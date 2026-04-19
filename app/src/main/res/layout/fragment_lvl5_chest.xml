@@ -14,12 +14,12 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl5_bg_blur"/>
+        android:src="@drawable/lvl5_bg_blur"
+        android:visibility="visible"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:id="@+id/iv_chest"
