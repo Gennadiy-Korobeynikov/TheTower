@@ -36,6 +36,9 @@ enum class SoundEffect(@RawRes val resId: Int) {
     // 4 Lvl
     CROW(R.raw.sound_of_crow),
 
+    //5 Lvl
+    CHEST_OPENING(R.raw.sound_of_chest_opening),
+
     // 6 Lvl
     CHAIN_RELEASE(R.raw.sound_of_chain_release),
 }

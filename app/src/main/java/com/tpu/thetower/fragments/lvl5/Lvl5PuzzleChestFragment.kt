@@ -94,7 +94,7 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
                     binding.ivAccessCard.visibility = View.VISIBLE
                     binding.ivChest.visibility = View.GONE
                     UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-                    soundManager.playSound(SoundEffect.ACCESS_CARD_INSERT) // todo change sound effect
+                    soundManager.playSound(SoundEffect.CHEST_OPENING)
                     notificationManager.cancel(NOTIFICATION_ID)
                 }
             }
