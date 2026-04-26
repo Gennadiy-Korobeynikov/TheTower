@@ -88,7 +88,6 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
                 loadManager.getCardImage(loadManager.getCurrentAccessCardNumber())
             )
         }
-        // TODO Также тут можно "достать" карту доступа из пустоты, если попробовать перетащить. Вроде баг, надо фиксить
     }
 
     @SuppressLint("ClickableViewAccessibility")

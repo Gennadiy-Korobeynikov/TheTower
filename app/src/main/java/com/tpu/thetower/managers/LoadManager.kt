@@ -28,6 +28,17 @@ class LoadManager @Inject constructor(
             R.id.action_elevatorFragment_to_lvl6Fragment
         )
 
+//        // id destination'ов уровней (фрагмент или подграф), для навигации "перейти к текущему уровню"
+//        private val levelDestinations = listOf(
+//            R.id.nav_lvl0, // lvl0 вынесен в подграф
+//            R.id.lvl1Fragment,
+//            R.id.lvl2Fragment,
+//            R.id.lvl3Fragment,
+//            R.id.nav_lvl4, // lvl4 вынесен в подграф
+//            R.id.lvl5Fragment,
+//            R.id.lvl6Fragment
+//        )
+
         private val cardImageIds: List<Int> = listOf(
             R.drawable.access_card_1,
             R.drawable.access_card_2,

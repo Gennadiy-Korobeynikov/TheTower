@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl5
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
@@ -12,6 +13,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Lvl5PuzzleMoose
 import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,6 +31,9 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
     @Inject lateinit var saveRepo : SaveRepository
     @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +59,7 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
                 .setDuration(500)
                 .withEndAction {
                     if (isAdded && view != null) {
-                        moose.setImageResource(R.drawable.lvl5_puzzle1_base)
+                        moose.setImageResource(R.drawable.lvl5_moose_base)
                     }
                 }
 
@@ -63,11 +68,11 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
         }
 
         binding.btnLeft.setOnClickListener {
-            playAndAppend(bit = '0', drawableOnClick = R.drawable.lvl5_puzzle1_left)
+            playAndAppend(bit = '0', drawableOnClick = R.drawable.lvl5_moose_left)
         }
 
         binding.btnRight.setOnClickListener {
-            playAndAppend(bit = '1', drawableOnClick = R.drawable.lvl5_puzzle1_right)
+            playAndAppend(bit = '1', drawableOnClick = R.drawable.lvl5_moose_right)
         }
     }
 
@@ -82,12 +87,13 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
 
     private fun passed() {
         //soundManager.playSound()
-
         CommonAnimationHelper.animatePuzzleCompletion(
             fragment = this,
             mainScreen = binding.mainScreen,
             fragmentRoot = binding.root
         )
+        blurVM.clearBlur(Lvl5Fragment.KEY_LVL5_SNAPSHOT)
+        blurVM.clearBlur(Lvl5Fragment.KEY_LVL5_BLUR)
     }
 
     override fun useHint() {

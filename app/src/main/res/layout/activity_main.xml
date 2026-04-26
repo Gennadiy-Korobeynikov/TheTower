@@ -46,7 +46,8 @@
                 android:id="@+id/fcv_go_back_arrow"
                 android:name="com.tpu.thetower.fragments.common.GoBackArrowFragment"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="5dp"
                 android:layout_gravity="bottom|center_horizontal"
                 android:visibility="gone" />
 

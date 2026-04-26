@@ -14,17 +14,33 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl5_bg_blur"/>
+        android:src="@drawable/lvl5_bg_blur"
+        android:visibility="visible"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/iv_chest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/lvl5_chest"
+            android:scaleType="fitCenter"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
             android:id="@+id/iv_access_card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/lvl5_access_card"
+            android:src="@drawable/lvl5_chest_opened"
             android:scaleType="fitCenter"
             app:layout_constraintWidth_default="percent"
             app:layout_constraintHeight_default="percent"

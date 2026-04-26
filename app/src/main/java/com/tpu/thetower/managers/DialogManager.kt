@@ -674,15 +674,6 @@ class DialogManager @Inject constructor(
         )
         ,
 
-
-        "lvl5_moose_paper" to DialogSpec(
-            lines = listOf(R.string.lvl5_moose_paper),
-            speakers = listOf("John_thinking")
-        )
-        ,
-
-
-
         "lvl5_bluetoothOff_hint1" to DialogSpec(
             lines = listOf(R.string.lvl5_bluetoothOff_hint1),
             speakers = listOf("John_thinking")

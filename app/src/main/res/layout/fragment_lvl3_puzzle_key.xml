@@ -118,16 +118,24 @@
             app:layout_constraintTop_toTopOf="@id/guideH_key"
             app:layout_constraintWidth_percent="0.6" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideV_btn_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_apply"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/lvl3_key_btn"
-            app:layout_constraintHeight_percent="0.18"
-            app:layout_constraintStart_toStartOf="@id/guideV_key"
-            app:layout_constraintTop_toBottomOf="@+id/iv_key"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintWidth_percent="0.1" />
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintWidth_percent="0.12"
+            android:background="@drawable/left_arrow_button"
+            app:layout_constraintStart_toStartOf="@id/guideV_btn_apply"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/iv_key"
+  />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

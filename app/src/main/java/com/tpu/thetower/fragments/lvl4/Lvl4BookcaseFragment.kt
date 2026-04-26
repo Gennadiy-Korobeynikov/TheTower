@@ -3,12 +3,15 @@ package com.tpu.thetower.fragments.lvl4
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4BookcaseBinding
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
+import com.tpu.thetower.utils.getOrCreateBlur
+import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,6 +23,8 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
 
     @Inject lateinit var loadManager: LoadManager
 
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +34,19 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase) {
         setListeners()
 
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+
+        val levelSnapshot = blurVM.getBlur(Lvl4Fragment.KEY_LVL4_SNAPSHOT)
+            ?: error("Snapshot must be set before opening puzzle")
+
+        val blur = getOrCreateBlur(
+            blurVM = blurVM,
+            blurKey = Lvl4Fragment.KEY_LVL4_BLUR,
+            sourceBitmap = levelSnapshot,
+            radius = 220f,
+            context = requireContext()
+        )
+
+        binding.ivBg.setImageBitmap(blur)
     }
 
     private fun setListeners() {

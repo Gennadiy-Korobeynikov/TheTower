@@ -188,7 +188,7 @@
             android:id="@+id/iv_key_draggable"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/lvl3_key"
+            android:src="@drawable/lvl3_key_static"
             android:visibility="gone"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="@id/guideV_key"

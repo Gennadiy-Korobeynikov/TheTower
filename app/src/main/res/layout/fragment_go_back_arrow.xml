@@ -6,14 +6,14 @@
     tools:context=".fragments.common.GoBackArrowFragment"
     android:orientation="horizontal">
 
-
     <ImageButton
         android:id="@+id/btn_go_back"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerInside"
-        android:src="@drawable/go_back_arrow" />
+        android:background="@android:color/transparent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/go_back_arrow"/>
 
 </FrameLayout>

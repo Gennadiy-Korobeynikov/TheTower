@@ -9,7 +9,7 @@ class Lvl2PuzzlePassword(
     puzzle: String,
 ) : Puzzle(level, puzzle) {
 
-    private val answer = "Gerberd"
+    private val answer = "gerberd"
 
     override fun checkSolution(activity: Activity?, saveRepo: SaveRepository, solution: String): Boolean {
         return if (solution == answer) {

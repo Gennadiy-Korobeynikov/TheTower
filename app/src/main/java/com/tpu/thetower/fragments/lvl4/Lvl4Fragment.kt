@@ -32,11 +32,11 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager : DialogManager
 
-    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_graph)
+    private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
-    private companion object {
-        private const val KEY_LVL4_SNAPSHOT = "lvl4_snapshot"
-        private const val KEY_LVL4_BLUR = "lvl4_blur"
+    companion object {
+        const val KEY_LVL4_SNAPSHOT = "lvl4_snapshot"
+        const val KEY_LVL4_BLUR = "lvl4_blur"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +54,14 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
 
         if (loadManager.getPuzzleStatus(4, "timeline") == PuzzleStatus.COMPLETED.value) {
             binding.btnTimeline.visibility = View.GONE
-            binding.ivBg.setImageResource(R.drawable.lvl4_bg_timeline_completed)
+            binding.ivRavenHead.setImageResource(
+                if (loadManager.getPuzzleStatus(4, "askiibtn") == PuzzleStatus.LOCKED.value)
+                    R.drawable.lvl4_raven_on
+                else
+                    R.drawable.lvl4_raven_off
+            )
+
+            binding.ivRavenHead.visibility = View.VISIBLE
             binding.btnRaven.visibility = View.VISIBLE
         }
 
@@ -107,8 +114,6 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        blurVM.clearBlur(KEY_LVL4_SNAPSHOT) //todo пока тут
-        blurVM.clearBlur(KEY_LVL4_BLUR)
     }
 
     override fun useHint() {

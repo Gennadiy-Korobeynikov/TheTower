@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/lvl0_access_card" />
+        android:src="@drawable/lvl0_vault_opened" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
