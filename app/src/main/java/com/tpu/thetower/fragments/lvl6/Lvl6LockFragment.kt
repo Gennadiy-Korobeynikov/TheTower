@@ -140,7 +140,8 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
             .alpha(0.2f)
             .setDuration(2500)
             .withEndAction {
-                FragmentNavigation.goBack(this)
+                FragmentNavigation.changeBG(this, R.id.action_lvl6LockFragment_to_finalFragment)
+
             }
             .start()
     }

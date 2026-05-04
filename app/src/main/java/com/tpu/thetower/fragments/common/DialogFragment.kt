@@ -1,9 +1,9 @@
 package com.tpu.thetower.fragments.common
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.text.HtmlCompat
+import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentDialogBinding
 import com.tpu.thetower.managers.DialogManager
@@ -20,6 +20,14 @@ class DialogFragment : Fragment(R.layout.fragment_dialog) {
     @Inject lateinit var dialogManager: DialogManager
 
     private lateinit var dialog: Dialog
+
+    /**
+     * Позволяет снаружи (DialogManager) подменить собранный Dialog.
+     * Используется для добавления дополнительного обработчика окончания диалога.
+     */
+    fun setDialogOverride(dialog: Dialog) {
+        this.dialog = dialog
+    }
 
     private lateinit var dialogKey: String
 

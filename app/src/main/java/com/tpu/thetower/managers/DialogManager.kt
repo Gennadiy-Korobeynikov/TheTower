@@ -813,6 +813,12 @@ class DialogManager @Inject constructor(
         )
         ,
 
+        "final_initial" to DialogSpec(
+            lines = listOf(R.string.final_initial),
+            speakers = listOf("John_thinking"),
+        )
+        ,
+
     )
 
     internal fun buildDialog(activity: Activity, dialogKey: String): Dialog {
@@ -833,10 +839,33 @@ class DialogManager @Inject constructor(
     }
 
     fun startDialog(activity: Activity, dialogKey: String) {
+        startDialog(activity, dialogKey, onFinished = null)
+    }
+
+
+    fun startDialog(
+        activity: Activity,
+        dialogKey: String,
+        onFinished: (() -> Unit)?
+    ) {
         val dialogFragment = DialogFragment.newInstance(dialogKey)
         (activity as? AppCompatActivity)?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.fcv_dialog, dialogFragment, "DialogFragment")
             ?.commitNow()
+
+        val f = (activity as? AppCompatActivity)
+            ?.supportFragmentManager
+            ?.findFragmentByTag("DialogFragment") as? DialogFragment
+
+        if (onFinished != null && f != null) {
+            val dialog = buildDialog(activity, dialogKey)
+            val base = dialog.onDialogEnd
+            dialog.onDialogEnd = {
+                base?.invoke()
+                onFinished.invoke()
+            }
+            f.setDialogOverride(dialog)
+        }
 
         UiVisibilityController.show(activity, UiVisibilityController.UiContainer.DIALOG)
     }
