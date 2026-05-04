@@ -248,10 +248,20 @@
         android:id="@+id/lvl6LockFragment"
         android:name="com.tpu.thetower.fragments.lvl6.Lvl6LockFragment"
         android:label="fragment_lvl6_lock"
-        tools:layout="@layout/fragment_lvl6_lock" />
+        tools:layout="@layout/fragment_lvl6_lock" >
+        <action
+            android:id="@+id/action_lvl6LockFragment_to_finalFragment"
+            app:destination="@id/finalFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
 
     <!-- Включаем подграфы уровней -->
     <include app:graph="@navigation/nav_lvl0" />
     <include app:graph="@navigation/nav_lvl4" />
     <include app:graph="@navigation/nav_lvl5" />
+    <fragment
+        android:id="@+id/finalFragment"
+        android:name="com.tpu.thetower.fragments.finalscene.FinalFragment"
+        android:label="FinalFragment" />
 </navigation>
