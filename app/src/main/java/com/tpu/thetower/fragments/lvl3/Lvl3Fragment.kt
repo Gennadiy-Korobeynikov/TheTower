@@ -83,6 +83,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         if (buttonsStatus == PuzzleStatus.COMPLETED.value) {
             binding.btnToPuzzleDonuts.visibility = View.GONE
             binding.btnToPuzzleButtonLock.visibility = View.GONE
+            binding.ivClosetOpened.visibility = View.VISIBLE
             if (sleepingPillsStatus != PuzzleStatus.COMPLETED.value) {
                 binding.ivSleepingPillsDraggable.visibility = View.VISIBLE
                 binding.ivBg.setImageResource(R.drawable.lvl3_bg_no_sleeping_pills)
