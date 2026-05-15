@@ -61,6 +61,17 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
             binding.btnElevatorToLvl6
         )
 
+    private val btnImages: List<Int>
+        get() = listOf(
+            R.drawable.elevator_btn_0,
+            R.drawable.elevator_btn_1,
+            R.drawable.elevator_btn_2,
+            R.drawable.elevator_btn_3,
+            R.drawable.elevator_btn_4,
+            R.drawable.elevator_btn_5,
+            R.drawable.elevator_btn_6
+        )
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -88,30 +99,13 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
                 loadManager.getCardImage(loadManager.getCurrentAccessCardNumber())
             )
         }
+
+        unlockLvls()
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
 
-        binding.ivPanel.setOnClickListener {
-            binding.ivBgBlurred.visibility = View.VISIBLE
-            binding.ivOpenedPanel.visibility = View.VISIBLE
-            binding.clPanel.visibility = View.VISIBLE
-            binding.ivPanel.visibility = View.GONE
-            binding.ivCardReader.visibility = View.GONE
-            UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-
-            unlockLvls()
-        }
-
-        binding.ivBgBlurred.setOnClickListener {
-            binding.ivBgBlurred.visibility = View.GONE
-            binding.ivOpenedPanel.visibility = View.GONE
-            binding.clPanel.visibility = View.GONE
-            binding.ivPanel.visibility = View.VISIBLE
-            binding.ivCardReader.visibility = View.VISIBLE
-            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-        }
 
         lvlButtons.forEachIndexed { index, btn ->
             btn.setOnClickListener {
@@ -186,7 +180,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         val unlockingLvls = (0..currAccessLevel)
         unlockingLvls.forEach { i ->
             openedLvlButtons.add(lvlButtons[i])
-            lvlButtons[i].setBackgroundResource(android.R.color.transparent)
+            lvlButtons[i].setBackgroundResource(btnImages[i])
             lvlButtons[i].isClickable = true
         }
     }
@@ -244,6 +238,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         currAccessLevel = loadManager.updateAccessLvl(cardNumber)
         soundManager.playSound(SoundEffect.ACCESS_CARD_INSERT)
         cardView.visibility = View.VISIBLE
+        unlockLvls()
     }
 
     private fun returnToOriginalPosition(view: View) {

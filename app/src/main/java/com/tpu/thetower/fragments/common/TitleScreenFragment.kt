@@ -34,7 +34,7 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
     }
 
     private fun setListeners() {
-        binding.btnToLvl0.setOnClickListener {
+        binding.btnRestart.setOnClickListener {
             // Сброс сейва
             saveRepo.resetFileData()
             loadManager.invalidateCache()
@@ -44,9 +44,9 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
             FragmentNavigation.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
         }
 
-        binding.btnToSettings.setOnClickListener {
-            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.SETTINGS)
-        }
+//        binding.btnToSettings.setOnClickListener {
+//            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.SETTINGS)
+//        }
 
         binding.btnResume.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
