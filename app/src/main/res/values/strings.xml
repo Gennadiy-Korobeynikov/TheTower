@@ -1,45 +1,675 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TheTower</string>
 
-    <!--################################# Окно запроса разрешений (+ туториал)  #######################################-->
-    <string name="permission_request">
-        This game has special mechanics: as you pass you will encounter puzzles that require you to use your creativity to solve them.
-    that will require the use of your creativity... and your device.\n
-    The former is completely at your disposal, but the latter requires permissions.\n\n
-    (Don\'t be alarmed if some of the permissions seem strange to you. I, the dialog box, personally guarantee that all data will be used only for the advancement of the game world)\n\n\n
+    <!--############################################# Dialog Lines ################################################-->
 
-    For example, right now, think about how you can use your smartphone to temporarily turn on the lights in a room.
+    <!--==================== Lvl0 (new lines) ====================-->
+    <string name="lvl0_after_light_1">Am I in a basement? How did I end up here?</string>
+    <string name="lvl0_after_light_2">I can\'t remember a thing.</string>
+    <string name="lvl0_after_light_3">Did I fall off the wagon again last night?</string>
+    <string name="lvl0_after_light_4">Looks like the only way out is through the elevator.</string>
+
+    <!-- %click except elevator -->
+    <string name="lvl0_click_not_elevator">I need to take the elevator up to the first floor and figure out where I am.</string>
+
+    <!-- %pressed any floor except 0 for the first time -->
+    <string name="lvl0_elevator_other_floor_first_1">What the...? Why is only one button working?</string>
+    <string name="lvl0_elevator_other_floor_first_2">There\'s a slot for some kind of cards here. Those greedy suits didn\'t seriously monetize the elevator, did they?</string>
+    <string name="lvl0_elevator_other_floor_first_3">Actually no, it doesn\'t look like a payment terminal.</string>
+    <string name="lvl0_elevator_other_floor_first_4">I need to call someone.</string>
+    <string name="lvl0_elevator_other_floor_first_5">Damn it! Phone\'s dead. Cheap piece of junk!</string>
+    <string name="lvl0_elevator_other_floor_first_6">Better look around the basement — maybe I\'ll find something to help me get out or call for help.</string>
+    <string name="lvl0_elevator_other_floor_first_7">Did someone actually lock me in here?</string>
+    <string name="lvl0_elevator_other_floor_first_8">Is this some dumb prank from Steve? If so, he won\'t get away with just a black eye this time.</string>
+
+    <!-- %Box -->
+    <string name="lvl0_box">Nothing useful. Just some kid\'s geometry homework.</string>
+
+    <!-- %Safe -->
+    <string name="lvl0_safe_1">They locked this safe for a reason — there\'s something important in there.</string>
+    <string name="lvl0_safe_2">But I\'m no thief. And I don\'t know the code anyway.</string>
+
+    <!-- %Box opened -->
+    <string name="lvl0_box_opened_1">Ha. Haven\'t completely drunk my brain away yet.</string>
+    <string name="lvl0_box_opened_2">But why would someone leave a hint for the safe combination? Bad memory?</string>
+    <string name="lvl0_box_opened_3">Or maybe I\'m doing some kind of escape room?</string>
+    <string name="lvl0_box_opened_4">Then why does my head hurt this badly and why can\'t I remember a thing?</string>
+    <string name="lvl0_box_opened_5">There\'s some kind of plastic card in here.</string>
+
+    <!-- %took card -->
+    <string name="lvl0_access_card_inspect_1">All it has on it is the number 1.</string>
+    <string name="lvl0_access_card_inspect_2">Well, I only saw one place where it could be useful.</string>
+
+    <!--==================== Lvl1 (NEW dialog with receptionist, replaces draft) ====================-->
+    <!-- %just entered -->
+    <string name="lvl1_start_1">Looks like a reception desk. Am I in a hotel?</string>
+    <string name="lvl1_start_2">And whose bright idea was it to put me in a damn basement?</string>
+    <string name="lvl1_start_3">Though money has been pretty tight, so maybe it\'s for the best.</string>
+    <string name="lvl1_start_4">I should ask that nice lady how and when I got here.</string>
+
+    <string name="lvl1_receptionist_1">Hello! How can I help you?</string>
+    <string name="lvl1_receptionist_2">Good... day? What time is it, even?</string>
+    <string name="lvl1_receptionist_3">Oh, it\'s you. I\'m sorry, I don\'t know your name — you never introduced yourself last night.</string>
+    <string name="lvl1_receptionist_4">Are you feeling better?</string>
+    <string name="lvl1_receptionist_5">I didn\'t introduce myself to such a lovely lady? That doesn\'t sound like me.</string>
+    <string name="lvl1_receptionist_6">I\'m John. (At least I still remember my own name.)</string>
+    <string name="lvl1_receptionist_7">My head is splitting. Could you tell me how I ended up here? I think those last few shots last night were a mistake.</string>
+    <string name="lvl1_receptionist_8">Oh, you don\'t remember anything? If you were intoxicated last night, that would explain a lot.</string>
+    <string name="lvl1_receptionist_9">We were already getting worried about you.</string>
+    <string name="lvl1_receptionist_10">What does it explain? Who is "we"? Could you elaborate?</string>
+    <string name="lvl1_receptionist_11">You burst into our hotel last night shouting from the moment you walked in. You were furious.</string>
+    <string name="lvl1_receptionist_12">I could even say I saw a rage in your eyes.</string>
+    <string name="lvl1_receptionist_13">Rage and desperation. I\'ve never seen that combination of emotions before.</string>
+    <string name="lvl1_receptionist_14">You frightened the staff and the guests. We were about to call the police, but you suddenly fell ill and passed out.</string>
+    <string name="lvl1_receptionist_15">Oh right — "we" means me and Pete, our security guard.</string>
+    <string name="lvl1_receptionist_16">We decided you needed to rest, so we carried you to a bed.</string>
+    <string name="lvl1_receptionist_17">We had no vacant rooms, so we put you on floor 0.</string>
+    <string name="lvl1_receptionist_18">The basement.</string>
+    <string name="lvl1_receptionist_19">Yes... But we didn\'t charge you anything.</string>
+    <string name="lvl1_receptionist_20">And I don\'t think you came here to use our services anyway.</string>
+    <string name="lvl1_receptionist_21">I\'m sorry for the scene I caused.</string>
+    <string name="lvl1_receptionist_22">I don\'t know why I came here. Do you remember what I was trying to say?</string>
+    <string name="lvl1_receptionist_23">"Saying" isn\'t quite the right word.</string>
+    <string name="lvl1_receptionist_24">It was hard to make out. It was mostly insults.</string>
+    <string name="lvl1_receptionist_25">But you were clearly accusing us of something.</string>
+    <string name="lvl1_receptionist_26">And you kept mentioning someone named Sara. Asking where she was.</string>
+    <string name="lvl1_receptionist_27">Sara? My daughter?</string>
+    <string name="lvl1_receptionist_28">Oh God... Sara!</string>
+    <string name="lvl1_receptionist_29">Do you know where she is?</string>
+    <string name="lvl1_receptionist_30">John, please try to calm down. We don\'t want another incident.</string>
+    <string name="lvl1_receptionist_31">Sara is a very common name. We\'ve certainly had several guests by that name recently.</string>
+    <string name="lvl1_receptionist_32">Of course, we can\'t share information about them.</string>
+    <string name="lvl1_receptionist_33">I\'m sorry. Is there anything else I can help you with?</string>
+    <string name="lvl1_receptionist_34">Please understand, this is serious. My daughter went missing recently.</string>
+    <string name="lvl1_receptionist_35">(How could I forget all that? Idiot! Although — that was probably the point when I walked into that bar last night.)</string>
+    <string name="lvl1_receptionist_36">I know she was taken.</string>
+    <string name="lvl1_receptionist_37">I was told she\'s being kept here.</string>
+    <string name="lvl1_receptionist_38">I assure you, we have a sophisticated security system.</string>
+    <string name="lvl1_receptionist_39">Anything illegal on these premises is out of the question. I guarantee it.</string>
+    <string name="lvl1_receptionist_40">I\'ve already had a close look at your security system. (Stupid key card.)</string>
+    <string name="lvl1_receptionist_41">You mentioned a guard — what was his name, Poll?</string>
+    <string name="lvl1_receptionist_42">I need to speak with him.</string>
+    <string name="lvl1_receptionist_43">Pete. He\'s on the third floor.</string>
+    <string name="lvl1_receptionist_44">You\'re welcome to try talking to him, but fair warning — he has a... difficult personality.</string>
+    <string name="lvl1_receptionist_45">Only he and his wife Jane have access cards.</string>
+    <string name="lvl1_receptionist_46">Her station is one floor up.</string>
+    <string name="lvl1_receptionist_47">Please, take this access card. I genuinely want to help.</string>
+    <string name="lvl1_receptionist_48">Well, at least there\'s that. Thank you.</string>
+
+    <string name="lvl1_npc_receptionist_repeat_1">Oh, it\'s you again. Feeling any better? Have you found out anything about your daughter?</string>
+    <string name="lvl1_npc_receptionist_repeat_2">I know she is somewhere here.</string>
+
+    <!--==================== Lvl2 (new lines) ====================-->
+    <string name="lvl2_jane_absent">Looks like Jane isn\'t here.</string>
+    <!-- %Lunch -->
+    <string name="lvl2_lunch_1">Jane must have gone to lunch.</string>
+    <!-- %Computer -->
+    <string name="lvl2_computer_1">There might be useful information on that computer.</string>
+    <string name="lvl2_computer_2">Of course it\'s password protected.</string>
+    <!-- %Got card -->
+    <string name="lvl2_card_chain_1">How are these complicated logical chains popping into my dumb, still-throbbing head?</string>
+    <string name="lvl2_card_chain_2">It\'s a strange feeling, like someone is pushing these thoughts into my mind.</string>
+
+    <!--==================== Lvl3 (new dialog with Pete) ====================-->
+    <!-- %First time -->
+    <string name="lvl3_security_1">Who are you? Where did you get that card?</string>
+    <string name="lvl3_security_2">Oh, it\'s you — the idiot who was screaming his head off last night. Sobered up yet?</string>
+    <string name="lvl3_security_3">(I\'d love to show him who the idiot is right now, but Pete needs to talk first.)</string>
+    <string name="lvl3_security_4">Yeah, I did have a bit too much to drink. I apologize for my behavior.</string>
+    <string name="lvl3_security_5">Right. Now go home and let me do my job.</string>
+    <string name="lvl3_security_6">Pete, I\'m completely... Look, I need your help. My daughter is missing, and I know she\'s in this building — on the 6th floor.</string>
+    <string name="lvl3_security_7">I really need an access card.</string>
+    <string name="lvl3_security_8">No way in hell am I giving you a card. So you can cause a scene up there too?</string>
+    <string name="lvl3_security_9">I\'d lose my job for something like that.</string>
+    <string name="lvl3_security_10">Could you at least check the cameras or the records to see how Sara got here?</string>
+    <string name="lvl3_security_11">I\'ll get you money and make it worth your while. Deal?</string>
+    <string name="lvl3_security_12">Man, I don\'t know anything about your daughter.</string>
+    <string name="lvl3_security_13">And I\'m too busy to dig through every file on that computer looking for "God knows what."</string>
+    <string name="lvl3_security_14">If she\'s here, she\'s here for a reason.</string>
+    <string name="lvl3_security_15">And I don\'t need your handouts. We\'re done.</string>
+
+    <!-- %Next time -->
+    <string name="lvl3_security_next">I\'ve told you everything. Just leave me alone.</string>
+
+    <!-- %Donuts -->
+    <string name="lvl3_donuts_1">Hands off! Those clowns at the bakery already botched the sprinkles so bad they won\'t stick at all.</string>
+    <string name="lvl3_donuts_2">The last thing I need is you poking around in there.</string>
+
+    <!--==================== Lvl4 (new lines) ====================-->
+    <string name="lvl4_start_1">What the...?</string>
+    <string name="lvl4_start_2">Ugh, my head! Why does everything look so strange? I need to sleep.</string>
+    <string name="lvl4_start_3">No. Sara first.</string>
+
+    <!--==================== Lvl5 (new lines) ====================-->
+    <string name="lvl5_start_1">Argh! It gets worse with every floor.</string>
+    <string name="lvl5_start_2">Is this place doing this to me, or have I completely lost it from the stress and the whiskey?</string>
+    <string name="lvl5_start_3">Good Lord! Is that a person sitting over there?</string>
+
+    <string name="lvl5_npc_fisher_1">Hey there, friend. You doing alright?</string>
+    <string name="lvl5_npc_fisher_2">Eh? What\'s supposed to be wrong with me, sonny? Standing here steady as a good anchor.</string>
+    <string name="lvl5_npc_fisher_3">Well, you look... strange.</string>
+    <string name="lvl5_npc_fisher_4">Bah, strange... It\'s the sea wind and the years that weather a man, not your little city strolls.</string>
+    <string name="lvl5_npc_fisher_5">Old age or not, Uncle Bob can still outrow any young pup out there.</string>
+    <string name="lvl5_npc_fisher_6">Alright, never mind.</string>
+    <string name="lvl5_npc_fisher_7">Fair enough. Not every old net needs untangling.</string>
+
+    <string name="lvl5_npc_fisher_return_1">Are you sure you don\'t need any help?</string>
+    <string name="lvl5_npc_fisher_return_2">Why do you keep pestering me, for heaven\'s sake? I\'m not in a hurry for help — but talking about fishing, now that\'s a different story.</string>
+    <string name="lvl5_npc_fisher_return_3">I\'ll pass.</string>
+
+    <string name="lvl5_npc_fisher_reward_1">Well, well... Turns out you\'re not completely green after all.</string>
+    <string name="lvl5_npc_fisher_reward_2">I\'d already written you off — thought, let him fumble around as long as he doesn\'t tangle my lines.</string>
+    <string name="lvl5_npc_fisher_reward_3">But you\'ve got a sharp eye.</string>
+    <string name="lvl5_npc_fisher_reward_4">You sorted the fish by type and rarity, didn\'t you? Not every fisherman would think of that.</string>
+    <string name="lvl5_npc_fisher_reward_5">So there\'s something to you after all. In that case — I\'ll pass on what I\'ve spent decades collecting.</string>
+    <string name="lvl5_npc_fisher_reward_6">I\'ll show you the route to the best spots, but listen well: break the order and you\'ll go home empty-handed.</string>
+    <string name="lvl5_npc_fisher_reward_7">Listen: Take the rifle, the fishing rod, and other gear from the house.</string>
+    <string name="lvl5_npc_fisher_reward_8">Go to the lookout tower, climb higher, and look around for game.</string>
+    <string name="lvl5_npc_fisher_reward_9">I often managed to catch a pair of deer off guard when they were calmly drinking water by the lake.</string>
+    <string name="lvl5_npc_fisher_reward_10">Need to catch some fish for fish soup. There’s a good spot by the river—I always have a boat ready there.</string>
+    <string name="lvl5_npc_fisher_reward_11">Then head south — I\'ve set up camp there.</string>
+    <string name="lvl5_npc_fisher_reward_12"><![CDATA[Spend the night, <b>take a break</b>]]></string>
+    <string name="lvl5_npc_fisher_reward_13">In the morning, go to the cemetery and visit my mother.</string>
+    <string name="lvl5_npc_fisher_reward_14">Go far north, passing between the big lake and the mine.</string>
+    <string name="lvl5_npc_fisher_reward_15">When I reach the signpost, I’ll know I can head west without having to swim across the river.</string>
+    <string name="lvl5_npc_fisher_reward_16">Near an old archway—almost as old as I am—my journey ends.</string>
+
+    <string name="lvl5_npc_fisher_reward_repeat">Already forgot?</string>
+
+    <!--==================== Lvl5 (new lines) ====================-->
+    <string name="lvl5_chest_1">You\'re kidding me. What kind of chest is this?</string>
+    <string name="lvl5_chest_2">Even if I had a key, where would I even put it?</string>
+    <string name="lvl5_chest_3">No code input either.</string>
+
+    <string name="lvl5_chest_opened_1">...</string>
+    <string name="lvl5_chest_opened_2">I was just looking at the chest and it opened.</string>
+    <string name="lvl5_chest_opened_3">Something is definitely at work here. Or rather — someone.</string>
+    <string name="lvl5_chest_opened_4">Why didn\'t you open it for me sooner, mysterious force? Did you need time to figure things out too?</string>
+    <string name="lvl5_chest_opened_5">God, I\'ve really drunk myself into a state. Talking to some higher power now.</string>
+
+    <string name="lvl5_card_floor6">Finally, the last floor. Please, God, let Sara be up there.</string>
+
+    <!--==================== Lvl6  ====================-->
+        <string name="lvl6_start_1">Oh my God! Sarah! My daughter!</string>
+        <string name="lvl6_start_2">Are you okay?</string>
+        <string name="lvl6_start_3">She\'s breathing. Thank heavens.</string>
+        <string name="lvl6_start_4">She\'s just unconscious.</string>
+        <string name="lvl6_start_5">Why is my daughter in chains?</string>
+        <string name="lvl6_start_6">What is going on here?!</string>
+        <string name="lvl6_start_7">I\'ll get you out of here now, do you hear me?</string>
+        <string name="lvl6_start_8">Hold on a little, sunshine, Daddy\'s here.</string>
+
+
+
+    <!--#################### Lvl0 #################-->
+    <string name="lvl0_start">Ugh, my head is pounding. Where am I?</string>
+    <string name="lvl0_dark">It\'s pitch black in here! I need some light, or I\'ll definitely break something.</string>
+    <string name="lvl0_flashlight_on">Where is that light coming from? Doesn\'t matter — now I can see the light switch.</string>
+    <!--###########################################-->
+
+
+    <!--#################### Lvl1 #################-->
+    <string name="lvl1_elevator">I need to get to the first floor. There should be a way out there.</string>
+
+    <!--###########################################-->
+
+    <!--#################### Lvl2 #################-->
+
+    <!--###########################################-->
+
+    <!--#################### Lvl3 #################-->
+
+    <string name="lvl3_computer">Who said you could touch someone else\'s computer?</string>
+
+    <string name="lvl3_npc_security_final_lock">Where do you think you\'re going? You think it\'s locked for no reason?</string>
+
+    <string name="lvl3_need_key">Need to find a key [TODO]</string>
+    <string name="lvl3_need_to_use_key">I should try that key on the vacuum.</string>
+
+
+    <string name="lvl3_copy">Lock successfully copied</string>
+    <string name="lvl3_paste">Nothing in the clipboard</string>
+
+    <!--###########################################-->
+
+
+
+    <!--#################### Lvl4 #################-->
+    <string name="lvl4_puzzle1_askii">Ñ�Ð¾Ð²Ð° Ð±Ñ�Ñ�ÐµÐ³Ð¾</string>
+    <string name="lvl4_puzzle1_normal">Is anything changing?</string>
+    <!--###########################################-->
+
+
+
+    <!--##############################################################################################################-->
+
+
+
+    <!--############################################# Hints ################################################-->
+
+    <string name="no_hints">I don\'t think there\'s anything for me to do here.</string>
+    <string name="hint_is_not_here">Maybe I should look around.</string>
+
+
+    <!--############################## Lvl0 #################################-->
+    <string name="lvl0_to_puzzle1_hint">I should take a closer look at the safe and think it through.</string>
+
+    <!--################# Lvl0Puzzle0 ##############-->
+    <string name="lvl0_puzzle0_hint1"><![CDATA[I need to turn the light on somehow. Wish I had a <b><u>flashlight</u></b> right now.]]></string>
+    <string name="lvl0_puzzle0_hint2"><![CDATA[Argh! Phone\'s dead. Otherwise I\'d just <b><u>turn on the flashlight on my phone</u></b>.]]></string>
+
+    <string name="lvl0_click_switch">I can see a light switch. I think I can reach it.</string>
+    <!--#############################################-->
+
+    <!--################# Lvl0Puzzle1 ##############-->
+    <string name="lvl0_puzzle1_hint1">Hmm... I should search the room — there might be something useful.</string>
+    <string name="lvl0_puzzle1_hint2">Those 4 shapes on the paper must be connected to the code for this lock somehow.</string>
+    <string name="lvl0_puzzle1_hint3">Interesting — each of those shapes has a different number of corners...</string>
+    <string name="lvl0_puzzle1_hint4_1">Right — a square has 4 corners, then an octagon and a triangle: 8 and 3, and finally a circle with no corners — 0.</string>
+    <string name="lvl0_puzzle1_hint4_2">I should try entering 4830. Some digits are worn off, but it\'s not hard to figure out.</string>
+
+    <!--#############################################-->
+
+    <!--#####################################################################-->
+
+
+    <!--############################## Lvl2 #################################-->
+
+    <string name="lvl2_puzzle0_hint">I need to enter 5 letters. Have I seen a 5-letter word anywhere in this room?</string>
+
+    <!--################# Lvl2Puzzle1 Caesar ##############-->
+    <string name="lvl2_puzzle1_hint1">Caesar eats caesar salad, and the word "lunch" is underlined... What could that mean?</string>
+    <string name="lvl2_puzzle1_hint2"><![CDATA[The lock needs 5 letters, and "lunch" also has 5 letters. In the top right corner, <i>a</i> changes to <i>b</i>. Maybe there\'s some kind of cipher?]]></string>
+    <string name="lvl2_puzzle1_hint3">What if it\'s a Caesar cipher? Of course! How did I not see that.</string>
+
+    <string name="lvl2_puzzle1_hint4_1">The Caesar cipher. I remember passing notes in class encrypted that way back in school.</string>
+    <string name="lvl2_puzzle1_hint4_2"><![CDATA[Even if the teacher caught us, she couldn\'t read them, because she didn\'t know we were simply <b>shifting every letter one step to the right in the alphabet</b>.]]></string>
+
+    <string name="lvl2_puzzle1_hint5">The word "lunch" is underlined — if you shift each letter one step right in the alphabet, you get "mvodi."</string>
+    <!--############################################-->
+
+
+    <!--################# Lvl2Puzzle2 ##############-->
+    <string name="lvl2_puzzle2_hint1">Let me think... What passwords do people usually set? Favorite movie? A hobby? Their mother\'s name?</string>
+    <string name="lvl2_puzzle2_hint2">What about a pet\'s name? Wonder what the computer owner\'s pet could have been called. Plenty of options.</string>
+    <string name="lvl2_puzzle2_hint3">Wait — I think I saw a photo with some dog in the drawer. I should at least try entering the name from its collar.</string>
+    <!--############################################-->
+
+
+    <!--################# Lvl2Puzzle3 ##############-->
+    <string name="lvl2_puzzle3_hint1">The short messages at the beginning and end give a clue about what James was trying to write.</string>
+    <string name="lvl2_puzzle3_hint2">From the messages, the characters seem to be shifted — but the Caesar cipher doesn\'t fit here...</string>
+    <string name="lvl2_puzzle3_hint3">Since James mixed up the keys when reassembling the keyboard, maybe I should look at the layout and find the pattern.</string>
+    <string name="lvl2_puzzle3_hint4_1">Aha! James just put each key one place to the left of where it should be. So "wjmmf" means "hello."</string>
+    <string name="lvl2_puzzle3_hint4_2">I found the pattern — but which word do I apply it to? Five letters again on the second lock?</string>
+    <string name="lvl2_puzzle3_hint5">It\'s weird, but I should try entering "lunch" in the second lock too — just with the new shift rule.</string>
+    <string name="lvl2_puzzle3_hint6">The result should be KYBXG.</string>
+    <!--############################################-->
+
+
+    <!--#####################################################################-->
+
+
+    <!--############################## Lvl3 #################################-->
+
+    <string name="lvl3_ventilation">I\'m no designer, but that ventilation grille really doesn\'t match the color scheme in here.</string>
+
+    <string name="lvl3_to_puzzle0_hint1">Maybe the computer can help me find something. How do I get the guard out of the way? Even just for a bit.</string>
+    <string name="lvl3_to_puzzle0_hint2"><![CDATA[Looks like the guard is fond of his <u>coffee</u>. Or he has to drink it to stay <u>awake</u>.]]></string>
+
+
+    <!--################# Lvl3Puzzle0Donuts ##############-->
+    <string name="lvl3_puzzle0_hint1_1">The guard mentioned the sprinkles on the donuts won\'t stay on...</string>
+    <string name="lvl3_puzzle0_hint1_2">And in a very unusual shape at that.</string>
+
+    <string name="lvl3_puzzle0_hint2_1">Maybe I could try to make the sprinkles fall off the other donuts in the box too?</string>
+    <string name="lvl3_puzzle0_hint2_2">What a crazy idea — why am I even thinking this?</string>
+
+    <string name="lvl3_puzzle0_hint3">I can\'t shake this thought of shaking the box to watch the sprinkles fall off the other donuts. The guard won\'t even notice.</string>
+    <string name="lvl3_puzzle0_hint4"><![CDATA[What am I afraid of? I just need to <u>literally shake my hands side to side</u>.]]></string>
+
+    <!-- After shaking -->
+    <string name="lvl3_puzzle0_hint5">What could these numbers mean? Looks like some kind of order — but one donut is missing.</string>
+
+    <string name="lvl3_puzzle0_hint6_1">Right. The last donut is on the desk — the guard hasn\'t finished it yet. So I have all 6 numbered donuts now!</string>
+    <string name="lvl3_puzzle0_hint6_2">...And what am I supposed to do with that?</string>
+
+    <string name="lvl3_puzzle0_hint7_1">That combination lock on the cabinet. I\'ll try pressing its buttons in the same order as the donuts are numbered in the box by position.</string>
+    <string name="lvl3_puzzle0_hint7_2">God, what am I doing? But for my daughter, I\'m willing to try even the most absurd ideas.</string>
+
+    <!--############################################-->
+
+
+    <!--################# Lvl3Puzzle1Lock ##############-->
+    <!-- After shaking the donuts -->
+    <string name="lvl3_puzzle1_hint1">The layout of these buttons reminds me of something...</string>
+
+    <string name="lvl3_puzzle1_hint2_1">Right — the donuts in the box are arranged the same way. What a funny coincidence.</string>
+    <string name="lvl3_puzzle1_hint2_2">Although, the more time I spend in this place, the more I feel like coincidences don\'t happen here...</string>
+
+    <!--############################################-->
+
+    <!-- When sleeping pills are already obtained -->
+    <string name="lvl3_to_coffee_hint1_1">I need access to the computer. The guard is in the way. I have sleeping pills. And the guard isn\'t watching his cup of coffee.</string>
+    <string name="lvl3_to_coffee_hint1_2">No. No, I can\'t — I need to push those thoughts away.</string>
+    <string name="lvl3_to_coffee_hint1_3">But do I have any other options?</string>
+
+
+    <!--################# Lvl3Puzzle2Hoover ##############-->
+    <string name="lvl3_puzzle2_hint1">There\'s a key on the robot vacuum. It might open that safe. How do I get this thing to come over here?</string>
+    <string name="lvl3_puzzle2_hint2">Looks like there\'s a manual control mode. But I have no idea how to navigate it!</string>
+    <string name="lvl3_puzzle2_hint3">If only I had some kind of map or floor plan to work with.</string>
+    <string name="lvl3_puzzle2_hint4">I think I saw a ventilation duct layout somewhere in the room. What if I guide the vacuum through the ducts and into this room?</string>
+    <!--############################################-->
+
+
+    <!--################# Lvl3Puzzle3Model ##############-->
+    <string name="lvl3_puzzle3_hint1_1">Something important seems to be missing here.</string>
+    <string name="lvl3_puzzle3_hint1_2">I can\'t paste it — it must still need to be copied.</string>
+
+    <string name="lvl3_puzzle3_hint2"><![CDATA[How am I supposed to copy lock.3d if I don\'t have access to the computer\'s files?]]></string>
+    <string name="lvl3_puzzle3_hint3">Copy the lock... Copy the lock... Hmm... What to do. Think, John, think.</string>
+
+    <string name="lvl3_puzzle3_hint4_1">How do people usually copy something?</string>
+    <string name="lvl3_puzzle3_hint4_2"><![CDATA[They just <u>select it and hit <b>"copy"</b></u> — but that\'s only on a computer. Argh. Why doesn\'t that work in real life?]]></string>
+
+    <string name="lvl3_puzzle3_hint5_1"><![CDATA[Right now I\'d love to just walk up to the lock, <u>press and hold my finger on it</u> like I\'m selecting text on a smartphone, copy it, and paste it into the program.]]></string>
+    <string name="lvl3_puzzle3_hint5_2">I\'m getting distracted. Can\'t give up — I need to find a solution.</string>
+
+
+    <!-- After inserting lock -->
+    <string name="lvl3_puzzle3_hint6_1">Interesting — this lock model has multiple layers. I can actually see its internals.</string>
+    <string name="lvl3_puzzle3_hint6_2">If I were a professional lockpick, this would be exactly what I\'d need.</string>
+    <!--############################################-->
+
+
+
+    <!--################# Lvl3Puzzle4Key ##############-->
+    <string name="lvl3_puzzle4_hint1">Wow. First time I\'ve seen an adjustable key. Wonder what that\'s for.</string>
+
+    <string name="lvl3_puzzle4_hint2_1">Maybe I can adjust this key to fit the lock on the safe?</string>
+    <string name="lvl3_puzzle4_hint2_2">But I don\'t know what the pins on the key are supposed to look like.</string>
+
+
+    <!-- If lock is inserted into computer -->
+    <string name="lvl3_puzzle4_hint3_1">How did I not think of this sooner? I can see the lock\'s internals through the program on the guard\'s computer.</string>
+    <string name="lvl3_puzzle4_hint3_2">I can adjust the pins on the key to match the grooves of the lock — then it should fit.</string>
+    <!--############################################-->
+
+
+
+    <!--#####################################################################-->
+
+
+
+    <!--############################## Lvl4 #################################-->
+
+    <!--################# Lvl4Chess ##############-->
+    <string name="lvl4_chess_hint1">This arrangement of cells reminds me of something.</string>
+    <string name="lvl4_chess_hint2">One, two, three... Eight by eight! Like a chessboard!</string>
+    <string name="lvl4_chess_hint3">So I need to press only certain cells. On a chessboard, pieces stand on specific squares. Squares... squares... Maybe I should look at the cell again?</string>
+    <string name="lvl4_chess_hint4"><![CDATA[The cell with the crow says <b>CAGE</b>, and the chessboard has letters from A to H. I\'ll check which positions in those rows the pieces are in and replicate that layout on the wall mechanism.]]></string>
+    <!--############################################-->
+
+
+    <!--################ Lvl4TimeLine #############-->
+    <string name="lvl4_timeline_hint1_1">From the pictures, this is a timeline showing the development of the universe from the very beginning to the present day.</string>
+    <string name="lvl4_timeline_hint1_2">There are also elements at the bottom — looks like they need to be placed in the correct time periods based on their content.</string>
+
+    <string name="lvl4_timeline_hint2_1">First came life in the form of microorganisms. It gradually evolved into dinosaurs, which went extinct long ago.</string>
+    <string name="lvl4_timeline_hint2_2">When humans appeared, they learned to make fire, then developed agriculture.</string>
+    <string name="lvl4_timeline_hint2_3">That image looks like the Great Wall of China — I think it comes next, before the Black Plague. After that should be the invention of the telephone, and then a World War I soldier.</string>
+    <string name="lvl4_timeline_hint2_4">That leaves the Moon landing and the invention of the internet — I think it\'s shown as a globe with a network. These happened around the same time, but the internet spread a bit later.</string>
+    <!--###########################################-->
+
+    <!--################ Lvl4AskiiBtn #############-->
+    <string name="lvl4_askiiBtn_hint1">Maybe I should check the books with the switch in different positions. Just in case.</string>
+    <string name="lvl4_askiiBtn_hint2">I keep having this nagging feeling that the content of the book with the gibberish has changed.</string>
+    <!--#########################################-->
+
+    <!--################ Lvl4SequencePaper #############-->
+    <string name="lvl4_sequencepaper_hint1">I\'ve seen symbols like these somewhere else in this room...</string>
+    <string name="lvl4_sequencepaper_hint2">Right — the bookshelf! Now I know which books to check. I just need to match the symbols on the spines.</string>
+    <string name="lvl4_sequencepaper_hint3">I\'ve seen something like this in a spy movie. The books will each contain a fragment of information. Once I collect them all, I can piece together the full sentence.</string>
+    <!--################################################-->
+
+    <!--################ Lvl4BookAskii #############-->
+    <string name="lvl4_book_askii_hint1">Interesting — why are these words highlighted? Could this be one of the pieces I need to assemble the full sentence?</string>
+    <!--############################################-->
+
+    <!--################ Lvl4BookBabel #############-->
+    <string name="lvl4_book_babel_hint1"><![CDATA[Who puts hyperlinks in a printed book?
+    I <b>tap the link with my finger</b>, but nothing happens. If only I had my phone...]]></string>
+
+    <string name="lvl4_book_babel_hint2_1">Among the highlighted words (if you can call them that), one is different — it\'s blue.</string>
+    <string name="lvl4_book_babel_hint2_2">Looks like its meaning is missing. Maybe it\'s in the source?</string>
+
+    <string name="lvl4_book_babel_hint3"><![CDATA[If I were looking up a word in the source, I\'d open the Second page first and look for the word that has <i>noun</i> and <i>guts</i> above it.]]></string>
+
+    <string name="lvl4_book_babel_hint4_1"><![CDATA[Ugh, feeling ill again — there\'s some voice in my head whispering <i>fidorb, fidorb</i> over and over. What does that even mean?]]></string>
+    <string name="lvl4_book_babel_hint4_2">This is some kind of torture!</string>
+
+    <string name="lvl4_book_babel_hint5_1">Maybe it\'s not torture — maybe it\'s another hint. And "fidorb" is the word I\'m looking for? But what does it mean? If it\'s just a string of letters, that book "for those who can see" might help — it had a decryption key in it.</string>
+    <string name="lvl4_book_babel_hint5_2">This is probably another cipher. Who\'s playing games with me? What\'s the point of all this?</string>
+    <!--############################################-->
+
+
+    <!--################ Lvl4BookQR #############-->
+    <string name="lvl4_book_qr_hint1_1">Interesting photos — and that one with the motorcycle is really strange.</string>
+    <string name="lvl4_book_qr_hint1_2">It reminds me of something...</string>
+
+    <string name="lvl4_book_qr_hint2_1">This looks like a QR code — the kind you scan with a phone app or online.</string>
+    <string name="lvl4_book_qr_hint2_2">They usually contain some useful information.</string>
+    <string name="lvl4_book_qr_hint2_3">If only I had my phone, I could test that theory.</string>
+
+    <string name="lvl4_book_qr_hint3_1">Actually, in the book "for those who can see," there was a link with "ScanQR" in the URL.</string>
+    <string name="lvl4_book_qr_hint3_2"><![CDATA[Maybe it\'s one of those sites that decodes a QR code from a <b>phone screenshot</b>?]]></string>
+
+    <string name="lvl4_book_qr_hint4_1"><![CDATA[Argh! That voice again. <i>"Tap", "Tap"</i>.]]></string>
+    <string name="lvl4_book_qr_hint4_2">Tap what? Tap where?</string>
+    <string name="lvl4_book_qr_hint4_3">Or is that another word?</string>
+    <!--#########################################-->
+
+
+
+    <!--################ Lvl4BookBlur #############-->
+    <string name="lvl4_book_blur_hint1">Beautiful images — especially the third one.</string>
+    <string name="lvl4_book_blur_hint2">I think if I squint, I can almost make out some text in one of them.</string>
+    <string name="lvl4_book_blur_hint3"><![CDATA[Yes — on the third image I can see the word <b>"Floor"</b>.]]></string>
+    <!--###########################################-->
+
+    <!--################ Lvl4BookHistory #############-->
+    <string name="lvl4_book_history_hint1">This book covers important events in human history — but why is the year missing in the second paragraph?</string>
+
+    <string name="lvl4_book_history_hint2_1">I should figure out which year is missing from the text. From the description, it sounds like something Edison invented that produced sound.</string>
+    <string name="lvl4_book_history_hint2_2">If only I had internet right now...</string>
+
+    <string name="lvl4_book_history_hint3_1">I remember — Edison invented the phonograph in 1877!</string>
+    <string name="lvl4_book_history_hint3_2">I watched a documentary about it not long ago.</string>
+    <string name="lvl4_book_history_hint3_3">Not long ago... How long have I actually been in here?</string>
+
+    <string name="lvl4_book_history_hint4">I\'ve been looking for words, not numbers — so what do I need this date for? That other book had something about turning digits into a number. I should try that.</string>
+    <string name="lvl4_book_history_hint5">That book mentioned something about a digital root. As far as I remember, you add all the digits together and keep doing that with the result until you\'re left with a single digit.</string>
+
+    <string name="lvl4_book_history_hint6_1">Okay, let me apply the digital root to 1877. 1+8+7+7=23.</string>
+    <string name="lvl4_book_history_hint6_2">Then 2+3 = 5. So the answer is 5 — let\'s hope the word I\'m looking for is "five."</string>
+    <!--##############################################-->
+
+
+    <!--#####################################################################-->
+
+
+
+
+    <!--############################## Lvl5 #################################-->
+
+    <!--################ Lvl5BluetoothOff #############-->
+    <string name="lvl5_bluetoothOff_hint1">"Blue tooth" — what could that mean? Actually, that\'s just Bluetooth, like on a phone.</string>
+    <string name="lvl5_bluetoothOff_hint2">Bluetooth — like on a phone. Funny. I remember sharing music with friends over it as a kid.</string>
+    <string name="lvl5_bluetoothOff_hint3"><![CDATA[I\'d love to <b>turn on Bluetooth on my phone</b> like the old days and swap some fun pictures, back when everything was still good.]]></string>
+    <!--############################################-->
+
+    <!--################ Lvl5BluetoothOn #############-->
+    <string name="lvl5_bluetoothOn_hint1_1">Something seems to have changed on the fish. There\'s a sequence visible on it. It looks like "left-right..."</string>
+    <string name="lvl5_bluetoothOn_hint1_2">But how do I use it?</string>
+
+    <string name="lvl5_bluetoothOn_hint2_1"><![CDATA[There\'s a <b>mounted trophy</b> on that wall. The way it stares at me is unsettling, even if it doesn\'t look realistic.]]></string>
+    <string name="lvl5_bluetoothOn_hint2_2"><![CDATA[And those antlers sticking out <b>left and right</b>. Like it\'s alive.]]></string>
+    <!--############################################-->
+
+    <!--################ Lvl5Horns #############-->
+    <string name="lvl5_horns_hint1_1">Looks like these antlers can be pulled.</string>
+    <string name="lvl5_horns_hint1_2">Hmm, nothing happens. Maybe I need a specific sequence?</string>
+
+    <string name="lvl5_horns_hint2_1">Every time I approach the mount, the image of that fish on the wall pops into my head.</string>
+    <string name="lvl5_horns_hint2_2">The scales show a clear sequence of directions: ₽₽₽</string>
+
+    <string name="lvl5_horns_hint3_1">What if I pull the antlers in the same sequence as the scales on the fish?</string>
+    <string name="lvl5_horns_hint3_2"><![CDATA[ <b>Left, right₽₽₽</b> ]]></string>
+    <!--############################################-->
+
+    <!--################ Lvl5Fish #############-->
+    <string name="lvl5_fish_hint1_1">Looks like I can move the fish around. In what order should I hang them?</string>
+    <string name="lvl5_fish_hint1_2">Will it do anything? Worth a try.</string>
+
+    <string name="lvl5_fish_hint2">I saw a note with a list of fish species in a specific order. Maybe the fish hanging here are described in that note?</string>
+
+    <string name="lvl5_fish_hint3_1">If I match the information from the note with what these fish look like, the order should be:</string>
+    <string name="lvl5_fish_hint3_2">₽₽₽</string>
+    <!--############################################-->
+
+    <!--################ Lvl5Map #############-->
+    <string name="lvl5_map_hint1">I could try to trace Bob\'s route using the note he gave me.</string>
+
+    <string name="lvl5_map_hint2_1">It\'d be great to do it detective-style — pin the spots on the map and connect them with string to find the pattern.</string>
+    <string name="lvl5_map_hint2_2">There\'s definitely one here. Nothing in this hotel is accidental.</string>
+
+    <string name="lvl5_map_hint3_1">I think I\'ve got it. If I mentally connect the dots, I get two numbers: 3 and 7.</string>
+    <string name="lvl5_map_hint3_2">That might be what I need. Now I just have to find where to enter it.</string>
+    <!--############################################-->
+
+
+    <!--################ Lvl5Chest #############-->
+    <string name="lvl5_chest_hint1">There’s some bell-shaped thing on it. Do I need to ring a bell to open it? But that weird guy is a fisherman, not a musician. There’s no bell here.</string>
+    <string name="lvl5_chest_hint2">Maybe this symbol means something?</string>
+    <string name="lvl5_chest_hint3">Most often I’ve seen that symbol in the context of notifications—on a smartphone, for example.</string>
+    <string name="lvl5_chest_hint4">Am I supposed to get a notification on my phone, confirm it, and the chest will open?</string>
+    <string name="lvl5_chest_hint5">But I still don’t have a working phone.</string>
+    <string name="lvl5_chest_hint6">Even if I got a notification, how would I confirm it?</string>
+    <string name="lvl5_chest_hint7">Usually you need a numeric code. Where did that old man hide it?</string>
+    <string name="lvl5_chest_hint8">Maybe I should take a closer look at the map on the wall?</string>
+    <!--############################################-->
+
+    <!--################ Lvl5General #############-->
+    <string name="lvl5_general_hint1">What a massive fish on that wall! I\'ll take a closer look.</string>
+
+    <string name="lvl5_general_hint2">That mounted trophy is getting to me more and more. Something is drawing me toward it.</string>
+
+    <string name="lvl5_general_hint3">Strange feeling. I\'ve never had OCD, but I really want to rearrange those fish on the rack.</string>
+
+    <string name="lvl5_general_hint4_1">That map on the wall seems to cover a specific area.</string>
+    <string name="lvl5_general_hint4_2">Bob probably spends a lot of time there and knows the best fishing spots in that region. I\'ll take a closer look.</string>
+    <!--############################################-->
+
+    <!--################ Lvl6Lock #############-->
+    <string name="lvl6_lock_hint1_1">What are these — second-grader problems?! How am I supposed to multiply colors?</string>
+    <string name="lvl6_lock_hint1_2">Unless the colors are just labels. I think I’ve seen those shades on the four panels to the right.</string>
+    <string name="lvl6_lock_hint2_1">It looks like each cell here is a clue for what to enter into the chain lock. It has exactly 5 dials.</string>
+    <string name="lvl6_lock_hint2_2">The colors probably refer to the matching cell on the panels to the right.</string>
+    <string name="lvl6_lock_hint2_3">For example, the green circle at the top would be the first cell in the green panel on the right. That’s 6.</string>
+    <string name="lvl6_lock_hint3">The first row is simple. Just apply the arithmetic operations to the numbers in the corresponding cells on the right. 6×1−2=4.</string>
+    <string name="lvl6_lock_hint4_1">The second row uses colors instead of numbers.</string>
+    <string name="lvl6_lock_hint4_2">But I’m not supposed to use the circles themselves — I still need the values from the panels. Nice try.</string>
+    <string name="lvl6_lock_hint5_1">So: take purple minus blue — that gives red. Add yellow and you get orange.</string>
+    <string name="lvl6_lock_hint5_2">>In the third row, it looks like I need to draw a pattern. If I follow the instructions from the panels, it’s 2 up, 3 right.</string>
+    <string name="lvl6_lock_hint6">Then blue corresponds to “1 down”, but it has a minus sign. Maybe that means “1 up”?</string>
+    <string name="lvl6_lock_hint6_1">In the fourth row, the shapes from the panels are layered over each other at different angles.</string>
+    <string name="lvl6_lock_hint6_2">First: “horizontally mirrored blue”. I guess I need the upside-down triangle.</string>
+    <string name="lvl6_lock_hint6_3">Then red and a right angle. Maybe that half-square needs to be rotated by 90°.</string>
+    <string name="lvl6_lock_hint6_4">Then green and sin(x) = −1. If I remember correctly, that’s 270°.</string>
+    <string name="lvl6_lock_hint6_5">So I need to rotate that squiggle shaped like the letter J. Now I just have to overlay the resulting shapes.</string>
+    <string name="lvl6_lock_hint7">In the last row, I need to combine objects. We’ve got wood and fabric. Out of the options on the lock, only a flag fits.</string>
+    <!--############################################-->
+
+    <!--==================== final ====================-->
+    <string name="final_court_1">The defendant, John West, has been found guilty of unlawful entry into Saint Mary\'s medical facility on the night of September 14th to 15th.</string>
+    <string name="final_court_2">According to case materials, the defendant forced his way into the building through a service entrance and moved between floors of the hospital.</string>
+    <string name="final_court_3">Security cameras recorded the defendant entering patient wards, utility rooms, and staff areas.</string>
+    <string name="final_court_4">The defendant broke into medication cabinets, disabled equipment, and took access cards from staff members.</string>
+    <string name="final_court_5">Security guard Thomas Pitt attempted to stop the defendant.</string>
+    <string name="final_court_6">The investigation determined that the defendant had mixed a lethal dose of potassium chloride into the employee\'s drink.</string>
+    <string name="final_court_7">The guard died on the scene from the resulting cardiac arrest.</string>
+    <string name="final_court_8">Receptionist Emily Carter suffered fatal injuries after a ceiling light fixture fell on her.</string>
+    <string name="final_court_9">The investigation established that the mounting had been damaged by the defendant in order to obtain her access card.</string>
+    <string name="final_court_10">Upon reaching the upper floor, the defendant entered the ward of his daughter — Sara West.</string>
+    <string name="final_court_11">Sara West was undergoing intensive care. According to the physicians, chances of recovery remained.</string>
+    <string name="final_court_12">The defendant disconnected the child from life support, resulting in the patient\'s death.</string>
+    <string name="final_court_13">Throughout the investigation, the defendant claimed that his daughter had been kidnapped.</string>
+    <string name="final_court_14">According to the defendant, the building appeared to him as a "hotel," and the girl was allegedly being held "in chains."</string>
+    <string name="final_court_15">The defendant also states that a force "from above" was helping him through trials and showing him the way.</string>
+    <string name="final_court_16">The court takes into account the results of the psychiatric evaluation.</string>
+    <string name="final_court_17">The defendant has been found not guilty by reason of insanity at the time of the crime.</string>
+    <string name="final_court_18">John West is to be committed to a closed psychiatric facility for mandatory treatment.</string>
+    <string name="final_court_19">Court is adjourned.</string>
+
+    <string name="final_hospital_1">Easy, John. Don\'t move.</string>
+    <string name="final_hospital_2">You are participating in an experimental memory reconstruction program.</string>
+    <string name="final_hospital_3">We observed your memories in real time.</string>
+    <string name="final_hospital_4">Everything you saw... the hotel, the floors, the puzzles... we saw it along with you.</string>
+    <string name="final_hospital_5">Now we are certain that you truly perceived everything that way.</string>
+    <string name="final_hospital_6">No... It wasn\'t a dream...</string>
+    <string name="final_hospital_7">His vitals are unstable.</string>
+    <string name="final_hospital_8">Prepare the patient for the next stage.</string>
+    <string name="final_hospital_9">What are you going to do to me?..</string>
+    <string name="final_hospital_10">Further treatment will require direct intervention in brain activity.</string>
+    <string name="final_hospital_11">No! Don\'t touch me!</string>
+    <string name="final_hospital_12">Administer the sedative.</string>
+    <string name="final_hospital_13">Wait!..</string>
+
+    <!--################################################################################# Other ###################################################################################-->
+
+    <string name="blank"></string>
+
+    <!--################################# Permission request window (+ tutorial) #######################################-->
+    <string name="permission_request">
+    This game has special mechanics: as you progress, you\'ll encounter puzzles that require creativity... and your device.\n
+    The first is entirely up to you, but for the second, the game needs certain permissions.\n\n
+    (Don\'t be alarmed if some permissions seem unusual. I, this little dialog box, personally guarantee that all data will be used solely to help you progress through the game world.)\n\n
+    For example, right now — think about how you could use your smartphone to temporarily light up a dark room.
 </string>
 
     <string name="ok">OK</string>
-    <string name="blank"></string>
 
     <!--##############################################################################################################-->
 
 
-    <!--################################# Окно при отказе предоставить разрешения  ####################################-->
+    <!--####################### Permission denied window ###########################-->
 
     <string name="permission_denied_msg">
-       Wait! You are losing a significant amount of this game\'s unique gameplay!
-    All permissions are only necessary to keep track of the fact that you managed to go outside the box,
-    went beyond the usual games of this genre and utilized the features of your device.
-    of your device ( turning on the flashlight, the camera, adding a new contact and more! )\n\n
-        I, dialog box, I really hope that I managed to change your mind, because the developers tried very hard to make the game unusual :)
+        Wait! You\'re missing out on a significant chunk of this game\'s unique gameplay!
+    All permissions are only needed to verify that you\'ve approached a puzzle creatively,
+    stepped outside the conventions of the genre, and used your device\'s features
+    (turning on the flashlight, the camera, adding a new contact, and much more!)\n\n
+        I, this dialog box, sincerely hope I\'ve managed to change your mind — the developers worked really hard to make something special :)
     </string>
 
-    <string name="open_sys">Go to the application settings</string>
-    <string name="no_thanks">No, thanks, I can enjoy what I\'ve got</string>
+    <string name="open_sys">Go to app settings</string>
+    <string name="no_thanks">No thanks, I\'ll enjoy what\'s there</string>
 
-    <!--##############################################################################################################-->
+    <!--##############################################################################################-->
+
+
     <string name="settings_title">Settings</string>
     <string name="music_volume">Music Volume</string>
-    <string name="sound_volume">Sound Effects Volume</string>
+    <string name="sound_volume">Sound Volume</string>
     <string name="game_language">Game Language</string>
     <string name="back_button">Back</string>
     <string name="resume">Resume</string>
-    <string name="main_screen">Main screen</string>
+    <string name="main_screen">Main Menu</string>
 
-    <!-- Массив для языков -->
+
+    <!-- Language array -->
     <string-array name="language_options">
         <item>Russian</item>
         <item>English</item>
@@ -47,271 +677,123 @@
     </string-array>
 
 
-    <!--############################################# Реплики диалогов ################################################-->
-
-    <!--#################### Lvl0 #################-->
-    <string name="lvl0_start">TODO</string>
-    <string name="lvl0_dark">TODO</string>
-    <string name="lvl0_flashlight_on">TODO</string>
-    <string name="lvl0_light_on">TODO</string>
-    <string name="lvl0_access_card">TODO</string>
-    <string name="lvl0_access_card_got">TODO</string>
-    <!--###########################################-->
-
-
-    <!--#################### Lvl1 #################-->
-    <string name="lvl1_elevator">TODO</string>
-
-    <string name="lvl1_npc_receptionist1"> Добрый день! Чем могу Вам помочь? </string>
-    <string name="lvl1_npc_receptionist2"> Что со мной произошло? Как я здесь оказался? </string>
-    <string name="lvl1_npc_receptionist3"> Вчера вы к нам пришли с очень сильной эмоциональной нагрузкой, вы кричали и были в бешенстве. Видимо вы сильно переволновались, поэтому сейчас не помните, что произошло. </string>
-    <string name="lvl1_npc_receptionist4"> Почему я оказался в подвале??? </string>
-    <string name="lvl1_npc_receptionist5"> Мы понимаем ваше беспокойство, но Вы были очень агрессивны, простите за предоставленные неудобства, но это было сделано в целях Вашей же безопасности. </string>
-    <string name="lvl1_npc_receptionist6"> Я всё равно ничего не понимаю. Что я здесь делаю? </string>
-    <string name="lvl1_npc_receptionist7"> К сожалению, Вы нам не сказали цели вашего визита. Но, Вы вчера о чем-то кричали, просили нас, даже требовали. </string>
-    <string name="lvl1_npc_receptionist8"> Мне жаль, но из вашей бессвязной речи мы поняли только то, что Вы говорили о дочери.</string>
-    <string name="lvl1_npc_receptionist9"> Зачем мне вам говорить о моей доч…</string>
-    <string name="lvl1_npc_receptionist10">Господи! Моя дочка! [Имя]! Где она?! </string>
-    <string name="lvl1_npc_receptionist11"> [Успакаивает гг, боясь, что у того снова припадок]</string>
-    <string name="lvl1_npc_receptionist12"> [Здесь нужно дописать диалог]… Я найду её! С вашей помощью или без, я найду [Имя]! </string>
-
-    <string name="lvl1_npc_receptionist_2_1"> О, это снова Вы. Вам уже полегчало? Разузнали что-то про Вашу дочь? </string>
-    <string name="lvl1_npc_receptionist_2_2"> Я знаю, что она где-то здесь. </string>
-
-    <!--###########################################-->
-
-    <!--##############################################################################################################-->
-
-
-    <!--############################################# Подсказки ################################################-->
-
-    <string name="no_hints">TODO</string>
-
-    <!--############################## Lvl0 #################################-->
-    <string name="lvl0_to_puzzle1_hint">TODO</string>
-
-    <!--################# Lvl0Puzzle0 ##############-->
-    <string name="lvl0_puzzle0_hint1">TODO </string>
-    <string name="lvl0_puzzle0_hint2">TODO </string>
-    <!--#############################################-->
-
-    <!--#################### Lvl0Puzzle1 #################-->
-    <string name="lvl0_puzzle1_hint1">TODO</string>
-    <string name="lvl0_puzzle1_hint2">TODO</string>
-    <string name="lvl0_puzzle1_hint3">TODO</string>
-    <string name="lvl0_puzzle1">TODO</string>
-
-    <!--##################################################-->
-
-
-    <!--#################### Lvl1Puzzle1 #################-->
-
-    <!--##################################################-->
-
-    <!--############################## Lvl2 #################################-->
-    <string name="lvl2_start">TODO</string>
-    <string name="lvl2_computer_lore">TODO</string>
-    <!--##################################################-->
-
-
-    <!--############################## Lvl3 #################################-->
-    <string name="lvl3_npc_security1">TODO</string>
-    <string name="lvl3_npc_security2">TODO</string>
-    <string name="lvl3_npc_security3">TODO</string>
-    <string name="lvl3_npc_security4">TODO</string>
-    <string name="lvl3_npc_security5">TODO</string>
-
-    <string name="lvl3_computer">TODO</string>
-    <string name="lvl3_donuts">TODO</string>
-
-    <string name="lvl3_copy">TODO</string>
-    <string name="lvl3_paste">TODO</string>
-
-    <!--##################################################-->
-
-
     <!--################# Lvl2Puzzle1 ##############-->
-    <string name="lvl2_puzzle1_password">Enter the password</string>
+    <string name="lvl2_puzzle1_password">Enter password</string>
+    <string name="lvl2_puzzle1_chat_james">James</string>
+    <string name="lvl2_puzzle1_chat1_1">Epiil y oggjcvf eomt kbyim</string>
+    <string name="lvl2_puzzle1_chat1_2">James, because YOU, you idiot, somehow managed to put the keys back in the wrong places after cleaning the keyboard, I have to sit here decoding this gibberish?!</string>
+    <string name="lvl2_puzzle1_chat1_3">Are you going to fix this?</string>
+    <string name="lvl2_puzzle1_chat1_4">yes</string>
+    <string name="lvl2_puzzle1_chat_amanda">Amanda Baines</string>
+    <string name="lvl2_puzzle1_chat2_1">We got a new one recently. Sara West. Ever heard of her?</string>
+    <string name="lvl2_puzzle1_chat2_2">No, but I can check the database.</string>
+    <string name="lvl2_puzzle1_chat2_3">I\'d appreciate that.</string>
+    <string name="lvl2_puzzle1_chat2_4">SaraWest.txt</string>
+    <string name="lvl2_puzzle1_chat_file">
+Name: Sara West\n\n
+03/14 — arrival registered at 21:48.\n
+Initial placement: Level 1, Room 103.\n\n
+Condition at check-in — no unusual observations.\n
+Personal belongings were stored according to procedure.\n\n
+03/15 — at 02:16 a decline in condition was reported.\n
+Transfer was recommended by staff.\n\n
+Due to limited service capabilities\n
+on Level 1, relocation was approved by administration.\n\n
+New placement: Level 6, Room 614.\n
+Room access status: restricted.\n\n
+03/15 — 03:02 transfer completed.\n
+Escort assigned.\n\n
+No additional remarks.
+</string>
     <!--#############################################-->
-    <string name="lvl4_book_babel_text1">1</string>
-    <string name="lvl2_computer">TODO</string>
-    <string name="hint_is_not_here">TODO</string>
-    <string name="lvl2_puzzle0_hint">TODO</string>
-    <string name="lvl2_puzzle1_hint2">TODO</string>
-    <string name="lvl2_puzzle1_hint1">TODO</string>
-    <string name="lvl2_puzzle1_hint3">TODO</string>
-    <string name="lvl2_puzzle2_hint1">TODO</string>
-    <string name="lvl2_puzzle2_hint2">TODO</string>
-    <string name="lvl2_puzzle2_hint3">TODO</string>
-    <string name="lvl4_book_askii_text1_a">rj53ghxjiw98ofqydmsjhdhdq4zpjht2hl8r9gcs2iuha1n5vkcl9aqrlrctw4fr7dzbzcak4bkc7km911u0o1q3t0bzmbeecodkucl4j3k441q6lj1wm6q49vb29a4e7nl6jeuuvdb0maujn3rsetcquisq67e43vqlk</string>
-    <string name="lvl4_book_askii_text2_a">pozhuj7vk3ahaf167x912fhblrguuufckb6du8m2g9fkx6vhwqgo6r1oc52jzwfnnb8dimhebc8p1hac8e6rnmrz2tvy4ig2dqi6z85v6ugawmdo1cn1of8cclcu8g8h31p4h1e62gk2piolm8mcjdv1ionxo7hrq12vfvmgt2adhzferafz5vf1w</string>
-    <string name="lvl4_book_askii_text1_b">uvykfovcvjfcq9rfhjopiskhomvviaxc91xjatjq6xwmrv6cjw5qn298tgewb7ibxppcozec33qebk1kyw6vuj0mf1dum2aftk8gcjd5557h4z5179rm7njyvigdfo2jmzpjfy0qh3b2osc7gqkqrtslq5dsrklq121n1jo9ks1ppm9v5oosu4lafrfd0np9vvduivt</string>
-    <string name="lvl4_book_askii_text2_b">tnzocoi1xt26h3vmz7dk6n6t103euf96b2a0iy4en1pxh7615zr5x8u2lej9nd2lr1ukbf3vi08mbsoags3dfvhbnw0vq6x54nvum2ufers68je8b6u0k1et1paw8lokfoedn8z5mnfvfpcctmqn4accojt0gqqgnlxm5sx3v6eao77sxjlrloaxzrp7qxleqevfx62kc3io84</string>
-    <string name="lvl4_puzzle1_askii">TODO</string>
-    <string name="lvl4_puzzle1_normal">TODO</string>
-    <string name="lvl3_puzzle0_hint1_1">TODO</string>
-    <string name="lvl3_puzzle0_hint1_2">TODO</string>
-    <string name="lvl3_puzzle0_hint2_1">TODO</string>
-    <string name="lvl3_puzzle0_hint2_2">TODO</string>
-    <string name="lvl3_puzzle0_hint3">TODO</string>
-    <string name="lvl3_puzzle0_hint4">TODO</string>
-    <string name="lvl3_puzzle0_hint5">TODO</string>
-    <string name="lvl3_puzzle0_hint6_1">TODO</string>
-    <string name="lvl3_puzzle0_hint6_2">TODO</string>
-    <string name="lvl3_puzzle0_hint7_1">TODO</string>
-    <string name="lvl3_puzzle1_hint1">TODO</string>
-    <string name="lvl3_puzzle1_hint2_1">TODO</string>
-    <string name="lvl3_puzzle1_hint2_2">TODO</string>
-    <string name="lvl3_to_coffee_hint1_1">TODO</string>
-    <string name="lvl3_to_coffee_hint1_2">TODO</string>
-    <string name="lvl3_to_coffee_hint1_3">TODO</string>
-    <string name="lvl3_puzzle2_hint1">TODO</string>
-    <string name="lvl3_puzzle2_hint2">TODO</string>
-    <string name="lvl3_puzzle2_hint3">TODO</string>
-    <string name="lvl3_puzzle2_hint4">TODO</string>
-    <string name="lvl3_puzzle3_hint1_1">TODO</string>
-    <string name="lvl3_puzzle3_hint2">TODO</string>
-    <string name="lvl3_puzzle3_hint3">TODO</string>
-    <string name="lvl3_puzzle3_hint4_1">TODO</string>
-    <string name="lvl3_puzzle3_hint4_2">TODO</string>
-    <string name="lvl3_puzzle3_hint5_1">TODO</string>
-    <string name="lvl3_puzzle3_hint5_2">TODO</string>
-    <string name="lvl3_puzzle3_hint6_1">TODO</string>
-    <string name="lvl3_puzzle3_hint6_2">TODO</string>
-    <string name="lvl3_puzzle4_hint1">TODO</string>
-    <string name="lvl3_puzzle4_hint2_1">TODO</string>
-    <string name="lvl3_puzzle4_hint3_1">TODO</string>
-    <string name="lvl3_puzzle4_hint3_2">TODO</string>
-    <string name="lvl3_puzzle3_hint1_2">TODO</string>
-    <string name="lvl3_puzzle4_hint2_2">TODO</string>
-    <string name="lvl3_to_puzzle0_hint1">TODO</string>
-    <string name="lvl3_puzzle0_hint7_2">TODO</string>
-    <string name="lvl3_to_puzzle0_hint2">TODO</string>
-    <string name="lvl2_puzzle3_hint1">TODO</string>
-    <string name="lvl2_puzzle3_hint5">TODO</string>
-    <string name="lvl2_puzzle3_hint2">TODO</string>
-    <string name="lvl2_puzzle3_hint3">TODO</string>
-    <string name="lvl2_puzzle3_hint4_1">TODO</string>
-    <string name="lvl2_puzzle3_hint4_2">TODO</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="lvl4_book_askii_title">%3A%2F%2Flibraryofbabel.info%2Fanglishize.cgi%3F217r0sm5b8bnmdqnkz9cmjryg5dqvay7xtdkg40btwtg38r7g4nsprmonb22k50fu2ino3yotitp2</string>
-    <string name="lvl4_book_babel_title">TODO</string>
-    <string name="lvl4_book_history_title">azjapl80im9le2oh8f87nbo5w8rcp1km95y8nqbkunad99egrol0xm27petlr6xnpg9ie0uhwxfm6nzdzcgemjivlyzc5fugkfa728mpi41tpw9ybo98lpod925wkzb2qzp8h4ruzzntxa6x0zb</string>
-    <string name="lvl4_book_history_text1">q6jp839yrg0bhs0nltre71k8qyeti8jy3jv1xu11a8mnxyh61ap3ash8gd7202ine41sd3x0i4qeuays9yy8pmt0gm1z9zfnlwk2yooaessu38lh0bvm7</string>
-    <string name="lvl4_book_history_text3">5c0jwzp2urh958l0ifl8r3ici1qajwidep04nkgycca8035156gdiobwiwslk2f03po1pyhwzua8xye0rp5xyua37plv4ejo2jermc</string>
-    <string name="lvl4_book_history_text2">wsaz3fa9s7jirjnhd5qyvutnai0nw35deyctyumrxge2xgigo5gabv51u8ol6de6pmjgs0u5owk1kws2dy5hor4s8rmcwivx2r0emll6np3a8exhramipqf7v5e</string>
-    <string name="lvl4_book_help_title">4zzflbz9k62l418n01a6c560bdzvzc6lm0iri8pk60qm8s4w19tm9nt58bwxqvygkrcyv6plvlolyu9lapeb9j75sqsch0</string>
-    <string name="lvl4_book_help_text1">qoltk5ltf507c9p27wr2frq38ikdhkixtsfch24ooka8sin1rivh0ndvcxct5o0ev3vb4h8o790vsqxoc5a0nuqcnjvtwp</string>
-    <string name="lvl4_book_help_text2">5c9prfenwslenaubwoyuf0viafuarcqp3ly3hogxsr21hat7b0ogksvd5nh43sa6p2q3uwfrq2vu7fxu6ocox29xl8tfdty</string>
-    <string name="lvl4_book_help_text3">d08pcmm8270jd3ztmjzkncz7655qo5cyh9v66mf5qj8ztdkxzzi5viruhfzgwhik63nkhss5wgz4kdwtv9dmgs1wuvnepokzvyvlqggww3uo60b4h54yiqjp63s6b3mrzjqvbfde3rc4cxvblyl0q4wdzf</string>
-    <string name="lvl4_book_qr_title">TODO</string>
-    <string name="lvl4_book_qr_text1">TODO</string>
-    <string name="lvl4_book_blur_title">TODO</string>
-    <string name="lvl4_book_help_link">0t7aljjrrw8m65qxse8824hyhbazdd5stj86tk5rab143gzk05qml5bck5970cdhc2iriu2aznkuzcitp8l7ae731ijrz0rlr6fb3nk26i97j3mw2qyttrwi5msx6bbwzsfhgip4ukhj2mrns15ix88ppsxgq242os7f6q2dfkpvpwj8f8k0kj9my2lo6-w2-s5-v07%3A1&amp;utf=1</string>
-    <string name="lvl4_book_babel_link">" https://vk.com/away.php?to=https"</string>
-
-    <string name="lvl2_puzzle1_chat1_1">TODO</string>
-    <string name="lvl2_puzzle1_chat1_2">TODO</string>
-    <string name="lvl2_puzzle1_chat1_3">TODO</string>
-    <string name="lvl2_puzzle1_chat1_4">TODO</string>
-    <string name="lvl2_puzzle1_chat_james">TODO</string>
-    <string name="lvl2_puzzle1_chat2_1">TODO</string>
-    <string name="lvl2_puzzle1_chat2_2">TODO</string>
-    <string name="lvl2_puzzle1_chat2_3">TODO</string>
-    <string name="lvl2_puzzle1_chat2_4">TODO</string>
-    <string name="lvl2_puzzle1_chat_amanda">TODO</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="lvl4_chess_hint1">TODO</string>
-    <string name="lvl4_chess_hint2">TODO</string>
-    <string name="lvl4_chess_hint3">TODO</string>
-    <string name="lvl4_chess_hint4">TODO</string>
-    <string name="lvl4_timeline_hint1_1">TODO</string>
-    <string name="lvl4_timeline_hint1_2">TODO</string>
-    <string name="lvl4_timeline_hint2_1">TODO</string>
-    <string name="lvl4_timeline_hint2_2">TODO</string>
-    <string name="lvl4_timeline_hint2_3">TODO</string>
-    <string name="lvl4_askiiBtn_hint1">TODO</string>
-    <string name="lvl4_askiiBtn_hint2">TODO</string>
-    <string name="lvl4_sequencepaper_hint1">TODO</string>
-    <string name="lvl4_sequencepaper_hint2">TODO</string>
-    <string name="lvl4_sequencepaper_hint3">TODO</string>
-    <string name="lvl4_book_askii_hint1">TODO</string>
-    <string name="lvl4_book_babel_hint1">TODO</string>
-    <string name="lvl4_book_babel_hint2_1">TODO</string>
-    <string name="lvl4_book_babel_hint2_2">TODO</string>
-    <string name="lvl4_book_babel_hint3">TODO</string>
-    <string name="lvl4_book_babel_hint4_1">TODO</string>
-    <string name="lvl4_book_babel_hint4_2">TODO</string>
-    <string name="lvl4_book_babel_hint5_1">TODO</string>
-    <string name="lvl4_book_babel_hint5_2">TODO</string>
-    <string name="lvl4_book_qr_hint1_1">TODO</string>
-    <string name="lvl4_book_qr_hint1_2">TODO</string>
-    <string name="lvl4_book_qr_hint2_1">TODO</string>
-    <string name="lvl4_book_qr_hint2_2">TODO</string>
-    <string name="lvl4_book_qr_hint2_3">TODO</string>
-    <string name="lvl4_book_qr_hint3_1">TODO</string>
-    <string name="lvl4_book_qr_hint3_2">TODO</string>
-    <string name="lvl4_book_qr_hint4_1">TODO</string>
-    <string name="lvl4_book_qr_hint4_2">TODO</string>
-    <string name="lvl4_book_qr_hint4_3">TODO</string>
-    <string name="lvl4_book_blur_hint1">TODO</string>
-    <string name="lvl4_book_blur_hint2">TODO</string>
-    <string name="lvl4_book_blur_hint3">TODO</string>
-    <string name="lvl4_book_history_hint1">TODO</string>
-    <string name="lvl4_book_history_hint3_1">TODO</string>
-    <string name="lvl4_book_history_hint3_2">TODO</string>
-    <string name="lvl4_book_history_hint3_3">TODO</string>
-    <string name="lvl4_book_history_hint4">TODO</string>
-    <string name="lvl4_book_history_hint5">TODO</string>
-    <string name="lvl4_book_history_hint6_1">TODO</string>
-    <string name="lvl4_book_history_hint6_2">TODO</string>
-    <string name="lvl5_bluetoothOff_hint1">TODO</string>
-    <string name="lvl5_bluetoothOff_hint2">TODO</string>
-    <string name="lvl5_bluetoothOff_hint3">TODO</string>
-    <string name="lvl5_bluetoothOn_hint1_1">TODO</string>
-    <string name="lvl5_bluetoothOn_hint1_2">TODO</string>
-    <string name="lvl5_bluetoothOn_hint2_1">TODO</string>
-    <string name="lvl5_bluetoothOn_hint2_2">TODO</string>
-    <string name="lvl5_horns_hint1_1">TODO</string>
-    <string name="lvl5_horns_hint1_2">TODO</string>
-    <string name="lvl5_horns_hint2_1">TODO</string>
-    <string name="lvl5_horns_hint2_2">TODO</string>
-    <string name="lvl5_horns_hint3_1">TODO</string>
-    <string name="lvl5_horns_hint3_2">TODO</string>
-    <string name="lvl5_fish_hint1_1">TODO</string>
-    <string name="lvl5_fish_hint1_2">TODO</string>
-    <string name="lvl5_fish_hint2">TODO</string>
-    <string name="lvl5_fish_hint3_1">TODO</string>
-    <string name="lvl5_map_hint1">TODO</string>
-    <string name="lvl5_map_hint2_1">TODO</string>
-    <string name="lvl5_map_hint2_2">TODO</string>
-    <string name="lvl5_map_hint3_1">TODO</string>
-    <string name="lvl5_map_hint3_2">TODO</string>
-    <string name="lvl5_general_hint1">TODO</string>
-    <string name="lvl5_general_hint2">TODO</string>
-    <string name="lvl5_general_hint3">TODO</string>
-    <string name="lvl5_general_hint4_1">TODO</string>
-    <string name="lvl5_general_hint4_2">TODO</string>
-    <string name="lvl4_book_history_hint2_1">TODO</string>
-    <string name="lvl4_book_history_hint2_2">TODO</string>
-    <string name="lvl2_puzzle3_hint6">TODO</string>
-    <string name="lvl5_fish_hint3_2">TODO</string>
-    <string name="lvl2_puzzle1_hint4_1">TODO</string>
-    <string name="lvl2_puzzle1_hint4_2">TODO</string>
-    <string name="lvl2_puzzle1_hint5">TODO</string>
-    <string name="lvl6_lock_hint1">TODO</string>
-    <string name="lvl5_moose_paper">TODO</string>
-    <string name="lvl3_npc_security_final_lock">TODO</string>
-    <string name="lvl3_need_key">TODO</string>
-    <string name="lvl3_need_to_use_key">TODO</string>
-    <string name="lvl0_click_switch">TODO</string>
-    <string name="lvl3_ventilation">TODO</string>
-    <string name="lvl5_fisher_rack_completed_1">TODO</string>
-    <string name="lvl5_fisher_rack_completed_2">TODO</string>
-    <string name="lvl2_puzzle1_chat_file">TODO</string>
-    <string name="final_initial">TODO</string>
 
 
+    <!--################# Lvl4BookBabel ##############-->
+    <string name="lvl4_book_babel_title">Grammar of Chaos</string>
+    <string name="lvl4_book_babel_text1"><![CDATA[
+The Library of Babel is a place for scholars, writers, and anyone seeking inspiration or pondering the peculiarities of existence. It contains every possible combination of letters, spaces, commas and periods — forming every book ever written and every book that could ever be written. Any page you find will exist in the same form and in the same place forever — for this infinite library already exists, simply waiting to be opened.
+This edition presents a fragment of one remarkable book from that very place.
+The full version can be found at:
+]]></string>
+
+    <string name="lvl4_book_babel_link"><![CDATA[<a href="https://libraryofbabel.info/anglishize.cgi?217r0sm5b8bnmdqnkz9cmjryg5dqvay7xtdkg40btwtg38r7g4nsprmonb22k50fu2ino3yotitp2rj53ghxjiw98ofqydmsjhdhdq4zpjht2hl8r9gcs2iuha1n5vkcl9aqrlrctw4fr7dzbzcak4bkc7km911u0o1q3t0bzmbeecodkucl4j3k441q6lj1wm6q49vb29a4e7nl6jeuuvdb0maujn3rsetcquisq67e43vqlkpozhuj7vk3ahaf167x912fhblrguuufckb6du8m2g9fkx6vhwqgo6r1oc52jzwfnnb8dimhebc8p1hac8e6rnmrz2tvy4ig2dqi6z85v6ugawmdo1cn1of8cclcu8g8h31p4h1e62gk2piolm8mcjdv1ionxo7hrq12vfvmgt2adhzferafz5vf1wuvykfovcvjfcq9rfhjopiskhomvviaxc91xjatjq6xwmrv6cjw5qn298tgewb7ibxppcozec33qebk1kyw6vuj0mf1dum2aftk8gcjd5557h4z5179rm7njyvigdfo2jmzpjfy0qh3b2osc7gqkqrtslq5dsrklq121n1jo9ks1ppm9v5oosu4lafrfd0np9vvduivttnzocoi1xt26h3vmz7dk6n6t103euf96b2a0iy4en1pxh7615zr5x8u2lej9nd2lr1ukbf3vi08mbsoags3dfvhbnw0vq6x54nvum2ufers68je8b6u0k1et1paw8lokfoedn8z5mnfvfpcctmqn4accojt0gqqgnlxm5sx3v6eao77sxjlrloaxzrp7qxleqevfx62kc3io84azjapl80im9le2oh8f87nbo5w8rcp1km95y8nqbkunad99egrol0xm27petlr6xnpg9ie0uhwxfm6nzdzcgemjivlyzc5fugkfa728mpi41tpw9ybo98lpod925wkzb2qzp8h4ruzzntxa6x0zbq6jp839yrg0bhs0nltre71k8qyeti8jy3jv1xu11a8mnxyh61ap3ash8gd7202ine41sd3x0i4qeuays9yy8pmt0gm1z9zfnlwk2yooaessu38lh0bvm7wsaz3fa9s7jirjnhd5qyvutnai0nw35deyctyumrxge2xgigo5gabv51u8ol6de6pmjgs0u5owk1kws2dy5hor4s8rmcwivx2r0emll6np3a8exhramipqf7v5e5c0jwzp2urh958l0ifl8r3ici1qajwidep04nkgycca8035156gdiobwiwslk2f03po1pyhwzua8xye0rp5xyua37plv4ejo2jermc4zzflbz9k62l418n01a6c560bdzvzc6lm0iri8pk60qm8s4w19tm9nt58bwxqvygkrcyv6plvlolyu9lapeb9j75sqsch0qoltk5ltf507c9p27wr2frq38ikdhkixtsfch24ooka8sin1rivh0ndvcxct5o0ev3vb4h8o790vsqxoc5a0nuqcnjvtwp5c9prfenwslenaubwoyuf0viafuarcqp3ly3hogxsr21hat7b0ogksvd5nh43sa6p2q3uwfrq2vu7fxu6ocox29xl8tfdtyd08pcmm8270jd3ztmjzkncz7655qo5cyh9v66mf5qj8ztdkxzzi5viruhfzgwhik63nkhss5wgz4kdwtv9dmgs1wuvnepokzvyvlqggww3uo60b4h54yiqjp63s6b3mrzjqvbfde3rc4cxvblyl0q4wdzf0t7aljjrrw8m65qxse8824hyhbazdd5stj86tk5rab143gzk05qml5bck5970cdhc2iriu2aznkuzcitp8l7ae731ijrz0rlr6fb3nk26i97j3mw2qyttrwi5msx6bbwzsfhgip4ukhj2mrns15ix88ppsxgq242os7f6q2dfkpvpwj8f8k0kj9my2lo6-w2-s5-v07:1">https://libraryofbabel/interesting_book</a>.]]></string>
+    <!--#############################################-->
+
+
+    <!--################# Lvl4BookAskii ##############-->
+    <string name="lvl4_book_askii_title">Chronicles of the Absurd</string>
+    <string name="lvl4_book_askii_text1_a">Ð�Ð° ÐºÑÐ°Ñ�Ðµ Ð³Ð¾ÑÐ¾Ð´Ð°, Ð¿ÑÑ�Ð¼Ð¾ Ð½Ð° ÐºÑÑÑ�Ðµ Ð¿ÑÑ�Ñ�Ð¾Ð³Ð¾ Ð°ÐºÐ²Ð°ÑÐ¸ÑÐ¼Ð°,\n
+Ð¶Ð¸Ð» Ð¿ÑÐ¾Ñ�ÐµÑ�Ñ�Ð¾Ñ ÐÐµÐºÑ� â€" Ñ�Ð¾Ð²Ð°, ÐºÐ¾Ñ�Ð¾ÑÐ°Ñ�Ñ�Ñ�Ñ� Ð¿ÑÐ¸Ð½Ð¸Ð¼Ð°Ð»Ð° Ñ�ÐµÐ±Ñ� Ð·Ð° Ð²ÑÐ´Ð°Ñ�Ñ�Ñ�ÐµÐ³Ð¾ \n
+Ñ�Ð¿ÐµÑ�Ð¸Ð°Ð»Ð¸Ñ�Ñ�Ð° Ð¿Ð¾ Ñ�Ð¸Ð»Ð¾Ñ�Ð¾Ñ�Ð¸Ð¸ ÐºÐ°ÐºÑ�Ñ�Ñ�Ð². ÐšÐ°Ð¶Ð´Ð¾Ðµ ÑÑ�Ñ�Ð¾ Ð¾Ð½ Ð½Ð°Ð´ÐµÐ²Ð°Ð» Ñ�ÐºÑÐ°-Ñ�Ð¾Ð·Ð¾Ð²ÑÐµ\n
+Ð³Ð°Ð»Ð¾Ñ�Ð¸ Ð¸ Ñ‡Ð¸Ñ�Ð°Ð» Ð»ÐµÐºÑ†Ð¸Ð¸ Ð²Ð¾ÑÐ¾Ð½Ñ'Ð½Ð¾Ð¹ Ñ�ÐºÐ²Ð¾ÑÐµÑ‡Ð½Ðµ Ð¾ Ð²Ð½ÑÑ‚Ñ€ÐµÐ½Ð½ÐµÐ¼ Ð¼Ð¸Ñ€Ðµ ÐºÐ¾Ð»ÑŽÑ‡Ð¸Ñ… Ñ€Ð°Ñ�Ñ‚ÐµÐ½Ð¸Ð¹.</string>
+
+    <string name="lvl4_book_askii_text2_a"><![CDATA[ÐžÐ´Ð½Ð°Ð¶Ð´Ñ‹ Ð¿Ñ€Ð¾Ñ�ÐµÑ�Ñ�Ð¾Ñ€ Ñ‚Ð°Ðº Ð²Ð´Ð¾Ñ…Ð½Ð¾Ð²Ð¸Ð»Ñ�Ñ� Ñ‚ÐµÐ¼Ð¾Ð¹ "ÐšÐ°ÐºÑ�Ñ�Ñ� Ð¸ \n
+Ñ�ÐºÐ·Ð¸Ñ�Ñ‚ÐµÐ½Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð°Ñ� Ñ‚Ð¾Ñ�ÐºÐ°", Ñ‡Ñ‚Ð¾ Ñ�Ð»ÑƒÑ‡Ð°Ð¹Ð½Ð¾ Ð·Ð°Ð¿Ð¸Ñ�Ð°Ð» Ñ�Ð²Ð¾ÑŽ Ð½Ð°ÑƒÑ‡Ð½ÑÑ� Ð´Ð¸Ñ�Ñ�ÐµÑ€Ñ‚Ð°Ñ†Ð¸ÑŽ Ð½Ð° Ð±Ð»Ð¸Ð½Ðµ Ð¸ \n
+Ð¿Ð¾Ñ‚Ð¾Ð¼ Ñ‚Ñ€Ð¸ Ð´Ð½Ñ� Ð³Ð¾Ð½Ñ�Ð»Ñ� Ð·Ð° Ñ�Ð¾Ð±Ñ�Ñ� Ð·Ð°Ð²Ñ‚Ñ€Ð°ÐºÐ¾Ð¼,\nÐ¿Ñ‹Ñ‚Ð°Ñ�ÑŒ <b>Ð´Ð¾ÐºÐ°Ð·Ð°Ñ</b>‚ÑŒ ÐµÐ¼Ñƒ Ð½Ð°ÑƒÑ‡Ð½ÑÑ� Ð½ÐµÑ�Ð¾Ñ�Ñ‚Ð¾Ñ�Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ñ�Ñ‚ÑŒ.\n
+Ñ�Ð². ÐšÐ°Ð¶Ð´Ð¾Ðµ ÑÑ�Ñ�Ð¾ Ð¾Ð½ Ð½Ð°Ð´ÐµÐ²Ð]]></string>
+
+    <string name="lvl4_book_askii_text1_b">Once upon a time, a tiny hippopotamus named Jingle got a job at a library for earthworms.\n
+He diligently made sure every book was soaked in fresh carrot juice, because only then did the worms read with genuine enthusiasm.\n
+One day a crab in a top hat wandered into the library and demanded a novel about the adventures of a pair of slippers in Antarctica.\n
+Jingle nodded solemnly, handed the crab a pickled cucumber instead of a book, and announced: "True knowledge always tastes a little tangy!"</string>
+
+    <string name="lvl4_book_askii_text2_b"><![CDATA[At the edge of town, right on the roof of an empty aquarium, lived Professor Keks — an owl who considered himself a distinguished expert in the philosophy of cacti.\n
+Every morning he put on his bright pink galoshes and gave lectures together <b>with the receptionist</b> in a starling house about the inner world of prickly plants.\n
+One day the professor got so inspired by the topic "The Cactus and Existential Longing" that he accidentally wrote his academic dissertation on a pancake and then spent\n
+three days chasing his own breakfast, trying to prove its scientific inadequacy.]]></string>
+
+    <!--#############################################-->
+
+
+    <!--################# Lvl4BookHistory ##############-->
+    <string name="lvl4_book_history_title">The Limits of the Impossible</string>
+    <string name="lvl4_book_history_text1">The First Manned Hot Air Balloon Flight\n
+"…I remember the trees looking like toys and the ground like a painting. Two brave souls, without any safety equipment, rose into the sky in a wicker basket to the astonishment of everyone below. The air was filled with smoke, for the balloon lifted by a burning furnace. It happened on the eve of a new era of flight. A clear November day in the distant year of 1783 changed humanity\'s relationship with the sky forever…"
+</string>
+    <string name="lvl4_book_history_text2">The Dawn of a New Era in Medicine\n
+"…His brother entered the operating room with an icy calm. No one had ever dared do such a thing — take an organ from one living person and transplant it to another. Everything teetered on the edge of the possible, yet against all odds, the operation succeeded. From that day in 1960 began a new era in medicine — an era in which "borrowed life" became reality…"
+</string>
+    <string name="lvl4_book_history_text3"><![CDATA[Edison Invented More Than Just the Lightbulb\n
+"…He pressed the needle to the cylinder, and from the machine came an indistinct yet living voice. It seemed as though the very echo of time had come alive in that room. No one believed it until they heard it themselves. He called it a "speaking machine," and in that year — &diamond;&diamond;&diamond;&diamond; — for the first time in history, a human being could not only hear a sound but preserve it…"
+]]></string>
+    <!--#############################################-->
+
+
+    <!--################# Lvl4BookHelp ##############-->
+    <string name="lvl4_book_help_title">A Book for Those Who Can See</string>
+    <string name="lvl4_book_help_text1"><![CDATA[Ciphers are everywhere — in text, sounds, images, and numbers. This book covers many different ways of hiding and revealing information, from ancient methods to modern ones.
+Symbol ciphers are among the most common: the simple Caesar cipher, the more complex Vigenère cipher, and digital codes like ASCII. Images can also carry hidden meaning — through pixel patterns or composition, for instance.
+Sounds are used in Morse code and other audio ciphers, where rhythm, duration, and frequency matter. Even numbers can be an encoded message: magic squares, sequences, checksums.
+A particular example is the <b>digital root</b>, in which a multi-digit number is reduced to a single digit that often conceals a pattern.]]></string>
+
+    <string name="lvl4_book_help_text2"><![CDATA[
+Those who wish to crack ciphers — researchers, cryptography enthusiasts, or simply curious minds — need a full set of tools. This includes pen and paper for classic puzzles,
+symbol tables, and knowledge of letter frequency. In our time, more technological aids are available too — such as a useful website:
+]]></string>
+
+
+    <string name="lvl4_book_help_text3">There are also more interesting cases where the decryption is not written in the usual key-value format.
+        An example can be found on the next page.</string>
+
+
+    <string name="lvl4_book_help_link"><![CDATA[<u><a href="https://scanbot.io/qr-code-scanner-online">https://scanQR.com</a></u>.]]></string>
+    <!--#############################################-->
+
+    <!--################# Lvl4BookQR ##############-->
+    <string name="lvl4_book_qr_title">No Right to Duplicate</string>
+    <string name="lvl4_book_qr_text1">No Right to Duplicate is a visual manifesto from a gaze in love with reality. Every photograph in this collection is not the result of retouching, but a point where light, shadow, moment, and meaning converge. There are no tricks here — only observation, composition, and patience.
+        The world in these frames is not beautified — it is simply seen differently. No filters, no post-processing. Just a lens, a point of view, and a little stubbornness. This is a book about how reality, if caught at the right moment, turns out to be stranger, subtler, and more poetic than any fantasy.</string>
+    <!--#############################################-->
+
+    <!--################# Lvl4BookBlur ##############-->
+    <string name="lvl4_book_blur_title">Topography of Dreams</string>
+    <!--#############################################-->
+
+    <!--################################################################################################################################################################################-->
+
+
+    <string name="lvl5_moose_paper">The finest catches.\nFamily secret.\n1. Long-snout\n2. Emerald-eye\n3. Amber fairy\n4. Triple-tail\n5. Chocolatefin.</string>
+
+
+    <!--################################################################################################################################################################################-->
 </resources>

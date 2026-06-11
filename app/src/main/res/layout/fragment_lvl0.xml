@@ -50,11 +50,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintHeight_percent="0.70"
             app:layout_constraintStart_toStartOf="@id/guideV_elevator"
             app:layout_constraintTop_toTopOf="@id/guideH_elevator"
-            app:layout_constraintWidth_percent="0.16" />
+            app:layout_constraintWidth_percent="0.2" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_puzzle1_lock"

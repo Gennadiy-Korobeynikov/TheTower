@@ -38,6 +38,9 @@ class Lvl2CaesarFragment : Fragment(R.layout.fragment_lvl2_caesar), Hintable {
             puzzle = "caesar"
         )
 
+        if (loadManager.getCurrentDialogIndex(2, "lunch") == 0)
+            dialogManager.startDialog(requireActivity(), "lvl2_lunch")
+
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 

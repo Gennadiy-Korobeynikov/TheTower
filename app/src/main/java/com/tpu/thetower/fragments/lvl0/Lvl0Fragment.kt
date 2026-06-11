@@ -100,6 +100,8 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         }
 
         binding.btnToPuzzle1Lock.setOnClickListener {
+            if (loadManager.getCurrentDialogIndex(0, "safe") == 0)
+                dialogManager.startDialog(requireActivity(), "lvl0_safe")
             FragmentNavigation.changeBG(this, R.id.action_lvl0Fragment_to_lvl0PuzzleLockFragment)
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
@@ -108,7 +110,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
             binding.ivPuzzle1.visibility = View.VISIBLE
             binding.ivClick.visibility = View.VISIBLE
             if (loadManager.getCurrentDialogIndex(0, "shapes_paper") == 0)
-                dialogManager.startDialog(requireActivity(), "lvl0_puzzle1")
+                dialogManager.startDialog(requireActivity(), "lvl0_box")
             soundManager.playSound(SoundEffect.DRAWER_OPENING)
         }
 
@@ -129,7 +131,7 @@ class Lvl0Fragment : Fragment(R.layout.fragment_lvl0), Hintable {
         binding.btnLightOn.setOnClickListener {
             binding.ivDarknessFlashlight.visibility = View.GONE
             binding.btnLightOn.visibility = View.GONE
-            dialogManager.startDialog(requireActivity(), "lvl0_light_on")
+            dialogManager.startDialog(requireActivity(), "lvl0_after_light")
             flashlightManager?.toggleFlashlight(false)
             flashlightManager?.stopMonitoring()
             saveRepo.savePuzzleStatus(0, "flashlight", status = PuzzleStatus.COMPLETED.value)

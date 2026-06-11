@@ -33,13 +33,13 @@ class FinalFragment : Fragment(R.layout.fragment_final) {
         _binding = FragmentFinalBinding.bind(view)
 
 
-        dialogManager.startDialog(requireActivity(), "final_initial") {
+        dialogManager.startDialog(requireActivity(), "final_court") {
             binding.ivBg.setImageResource(R.drawable.final_judge2)
-            dialogManager.startDialog(requireActivity(), "final_initial") {
+            dialogManager.startDialog(requireActivity(), "final_court_2") {
                 binding.ivBg.setImageResource(R.drawable.final_judge3)
-                dialogManager.startDialog(requireActivity(), "final_initial") {
+                dialogManager.startDialog(requireActivity(), "final_court_3") {
                     binding.ivBg.setImageResource(R.drawable.final_hospital)
-                    dialogManager.startDialog(requireActivity(), "final_initial") {
+                    dialogManager.startDialog(requireActivity(), "final_hospital") {
                     }
                 }
             }

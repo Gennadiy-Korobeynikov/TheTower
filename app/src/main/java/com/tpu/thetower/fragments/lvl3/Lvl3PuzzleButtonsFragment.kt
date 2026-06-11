@@ -89,6 +89,7 @@ class Lvl3PuzzleButtonsFragment : Fragment(R.layout.fragment_lvl3_puzzle_buttons
 
     private fun passed() {
         soundManager.playSound(SoundEffect.LOCK_OPENING)
+        saveRepo.savePuzzleStatus(3, "sleeping pills", PuzzleStatus.IN_PROGRESS.value)
 
         CommonAnimationHelper.animatePuzzleCompletion(
             fragment = this,

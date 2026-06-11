@@ -38,16 +38,19 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
             binding.btnNpcReceptionist.visibility = View.GONE
             binding.btnAccessCard.visibility = View.VISIBLE
         }
+
+        if (loadManager.getCurrentDialogIndex(1, "start") == 0)
+            dialogManager.startDialog(requireActivity(), "lvl1_start")
     }
 
     private fun setListeners() {
         binding.btnNpcReceptionist.setOnClickListener {
             when (loadManager.getCurrentDialogIndex(1, "receptionist")) {
                 0 -> {
-                    dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist")
+                    dialogManager.startDialog(requireActivity(), "lvl1_receptionist")
                     saveRepo.saveLevelCompletedStatus(1)
                 }
-                1 -> dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist_2")
+                1 -> dialogManager.startDialog(requireActivity(), "lvl1_npc_receptionist_repeat")
             }
         }
 

@@ -19,7 +19,7 @@
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintWidth_percent="0.3"
         android:visibility="visible"/>
 
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_percent="0.09" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_name"
@@ -87,14 +87,14 @@
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="Имя"
+            android:text="Администратор"
             android:textAlignment="center"
             android:textColor="#FFDFDF"
             android:textSize="18sp"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintStart_toStartOf="@id/guideV_name"
             app:layout_constraintTop_toTopOf="@id/guideH_name"
-            app:layout_constraintWidth_percent="0.25" />
+            app:layout_constraintWidth_percent="0.26" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideV_text"

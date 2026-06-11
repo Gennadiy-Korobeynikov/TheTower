@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl0CompletedBinding
 import com.tpu.thetower.managers.DialogManager
+import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.UiVisibilityController
@@ -28,15 +29,16 @@ class Lvl0OpenedVaultFragment : Fragment(R.layout.fragment_lvl0_completed) {
         _binding = FragmentLvl0CompletedBinding.bind(view)
 
         setListeners()
-
+        dialogManager.startDialog(requireActivity(), "lvl0_box_opened")
         UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
     }
 
     private fun setListeners() {
         binding.btnAccessCard.setOnClickListener {
-            dialogManager.startDialog(requireActivity(), "lvl0_access_card_got")
+            dialogManager.startDialog(requireActivity(), "lvl0_access_card_inspect")
             loadManager.changeAccessCardNumber(1)
             saveRepo.saveLevelCompletedStatus(0)
+            FragmentNavigation.goBack(this)
         }
     }
 

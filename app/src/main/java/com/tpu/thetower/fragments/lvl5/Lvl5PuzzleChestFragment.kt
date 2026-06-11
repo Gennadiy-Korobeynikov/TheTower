@@ -17,10 +17,12 @@ import androidx.navigation.navGraphViewModels
 import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5ChestBinding
+import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.PermissionManager
+import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.managers.devicemanagers.ChestCodeReceiver
@@ -43,8 +45,9 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
-
     @Inject lateinit var chestManager: ChestManager
+    @Inject lateinit var dialogManager: DialogManager
+    @Inject lateinit var saveRepo: SaveRepository
 
     private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
 
@@ -84,6 +87,15 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
         )
 
         binding.ivBg.setImageBitmap(blur)
+
+        hintManager = hintManagerFactory.create(
+            hints = listOf(
+                "lvl5_chest_hint1", "lvl5_chest_hint2", "lvl5_chest_hint3", "lvl5_chest_hint4",
+                "lvl5_chest_hint5", "lvl5_chest_hint6", "lvl5_chest_hint7", "lvl5_chest_hint8"
+            ),
+            level = 5,
+            puzzle = "chest"
+        )
     }
 
     fun setListeners() {
@@ -91,6 +103,7 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
         viewLifecycleOwner.lifecycleScope.launch {
             chestManager.chestState.collect { isOpen ->
                 if (isOpen) {
+                    dialogManager.startDialog(requireActivity(), "lvl5_chest_opened")
                     binding.ivAccessCard.visibility = View.VISIBLE
                     binding.ivChest.visibility = View.GONE
                     UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
@@ -104,6 +117,7 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
             FragmentNavigation.goBack(this)
             UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
             loadManager.changeAccessCardNumber(6)
+            dialogManager.startDialog(requireActivity(), "lvl5_card_floor6")
         }
     }
 
@@ -175,7 +189,7 @@ class Lvl5PuzzleChestFragment : Fragment(R.layout.fragment_lvl5_chest), Hintable
 
 
     override fun useHint() {
-        // todo
+        hintManager.useHint(requireActivity())
     }
 
     override fun skipPuzzle() {

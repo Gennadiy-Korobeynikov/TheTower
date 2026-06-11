@@ -15,8 +15,10 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5FishRackBinding
 import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl5PuzzleFishRack
 import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.getOrCreateBlur
@@ -43,6 +45,7 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
     @Inject lateinit var saveRepo : SaveRepository
     @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var loadManager: LoadManager
 
 
     private val puzzle: Puzzle = Lvl5PuzzleFishRack(5, "fish rack")
@@ -80,13 +83,32 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
 
         hintManager = hintManagerFactory.create(
             hints = listOf(
-                "lvl5_fish_rack_hint1",
-                "lvl5_fish_rack_hint2",
-                "lvl5_fish_rack_hint3"
+                "lvl5_fish_hint1",
+                "lvl5_fish_hint2",
+                "lvl5_fish_hint3"
             ),
             level = 5,
             puzzle = "fish rack"
         )
+
+        hintManager = if (loadManager.getPuzzleStatus(5, "moose") == PuzzleStatus.COMPLETED.value) {
+            hintManagerFactory.create(
+                hints = listOf(
+                    "lvl5_fish_hint1",
+                    "lvl5_fish_hint2",
+                    "lvl5_fish_hint3"
+                ),
+                level = 5,
+                puzzle = "fish rack"
+            )
+        } else
+            hintManagerFactory.create(
+                hints = listOf(
+                    "lvl5_fish_hint1",
+                ),
+                level = 5,
+                puzzle = "fish rack"
+            )
 
         val levelSnapshot = blurVM.getBlur(Lvl5Fragment.KEY_LVL5_SNAPSHOT)
             ?: error("Snapshot must be set before opening puzzle")
@@ -211,6 +233,7 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
 
                 updateSolution()
                 if (puzzle.checkSolution(requireActivity(), saveRepo, String(solution))) {
+                    saveRepo.savePuzzleStatus(5, "fish rack", status = PuzzleStatus.COMPLETED.value)
                     passed()
                 }
                 true

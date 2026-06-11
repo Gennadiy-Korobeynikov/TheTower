@@ -70,9 +70,11 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
             )
         )
 
+        if (loadManager.getCurrentDialogIndex(2, "computer") == 0)
+            dialogManager.startDialog(requireActivity(), "lvl2_computer")
+
         when (loadManager.getPuzzleStatus(2, "password")) {
             PuzzleStatus.LOCKED.value -> {
-                showKeyboard()
                 hintManager = hintManagerFactory.create(
                     hints = listOf("lvl2_puzzle2_hint1", "lvl2_puzzle2_hint2", "lvl2_puzzle2_hint3"),
                     level = 2,
@@ -102,10 +104,17 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                     puzzle = "password"
                 )
             }
+
+
         }
     }
 
     private fun setListeners() = with(binding) {
+
+        pinContainer.setOnClickListener {
+            showKeyboard()
+        }
+
         btnToJames.setOnClickListener {
             clChatAmanda.visibility = View.GONE
             clChatJames.visibility = View.VISIBLE
@@ -139,7 +148,6 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
                 }
 
                 if (puzzle.checkSolution(requireActivity(), saveRepo, input)) {
-                    dialogManager.startDialog(requireActivity(), "lvl2_computer_lore")
                     completed()
                     hideKeyboard()
                 }

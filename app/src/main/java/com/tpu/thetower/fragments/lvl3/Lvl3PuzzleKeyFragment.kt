@@ -67,7 +67,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
         hintManager = if (loadManager.getPuzzleStatus(3, "lock model") == PuzzleStatus.COMPLETED.value) {
             // Замок вставлен в комп
             hintManagerFactory.create(
-                hints = listOf("lvl3_puzzle4_hint1", "lvl3_puzzle4_hint2", "lvl3_puzzle4_hint3"),
+                hints = listOf("lvl3_puzzle4_hint3"),
                 level = 3,
                 puzzle = "key"
             )
