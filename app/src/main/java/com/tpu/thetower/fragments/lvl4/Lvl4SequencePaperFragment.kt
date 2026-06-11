@@ -4,20 +4,28 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl4SequencePaperBinding
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.utils.getOrCreateBlur
 import com.tpu.thetower.viewmodels.BlurViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class Lvl4SequencePaperFragment : Fragment(R.layout.fragment_lvl4_sequence_paper) {
+@AndroidEntryPoint
+class Lvl4SequencePaperFragment : Fragment(R.layout.fragment_lvl4_sequence_paper), Hintable {
 
     private var _binding: FragmentLvl4SequencePaperBinding? = null
     private val binding get() = _binding!!
 
     private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl4)
 
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
+
+    private lateinit var hintManager: HintManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +48,14 @@ class Lvl4SequencePaperFragment : Fragment(R.layout.fragment_lvl4_sequence_paper
         )
 
         binding.ivBg.setImageBitmap(blur)
+
+        hintManager = hintManagerFactory.create(
+            hints = listOf(
+                "lvl4_sequencepaper_hint1", "lvl4_sequencepaper_hint2", "lvl4_sequencepaper_hint3"
+            ),
+            level = 4,
+            puzzle = "sequence_paper"
+        )
     }
 
     private fun setListeners() {
@@ -51,5 +67,12 @@ class Lvl4SequencePaperFragment : Fragment(R.layout.fragment_lvl4_sequence_paper
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
     }
 }

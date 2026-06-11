@@ -24,9 +24,6 @@ class Lvl5MapFragment : Fragment(R.layout.fragment_lvl5_map), Hintable {
 
     private lateinit var hintManager: HintManager
 
-
-    //    @Inject lateinit var saveRepo : SaveRepository
-//    @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +44,12 @@ class Lvl5MapFragment : Fragment(R.layout.fragment_lvl5_map), Hintable {
 
         binding.ivBg.setImageBitmap(blur)
 
+        hintManager = hintManagerFactory.create(
+            hints = listOf("lvl5_map_hint1", "lvl5_map_hint2", "lvl5_map_hint3"),
+            level = 5,
+            puzzle = "map"
+        )
+
         setListeners()
     }
 
@@ -58,7 +61,7 @@ class Lvl5MapFragment : Fragment(R.layout.fragment_lvl5_map), Hintable {
 
 
     override fun useHint() {
-        // todo
+        hintManager.useHint(requireActivity())
     }
 
     override fun skipPuzzle() {

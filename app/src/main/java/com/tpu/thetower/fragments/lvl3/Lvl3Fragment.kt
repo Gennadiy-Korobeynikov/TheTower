@@ -75,7 +75,7 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
 
         // Первый диалог
         if (donutsStatus == PuzzleStatus.LOCKED.value) {
-            dialogManager.startDialog(requireActivity(), "lvl3_npc_security")
+            dialogManager.startDialog(requireActivity(), "lvl3_security")
             saveRepo.savePuzzleStatus(3, "donuts", status = PuzzleStatus.IN_PROGRESS.value)
         }
 
@@ -88,6 +88,15 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
                 binding.ivSleepingPillsDraggable.visibility = View.VISIBLE
                 binding.ivBg.setImageResource(R.drawable.lvl3_bg_no_sleeping_pills)
             }
+        }
+
+        // Получили снотворное
+        if (sleepingPillsStatus == PuzzleStatus.IN_PROGRESS.value) {
+            hintManager = hintManagerFactory.create(
+                hints = listOf("lvl3_to_coffee_hint1"),
+                level = 3,
+                puzzle = "sleeping pills"
+            )
         }
 
         // Охранник уснул

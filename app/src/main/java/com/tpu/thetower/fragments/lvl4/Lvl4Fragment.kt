@@ -45,6 +45,10 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
 
         setListeners()
 
+        if (loadManager.getCurrentDialogIndex(4, "start") == 0) {
+            dialogManager.startDialog(requireActivity(), "lvl4_start")
+        }
+
         if (loadManager.getPuzzleStatus(4, "chess") == PuzzleStatus.COMPLETED.value) {
             binding.btnWallMechanism.visibility = View.GONE
             binding.btnChessboard.visibility = View.GONE

@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
+import com.tpu.thetower.Hintable
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5Binding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
@@ -21,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
+class Lvl5Fragment : Fragment(R.layout.fragment_lvl5), Hintable {
 
     private var _binding: FragmentLvl5Binding? = null
     private val binding get() = _binding!!
@@ -31,6 +33,9 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
     @Inject lateinit var saveRepo: SaveRepository
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager: DialogManager
+    @Inject lateinit var hintManagerFactory: HintManager.Factory
+
+    private lateinit var hintManager: HintManager
 
     private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
 
@@ -45,6 +50,10 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
 
         setListeners()
 
+        if (loadManager.getCurrentDialogIndex(5, "start") == 0) {
+            dialogManager.startDialog(requireActivity(), "lvl5_start")
+        }
+
         if (loadManager.getPuzzleStatus(5, "moose") == PuzzleStatus.COMPLETED.value) {
             binding.btnMoose.visibility = View.GONE
             binding.ivMooseWithPaper.visibility = View.VISIBLE
@@ -55,14 +64,15 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         if (loadManager.getPuzzleStatus(5, "fish rack") == PuzzleStatus.COMPLETED.value) {
             binding.btnFishRack.visibility = View.GONE
             binding.ivFishRack.setImageResource(R.drawable.lvl5_fishes_solved)
-            if (loadManager.getCurrentDialogIndex(5, "lvl5_fisher_rack_completed") < 1) {
-                dialogManager.startDialog(requireActivity(), "lvl5_fisher_rack_completed")
+            if (loadManager.getCurrentDialogIndex(5, "npc_fisher_reward") == 0) {
+                dialogManager.startDialog(requireActivity(), "lvl5_npc_fisher_reward")
             }
         }
 
         if (loadManager.getPuzzleStatus(5, "chest") == PuzzleStatus.COMPLETED.value) {
             binding.btnChest.visibility = View.GONE
         }
+
 
         binding.root.post {
             if (!isAdded) return@post
@@ -75,9 +85,25 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
             val snapshot = blurVM.getBlur(KEY_LVL5_SNAPSHOT) ?: return@post
             getOrCreateBlur(blurVM, blurKey = KEY_LVL5_BLUR, sourceBitmap = snapshot, radius = 220f, context = requireContext())
         }
+
+        setGeneralHints()
     }
 
     private fun setListeners() {
+        binding.btnFisher.setOnClickListener {
+            when (loadManager.getPuzzleStatus(5, "fish rack")) {
+                PuzzleStatus.COMPLETED.value ->
+                        dialogManager.startDialog(requireActivity(), "lvl5_npc_fisher_reward_repeat")
+
+                else -> {
+                    if (loadManager.getCurrentDialogIndex(5, "npc_fisher") == 0) {
+                        dialogManager.startDialog(requireActivity(), "lvl5_npc_fisher")
+                    } else
+                        dialogManager.startDialog(requireActivity(), "lvl5_npc_fisher_return")
+                }
+            }
+        }
+
 
         binding.btnFishRack.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5FishRackFragment)
@@ -105,7 +131,43 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
         }
 
         binding.btnChest.setOnClickListener {
+            if (loadManager.getCurrentDialogIndex(5, "chest") == 0) {
+                dialogManager.startDialog(requireActivity(), "lvl5_chest")
+            }
             FragmentNavigation.changeBG(this, R.id.action_lvl5Fragment_to_lvl5PuzzleChestFragment)
+        }
+    }
+
+    private fun setGeneralHints() {
+        when (PuzzleStatus.COMPLETED.value) {
+            loadManager.getPuzzleStatus(5, "fish rack") -> {
+                hintManager = hintManagerFactory.create(
+                    hints = listOf("lvl5_general_hint4"),
+                    level = 5,
+                    puzzle = "general1"
+                )
+            }
+            loadManager.getPuzzleStatus(5, "moose") -> {
+                hintManager = hintManagerFactory.create(
+                    hints = listOf("lvl5_general_hint3"),
+                    level = 5,
+                    puzzle = "general2"
+                )
+            }
+            loadManager.getPuzzleStatus(5, "bluetooth") -> {
+                hintManager = hintManagerFactory.create(
+                    hints = listOf("lvl5_general_hint2"),
+                    level = 5,
+                    puzzle = "general3"
+                )
+            }
+            else -> {
+                hintManager = hintManagerFactory.create(
+                    hints = listOf("lvl5_general_hint1"),
+                    level = 5,
+                    puzzle = "general4"
+                )
+            }
         }
     }
 
@@ -117,5 +179,12 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun useHint() {
+        hintManager.useHint(requireActivity())
+    }
+
+    override fun skipPuzzle() {
     }
 }

@@ -94,13 +94,14 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
                 win = puzzleHoover.checkSolution(requireActivity(), saveRepo)
                 checkStatus()
                 binding.btnForward.postDelayed({
-                    changeButtonsState(true)
+                    if (_binding != null) changeButtonsState(true)
                 }, 3000)
             }
         }
     }
 
     private fun changeButtonsState(state: Boolean) {
+        if (_binding == null) return
         val alpha = if (state) 1f else 0.5f
         binding.btnLeft.isEnabled = state
         binding.btnRight.isEnabled = state
@@ -151,9 +152,12 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             addListener(object : Transition.TransitionListener {
                 override fun onTransitionEnd(transition: Transition?) {
                     transition?.removeListener(this)
+                    if (_binding == null) return
                     if (puzzleHoover.currDirection != Direction.Up) {
                         // Возврат на исходную позицию (центр)
-                        binding.ivHoover.postDelayed({ moveHooverToCenter(mainLayout) }, 750)
+                        binding.ivHoover.postDelayed({
+                            if (_binding != null) moveHooverToCenter(mainLayout)
+                        }, 750)
                     } else {
                         onStartPosition = false
                         puzzleHoover.moveForward()
@@ -189,6 +193,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
             addListener(object : Transition.TransitionListener {
                 override fun onTransitionEnd(transition: Transition?) {
                     transition?.removeListener(this)
+                    if (_binding == null) return
                     checkStatus()
                     onStartPosition = true
                     changeButtonsState(true)
@@ -205,6 +210,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
     }
 
     private fun checkStatus() {
+        if (_binding == null) return
         if (restart) {
             soundManager.playSound(SoundEffect.VACUUM_BUMPING)
             binding.ivHoover.animate().rotation(0f).setDuration(300).start()

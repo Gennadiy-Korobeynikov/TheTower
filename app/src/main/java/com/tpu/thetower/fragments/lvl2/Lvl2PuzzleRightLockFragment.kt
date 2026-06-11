@@ -9,6 +9,7 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl2PuzzleRightLockBinding
+import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
@@ -30,6 +31,8 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_right
     @Inject lateinit var soundManager: SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var saveRepo: SaveRepository
+    @Inject lateinit var dialogManager: DialogManager
+
 
     private val currSolution = "00000".toCharArray()
     private var isSolved = false
@@ -102,6 +105,8 @@ class Lvl2PuzzleRightLockFragment : Fragment(R.layout.fragment_lvl2_puzzle_right
             mainScreen = binding.mainScreen,
             fragmentRoot = binding.root
         )
+
+        dialogManager.startDialog(requireActivity(), "lvl2_card_chain")
     }
 
     override fun useHint() {

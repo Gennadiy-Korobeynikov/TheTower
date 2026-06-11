@@ -109,6 +109,10 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
 
         lvlButtons.forEachIndexed { index, btn ->
             btn.setOnClickListener {
+                if (loadManager.getCurrentDialogIndex(0, "elevator") == 0
+                    && index != 1 && currAccessLevel == 0) // В первый раз только на нулевой этаж
+                    dialogManager.startDialog(requireActivity(), "lvl0_elevator_other_floor_first")
+
                 if (btn !in openedLvlButtons) return@setOnClickListener
 
                 FragmentNavigation.changeBG(this, lvlActions[index])
@@ -180,7 +184,7 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         val unlockingLvls = (0..currAccessLevel)
         unlockingLvls.forEach { i ->
             openedLvlButtons.add(lvlButtons[i])
-            lvlButtons[i].setBackgroundResource(btnImages[i])
+            lvlButtons[i].visibility = View.VISIBLE
             lvlButtons[i].isClickable = true
         }
     }

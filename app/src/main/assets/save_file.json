@@ -33,6 +33,14 @@
         {
           "dialogKey": "shapes_paper",
           "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "safe",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "elevator",
+          "currentDialogIndex": 0
         }
       ]
     },
@@ -53,6 +61,10 @@
       "dialogs": [
         {
           "dialogKey": "receptionist",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "start",
           "currentDialogIndex": 0
         }
       ]
@@ -95,7 +107,20 @@
           "hintsUsed": 0
         }
       ],
-      "dialogs": []
+      "dialogs": [
+        {
+          "dialogKey": "start",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "lunch",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "computer",
+          "currentDialogIndex": 0
+        }
+      ]
     },
     {
       "id": 3,
@@ -246,7 +271,12 @@
               "hintsUsed": 0
             }
           ],
-          "dialogs": []
+          "dialogs": [
+            {
+              "dialogKey": "start",
+              "currentDialogIndex": 0
+            }
+          ]
         },
     {
       "id": 5,
@@ -256,6 +286,22 @@
         {
           "id": 0,
           "name": "bluetooth",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 81,
+          "name": "bluetooth_off",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 82,
+          "name": "bluetooth_on",
           "status": "locked",
           "attempts": 0,
           "timeSpent": 0,
@@ -284,11 +330,76 @@
           "attempts": 0,
           "timeSpent": 0,
           "hintsUsed": 0
+        },
+        {
+          "id": 91,
+          "name": "general1",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 92,
+          "name": "general2",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 93,
+          "name": "general3",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        },
+        {
+          "id": 94,
+          "name": "general4",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
         }
       ],
       "dialogs": [
         {
-          "dialogKey": "lvl5_fisher_rack_completed",
+          "dialogKey": "start",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "npc_fisher",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "npc_fisher_reward",
+          "currentDialogIndex": 0
+        },
+        {
+          "dialogKey": "chest",
+          "currentDialogIndex": 0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Final",
+      "isCompleted": false,
+      "puzzles": [
+        {
+          "id": 0,
+          "name": "lock",
+          "status": "locked",
+          "attempts": 0,
+          "timeSpent": 0,
+          "hintsUsed": 0
+        }
+      ],
+      "dialogs": [
+        {
+          "dialogKey": "start",
           "currentDialogIndex": 0
         }
       ]

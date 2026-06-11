@@ -9,8 +9,10 @@ import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl5PuzzleMooseBinding
 import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl5PuzzleMoose
 import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.viewmodels.BlurViewModel
@@ -31,6 +33,7 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
     @Inject lateinit var saveRepo : SaveRepository
     @Inject lateinit var soundManager : SoundManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var loadManager: LoadManager
 
     private val blurVM: BlurViewModel by navGraphViewModels(R.id.nav_lvl5)
 
@@ -42,11 +45,18 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
 
         setListeners()
 
-        hintManager = hintManagerFactory.create(
-            hints = listOf("lvl5_horns_hint1", "lvl5_horns_hint2", "lvl5_horns_hint3"),
-            level = 5,
-            puzzle = "moose"
-        )
+        hintManager = if (loadManager.getPuzzleStatus(5, "bluetooth") == PuzzleStatus.COMPLETED.value) {
+            hintManagerFactory.create(
+                hints = listOf("lvl5_horns_hint1", "lvl5_horns_hint2", "lvl5_horns_hint3"),
+                level = 5,
+                puzzle = "moose"
+            )
+        } else
+            hintManagerFactory.create(
+                hints = listOf("lvl5_horns_hint1"),
+                level = 5,
+                puzzle = "moose"
+            )
     }
 
     private fun setListeners() {

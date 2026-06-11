@@ -85,6 +85,12 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
         hintManager = hintManagerFactory.create(
             hints = listOf(
                 "lvl6_lock_hint1",
+                "lvl6_lock_hint2",
+                "lvl6_lock_hint3",
+                "lvl6_lock_hint4",
+                "lvl6_lock_hint5",
+                "lvl6_lock_hint6",
+                "lvl6_lock_hint7"
             ),
             level = 6,
             puzzle = "lock"

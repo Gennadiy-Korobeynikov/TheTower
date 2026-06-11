@@ -37,7 +37,6 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
         setListeners()
 
         if (loadManager.getPuzzleStatus(2, "lock") == PuzzleStatus.LOCKED.value) {
-            dialogManager.startDialog(requireActivity(), "lvl2_start")
             saveRepo.savePuzzleStatus(2, "lock", status = PuzzleStatus.IN_PROGRESS.value)
         }
 
@@ -52,6 +51,9 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
                 binding.btnToPuzzle2Completed.visibility = View.VISIBLE
             }
         }
+
+        if (loadManager.getCurrentDialogIndex(2, "start") == 0)
+            dialogManager.startDialog(requireActivity(), "lvl2_jane_absent")
     }
 
     private fun setListeners() {
