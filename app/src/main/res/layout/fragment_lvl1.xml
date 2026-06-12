@@ -13,8 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
+
         android:scaleType="fitCenter"
         android:src="@drawable/lvl1_bg" />
+
+    <View
+        android:id="@+id/viewFlash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:alpha="0"
+        android:clickable="false" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,29 +78,22 @@
             app:layout_constraintWidth_percent="0.16" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideV_access_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.38" />
-
-        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_access_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.82" />
+            app:layout_constraintGuide_percent="0.50" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_access_card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/button_outline"
             android:visibility="gone"
-            app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintStart_toStartOf="@id/guideV_access_card"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="@id/guideV_receptionist"
             app:layout_constraintTop_toTopOf="@id/guideH_access_card"
-            app:layout_constraintWidth_percent="0.06" />
+            app:layout_constraintWidth_percent="0.1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView

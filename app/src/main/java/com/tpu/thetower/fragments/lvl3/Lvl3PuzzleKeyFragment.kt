@@ -17,6 +17,7 @@ import com.tpu.thetower.Hintable
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
 import com.tpu.thetower.databinding.FragmentLvl3PuzzleKeyBinding
+import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.SaveRepository
@@ -47,6 +48,7 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var soundManager : SoundManager
+    @Inject lateinit var dialogManager: DialogManager
 
     private lateinit var puzzle: Puzzle
     var longPressRunnable: Runnable? = null
@@ -130,7 +132,8 @@ class Lvl3PuzzleKeyFragment : Fragment(R.layout.fragment_lvl3_puzzle_key), Hinta
             if (puzzle.checkSolution(requireActivity(), saveRepo, pinsPositions.joinToString(""))) {
                 passed()
             }
-            else { //todo диалог "не подшло" и анимация
+            else {
+                dialogManager.startDialog(requireActivity(), "lvl3_wrong_key")
                 soundManager.playSound(SoundEffect.WRONG_KEY)
             }
         }

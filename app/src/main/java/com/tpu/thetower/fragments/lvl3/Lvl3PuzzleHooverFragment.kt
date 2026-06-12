@@ -219,9 +219,7 @@ class Lvl3PuzzleHooverFragment : Fragment(R.layout.fragment_lvl3_puzzle_hoover),
         }
 
         if (win) {
-            soundManager.playSound(SoundEffect.VACUUM_BUMPING) //todo заменить звук
-            //FragmentNavigation.changeBG(this, R.id.elevatorFragment) // Надо так , иначе кнопка назад не сработает
-            //FragmentNavigation.changeBG(this, R.id.lvl3Fragment)
+            soundManager.playSound(SoundEffect.VACUUM_BUMPING)
             passed()
         }
     }

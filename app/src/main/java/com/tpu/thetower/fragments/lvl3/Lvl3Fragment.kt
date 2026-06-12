@@ -384,6 +384,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
 
     override fun skipPuzzle() {
         Snackbar.make(requireView(), "?Пончики; Шкаф; Кофе: ?Пылесос; Замок", Snackbar.LENGTH_SHORT).show()
+        loadManager.changeAccessCardNumber(4)
+        saveRepo.saveLevelCompletedStatus(3)
     }
 
     override fun onDestroyView() {

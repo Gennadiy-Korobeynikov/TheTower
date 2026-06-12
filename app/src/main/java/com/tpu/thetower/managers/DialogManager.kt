@@ -304,6 +304,11 @@ class DialogManager @Inject constructor(
             speakers = listOf("receptionist", "John")
         ),
 
+        "lvl1_after_clicks" to DialogSpec(
+            lines = listOf(R.string.lvl1_after_clicks),
+            speakers = listOf("John")
+        ),
+
         // ==================== Lvl2 (новые реплики) ====================
 
         "lvl2_jane_absent" to DialogSpec(
@@ -476,6 +481,11 @@ class DialogManager @Inject constructor(
 
         "lvl3_need_to_use_key" to DialogSpec(
             lines = listOf(R.string.lvl3_need_to_use_key),
+            speakers = listOf("John_thinking")
+        ),
+
+        "lvl3_wrong_key" to DialogSpec(
+            lines = listOf(R.string.lvl3_wrong_key),
             speakers = listOf("John_thinking")
         ),
 

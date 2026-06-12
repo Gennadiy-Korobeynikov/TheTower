@@ -100,6 +100,8 @@
     <string name="lvl1_receptionist_47">Возьмите карту доступа, пожалуйста. Я правда хочу помочь.</string>
     <string name="lvl1_receptionist_48">Хоть на том спасибо.</string>
 
+    <string name="lvl1_after_clicks">Что это было?!</string>
+
     <!--==================== Lvl2 (новые реплики) ====================-->
     <string name="lvl2_jane_absent">Кажется, Джейн здесь нет.</string>
     <!-- %Ланч -->
@@ -137,6 +139,8 @@
     <string name="lvl3_donuts_2">Не хватало, чтобы ты ещё там переворошил всё.</string>
 
     <string name="lvl3_ventilation">Я не дизайнер, но эта вентиляционная решётка не очень вписывается тут по цвету.</string>
+    
+    <string name="lvl3_wrong_key">Не подходит...</string>
 
     <!--==================== Lvl4 (новые реплики) ====================-->
     <string name="lvl4_start_1">Что за...?</string>

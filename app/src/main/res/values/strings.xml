@@ -100,6 +100,8 @@
     <string name="lvl1_npc_receptionist_repeat_1">Oh, it\'s you again. Feeling any better? Have you found out anything about your daughter?</string>
     <string name="lvl1_npc_receptionist_repeat_2">I know she is somewhere here.</string>
 
+    <string name="lvl1_after_clicks">What was that?!</string>
+
     <!--==================== Lvl2 (new lines) ====================-->
     <string name="lvl2_jane_absent">Looks like Jane isn\'t here.</string>
     <!-- %Lunch -->
@@ -135,6 +137,8 @@
     <!-- %Donuts -->
     <string name="lvl3_donuts_1">Hands off! Those clowns at the bakery already botched the sprinkles so bad they won\'t stick at all.</string>
     <string name="lvl3_donuts_2">The last thing I need is you poking around in there.</string>
+
+    <string name="lvl3_wrong_key">Doesn\'t fit....</string>
 
     <!--==================== Lvl4 (new lines) ====================-->
     <string name="lvl4_start_1">What the...?</string>
