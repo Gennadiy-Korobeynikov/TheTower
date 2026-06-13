@@ -29,7 +29,6 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentTitleScreenBinding.bind(view)
-
         setListeners()
     }
 
@@ -44,20 +43,15 @@ class TitleScreenFragment : Fragment(R.layout.fragment_title_screen) {
             FragmentNavigation.changeBG(this, R.id.action_titleScreenFragment_to_lvl0Fragment)
         }
 
-//        binding.btnToSettings.setOnClickListener {
-//            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.SETTINGS)
-//        }
-
         binding.btnResume.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_global_titleScreenFragment)
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TITLE)
             loadManager.startSavedLevel(requireActivity())
         }
-    }
 
-//    override fun onResume() {
-//        super.onResume()
-//        musicManager.playMusic(R.raw.soundtrack_1)
-//    }
+        binding.btnExit.setOnClickListener {
+            requireActivity().finish()
+        }
+    }
 
 }

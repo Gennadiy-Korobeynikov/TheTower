@@ -52,6 +52,15 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:visibility="gone" />
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fcv_title_screen"
+                android:name="com.tpu.thetower.fragments.common.TitleScreenFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:clickable="true"
+                android:elevation="8dp" />
+
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -65,22 +74,22 @@
         android:visibility="gone"
         android:clickable="true" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_permission_request"
-        android:name="com.tpu.thetower.fragments.common.PermissionRequestFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:clickable="true" />
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fcv_permission_request"-->
+<!--        android:name="com.tpu.thetower.fragments.common.PermissionRequestFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone"-->
+<!--        android:clickable="true" />-->
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_permission_denied"
-        android:name="com.tpu.thetower.fragments.common.PermissionDeniedFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:clickable="true"
-        android:elevation="3dp" />
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fcv_permission_denied"-->
+<!--        android:name="com.tpu.thetower.fragments.common.PermissionDeniedFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone"-->
+<!--        android:clickable="true"-->
+<!--        android:elevation="3dp" />-->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_menu"
@@ -91,22 +100,14 @@
         android:clickable="true"
         android:elevation="3dp" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_title_screen"
-        android:name="com.tpu.thetower.fragments.common.TitleScreenFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:clickable="true"
-        android:elevation="8dp" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_settings"
-        android:name="com.tpu.thetower.fragments.common.SettingsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:clickable="true"
-        android:elevation="9dp" />
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fcv_settings"-->
+<!--        android:name="com.tpu.thetower.fragments.common.SettingsFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone"-->
+<!--        android:clickable="true"-->
+<!--        android:elevation="9dp" />-->
 
 </FrameLayout>

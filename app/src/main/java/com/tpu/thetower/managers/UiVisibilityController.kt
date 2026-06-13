@@ -10,12 +10,11 @@ object UiVisibilityController {
     enum class UiContainer(val id: Int) {
         TITLE(R.id.fcv_title_screen),
         MENU(R.id.fcv_menu),
-        SETTINGS(R.id.fcv_settings),
         TOPBAR_UI(R.id.fcv_topbar_ui),
         GO_BACK_ARROW(R.id.fcv_go_back_arrow),
         DIALOG(R.id.fcv_dialog),
-        PERMISSION_DENIED(R.id.fcv_permission_denied),
-        PERMISSION_REQUEST(R.id.fcv_permission_request)
+//        PERMISSION_DENIED(R.id.fcv_permission_denied),
+//        PERMISSION_REQUEST(R.id.fcv_permission_request)
     }
 
     private fun Activity.setContainerVisible(container: UiContainer, visible: Boolean) {
