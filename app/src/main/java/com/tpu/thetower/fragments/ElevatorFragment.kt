@@ -1,12 +1,16 @@
 package com.tpu.thetower.fragments
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.graphics.Color
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
+import android.view.ViewConfiguration
+import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import com.tpu.thetower.AppPreferences
 import com.tpu.thetower.R
@@ -18,6 +22,7 @@ import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
+import com.tpu.thetower.utils.LongPressCircleDrawable
 import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -37,6 +42,17 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
     private lateinit var originalPosition: Pair<Float, Float>
 
     private var currAccessLevel: Int = 0
+
+    private var isDragging = false
+    private var longPressAnimator: ValueAnimator? = null
+
+    private val longPressCircle by lazy {
+        LongPressCircleDrawable(
+            color = Color.WHITE,
+            strokeWidthPx = 3f * resources.displayMetrics.density
+        )
+    }
+
 
     private val openedLvlButtons: MutableList<View> = mutableListOf()
 
@@ -123,35 +139,24 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         }
 
 
+        binding.ivAccessCardDraggable.foreground = longPressCircle
         binding.ivAccessCardDraggable.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     v.animate()
-                        .translationY(-20f)
-                        .scaleX(1.05f)
-                        .scaleY(1.05f)
-                        .setDuration(100)
-                        .start()
+                        .translationY(-20f).scaleX(1.05f).scaleY(1.05f)
+                        .setDuration(100).start()
+                    startCircleAnimation()
                     false
                 }
 
-                MotionEvent.ACTION_UP -> {
-                    v.animate()
-                        .translationY(0f)
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(100)
-                        .start()
-                    false
-                }
-
-                MotionEvent.ACTION_CANCEL -> {
-                    v.animate()
-                        .translationY(0f)
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(100)
-                        .start()
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    if (!isDragging) {
+                        cancelCircleAnimation()
+                        v.animate()
+                            .translationY(0f).scaleX(1f).scaleY(1f)
+                            .setDuration(100).start()
+                    }
                     false
                 }
 
@@ -160,20 +165,18 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         }
 
         binding.ivAccessCardDraggable.setOnLongClickListener { view ->
-
-            if (loadManager.getCurrentAccessCardNumber() == 0) {
-                return@setOnLongClickListener false
-            }
+            if (loadManager.getCurrentAccessCardNumber() == 0) return@setOnLongClickListener false
 
             val clipData = ClipData.newPlainText(
                 "ACCESS_CARD",
                 loadManager.getCurrentAccessCardNumber().toString()
             )
 
-            val shadow = DragShadowBuilder(view)
+            isDragging = true
+            longPressCircle.isActive = false  // Прячем круг вместе с view
+            longPressCircle.progress = 0f
 
-            view.startDragAndDrop(clipData, shadow, view, 0)
-
+            view.startDragAndDrop(clipData, DragShadowBuilder(view), view, 0)
             view.visibility = View.INVISIBLE
             true
         }
@@ -195,45 +198,38 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         val draggedView = event.localState as? View ?: return false
 
         when (event.action) {
-
             DragEvent.ACTION_DRAG_STARTED -> {
-                event.clipDescription?.label == "ACCESS_CARD"
+                // Возвращаем true только для нашего типа данных
+                return event.clipDescription?.label == "ACCESS_CARD"
             }
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 targetView.alpha = 0.7f
-                true
             }
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 targetView.alpha = 1f
-                true
             }
 
             DragEvent.ACTION_DROP -> {
                 targetView.alpha = 1f
-
-                val cardNumber = event.clipData
-                    .getItemAt(0)
-                    .text
-                    .toString()
-                    .toInt()
+                val cardNumber = event.clipData.getItemAt(0).text.toString().toInt()
 
                 if (targetView == binding.ivCardReader) {
                     onCardInserted(cardNumber, draggedView)
                 } else {
                     returnToOriginalPosition(draggedView)
                 }
-                true
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
+                // event.result == false: дроп не был принят никем (мимо)
                 if (!event.result) {
                     returnToOriginalPosition(draggedView)
+                } else {
+                    isDragging = false
                 }
-                true
             }
-            else -> true
         }
         return true
     }
@@ -245,10 +241,33 @@ class ElevatorFragment : Fragment(R.layout.fragment_elevator), View.OnDragListen
         unlockLvls()
     }
 
+    private fun startCircleAnimation() {
+        longPressAnimator?.cancel()
+        longPressCircle.progress = 0f
+        longPressCircle.isActive = true  // Трек появляется сразу
+
+        longPressAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = ViewConfiguration.getLongPressTimeout().toLong()
+            interpolator = LinearInterpolator()
+            addUpdateListener { longPressCircle.progress = it.animatedValue as Float }
+            start()
+        }
+    }
+
+    private fun cancelCircleAnimation() {
+        longPressAnimator?.cancel()
+        longPressAnimator = null
+        longPressCircle.isActive = false
+        longPressCircle.progress = 0f
+    }
+
     private fun returnToOriginalPosition(view: View) {
-        view.x = originalPosition.first
-        view.y = originalPosition.second
+        isDragging = false
+        cancelCircleAnimation()
         view.visibility = View.VISIBLE
+        view.animate()
+            .translationY(0f).scaleX(1f).scaleY(1f)
+            .setDuration(150).start()
     }
 
 }
