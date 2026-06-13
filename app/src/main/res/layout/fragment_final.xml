@@ -15,4 +15,11 @@
         android:scaleType="fitCenter"
         android:src="@drawable/final_judge" />
 
+    <View
+        android:id="@+id/viewFlash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:alpha="0"
+        android:clickable="false" />
 </FrameLayout>
