@@ -678,6 +678,11 @@ class DialogManager @Inject constructor(
             speakers = listOf("John_thinking")
         ),
 
+        "lvl4_wrong_book" to DialogSpec(
+            lines = listOf(R.string.lvl4_wrong_book),
+            speakers = listOf("John_thinking")
+        ),
+
         "lvl4_book_askii_hint1" to DialogSpec(
             lines = listOf(R.string.lvl4_book_askii_hint1),
             speakers = listOf("John_thinking")

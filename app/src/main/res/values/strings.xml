@@ -242,6 +242,8 @@
     <!--#################### Lvl4 #################-->
     <string name="lvl4_puzzle1_askii">Ñ�Ð¾Ð²Ð° Ð±Ñ�Ñ�ÐµÐ³Ð¾</string>
     <string name="lvl4_puzzle1_normal">Is anything changing?</string>
+
+    <string name="lvl4_wrong_book">All the pages in this book are blank...</string>
     <!--###########################################-->
 
 

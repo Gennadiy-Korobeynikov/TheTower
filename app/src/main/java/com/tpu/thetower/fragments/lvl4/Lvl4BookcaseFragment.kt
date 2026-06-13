@@ -82,6 +82,10 @@ class Lvl4BookcaseFragment : Fragment(R.layout.fragment_lvl4_bookcase), Hintable
         binding.btnBookBabel.setOnClickListener {
             openBook("babel")
         }
+
+        binding.ivBg.setOnClickListener {
+                dialogManager.startDialog(requireActivity(), "lvl4_wrong_book")
+        }
     }
 
     private fun openBook(book: String) {
