@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.tpu.thetower.R
 import com.tpu.thetower.managers.FragmentNavigation
+import com.tpu.thetower.managers.UiVisibilityController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,14 +17,16 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Небольшая задержка: даём системе стабилизировать измерения/лейаут,
-        // и уводим пользователя с проблемного первого кадра TitleScreen.
         viewLifecycleOwner.lifecycleScope.launch {
             delay(SPLASH_DELAY_MS)
             if (!isAdded) return@launch
 
             FragmentNavigation.changeBG(this@SplashFragment, R.id.action_global_titleScreenFragment)
         }
+
+        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+        UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.TOPBAR_UI)
+
     }
 
     private companion object {

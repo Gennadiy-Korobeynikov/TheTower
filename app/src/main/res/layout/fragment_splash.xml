@@ -16,6 +16,8 @@
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:src="@drawable/logo" />
 
 </FrameLayout>
