@@ -14,6 +14,8 @@ import com.tpu.thetower.databinding.FragmentBookBinding
 import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.SoundManager
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,6 +31,7 @@ class Lvl4BookFragment : Fragment(R.layout.fragment_book), Hintable {
     @Inject lateinit var dialogManager: DialogManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
     @Inject lateinit var loadManager: LoadManager
+    @Inject lateinit var soundManager: SoundManager
 
     private lateinit var bookKey: String
 
@@ -258,6 +261,7 @@ class Lvl4BookFragment : Fragment(R.layout.fragment_book), Hintable {
                 binding.ivPage.setImageResource(newPage)
                 binding.tvPageTextLeft.text = newTextLeft
                 binding.tvPageTextRight.text = newTextRight
+                soundManager.playSound(SoundEffect.PAPER)
                 return@setOnTouchListener true
             }
             true

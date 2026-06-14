@@ -466,6 +466,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
         saveRepo.savePuzzleStatus(3, "sleeping pills")
 
         soundManager.playSound(SoundEffect.GUARD_SNORING, repeat = -1)
+        soundManager.playSound(SoundEffect.PILLS_DROP)
+
 
         draggedView.visibility = View.GONE
     }

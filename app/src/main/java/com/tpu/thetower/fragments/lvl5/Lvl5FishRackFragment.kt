@@ -21,6 +21,7 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl5PuzzleFishRack
 import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.utils.getOrCreateBlur
 import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -165,6 +166,7 @@ class Lvl5FishRackFragment : Fragment(R.layout.fragment_lvl5_fish_rack),
                             .scaleY(1.05f)
                             .setDuration(100)
                             .start()
+                        soundManager.playSound(SoundEffect.FISH)
                         false
                     }
 

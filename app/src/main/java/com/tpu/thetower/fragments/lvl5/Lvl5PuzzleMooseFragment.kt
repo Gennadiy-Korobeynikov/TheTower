@@ -15,6 +15,7 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.puzzles.Lvl5PuzzleMoose
 import com.tpu.thetower.utils.CommonAnimationHelper
+import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -64,6 +65,8 @@ class Lvl5PuzzleMooseFragment : Fragment(R.layout.fragment_lvl5_puzzle_moose), H
 
         fun playAndAppend(bit: Char, drawableOnClick: Int) {
             moose.setImageResource(drawableOnClick)
+            soundManager.playSound(SoundEffect.HORNS)
+
             moose.animate()
                 .alpha(1f)
                 .setDuration(500)

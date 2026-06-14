@@ -3,6 +3,7 @@ package com.tpu.thetower.fragments.lvl6
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tpu.thetower.Hintable
@@ -18,6 +19,8 @@ import com.tpu.thetower.puzzles.Lvl6PuzzleLock
 import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.utils.wheellocks.WheelSetupHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -132,7 +135,6 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
             isSolvedRef = { isSolved },
             onSolvedListener = object : WheelSetupHelper.WheelSolvedListener {
                 override fun onPuzzleSolved() {
-                    soundManager.playSound(SoundEffect.CHAIN_RELEASE)
                     passed()
                 }
             }
@@ -141,15 +143,21 @@ class Lvl6LockFragment : Fragment(R.layout.fragment_lvl6_lock), Hintable {
 
     private fun passed() {
         isSolved = true
+        soundManager.playSound(SoundEffect.CHAIN_RELEASE)
         UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
-        binding.mainScreen.animate()
-            .alpha(0.2f)
-            .setDuration(2500)
-            .withEndAction {
-                FragmentNavigation.changeBG(this, R.id.action_lvl6LockFragment_to_finalFragment)
 
-            }
-            .start()
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(2000) // Задержка 2 секунды (2000 мс) после первого звука
+
+            soundManager.playSound(SoundEffect.DEATH)
+            binding.mainScreen.animate()
+                .alpha(0.2f)
+                .setDuration(2500)
+                .withEndAction {
+                    FragmentNavigation.changeBG(this@Lvl6LockFragment, R.id.action_lvl6LockFragment_to_finalFragment)
+                }
+                .start()
+        }
     }
 
     override fun useHint() {

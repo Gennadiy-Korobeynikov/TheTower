@@ -5,20 +5,19 @@ import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-
-import com.tpu.thetower.managers.HintManager
 import com.tpu.thetower.Hintable
-import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.Puzzle
 import com.tpu.thetower.R
-import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.databinding.FragmentLvl4PuzzleChessboardBinding
+import com.tpu.thetower.managers.HintManager
+import com.tpu.thetower.managers.LoadManager
+import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.puzzles.Lvl4ChessboardPuzzle
-import com.tpu.thetower.managers.FragmentNavigation
 import com.tpu.thetower.utils.CommonAnimationHelper
 import com.tpu.thetower.utils.SoundEffect
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -31,6 +30,7 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
     @Inject lateinit var saveRepo: SaveRepository
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var hintManagerFactory: HintManager.Factory
+    @Inject lateinit var soundManager: SoundManager
 
     private lateinit var hintManager: HintManager
 
@@ -77,6 +77,7 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
                 setBackgroundResource(0)
                 setOnClickListener {
                     switchCellState(this, i)
+                    soundManager.playSound(SoundEffect.BUTTON_CHESS)
                 }
                 scaleType = ImageView.ScaleType.CENTER_CROP
             }
@@ -95,8 +96,6 @@ class Lvl4PuzzleChessboardFragment : Fragment(R.layout.fragment_lvl4_puzzle_ches
     }
 
     private fun passed() {
-        //soundManager.playSound(SoundEffect.LOCK_OPENING)
-
         CommonAnimationHelper.animatePuzzleCompletion(
             fragment = this,
             mainScreen = binding.mainScreen,

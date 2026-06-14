@@ -60,4 +60,9 @@ class Lvl6Fragment : Fragment(R.layout.fragment_lvl6), Hintable {
 
     override fun skipPuzzle() {
     }
+
+    override fun onResume() {
+        super.onResume()
+        saveRepo.saveCurrentLevel(6)
+    }
 }

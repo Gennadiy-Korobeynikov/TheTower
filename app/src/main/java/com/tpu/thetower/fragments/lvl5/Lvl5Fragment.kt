@@ -17,6 +17,7 @@ import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.managers.UiVisibilityController
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.utils.BlurUtils
+import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.utils.getOrCreateBlur
 import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -120,10 +121,12 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5), Hintable {
         binding.btnMoosePaper.setOnClickListener {
             binding.clMoosePaper.visibility = View.VISIBLE
             UiVisibilityController.hide(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
+            soundManager.playSound(SoundEffect.PAPER)
         }
 
         binding.clMoosePaper.setOnClickListener {
             binding.clMoosePaper.visibility = View.GONE
+            UiVisibilityController.show(requireActivity(), UiVisibilityController.UiContainer.GO_BACK_ARROW)
         }
 
         binding.btnMap.setOnClickListener {

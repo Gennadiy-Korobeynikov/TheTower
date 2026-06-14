@@ -56,7 +56,7 @@ class ChestManager @Inject constructor(
             _chestState.value = true
         }
         else {
-            soundManager.playSound(SoundEffect.WRONG_KEY) // todo: change sound effect
+            soundManager.playSound(SoundEffect.VACUUM_BUMPING)
         }
     }
 }

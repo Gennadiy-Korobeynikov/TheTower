@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.tpu.thetower.AppPreferences
+import com.tpu.thetower.utils.SoundEffect
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,7 +16,8 @@ class HintManager @AssistedInject constructor(
     @Assisted private val puzzle: String,
     private val saveRepo: SaveRepository,
     private val loadManager: LoadManager,
-    private val dialogManager: DialogManager
+    private val dialogManager: DialogManager,
+    private val soundManager: SoundManager
 ) {
     companion object {
         private var isNewHintAvailable = true
@@ -27,11 +29,12 @@ class HintManager @AssistedInject constructor(
             isNewHintAvailable = false
 
             val totalTimeToRecover =  if (AppPreferences(activity).isDevMode) 1_000L else 20_000L
-            val updateInterval = totalTimeToRecover / 6
+            val updateInterval = totalTimeToRecover / 5
 
-                timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
+            timer = object : CountDownTimer(totalTimeToRecover, updateInterval) {
                 override fun onTick(millisUntilFinished: Long) {
-                    val step = ((totalTimeToRecover - millisUntilFinished) / updateInterval).toInt()
+                    // Добавлено + 1, чтобы первый шаг анимации начинался сразу с 1, а не с 0.
+                    val step = ((totalTimeToRecover - millisUntilFinished) / updateInterval).toInt() + 1
 
                     (activity as? AppCompatActivity)?.supportFragmentManager
                         ?.setFragmentResult("hintImgUpdating", bundleOf("step" to step))
@@ -58,6 +61,7 @@ class HintManager @AssistedInject constructor(
     fun useHint(activity: Activity) {
 
         val usedHintsCount = loadManager.getPuzzleUsedHintsCount(level, puzzle)
+        soundManager.playSound(SoundEffect.HINT_CLICK)
 
         // Если в предыдущий раз подсказка была вызвана на этом фрагменте или это не первая подсказка
         if (lastPuzzleName == puzzle || usedHintsCount>0) {
@@ -69,23 +73,26 @@ class HintManager @AssistedInject constructor(
             }
 
             // Показываем текущую подсказку, если она новая или ещё не восстановилась старая на этом же фрагменте
-            if (lastPuzzleName == puzzle || isNewHintAvailable)
+            if (lastPuzzleName == puzzle || isNewHintAvailable) {
                 dialogManager.startDialog(activity, hints[usedHintsCount])
+            }
 
             // Показываем предыдущую подсказку
             else
                 dialogManager.startDialog(activity, hints[usedHintsCount - 1])
 
             if (isNewHintAvailable) {
+                soundManager.playSound(SoundEffect.HINT_RESTORED)
                 startHintRecovery(activity, this)
                 lastPuzzleName = puzzle
             }
         } else if (isNewHintAvailable) {
+            soundManager.playSound(SoundEffect.HINT_RESTORED)
             dialogManager.startDialog(activity, hints[usedHintsCount])
             startHintRecovery(activity, this)
             lastPuzzleName = puzzle
         }
-        // else звук или ещё что-то, типа "подсказка не готова" TODO
+
     }
 
     private fun usedHintsCountIncrease() {

@@ -16,6 +16,7 @@ import com.tpu.thetower.managers.SaveRepository
 import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.models.PuzzleStatus
 import com.tpu.thetower.utils.BlurUtils
+import com.tpu.thetower.utils.SoundEffect
 import com.tpu.thetower.utils.getOrCreateBlur
 import com.tpu.thetower.viewmodels.BlurViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -106,6 +107,7 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
 
         binding.btnSequencePaper.setOnClickListener {
             FragmentNavigation.changeBG(this, R.id.action_lvl4Fragment_to_lvl4SequencePaperFragment)
+            soundManager.playSound(SoundEffect.PAPER)
         }
     }
 

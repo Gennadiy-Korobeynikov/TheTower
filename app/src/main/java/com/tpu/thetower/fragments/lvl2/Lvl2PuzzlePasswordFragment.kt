@@ -120,6 +120,7 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
             clChatJames.visibility = View.VISIBLE
             btnOpenFile.visibility = View.GONE
             ivDialog.setImageResource(R.drawable.lvl2_chat1)
+            soundManager.playSound(SoundEffect.MOUSE_CLICK)
         }
 
         btnToAmanda.setOnClickListener {
@@ -127,14 +128,17 @@ class Lvl2PuzzlePasswordFragment : Fragment(R.layout.fragment_lvl2_puzzle_passwo
             clChatJames.visibility = View.GONE
             btnOpenFile.visibility = View.VISIBLE
             ivDialog.setImageResource(R.drawable.lvl2_chat2)
+            soundManager.playSound(SoundEffect.MOUSE_CLICK)
         }
 
         btnOpenFile.setOnClickListener {
             clFile.visibility = View.VISIBLE
+            soundManager.playSound(SoundEffect.MOUSE_CLICK)
         }
 
         btnToCloseFile.setOnClickListener {
             clFile.visibility = View.GONE
+            soundManager.playSound(SoundEffect.MOUSE_CLICK)
         }
 
         pinContainer.setOnClickListener { showKeyboard() }

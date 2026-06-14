@@ -14,7 +14,9 @@ import com.tpu.thetower.managers.DialogManager
 import com.tpu.thetower.managers.LoadManager
 import com.tpu.thetower.managers.MusicManager
 import com.tpu.thetower.managers.SaveRepository
+import com.tpu.thetower.managers.SoundManager
 import com.tpu.thetower.models.PuzzleStatus
+import com.tpu.thetower.utils.SoundEffect
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +29,8 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
     @Inject lateinit var saveRepo: SaveRepository
     @Inject lateinit var loadManager: LoadManager
     @Inject lateinit var dialogManager: DialogManager
+    @Inject lateinit var soundManager: SoundManager
+
 
     private var clickCount = 0
 
@@ -51,9 +55,6 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
 
         if (loadManager.getCurrentDialogIndex(1, "start") == 0)
             dialogManager.startDialog(requireActivity(), "lvl1_start")
-
-        // todo
-        saveRepo.saveLevelCompletedStatus(3)
     }
 
     private fun setListeners() {
@@ -115,6 +116,7 @@ class Lvl1Fragment : Fragment(R.layout.fragment_lvl1) {
                         start()
                     }
                     saveRepo.savePuzzleStatus(1, "chandelier", status = PuzzleStatus.IN_PROGRESS.value)
+                    soundManager.playSound(SoundEffect.LUSTRE)
                 }
             }
         }

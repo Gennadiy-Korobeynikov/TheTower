@@ -45,10 +45,11 @@ class FinalFragment : Fragment(R.layout.fragment_final) {
             binding.ivBg.setImageResource(R.drawable.final_judge2)
             dialogManager.startDialog(requireActivity(), "final_court_2") {
                 binding.ivBg.setImageResource(R.drawable.final_judge3)
+                soundManager.playSound(SoundEffect.JUDGE)
                 dialogManager.startDialog(requireActivity(), "final_court_3") {
                     binding.ivBg.setImageResource(R.drawable.final_hospital)
                     dialogManager.startDialog(requireActivity(), "final_hospital") {
-
+                        soundManager.playSound(SoundEffect.TRANSITION)
                         val root = binding.root
 
                         val scaleUp = ObjectAnimator.ofPropertyValuesHolder(root,
@@ -84,7 +85,6 @@ class FinalFragment : Fragment(R.layout.fragment_final) {
                         AnimatorSet().apply {
                             playTogether(scaleUp, scaleDown, flashIn, flashOut)
                             start()
-                            soundManager.playSound(SoundEffect.CROW)
                         }
                     }
                 }
