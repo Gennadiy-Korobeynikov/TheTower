@@ -92,6 +92,12 @@ class FinalFragment : Fragment(R.layout.fragment_final) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_portraits_in_the_hallway)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

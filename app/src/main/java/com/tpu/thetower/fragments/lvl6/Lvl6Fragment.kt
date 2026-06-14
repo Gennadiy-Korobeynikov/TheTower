@@ -63,6 +63,8 @@ class Lvl6Fragment : Fragment(R.layout.fragment_lvl6), Hintable {
 
     override fun onResume() {
         super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_empty_museum_after_hours)
         saveRepo.saveCurrentLevel(6)
     }
 }

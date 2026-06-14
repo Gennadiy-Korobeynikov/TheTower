@@ -96,6 +96,8 @@ class Lvl2Fragment : Fragment(R.layout.fragment_lvl2), Hintable {
 
     override fun onResume() {
         super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_a_room_held_still)
         saveRepo.saveCurrentLevel(2)
     }
 

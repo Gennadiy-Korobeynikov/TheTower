@@ -114,6 +114,8 @@ class Lvl4Fragment : Fragment(R.layout.fragment_lvl4), Hintable {
 
     override fun onResume() {
         super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_the_heometry_of_quiet)
         saveRepo.saveCurrentLevel(4)
     }
 

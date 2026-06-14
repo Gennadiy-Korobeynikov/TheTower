@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         val prefs = AppPreferences(this)
         //TEST: режим разработчика (макс. уровень доступа, кнопка пропуска пазлов)
-        prefs.isDevMode = false
+        prefs.isDevMode = true
         prefs.isMaxAccessLvl = true
 
         setManagers()

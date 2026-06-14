@@ -176,6 +176,8 @@ class Lvl5Fragment : Fragment(R.layout.fragment_lvl5), Hintable {
 
     override fun onResume() {
         super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_portraits_in_the_hallway)
         saveRepo.saveCurrentLevel(5)
     }
 

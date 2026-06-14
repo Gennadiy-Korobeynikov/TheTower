@@ -571,6 +571,8 @@ class Lvl3Fragment : Fragment(R.layout.fragment_lvl3), View.OnDragListener, Hint
 
     override fun onResume() {
         super.onResume()
+
+        musicManager.playMusic(R.raw.soundtrack_portraits_in_the_hallway)
         saveRepo.saveCurrentLevel(3)
     }
 
